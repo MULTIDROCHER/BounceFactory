@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Pinball Idle.sln"
+    "dotnet.defaultSolution": "BounceFactory.sln"
 }
