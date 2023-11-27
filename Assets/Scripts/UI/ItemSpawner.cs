@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -9,9 +9,11 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private List<SpawnPoint> _spawnPoints;
     [SerializeField] private Transform _container;
 
-    private int _accelerationChance = 60;
-    private int _ballgeneratorChance = 50;
+    private int _accelerationChance = 15;
+    private int _ballgeneratorChance = 10;
     private int _teleportChance = 5;
+
+    public UnityAction<Item> ItemSpawned;
 
     public void Spawn()
     {
@@ -20,10 +22,12 @@ public class ItemSpawner : MonoBehaviour
         if (point != null)
         {
             var itemToSpawn = GetRandomItem();
-            Debug.Log(itemToSpawn.name);
 
             if (itemToSpawn != null)
-                Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, _container);
+            {
+                var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, _container);
+                ItemSpawned?.Invoke(spawned);
+            }
         }
         else
             Debug.Log("something wrong");
@@ -35,17 +39,11 @@ public class ItemSpawner : MonoBehaviour
         Debug.Log(chance);
 
         if (chance <= _ballgeneratorChance)
-        {
-            Debug.Log("generator");
-            return GetBallGeneratorItem();
-        }
+            return GetItemByComponent<BallGeneratorItem>();
         else if (chance <= _accelerationChance)
-        {
-            Debug.Log("acceleration");
-            return GetAccelerationItem();
-        }
+            return GetItemByComponent<AccelerationItem>();
         else
-            return GetCommonItem();
+            return GetItemByComponent<CommonItem>();
     }
 
     private SpawnPoint GetPoint()
@@ -58,11 +56,5 @@ public class ItemSpawner : MonoBehaviour
             return null;
     }
 
-    private Item GetCommonItem() => _items.Find(item => item.Type == ItemType.Common);
-
-    private Item GetAccelerationItem() => _items.Find(item => item.Type == ItemType.Acceleration);
-
-    private Item GetBallGeneratorItem() => _items.Find(item => item.Type == ItemType.BallGenerator);
-
-    private Item GetTeleportItem() => _items.Find(item => item.Type == ItemType.Teleport);
+    private Item GetItemByComponent<T>() where T : Component => _items.Find(item => item.TryGetComponent(out T component));
 }

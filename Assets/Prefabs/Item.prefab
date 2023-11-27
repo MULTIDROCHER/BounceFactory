@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8270306399387905893}
   - component: {fileID: 839128029423015502}
   - component: {fileID: 4039458971684052586}
+  - component: {fileID: -3243448650771766148}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -133,28 +134,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.3448414, y: 0.07702726}
-      - {x: 0.23888442, y: 0.10902519}
-      - {x: 0.2535979, y: 0.23012052}
-      - {x: 0.19117895, y: 0.32527846}
-      - {x: 0.04914753, y: 0.32975602}
-      - {x: -0.055829234, y: 0.19731033}
-      - {x: -0.26061136, y: 0.2573163}
-      - {x: -0.35689008, y: 0.22042622}
-      - {x: -0.407378, y: 0.13420637}
-      - {x: -0.38115814, y: 0.010243972}
-      - {x: -0.30529267, y: -0.026985444}
-      - {x: -0.19560848, y: -0.05536452}
-      - {x: -0.2359736, y: -0.16649657}
-      - {x: -0.20951205, y: -0.26420635}
-      - {x: -0.12211835, y: -0.34308803}
-      - {x: -0.0065255463, y: -0.33237797}
-      - {x: 0.07673087, y: -0.2124685}
-      - {x: 0.08488666, y: -0.16112567}
-      - {x: 0.2596943, y: -0.20615815}
-      - {x: 0.34445032, y: -0.17597589}
-      - {x: 0.4166191, y: -0.10087952}
-      - {x: 0.41786596, y: -0.007257469}
+    - - {x: -0.13000001, y: -0.21499999}
+      - {x: 0.22, y: -0.034999996}
+      - {x: 0.18, y: 0.15499999}
+      - {x: -0.14, y: 0.065}
+      - {x: -0.17, y: -0.195}
   m_UseDelaunayMesh: 0
 --- !u!50 &-3282936726882075868
 Rigidbody2D:
@@ -164,7 +148,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228264078072020680}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -182,7 +166,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 3
 --- !u!114 &-8270306399387905893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,15 +217,40 @@ MonoBehaviour:
   lastScale: 1
   lastDistanceThreshold: 8
   lastDecompose: 0
-  lastSprite: {fileID: -1014137143, guid: d112d39b0e7fd7a40b197719459015e7, type: 3}
+  lastSprite: {fileID: 397668574, guid: d112d39b0e7fd7a40b197719459015e7, type: 3}
   lastRect:
     serializedVersion: 2
-    x: 77
-    y: 0
-    width: 82
-    height: 67
-  lastOffset: {x: 41, y: 33.5}
+    x: 115
+    y: 188
+    width: 51
+    height: 48
+  lastOffset: {x: 25.5, y: 24}
   lastPixelsPerUnit: 100
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
+--- !u!233 &-3243448650771766148
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228264078072020680}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: -3282936726882075868}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 359
