@@ -31,9 +31,6 @@ public class LevelDisplay : MonoBehaviour
     private void LateUpdate()
     {
         if (isDisplayed)
-        {
-            transform.position = item.transform.position;
-            transform.rotation = Quaternion.identity;
-        }
+            transform.SetPositionAndRotation(item.transform.position, Quaternion.identity);
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6805961288332370874}
   - component: {fileID: 8973782570689397465}
   - component: {fileID: 8464651220464927690}
+  - component: {fileID: 1657912345424132184}
   m_Layer: 0
   m_Name: ballgenerator
   m_TagString: Untagged
@@ -198,6 +199,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bad6f51ede414c42a72b1fc69066c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1657912345424132184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422785025111780435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70920047708b70d4a918d62ffeda0918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7605262582553421338
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +272,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &7047537865369244869
 MonoBehaviour:

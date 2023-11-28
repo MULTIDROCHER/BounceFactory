@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -8270306399387905893}
   - component: {fileID: 839128029423015502}
   - component: {fileID: -7375451795871715379}
+  - component: {fileID: 5350849683300647299}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -184,9 +185,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228264078072020680}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -212,7 +213,7 @@ HingeJoint2D:
   m_GameObject: {fileID: 1228264078072020680}
   m_Enabled: 1
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -266,6 +267,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bad6f51ede414c42a72b1fc69066c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5350849683300647299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228264078072020680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70920047708b70d4a918d62ffeda0918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6661668680695697942
@@ -329,7 +342,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &5777769419060956682
 MonoBehaviour:

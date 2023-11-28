@@ -14,13 +14,12 @@ public class SpawnPoint : MonoBehaviour
         HidePoint();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.TryGetComponent(out Item item))
         {
             Item = item;
             IsEmpty = false;
-                Debug.Log("item is " + Item.name);
         }
     }
 

@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class BallGeneratorItem : Item
 {
-    private Collider2D _collider;
     private int _amount = 2;
     private int _acceleration = 10;
     private int _delay = 3;
+    private bool _isActive = true;
     private List<Ball> _spawned;
 
     private void Awake()
     {
         Type = ItemType.BallGenerator;
-        _collider = GetComponent<Collider2D>();
         _spawned = new List<Ball>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Ball ball))
+        if (other.TryGetComponent(out Ball ball) && _isActive)
         {
-            _collider.enabled = false;
+            _isActive = false;
             CreateClones(ball);
             StartCoroutine(DestroyBallsAfterDelay());
         }
@@ -33,7 +32,7 @@ public class BallGeneratorItem : Item
         {
             var clone = Instantiate(ball, transform.position, Quaternion.identity);
             clone.TryGetComponent(out Rigidbody2D rigidbody);
-            rigidbody.velocity = rigidbody.velocity.normalized * _acceleration;
+            rigidbody.velocity = SetDirection().normalized * _acceleration;
             _spawned.Add(clone);
         }
     }
@@ -51,6 +50,8 @@ public class BallGeneratorItem : Item
     private void Reset()
     {
         _spawned.Clear();
-        _collider.enabled = true;
+        _isActive = true;
     }
+
+    private Vector2 SetDirection() => Vector2.right * Random.Range(0, 360);
 }

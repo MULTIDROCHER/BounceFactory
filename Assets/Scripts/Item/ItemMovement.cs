@@ -7,14 +7,14 @@ public class ItemMovement : MonoBehaviour
     private ItemCollisionHandler _collisionHandler;
     private bool _isDragged = false;
     private Vector3 _mousePos;
-    private SpawnPoint _prevPoint;
+    private SpawnPoint _prevPoint => _collisionHandler.PreviousPoint;
 
     private void Start()
     {
         _camera = Camera.main;
         _collisionHandler = GetComponent<ItemCollisionHandler>();
 
-        _prevPoint = _collisionHandler.GetPoint();
+        //_prevPoint = _collisionHandler.GetPoint();
     }
 
     private void Update()
@@ -41,7 +41,7 @@ public class ItemMovement : MonoBehaviour
     {
         _isDragged = false;
 
-        _prevPoint = _collisionHandler.PreviousPoint;
+        //_prevPoint = _collisionHandler.GetPoint();
         transform.position = _prevPoint.transform.position;
         Rotate();
     }

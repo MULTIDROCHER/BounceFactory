@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BounceController))]
+[RequireComponent(typeof(CollisionController))]
 public class Ball : MonoBehaviour
 {
     public Sprite Sprite { get; private set; }

@@ -61,7 +61,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &1789415228316552634
 MonoBehaviour:
@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: -7914261443075248206}
   - component: {fileID: 4742465689044266685}
   - component: {fileID: 4555383436224739939}
+  - component: {fileID: 1248869221171133983}
   m_Layer: 0
   m_Name: acceleration
   m_TagString: Untagged
@@ -319,6 +320,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bad6f51ede414c42a72b1fc69066c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1248869221171133983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4068643389051220013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70920047708b70d4a918d62ffeda0918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6890652696829302740
