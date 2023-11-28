@@ -36,7 +36,6 @@ public class ItemSpawner : MonoBehaviour
     private Item GetRandomItem()
     {
         int chance = Random.Range(1, 101);
-        Debug.Log(chance);
 
         if (chance <= _ballgeneratorChance)
             return GetItemByComponent<BallGeneratorItem>();

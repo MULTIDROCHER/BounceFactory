@@ -7,8 +7,8 @@ public class BallGeneratorItem : Item
     private Collider2D _collider;
     private int _amount = 2;
     private int _acceleration = 10;
-    private List<Ball> _spawned;
     private int _delay = 3;
+    private List<Ball> _spawned;
 
     private void Awake()
     {

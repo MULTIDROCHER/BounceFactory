@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(ItemMovement))]
+[RequireComponent(typeof(ItemClickHandler))]
+[RequireComponent(typeof(ItemCollisionHandler))]
 public class Item : MonoBehaviour
 {
     public ItemType Type { get; protected set; }

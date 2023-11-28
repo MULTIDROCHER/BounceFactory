@@ -1,70 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ItemMovement : MonoBehaviour
 {
     private Camera _camera;
+    private ItemCollisionHandler _collisionHandler;
     private bool _isDragged = false;
-    private Vector3 _mouseOffset;
-    private Vector3 _rotation = new Vector3(0, 0, 90);
-    private PointView _view;
-    private SpawnPoint _previousPoint;
+    private Vector3 _mousePos;
+    private SpawnPoint _prevPoint;
 
-    private void Awake()
+    private void Start()
     {
         _camera = Camera.main;
-        _view = FindObjectOfType<PointView>();
-        GetPoint();
+        _collisionHandler = GetComponent<ItemCollisionHandler>();
+
+        _prevPoint = _collisionHandler.GetPoint();
+    }
+
+    private void Update()
+    {
+        if (_isDragged)
+        {
+            _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+            _mousePos.z = 0;
+        }
     }
 
     private void OnMouseDown()
     {
         _isDragged = true;
-        _view.ShowPoints();
-        _mouseOffset = transform.position - MousePosition();
     }
 
     private void OnMouseDrag()
     {
         if (_isDragged)
-            transform.position = MousePosition() + _mouseOffset;
+            transform.position = _mousePos;
     }
 
     private void OnMouseUp()
     {
         _isDragged = false;
-        _view.HidePoints();
 
-        transform.position = _previousPoint.transform.position;
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + _rotation);
+        _prevPoint = _collisionHandler.PreviousPoint;
+        transform.position = _prevPoint.transform.position;
+        Rotate();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Rotate()
     {
-        if (other.TryGetComponent(out SpawnPoint point) && point.IsEmpty)
-            _previousPoint = point;
-    }
-
-    private Vector3 MousePosition()
-    {
-        var mouseScreenPos = Input.mousePosition;
-        mouseScreenPos.z = 0;
-        return _camera.ScreenToWorldPoint(mouseScreenPos);
-    }
-
-    private void GetPoint()
-    {
-        RaycastHit2D[] hitResults = Physics2D.RaycastAll(transform.position, Vector2.zero);
-
-        foreach (RaycastHit2D hit in hitResults)
-        {
-            if (hit.collider != null && hit.collider.TryGetComponent(out SpawnPoint point) && point.IsEmpty)
-            {
-                _previousPoint = point;
-                break;
-            }
-        }
+        Vector3 rotation = new(0, 0, 90);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotation);
     }
 }

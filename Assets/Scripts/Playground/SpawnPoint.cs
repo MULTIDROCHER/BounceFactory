@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpawnPoint : MonoBehaviour
 {
-    private bool _isEmpty = true;
-    private SpriteRenderer _renderer;
+    public bool IsEmpty { get; private set; } = true;
+    public Item Item { get; private set; }
 
-    public bool IsEmpty => _isEmpty;
+    private SpriteRenderer _renderer;
 
     private void Awake()
     {
@@ -17,13 +17,20 @@ public class SpawnPoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Item item))
-            _isEmpty = false;
+        {
+            Item = item;
+            IsEmpty = false;
+                Debug.Log("item is " + Item.name);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Item item))
-            _isEmpty = true;
+        if (other.TryGetComponent(out Item item) && item == Item)
+        {
+            Item = null;
+            IsEmpty = true;
+        }
     }
 
     public void ShowPoint() => _renderer.enabled = true;
