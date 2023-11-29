@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class ItemMovement : MonoBehaviour
 {
     private Camera _camera;
-    private ItemCollisionHandler _collisionHandler;
+    private PointHandler _collisionHandler;
     private bool _isDragged = false;
     private Vector3 _mousePos;
     private SpawnPoint _prevPoint => _collisionHandler.PreviousPoint;
@@ -12,7 +12,7 @@ public class ItemMovement : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
-        _collisionHandler = GetComponent<ItemCollisionHandler>();
+        _collisionHandler = GetComponent<PointHandler>();
 
         //_prevPoint = _collisionHandler.GetPoint();
     }

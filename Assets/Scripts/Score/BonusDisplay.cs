@@ -1,38 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class BonusDisplay : MonoBehaviour
 {
     private TMP_Text _text;
-    private Transform _parent;
-    private float _delay = 1;
-    private WaitForSeconds _wait;
+    private float _delay = 2;
+    private Vector2 _position;
+    private Vector2 _positionSpread = new(.2f, .2f);
 
     private void Awake()
     {
         _text = GetComponentInChildren<TMP_Text>();
-        _parent = transform.parent;
-        _wait = new WaitForSeconds(_delay);
     }
 
-    public void ShowText(int bonus, Item item)
+    private void LateUpdate()
     {
-        _text.enabled = true;
-        transform.SetParent(item.transform);
-        transform.SetPositionAndRotation(item.transform.position, Quaternion.identity);
+        transform.SetPositionAndRotation(_position, Quaternion.identity);
+    }
+
+    public void ShowBonus(int bonus, ContactPoint2D pos)
+    {
+        SetText(bonus, pos);
+        Destroy(gameObject, _delay);
+    }
+
+    private void SetText(int bonus, ContactPoint2D pos)
+    {
         _text.text = "+" + bonus.ToString();
-
-        StartCoroutine(HideAfterDelay());
-    }
-
-    private IEnumerator HideAfterDelay()
-    {
-        yield return _wait;
-
-        _text.enabled = false;
-        transform.SetParent(_parent);
-        transform.SetPositionAndRotation(_parent.position, Quaternion.identity);
+        _position = pos.point;
+        _position += new Vector2(Random.Range(-_positionSpread.x, _positionSpread.x), Random.Range(-_positionSpread.y, _positionSpread.y));
     }
 }

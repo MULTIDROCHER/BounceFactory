@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCollisionHandler : MonoBehaviour
+public class PointHandler : MonoBehaviour
 {
     public SpawnPoint PreviousPoint { get; private set; }
 
@@ -23,7 +23,5 @@ public class ItemCollisionHandler : MonoBehaviour
         foreach (Collider2D collider in colliders)
             if (collider.TryGetComponent(out SpawnPoint point) && point.IsEmpty)
                 PreviousPoint = point;
-
-        Debug.Log(colliders.Length);
     }
 }

@@ -7,7 +7,7 @@ public class CommonItem : Item
 
     private void Awake()
     {
-        Type = ItemType.Common;
+        //Type = ItemType.Common;
         GetComponent<SpriteRenderer>().sprite = _sprites[Random.Range(0, _sprites.Count)];
     }
 }
