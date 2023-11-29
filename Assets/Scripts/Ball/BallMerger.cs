@@ -10,114 +10,74 @@ public class BallMerger : MonoBehaviour
     [SerializeField] private Transform _container;
     [SerializeField] private BallSpawner _spawner;
     [SerializeField] private Button _button;
+    private int _ballCount;
 
-    private void OnEnable()
+    private void Start()
     {
-        _spawner.BallSpawned += OnBallSpawned;
+        _ballCount = _container.childCount;
     }
 
-    private void OnDisable()
+    private void FixedUpdate()
     {
-        _spawner.BallSpawned -= OnBallSpawned;
+        if (_container.childCount != _ballCount)
+        {
+            _ballCount = _container.childCount;
+            TryFindMatches();
+        }
     }
 
-    private bool TryFindMatches(out List<Ball> matchedBalls)
+    private void TryFindMatches()
     {
         List<Ball> balls = _container.GetComponentsInChildren<Ball>().ToList();
-        int level = GetHighestLevel(balls);
+        int level = balls.Max(ball => ball.Level);
 
         while (level > 0)
         {
-            Ball[] matchingBalls = null;
-            matchingBalls = balls.FindAll(ball => ball.Level == level).ToArray();
+            Ball[] matchingBalls = balls.FindAll(ball => ball.Level == level).ToArray();
 
             if (matchingBalls.Length >= 3)
             {
-                matchedBalls = matchingBalls.Take(3).ToList();
-                return true;
+                _button.interactable = true;
+                _button.onClick.AddListener(() => Merge(matchingBalls.Take(3).ToList()));
+                break;
             }
 
             level--;
         }
-
-        matchedBalls = null;
-        return false;
     }
 
-    private int GetHighestLevel(List<Ball> balls)
+    private void Merge(List<Ball> balls)
     {
-        int level = 0;
+        _button.onClick.RemoveAllListeners();
+        _button.interactable = false;
+        UpgradeOneBall(balls);
+        /* int count = 0;
 
-        foreach (var ball in balls)
-            if (ball.Level > level)
-                level = ball.Level;
-
-        return level;
-    }
-
-    private void OnBallSpawned()
-    {
-        if (TryFindMatches(out List<Ball> balls))
+        foreach (var ball in balls.ToArray())
         {
-            _button.interactable = true;
-            _button.onClick.AddListener(() => TryToMerge(balls));
-        }
-    }
+            ball.transform.DOMove(_spawner.transform.position, 2, false).OnComplete(() =>
+            {
+                count++;
 
-    private void TryToMerge(List<Ball> balls)
-    {
-        Debug.Log(balls.Count);
-        foreach (var ball in balls)
-        {
-            if (ball != null)
-                ball.transform.DOMove(_spawner.transform.position, 2, false).OnComplete(() =>
+                if (count == balls.Count)
                 {
+                    Debug.Log("count = " + count);
                     UpgradeOneBall(balls);
-                });
-        }
+                }
+            });
+        } */
     }
 
     private void UpgradeOneBall(List<Ball> balls)
     {
+        Debug.Log(" start lvlup");
         var ball = balls[0];
         balls.Remove(ball);
-        ball.LevelUp();
+        Debug.Log(balls.Count);
 
-        foreach (var lowLevel in balls)
+        foreach (var lowLevel in balls.ToArray())
             Destroy(lowLevel.gameObject);
 
-        StartCoroutine(CheckForAdditionalMatches());
+        ball.LevelUp();
     }
-
-    private IEnumerator CheckForAdditionalMatches()
-    {
-        _button.interactable = false;
-
-        yield return new WaitForSeconds(3);
-
-        OnBallSpawned();
-    }
-    /* 
-        private void TryToMerge(Ball[] balls)
-        {
-            Debug.Log(balls.Length);
-            foreach (var ball in balls)
-            {
-                if (ball != null)
-                    ball.transform.DOMove(_spawner.transform.position, 2, false).OnComplete(() =>
-                    {
-                        DestroyTwoBalls(balls);
-                        ball.LevelUp();
-                    });
-            }
-
-            StartCoroutine(CheckForAdditionalMatches());
-        }
-
-        private void DestroyTwoBalls(Ball[] balls)
-        {
-            for (int i = 0; i < 2; i++)
-                if (balls.Length > i && balls[i] != null)
-                    Destroy(balls[i].gameObject);
-        } */
 }
