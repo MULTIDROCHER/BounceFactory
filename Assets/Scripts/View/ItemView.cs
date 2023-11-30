@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemView : MonoBehaviour
 {
-    [SerializeField] private readonly Transform _container;
+    [SerializeField] private Transform _container;
 
     private readonly List<LevelDisplay> _itemsLevel = new();
 
@@ -27,6 +27,11 @@ public class ItemView : MonoBehaviour
         Item[] items = _container.GetComponentsInChildren<Item>();
 
         foreach (var item in items)
-            _itemsLevel.Add(item.GetComponentInChildren<LevelDisplay>());
+        {
+            var display = item.GetComponentInChildren<LevelDisplay>();
+
+            if (display != null)
+                _itemsLevel.Add(display);
+        }
     }
 }

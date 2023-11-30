@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public class Gate : MonoBehaviour
 {
-    [SerializeField] private readonly float _angle;
+    [SerializeField] private float _angle;
 
     private readonly float _delay = .1f;
 

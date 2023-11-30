@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -7,14 +6,17 @@ using UnityEngine.UI;
 
 public class BallMerger : MonoBehaviour
 {
-    [SerializeField] private readonly Transform _container;
-    [SerializeField] private readonly BallSpawner _spawner;
-    [SerializeField] private readonly Button _button;
+    [SerializeField] private Transform _container;
+    [SerializeField] private BallSpawner _spawner;
+    [SerializeField] private Button _button;
+
+    private ColorSetter _colorSetter;
     private int _ballCount;
 
     private void Start()
     {
         _ballCount = _container.childCount;
+        _colorSetter = GetComponent<ColorSetter>();
     }
 
     private void FixedUpdate()
@@ -35,7 +37,7 @@ public class BallMerger : MonoBehaviour
         {
             Ball[] matchingBalls = balls.FindAll(ball => ball.Level == level).ToArray();
 
-            if (matchingBalls.Length >= 3)
+            if (matchingBalls.Length == 3)
             {
                 _button.interactable = true;
                 _button.onClick.AddListener(() => Merge(matchingBalls.Take(3).ToList()));
@@ -50,34 +52,36 @@ public class BallMerger : MonoBehaviour
     {
         _button.onClick.RemoveAllListeners();
         _button.interactable = false;
-        UpgradeOneBall(balls);
-        /* int count = 0;
+        MoveToSpawner(balls);
+    }
 
-        foreach (var ball in balls.ToArray())
+    private void MoveToSpawner(List<Ball> balls)
+    {
+        int completedTweens = 0;
+
+        foreach (var ball in balls)
         {
-            ball.transform.DOMove(_spawner.transform.position, 2, false).OnComplete(() =>
-            {
-                count++;
-
-                if (count == balls.Count)
+            ball.GetComponent<Collider2D>().enabled = false;
+            ball.transform.DOMove(_spawner.transform.position, 2)
+                .OnComplete(() =>
                 {
-                    Debug.Log("count = " + count);
-                    UpgradeOneBall(balls);
-                }
-            });
-        } */
+                    completedTweens++;
+
+                    if (completedTweens == balls.Count)
+                        UpgradeOneBall(balls);
+                });
+        }
     }
 
     private void UpgradeOneBall(List<Ball> balls)
     {
-        Debug.Log(" start lvlup");
         var ball = balls[0];
         balls.Remove(ball);
-        Debug.Log(balls.Count);
 
         foreach (var lowLevel in balls.ToArray())
             Destroy(lowLevel.gameObject);
 
-        ball.LevelUp();
+        ball.LevelUp(_colorSetter.SetColor(ball));
+        ball.GetComponent<Collider2D>().enabled = true;
     }
 }

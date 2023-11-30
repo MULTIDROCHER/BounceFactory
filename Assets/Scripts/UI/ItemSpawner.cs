@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private readonly List<Item> _items;
-    [SerializeField] private readonly List<SpawnPoint> _spawnPoints;
-    [SerializeField] private readonly Transform _container;
+    [SerializeField] private List<Item> _items;
+    [SerializeField] private List<SpawnPoint> _spawnPoints;
+    [SerializeField] private Transform _container;
 
     private readonly int _accelerationChance = 15;
     private readonly int _ballgeneratorChance = 10;
-    private readonly int _teleportChance = 5;
+    //private int _teleportChance = 20;
 
     public UnityAction<Item> ItemSpawned;
 
@@ -41,6 +41,8 @@ public class ItemSpawner : MonoBehaviour
             return GetItemByComponent<BallGeneratorItem>();
         else if (chance <= _accelerationChance)
             return GetItemByComponent<AccelerationItem>();
+        else if (chance <= TeleportChance())
+            return GetItemByComponent<TeleportItem>();
         else
             return GetItemByComponent<CommonItem>();
     }
@@ -53,6 +55,17 @@ public class ItemSpawner : MonoBehaviour
             return emptyPoints[Random.Range(0, emptyPoints.Length)];
         else
             return null;
+    }
+
+    private int TeleportChance()
+    {
+        int possibleAmount = 2;
+        TeleportItem[] portals = FindObjectsOfType<TeleportItem>();
+
+        if (portals.Length < possibleAmount)
+            return 20;
+        else
+            return 0;
     }
 
     private Item GetItemByComponent<T>() where T : Component => _items.Find(item => item.TryGetComponent(out T component));

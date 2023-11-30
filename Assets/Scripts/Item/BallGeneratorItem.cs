@@ -8,7 +8,7 @@ public class BallGeneratorItem : Item
     private readonly int _acceleration = 10;
     private readonly int _delay = 3;
     private readonly List<Ball> _spawned = new();
-    
+
     private bool _isActive = true;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,8 +36,9 @@ public class BallGeneratorItem : Item
     {
         yield return new WaitForSeconds(_delay);
 
-        foreach (var item in _spawned)
-            Destroy(item.gameObject);
+        foreach (var item in _spawned.ToArray())
+            if (item != null)
+                Destroy(item.gameObject);
 
         Reset();
     }

@@ -6,14 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(PointHandler))]
 public class Item : MonoBehaviour
 {
-    [SerializeField] private readonly ItemType _type;
-    [SerializeField] private readonly LevelDisplay _display;
+    [SerializeField] private ItemType _type;
+    [SerializeField] private bool _canBeUpgraded;
+    [SerializeField] private LevelDisplay _display;
 
     public ItemType Type => _type;
+    public bool CanBeUpgraded => _canBeUpgraded;
     public Sprite Sprite { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
-    public bool CanBeUpgraded { get; private set; }
 
     private void Start()
     {

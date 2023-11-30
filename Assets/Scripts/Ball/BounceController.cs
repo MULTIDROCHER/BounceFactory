@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BounceController : MonoBehaviour
 {
-    [SerializeField] private readonly PhysicsMaterial2D _bounceMaterial;
+    [SerializeField] private PhysicsMaterial2D _bounceMaterial;
 
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
