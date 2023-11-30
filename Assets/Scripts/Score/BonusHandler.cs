@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BonusHandler : MonoBehaviour
 {
-    [SerializeField] private BonusDisplay _bonusDisplay;
+    [SerializeField] private readonly BonusDisplay _bonusDisplay;
     private Item _item;
 
-    private void Awake()
-    {
-        TryGetComponent(out _item);
-    }
+    private void Awake() => TryGetComponent(out _item);
 
     private void OnCollisionEnter2D(Collision2D other)
     {

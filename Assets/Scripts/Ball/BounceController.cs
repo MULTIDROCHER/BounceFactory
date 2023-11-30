@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BounceController : MonoBehaviour
 {
-    [SerializeField] private PhysicsMaterial2D _bounceMaterial;
+    [SerializeField] private readonly PhysicsMaterial2D _bounceMaterial;
 
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
@@ -21,7 +21,8 @@ public class BounceController : MonoBehaviour
         _collider.sharedMaterial = _bounceMaterial;
     }
 
-    public void DisableMaterial(){
+    public void DisableMaterial()
+    {
         _rigidbody.sharedMaterial = null;
         _collider.sharedMaterial = null;
     }

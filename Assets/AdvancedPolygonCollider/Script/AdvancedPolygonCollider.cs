@@ -194,11 +194,11 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         [SerializeField]
         [HideInInspector]
-        private Rect lastRect = new Rect();
+        private Rect lastRect = new();
 
         [SerializeField]
         [HideInInspector]
-        private Vector2 lastOffset = new Vector2(-99999.0f, -99999.0f);
+        private Vector2 lastOffset = new(-99999.0f, -99999.0f);
 
         [SerializeField]
         [HideInInspector]
@@ -212,14 +212,14 @@ namespace DigitalRuby.AdvancedPolygonCollider
         [HideInInspector]
         private bool lastFlipY;
 
-        private static readonly Dictionary<CacheKey, List<Vector2[]>> cache = new Dictionary<CacheKey, List<Vector2[]>>();
+        private static readonly Dictionary<CacheKey, List<Vector2[]>> cache = new();
 
         [Tooltip("All the cached objects from the editor. Do not modify this data.")]
         [SerializeField]
-        private List<CacheEntry> editorCache = new List<CacheEntry>();
+        private readonly List<CacheEntry> editorCache = new();
 
         // private readonly AdvancedPolygonColliderAutoGeometry geometryDetector = new AdvancedPolygonColliderAutoGeometry();
-        private readonly TextureConverter geometryDetector = new TextureConverter();
+        private readonly TextureConverter geometryDetector = new();
 
 #if UNITY_EDITOR
 
@@ -234,7 +234,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
                 // move editor cache to regular cache
                 foreach (var v in editorCache)
                 {
-                    List<Vector2[]> list = new List<Vector2[]>();
+                    List<Vector2[]> list = new();
                     cache[v.Key] = list;
                     foreach (ArrayWrapper w in v.Value.List)
                     {
@@ -348,7 +348,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
             Vector3 screenPos = view.camera.WorldToScreenPoint(gameObject.transform.position);
             Vector2 size = GUI.skin.label.CalcSize(new GUIContent(text));
             GUI.skin.box.normal.background = blackBackground;
-            Rect rect = new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y);
+            Rect rect = new(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y);
             GUI.Box(rect, GUIContent.none);
             GUI.Label(rect, text);
             UnityEditor.Handles.EndGUI();
@@ -356,17 +356,17 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         private void AddEditorCache(ref PolygonParameters p, List<Vector2[]> list)
         {
-            CacheKey key = new CacheKey();
+            CacheKey key = new();
             key.Texture = p.Texture;
             key.Rect = p.Rect;
 
-            CacheEntry e = new CacheEntry();
+            CacheEntry e = new();
             e.Key = key;
             e.Value = new ListWrapper();
             e.Value.List = new List<ArrayWrapper>();
             foreach (Vector2[] v in list)
             {
-                ArrayWrapper w = new ArrayWrapper();
+                ArrayWrapper w = new();
                 w.Array = v;
                 e.Value.List.Add(w);
             }
@@ -390,7 +390,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
         {
             if (spriteRenderer.sprite != null)
             {
-                PolygonParameters p = new PolygonParameters();
+                PolygonParameters p = new();
                 p.AlphaTolerance = AlphaTolerance;
                 p.Decompose = Decompose;
                 p.DistanceThreshold = DistanceThreshold;
@@ -416,7 +416,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
             if (Application.isPlaying && p.UseCache)
             {
-                CacheKey key = new CacheKey();
+                CacheKey key = new();
                 key.Texture = p.Texture;
                 key.Rect = p.Rect;
 
@@ -462,7 +462,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
                 UnityEngine.Color[] pixels = p.Texture.GetPixels(x, y, width, height, 0);
                 List<Vertices> verts = geometryDetector.DetectVertices(pixels, width, p.AlphaTolerance);
                 int pathIndex = 0;
-                List<Vector2[]> list = new List<Vector2[]>();
+                List<Vector2[]> list = new();
 
                 for (int i = 0; i < verts.Count; i++)
                 {
@@ -478,7 +478,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
                     if (p.UseCache)
                     {
-                        CacheKey key = new CacheKey();
+                        CacheKey key = new();
                         key.Texture = p.Texture;
                         key.Rect = p.Rect;
                         cache[key] = list;

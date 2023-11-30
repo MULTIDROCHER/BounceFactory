@@ -42,7 +42,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
     public sealed class TextureConverter
     {
         private const int closePixelsLength = 8;
-        private static int[,] closePixels = new int[closePixelsLength, 2] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 } };
+        private static readonly int[,] closePixels = new int[closePixelsLength, 2] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 } };
         private const float hullTolerance = 0.9f;
 
         private byte[] solids;
@@ -72,7 +72,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
             solidsLength = colors.Length;
 
             List<Vertices> detectedVerticesList = DetectVertices();
-            List<Vertices> result = new List<Vertices>();
+            List<Vertices> result = new();
 
             for (int i = 0; i < detectedVerticesList.Count; i++)
             {
@@ -84,10 +84,10 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         public List<Vertices> DetectVertices()
         {
-            List<Vertices> detectedPolygons = new List<Vertices>();
+            List<Vertices> detectedPolygons = new();
             Vector2? holeEntrance = null;
             Vector2? polygonEntrance = null;
-            List<Vector2> blackList = new List<Vector2>();
+            List<Vector2> blackList = new();
 
             bool searchOn;
             do
@@ -469,7 +469,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
             // Used to search the x coordinates of edges in the polygon for a specific y coordinate.
             // (Usualy comming from the texture data, that's why it's an int and not a float.)
 
-            List<float> edges = new List<float>();
+            List<float> edges = new();
 
             // current edge
             Vector2 slope;
@@ -631,9 +631,9 @@ namespace DigitalRuby.AdvancedPolygonCollider
             bool entranceFound = false;
             bool endOfHull = false;
 
-            Vertices polygon = new Vertices(32);
-            Vertices hullArea = new Vertices(32);
-            Vertices endOfHullArea = new Vertices(32);
+            Vertices polygon = new(32);
+            Vertices hullArea = new(32);
+            Vertices endOfHullArea = new(32);
 
             Vector2 current = Vector2.zero;
 
@@ -1014,7 +1014,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             for (int i = 0; i < Count; i++)
             {
                 builder.Append(this[i].ToString());
@@ -1282,7 +1282,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
         /// <param name="vertices">The vertices, as described above</param>
         public static Vertices LineSegmentVerticesIntersect(ref Vector2 point1, ref Vector2 point2, Vertices vertices)
         {
-            Vertices intersectionPoints = new Vertices();
+            Vertices intersectionPoints = new();
 
             for (int i = 0; i < vertices.Count; i++)
             {
@@ -1312,7 +1312,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         private static List<Vector2> Copy(int i, int j, List<Vector2> vertices)
         {
-            List<Vector2> p = new List<Vector2>();
+            List<Vector2> p = new();
             while (j < i) j += vertices.Count;
             //p.reserve(j - i + 1);
             for (; i <= j; ++i)
@@ -1334,11 +1334,11 @@ namespace DigitalRuby.AdvancedPolygonCollider
             //We force it to CCW as it is a precondition in this algorithm.
             ForceCounterClockWise(vertices);
 
-            List<List<Vector2>> list = new List<List<Vector2>>();
+            List<List<Vector2>> list = new();
             float d, lowerDist, upperDist;
             Vector2 p;
-            Vector2 lowerInt = new Vector2();
-            Vector2 upperInt = new Vector2(); // intersection points
+            Vector2 lowerInt = new();
+            Vector2 upperInt = new(); // intersection points
             int lowerIndex = 0, upperIndex = 0;
             List<Vector2> lowerPoly, upperPoly;
 
@@ -1675,7 +1675,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
             SimplifySection(vertices, 0, vertices.Count - 1, usePoint, distanceTolerance);
 
-            Vertices simplified = new Vertices(vertices.Count);
+            Vertices simplified = new(vertices.Count);
 
             for (int i = 0; i < vertices.Count; i++)
             {
@@ -1786,7 +1786,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
             int currIndex = 0;
 
             //Copy the vertices to a new list and clear the old
-            Vertices newVertices = new Vertices(newNVertices);
+            Vertices newVertices = new(newNVertices);
 
             for (int i = 0; i < vertices.Count; ++i)
             {
@@ -1808,7 +1808,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
         /// <param name="vertices">The vertices.</param>
         public static Vertices MergeIdenticalPoints(Vertices vertices)
         {
-            HashSet<Vector2> unique = new HashSet<Vector2>();
+            HashSet<Vector2> unique = new();
 
             foreach (Vector2 vertex in vertices)
             {
@@ -1830,7 +1830,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
             float distance2 = distance * distance;
 
-            Vertices simplified = new Vertices(vertices.Count);
+            Vertices simplified = new(vertices.Count);
 
             for (int i = 0; i < vertices.Count; i++)
             {
@@ -1861,7 +1861,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
             if (nth == 0)
                 return vertices;
 
-            Vertices simplified = new Vertices(vertices.Count);
+            Vertices simplified = new(vertices.Count);
 
             for (int i = 0; i < vertices.Count; i++)
             {
@@ -1892,7 +1892,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
             if (areaTolerance < 0)
                 throw new ArgumentOutOfRangeException("areaTolerance", "must be equal to or greater than zero.");
 
-            Vertices simplified = new Vertices(vertices.Count);
+            Vertices simplified = new(vertices.Count);
             Vector2 v3;
             Vector2 v1 = vertices[vertices.Count - 2];
             Vector2 v2 = vertices[vertices.Count - 1];

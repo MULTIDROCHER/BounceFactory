@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -26,8 +24,5 @@ public class ScoreCounter : MonoBehaviour
         UpdateDisplay();
     }
 
-    private void UpdateDisplay()
-    {
-        _scoreText.text = "score: " + Score;
-    }
+    private void UpdateDisplay() => _scoreText.text = "score: " + Score;
 }

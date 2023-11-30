@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class BallMerger : MonoBehaviour
 {
-    [SerializeField] private Transform _container;
-    [SerializeField] private BallSpawner _spawner;
-    [SerializeField] private Button _button;
+    [SerializeField] private readonly Transform _container;
+    [SerializeField] private readonly BallSpawner _spawner;
+    [SerializeField] private readonly Button _button;
     private int _ballCount;
 
     private void Start()

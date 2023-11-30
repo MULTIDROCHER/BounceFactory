@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ItemMovement : MonoBehaviour
 {
@@ -7,14 +6,13 @@ public class ItemMovement : MonoBehaviour
     private PointHandler _collisionHandler;
     private bool _isDragged = false;
     private Vector3 _mousePos;
-    private SpawnPoint _prevPoint => _collisionHandler.PreviousPoint;
+
+    private SpawnPoint PreviousPoint => _collisionHandler.PreviousPoint;
 
     private void Start()
     {
         _camera = Camera.main;
         _collisionHandler = GetComponent<PointHandler>();
-
-        //_prevPoint = _collisionHandler.GetPoint();
     }
 
     private void Update()
@@ -26,10 +24,7 @@ public class ItemMovement : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
-    {
-        _isDragged = true;
-    }
+    private void OnMouseDown() => _isDragged = true;
 
     private void OnMouseDrag()
     {
@@ -41,14 +36,13 @@ public class ItemMovement : MonoBehaviour
     {
         _isDragged = false;
 
-        //_prevPoint = _collisionHandler.GetPoint();
-        transform.position = _prevPoint.transform.position;
+        transform.position = PreviousPoint.transform.position;
         Rotate();
     }
 
     private void Rotate()
     {
         Vector3 rotation = new(0, 0, 90);
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotation);
+        transform.rotation *= Quaternion.Euler(rotation);
     }
 }

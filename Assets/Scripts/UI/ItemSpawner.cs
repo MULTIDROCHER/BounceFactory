@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private List<Item> _items;
-    [SerializeField] private List<SpawnPoint> _spawnPoints;
-    [SerializeField] private Transform _container;
+    [SerializeField] private readonly List<Item> _items;
+    [SerializeField] private readonly List<SpawnPoint> _spawnPoints;
+    [SerializeField] private readonly Transform _container;
 
-    private int _accelerationChance = 15;
-    private int _ballgeneratorChance = 10;
-    private int _teleportChance = 5;
+    private readonly int _accelerationChance = 15;
+    private readonly int _ballgeneratorChance = 10;
+    private readonly int _teleportChance = 5;
 
     public UnityAction<Item> ItemSpawned;
 

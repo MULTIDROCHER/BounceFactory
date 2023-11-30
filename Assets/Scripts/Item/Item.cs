@@ -6,9 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(PointHandler))]
 public class Item : MonoBehaviour
 {
-    [SerializeField] private ItemType _type;
-    [SerializeField] private LevelDisplay _display;
-    public ItemType Type {get => _type; protected set => _ = _type;}
+    [SerializeField] private readonly ItemType _type;
+    [SerializeField] private readonly LevelDisplay _display;
+
+    public ItemType Type => _type;
     public Sprite Sprite { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
@@ -19,12 +20,4 @@ public class Item : MonoBehaviour
         Sprite = GetComponent<SpriteRenderer>().sprite;
         Instantiate(_display, transform);
     }
-}
-
-public enum ItemType
-{
-    Common,
-    Teleport,
-    Acceleration,
-    BallGenerator
 }

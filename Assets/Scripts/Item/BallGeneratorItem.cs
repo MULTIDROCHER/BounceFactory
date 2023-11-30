@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class BallGeneratorItem : Item
 {
-    //public override ItemType Type { get => base.Type; protected set => base.Type = ItemType.BallGenerator; }
-    //public override ItemType Type { get { return ItemType.BallGenerator; } protected set { } }
-    private int _amount = 2;
-    private int _acceleration = 10;
-    private int _delay = 3;
+    private readonly int _amount = 2;
+    private readonly int _acceleration = 10;
+    private readonly int _delay = 3;
+    private readonly List<Ball> _spawned = new();
+    
     private bool _isActive = true;
-    private List<Ball> _spawned;
-
-    private void Awake()
-    {
-        //Type = ItemType.BallGenerator;
-        _spawned = new List<Ball>();
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -1,24 +1,17 @@
-using System.Collections;
 using TMPro;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class BonusDisplay : MonoBehaviour
 {
+    private readonly float _delay = 2;
+    
     private TMP_Text _text;
-    private float _delay = 2;
     private Vector2 _position;
     private Vector2 _positionSpread = new(.2f, .2f);
 
-    private void Awake()
-    {
-        _text = GetComponentInChildren<TMP_Text>();
-    }
+    private void Awake() => _text = GetComponentInChildren<TMP_Text>();
 
-    private void LateUpdate()
-    {
-        transform.SetPositionAndRotation(_position, Quaternion.identity);
-    }
+    private void LateUpdate() => transform.SetPositionAndRotation(_position, Quaternion.identity);
 
     public void ShowBonus(int bonus, ContactPoint2D pos)
     {

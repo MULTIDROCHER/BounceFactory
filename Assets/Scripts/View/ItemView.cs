@@ -1,11 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemView : MonoBehaviour
 {
-    [SerializeField] private Transform _container;
-    private List<LevelDisplay> _itemsLevel = new List<LevelDisplay>();
+    [SerializeField] private readonly Transform _container;
+
+    private readonly List<LevelDisplay> _itemsLevel = new();
 
     public void ShowLevel()
     {
