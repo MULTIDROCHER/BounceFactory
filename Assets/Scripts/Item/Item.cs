@@ -1,3 +1,4 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -20,5 +21,34 @@ public class Item : MonoBehaviour
     {
         Sprite = GetComponent<SpriteRenderer>().sprite;
         Instantiate(_display, transform);
+
+        if (_canBeUpgraded)
+            gameObject.AddComponent<UpgradeHandler>();
+    }
+
+    public void LevelUp(ItemType type, Sprite sprite)
+    {
+        Level++;
+        Bonus += 2;
+        Sprite = sprite;
+
+        if (type != Type)
+            ChangeType(type);
+
+        gameObject.name = Level.ToString();
+    }
+
+    private void ChangeType(ItemType type)
+    {
+        var previousType = GetComponent<Item>();
+
+        if (type == ItemType.Common)
+            gameObject.AddComponent<CommonItem>();
+        else if (type == ItemType.Acceleration)
+            gameObject.AddComponent<AccelerationItem>();
+        else if (type == ItemType.BallGenerator)
+            gameObject.AddComponent<BallGeneratorItem>();
+
+        Destroy(previousType);
     }
 }

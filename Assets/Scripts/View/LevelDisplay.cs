@@ -27,13 +27,19 @@ public class LevelDisplay : MonoBehaviour
 
     public void ShowLevel()
     {
-        levelText.gameObject.SetActive(true);
-        isDisplayed = true;
+        if (levelText != null)
+        {
+            levelText.gameObject.SetActive(true);
+            isDisplayed = true;
+        }
     }
 
     public void HideLevel()
     {
-        levelText.gameObject.SetActive(false);
-        isDisplayed = false;
+        if (levelText != null)
+        {
+            levelText.gameObject.SetActive(false);
+            isDisplayed = false;
+        }
     }
 }

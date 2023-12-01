@@ -176,7 +176,6 @@ MonoBehaviour:
   lastPixelsPerUnit: 100
   lastFlipX: 0
   lastFlipY: 0
-  editorCache: []
 --- !u!50 &-3282936726882075868
 Rigidbody2D:
   serializedVersion: 4
@@ -242,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+  _canBeUpgraded: 1
   _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _sprites:
   - {fileID: 397668574, guid: d112d39b0e7fd7a40b197719459015e7, type: 3}

@@ -5,7 +5,18 @@ public class ItemView : MonoBehaviour
 {
     [SerializeField] private Transform _container;
 
+    private int _childCount;
+
     private readonly List<LevelDisplay> _itemsLevel = new();
+
+    private void Update()
+    {
+        if (_container.childCount != _childCount)
+        {
+            _childCount = _container.childCount;
+            GetItems();
+        }
+    }
 
     public void ShowLevel()
     {

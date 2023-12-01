@@ -1,0 +1,123 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class UpgradeHandler : MonoBehaviour
+{
+    private Item _current;
+    private bool _canUpgrade = false;
+    private Item _itemToMerge;
+    private SpriteRenderer _renderer;
+
+    private void Awake()
+    {
+        TryGetComponent(out _current);
+        TryGetComponent(out _renderer);
+        enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) => _itemToMerge = GetItem();
+
+    private void OnCollisionEnter2D(Collision2D other) => _itemToMerge = GetItem();
+
+    private void OnTriggerExit2D(Collider2D other) => ResetItem(other.gameObject);
+
+    private void OnCollisionExit2D(Collision2D other) => ResetItem(other.gameObject);
+
+    /* private void OnCollisionStay2D(Collision2D other) => TryToUpgrade();
+
+    private void OnTriggerStay2D(Collider2D other) => TryToUpgrade();
+
+    private void TryToUpgrade()
+    {
+        var item = GetItem();
+
+        if (item != null)
+        {
+            _current.GetComponent<SpriteRenderer>().color = Color.blue;
+
+            if (Input.GetMouseButtonUp(0))
+                LevelUp(item);
+        }
+        else
+        {
+            _current.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    } */
+    private void OnMouseUp()
+    {
+        if (_itemToMerge != null)
+            LevelUp(_itemToMerge);
+    }
+
+    private void LevelUp(Item item)
+    {
+        SetNewItem(item, out ItemType type, out Sprite sprite);
+        item.LevelUp(type, sprite);
+        Debug.Log("eat bro to grow up");
+        Destroy(gameObject);
+    }
+
+    private void SetNewItem(Item item, out ItemType type, out Sprite sprite)
+    {
+        int chance = Random.Range(0, 2);
+        Debug.Log(chance);
+
+        if (item.Type == _current.Type && item.Type == ItemType.Common)
+        {
+            type = ItemType.Common;
+            sprite = ChooseSprite(item, chance);
+        }
+        else
+        {
+            var baseItem = ChooseItem(item, chance);
+            type = baseItem.Type;
+            sprite = baseItem.Sprite;
+        }
+    }
+
+    private Item ChooseItem(Item item, int chance)
+    {
+        if (chance == 0)
+            return item;
+        else
+            return _current;
+    }
+
+    private Sprite ChooseSprite(Item item, int chance)
+    {
+        if (chance == 0)
+            return item.Sprite;
+        else
+            return _current.Sprite;
+    }
+
+    private Item GetItem()
+    {
+        float radius = 1f;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+
+        foreach (Collider2D collider in colliders)
+            if (collider.TryGetComponent(out Item item)
+            && item.CanBeUpgraded
+            && item.Level == _current.Level
+            && item != _current)
+            {
+                _renderer.color = Color.cyan;
+                return item;
+            }
+
+        return null;
+    }
+
+    private void ResetItem(GameObject item)
+    {
+        if (_itemToMerge.gameObject == item)
+        {
+            _itemToMerge = null;
+            _renderer.color = Color.white;
+        }
+    }
+}

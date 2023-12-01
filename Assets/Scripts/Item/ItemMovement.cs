@@ -3,16 +3,18 @@ using UnityEngine;
 public class ItemMovement : MonoBehaviour
 {
     private Camera _camera;
-    private PointHandler _collisionHandler;
+    private PointHandler _pointHandler;
+    private UpgradeHandler _upgradeHandler;
     private bool _isDragged = false;
     private Vector3 _mousePos;
 
-    private SpawnPoint PreviousPoint => _collisionHandler.PreviousPoint;
+    private SpawnPoint PreviousPoint => _pointHandler.PreviousPoint;
 
     private void Start()
     {
         _camera = Camera.main;
-        _collisionHandler = GetComponent<PointHandler>();
+        _pointHandler = GetComponent<PointHandler>();
+        TryGetComponent(out _upgradeHandler);
     }
 
     private void Update()
@@ -24,7 +26,13 @@ public class ItemMovement : MonoBehaviour
         }
     }
 
-    private void OnMouseDown() => _isDragged = true;
+    private void OnMouseDown()
+    {
+        _isDragged = true;
+
+        if (_upgradeHandler != null)
+            _upgradeHandler.enabled = true;
+    }
 
     private void OnMouseDrag()
     {
