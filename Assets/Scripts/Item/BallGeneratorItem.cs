@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class BallGeneratorItem : Item
 {
-    private readonly int _amount = 2;
+    private int _amount = 2;
+    private int _delay = 3;
     private readonly int _acceleration = 10;
-    private readonly int _delay = 3;
     private readonly List<Ball> _spawned = new();
 
     private bool _isActive = true;
+
+    private void Start()
+    {
+        _canBeUpgraded = true;
+        _type = ItemType.BallGenerator;
+        
+        GetComponent<Collider2D>().isTrigger = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -19,6 +27,14 @@ public class BallGeneratorItem : Item
             CreateClones(ball);
             StartCoroutine(DestroyBallsAfterDelay());
         }
+    }
+
+    public override void LevelUp(ItemType type, Sprite sprite)
+    {
+        base.LevelUp(type, sprite);
+        
+        _delay++;
+        _amount++;
     }
 
     private void CreateClones(Ball ball)

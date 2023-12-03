@@ -6,7 +6,6 @@ using UnityEngine;
 public class UpgradeHandler : MonoBehaviour
 {
     private Item _current;
-    private bool _canUpgrade = false;
     private Item _itemToMerge;
     private SpriteRenderer _renderer;
 
@@ -17,46 +16,40 @@ public class UpgradeHandler : MonoBehaviour
         enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) => _itemToMerge = GetItem();
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (_itemToMerge != null)
 
-    private void OnCollisionEnter2D(Collision2D other) => _itemToMerge = GetItem();
+            _renderer.color = Color.cyan;
+        else if (other.TryGetComponent(out Item _))
+            _itemToMerge = GetItem();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (_itemToMerge != null)
+            _renderer.color = Color.cyan;
+        else if (other.gameObject.TryGetComponent(out Item _))
+            _itemToMerge = GetItem();
+    }
 
     private void OnTriggerExit2D(Collider2D other) => ResetItem(other.gameObject);
 
     private void OnCollisionExit2D(Collision2D other) => ResetItem(other.gameObject);
 
-    /* private void OnCollisionStay2D(Collision2D other) => TryToUpgrade();
-
-    private void OnTriggerStay2D(Collider2D other) => TryToUpgrade();
-
-    private void TryToUpgrade()
-    {
-        var item = GetItem();
-
-        if (item != null)
-        {
-            _current.GetComponent<SpriteRenderer>().color = Color.blue;
-
-            if (Input.GetMouseButtonUp(0))
-                LevelUp(item);
-        }
-        else
-        {
-            _current.GetComponent<SpriteRenderer>().color = Color.white;
-        }
-    } */
     private void OnMouseUp()
     {
         if (_itemToMerge != null)
             LevelUp(_itemToMerge);
+        else
+            enabled = false;
     }
 
     private void LevelUp(Item item)
     {
         SetNewItem(item, out ItemType type, out Sprite sprite);
-        item.LevelUp(type, sprite);
-        Debug.Log("eat bro to grow up");
-        Destroy(gameObject);
+        _current.LevelUp(type, sprite);
+        Destroy(item.gameObject);
     }
 
     private void SetNewItem(Item item, out ItemType type, out Sprite sprite)
@@ -64,7 +57,8 @@ public class UpgradeHandler : MonoBehaviour
         int chance = Random.Range(0, 2);
         Debug.Log(chance);
 
-        if (item.Type == _current.Type && item.Type == ItemType.Common)
+        if (item.Type == _current.Type
+        && item.Type == ItemType.Common)
         {
             type = ItemType.Common;
             sprite = ChooseSprite(item, chance);
@@ -73,7 +67,7 @@ public class UpgradeHandler : MonoBehaviour
         {
             var baseItem = ChooseItem(item, chance);
             type = baseItem.Type;
-            sprite = baseItem.Sprite;
+            sprite = baseItem.Sprite.sprite;
         }
     }
 
@@ -88,9 +82,9 @@ public class UpgradeHandler : MonoBehaviour
     private Sprite ChooseSprite(Item item, int chance)
     {
         if (chance == 0)
-            return item.Sprite;
+            return item.Sprite.sprite;
         else
-            return _current.Sprite;
+            return _current.Sprite.sprite;
     }
 
     private Item GetItem()
@@ -104,17 +98,14 @@ public class UpgradeHandler : MonoBehaviour
             && item.CanBeUpgraded
             && item.Level == _current.Level
             && item != _current)
-            {
-                _renderer.color = Color.cyan;
                 return item;
-            }
 
         return null;
     }
 
     private void ResetItem(GameObject item)
     {
-        if (_itemToMerge.gameObject == item)
+        if (_itemToMerge == item.GetComponent<Item>())
         {
             _itemToMerge = null;
             _renderer.color = Color.white;

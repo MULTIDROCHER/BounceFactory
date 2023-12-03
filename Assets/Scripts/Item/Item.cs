@@ -1,5 +1,6 @@
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(ItemMovement))]
@@ -7,40 +8,47 @@ using UnityEngine;
 [RequireComponent(typeof(PointHandler))]
 public class Item : MonoBehaviour
 {
-    [SerializeField] private ItemType _type;
-    [SerializeField] private bool _canBeUpgraded;
+    [SerializeField] protected ItemType _type;
+    [SerializeField] protected bool _canBeUpgraded;
     [SerializeField] private LevelDisplay _display;
 
     public ItemType Type => _type;
     public bool CanBeUpgraded => _canBeUpgraded;
-    public Sprite Sprite { get; private set; }
+    public SpriteRenderer Sprite { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
 
-    private void Start()
+    private void Awake()
     {
-        Sprite = GetComponent<SpriteRenderer>().sprite;
-        Instantiate(_display, transform);
+        Sprite = GetComponent<SpriteRenderer>();
 
         if (_canBeUpgraded)
+        {
+            Instantiate(_display, transform);
             gameObject.AddComponent<UpgradeHandler>();
+        }
     }
 
-    public void LevelUp(ItemType type, Sprite sprite)
+    public virtual void LevelUp(ItemType type, Sprite sprite)
     {
         Level++;
         Bonus += 2;
-        Sprite = sprite;
-
-        if (type != Type)
-            ChangeType(type);
+        Sprite.sprite = sprite;
 
         gameObject.name = Level.ToString();
+
+        if (type != Type)
+        {
+            ChangeType(type, out Item previousType);
+            //SetupNewType(previousType);
+            Destroy(previousType);
+        }
     }
 
-    private void ChangeType(ItemType type)
+    private void ChangeType(ItemType type, out Item previousType)
     {
-        var previousType = GetComponent<Item>();
+        previousType = GetComponent<Item>();
+        Debug.Log($"prev type = {previousType}. new = {type}");
 
         if (type == ItemType.Common)
             gameObject.AddComponent<CommonItem>();
@@ -49,6 +57,18 @@ public class Item : MonoBehaviour
         else if (type == ItemType.BallGenerator)
             gameObject.AddComponent<BallGeneratorItem>();
 
-        Destroy(previousType);
+    }
+
+    private void SetupNewType(Item previousType)
+    {
+        if (TryGetComponent(out Item item) != previousType)
+        {
+            item.Level = Level;
+            item.Bonus = Bonus;
+        }
+        else
+        {
+            Debug.Log("error of type");
+        }
     }
 }

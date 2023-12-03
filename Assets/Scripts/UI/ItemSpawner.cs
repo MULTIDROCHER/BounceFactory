@@ -8,12 +8,13 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private List<Item> _items;
     [SerializeField] private List<SpawnPoint> _spawnPoints;
     [SerializeField] private Transform _container;
+    [SerializeField] private ItemSeller _seller;
 
-    private readonly int _accelerationChance = 15;
-    private readonly int _ballgeneratorChance = 10;
-    //private int _teleportChance = 20;
+    private readonly int _accelerationChance = 10;
+    private readonly int _ballgeneratorChance = 30;
 
     public UnityAction<Item> ItemSpawned;
+    public UnityAction ItemBought;
 
     public void Spawn()
     {
@@ -26,7 +27,9 @@ public class ItemSpawner : MonoBehaviour
             if (itemToSpawn != null)
             {
                 var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, _container);
+                ScoreCounter.Instance.Buy(_seller.Price);
                 ItemSpawned?.Invoke(spawned);
+                ItemBought?.Invoke();
             }
         }
         else
@@ -37,10 +40,10 @@ public class ItemSpawner : MonoBehaviour
     {
         int chance = Random.Range(1, 101);
 
-        if (chance <= _ballgeneratorChance)
-            return GetItemByComponent<BallGeneratorItem>();
-        else if (chance <= _accelerationChance)
+        if (chance <= _accelerationChance)
             return GetItemByComponent<AccelerationItem>();
+        else if (chance <= _ballgeneratorChance)
+            return GetItemByComponent<BallGeneratorItem>();
         else if (chance <= TeleportChance())
             return GetItemByComponent<TeleportItem>();
         else

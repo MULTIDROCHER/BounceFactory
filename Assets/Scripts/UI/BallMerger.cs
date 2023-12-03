@@ -24,6 +24,7 @@ public class BallMerger : MonoBehaviour
     {
         if (_container.childCount != _ballCount)
         {
+            Debug.Log("finding balls");
             _ballCount = _container.childCount;
             TryFindMatches();
         }
@@ -32,7 +33,7 @@ public class BallMerger : MonoBehaviour
     private void TryFindMatches()
     {
         List<Ball> balls = _container.GetComponentsInChildren<Ball>().ToList();
-        int level = balls.Max(ball => ball.Level);
+        int level = balls.Count != 0 ? balls.Max(ball => ball.Level) : 0;
 
         while (level > 0)
         {

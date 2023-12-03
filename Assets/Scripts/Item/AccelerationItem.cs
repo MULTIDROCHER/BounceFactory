@@ -4,6 +4,14 @@ public class AccelerationItem : Item
 {
     private readonly int _acceleration = 10;
 
+    private void Start()
+    {
+        _canBeUpgraded = true;
+        _type = ItemType.Acceleration;
+
+        GetComponent<Collider2D>().isTrigger = true;
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Ball ball)

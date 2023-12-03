@@ -4,24 +4,29 @@ using UnityEngine;
 public class LevelDisplay : MonoBehaviour
 {
     private TMP_Text levelText;
-    private Item item;
+    private Item _item;
     private bool isDisplayed;
     private Vector3 _offset = new(0, -.5f, 0);
-    private string Text => item.Level.ToString();
+    private string Text => _item.Level.ToString();
 
     private void Awake()
     {
-        item = GetComponentInParent<Item>();
+        _item = GetComponentInParent<Item>();
         levelText = GetComponentInChildren<TMP_Text>();
         HideLevel();
     }
 
+    private void OnDestroy() => HideLevel();
+
     private void LateUpdate()
     {
+        if (_item == null)
+            _item = GetComponentInParent<Item>();
+
         if (isDisplayed)
         {
             levelText.text = Text;
-            transform.SetPositionAndRotation(item.transform.position + _offset, Quaternion.identity);
+            transform.SetPositionAndRotation(_item.transform.position + _offset, Quaternion.identity);
         }
     }
 
