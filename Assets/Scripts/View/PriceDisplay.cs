@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +10,9 @@ public class PriceDisplay : MonoBehaviour
 
     private int _price;
 
-    private void OnEnable()
-    {
-        _seller.PriceChanged += OnPriceChanged;
-    }
+    private void OnEnable() => _seller.PriceChanged += OnPriceChanged;
 
-    private void OnDisable()
-    {
-        _seller.PriceChanged -= OnPriceChanged;
-    }
+    private void OnDisable() => _seller.PriceChanged -= OnPriceChanged;
 
     private void LateUpdate()
     {

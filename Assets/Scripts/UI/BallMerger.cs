@@ -11,6 +11,7 @@ public class BallMerger : MonoBehaviour
     [SerializeField] private Button _button;
 
     private ColorSetter _colorSetter;
+    private int _requiredAmount = 3;
     private int _ballCount;
 
     private void Start()
@@ -24,9 +25,12 @@ public class BallMerger : MonoBehaviour
     {
         if (_container.childCount != _ballCount)
         {
-            Debug.Log("finding balls");
             _ballCount = _container.childCount;
-            TryFindMatches();
+
+            if (_ballCount < _requiredAmount)
+                _button.gameObject.SetActive(false);
+            else
+                TryFindMatches();
         }
     }
 
@@ -79,11 +83,10 @@ public class BallMerger : MonoBehaviour
     {
         var ball = balls[0];
         balls.Remove(ball);
+        ball.LevelUp(_colorSetter.SetColor(ball));
+        ball.GetComponent<Collider2D>().enabled = true;
 
         foreach (var lowLevel in balls.ToArray())
             Destroy(lowLevel.gameObject);
-
-        ball.LevelUp(_colorSetter.SetColor(ball));
-        ball.GetComponent<Collider2D>().enabled = true;
     }
 }

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallGeneratorItem : Item
+public class BallGeneratorItem : Item, IAnimated
 {
+    private Animator _animator;
     private int _amount = 2;
     private int _delay = 3;
     private readonly int _acceleration = 10;
@@ -15,7 +16,8 @@ public class BallGeneratorItem : Item
     {
         _canBeUpgraded = true;
         _type = ItemType.BallGenerator;
-        
+
+        TryGetComponent(out _animator);
         GetComponent<Collider2D>().isTrigger = true;
     }
 
@@ -24,6 +26,7 @@ public class BallGeneratorItem : Item
         if (other.TryGetComponent(out Ball ball) && _isActive)
         {
             _isActive = false;
+            PlayAnimation(other);
             CreateClones(ball);
             StartCoroutine(DestroyBallsAfterDelay());
         }
@@ -32,7 +35,7 @@ public class BallGeneratorItem : Item
     public override void LevelUp(ItemType type, Sprite sprite)
     {
         base.LevelUp(type, sprite);
-        
+
         _delay++;
         _amount++;
     }
@@ -66,4 +69,6 @@ public class BallGeneratorItem : Item
     }
 
     private Vector2 SetDirection() => Vector2.right * Random.Range(0, 360);
+
+    public void PlayAnimation(Collider2D other) => _animator.SetTrigger(IAnimated.Trigger);
 }

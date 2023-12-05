@@ -7,8 +7,8 @@ public class CommonItem : Item
 
     private void Start()
     {
-        if (Sprite.sprite == null)
-            Sprite.sprite = _sprites[Random.Range(0, _sprites.Count)];
+        if (Renderer.sprite == null)
+            Renderer.sprite = _sprites[Random.Range(0, _sprites.Count)];
 
         _canBeUpgraded = true;
         _type = ItemType.Common;

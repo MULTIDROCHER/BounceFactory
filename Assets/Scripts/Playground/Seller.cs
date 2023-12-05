@@ -14,7 +14,7 @@ public abstract class Seller : MonoBehaviour
 
     public event Action<int> PriceChanged;
 
-    protected void OnBought() => IncreasePrices();
+    protected void OnBought() => /* Debug.Log("purchase"); */IncreasePrices();
 
     private void IncreasePrices()
     {

@@ -1,6 +1,7 @@
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(ItemMovement))]
@@ -14,13 +15,13 @@ public class Item : MonoBehaviour
 
     public ItemType Type => _type;
     public bool CanBeUpgraded => _canBeUpgraded;
-    public SpriteRenderer Sprite { get; private set; }
+    public SpriteRenderer Renderer { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
 
     private void Awake()
     {
-        Sprite = GetComponent<SpriteRenderer>();
+        Renderer = GetComponent<SpriteRenderer>();
 
         if (_canBeUpgraded)
         {
@@ -33,14 +34,13 @@ public class Item : MonoBehaviour
     {
         Level++;
         Bonus += 2;
-        Sprite.sprite = sprite;
+        Renderer.sprite = sprite;
 
         gameObject.name = Level.ToString();
 
         if (type != Type)
         {
             ChangeType(type, out Item previousType);
-            //SetupNewType(previousType);
             Destroy(previousType);
         }
     }
@@ -56,19 +56,10 @@ public class Item : MonoBehaviour
             gameObject.AddComponent<AccelerationItem>();
         else if (type == ItemType.BallGenerator)
             gameObject.AddComponent<BallGeneratorItem>();
-
     }
 
-    private void SetupNewType(Item previousType)
+    private void SetItem()
     {
-        if (TryGetComponent(out Item item) != previousType)
-        {
-            item.Level = Level;
-            item.Bonus = Bonus;
-        }
-        else
-        {
-            Debug.Log("error of type");
-        }
+        
     }
 }

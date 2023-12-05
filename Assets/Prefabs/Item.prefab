@@ -224,10 +224,10 @@ HingeJoint2D:
   m_Motor:
     m_MotorSpeed: -100
     m_MaximumMotorForce: 100
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 90
+    m_LowerAngle: -180
+    m_UpperAngle: 180
 --- !u!114 &-8270306399387905893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,9 +244,12 @@ MonoBehaviour:
   _canBeUpgraded: 1
   _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _sprites:
-  - {fileID: 397668574, guid: d112d39b0e7fd7a40b197719459015e7, type: 3}
-  - {fileID: 1134256987, guid: d112d39b0e7fd7a40b197719459015e7, type: 3}
-  - {fileID: -1014137143, guid: d112d39b0e7fd7a40b197719459015e7, type: 3}
+  - {fileID: -670916510, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
+  - {fileID: 1221652569, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
+  - {fileID: -547864288, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
+  - {fileID: -1674503494, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
+  - {fileID: -438864462, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
+  - {fileID: -965375348, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
 --- !u!114 &839128029423015502
 MonoBehaviour:
   m_ObjectHideFlags: 0
