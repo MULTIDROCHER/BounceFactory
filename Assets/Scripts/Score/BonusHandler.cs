@@ -6,7 +6,7 @@ public class BonusHandler : MonoBehaviour
 
     private Item _item;
 
-    private void Awake() => TryGetComponent(out _item);
+    private void Start() => TryGetComponent(out _item);
 
     private void OnCollisionEnter2D(Collision2D other)
     {

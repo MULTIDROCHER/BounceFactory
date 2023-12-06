@@ -8,6 +8,7 @@ public class AccelerationItem : Item
     {
         _canBeUpgraded = true;
         _type = ItemType.Acceleration;
+        Collider.isTrigger = true;
 
         GetComponent<Collider2D>().isTrigger = true;
     }

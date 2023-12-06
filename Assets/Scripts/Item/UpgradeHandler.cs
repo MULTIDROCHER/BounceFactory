@@ -31,10 +31,10 @@ public class UpgradeHandler : MonoBehaviour
 
     private void HandleCollision(GameObject other)
     {
-        if (_itemToMerge != null)
+        if (_itemToMerge == null)
+            _itemToMerge = GetItem(other);
+        else
             _renderer.color = Color.cyan;
-        else if (other.TryGetComponent(out Item _))
-            _itemToMerge = GetItem();
     }
 
     private void ResetItem(GameObject item)
@@ -55,19 +55,14 @@ public class UpgradeHandler : MonoBehaviour
         Destroy(item.gameObject);
     }
 
-    private Item GetItem()
+    private Item GetItem(GameObject other)
     {
-        float radius = 1f;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
-
-        foreach (Collider2D collider in colliders)
-            if (collider.TryGetComponent(out Item item)
+        if (other.TryGetComponent(out Item item)
             && item.CanBeUpgraded
             && item.Level == _current.Level
             && item != _current)
-                return item;
-
-        return null;
+            return item;
+        else
+            return null;
     }
 }

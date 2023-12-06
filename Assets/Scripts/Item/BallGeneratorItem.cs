@@ -16,6 +16,7 @@ public class BallGeneratorItem : Item, IAnimated
     {
         _canBeUpgraded = true;
         _type = ItemType.BallGenerator;
+        Collider.isTrigger = true;
 
         TryGetComponent(out _animator);
         GetComponent<Collider2D>().isTrigger = true;

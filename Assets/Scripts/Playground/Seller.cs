@@ -14,7 +14,7 @@ public abstract class Seller : MonoBehaviour
 
     public event Action<int> PriceChanged;
 
-    protected void OnBought() => /* Debug.Log("purchase"); */IncreasePrices();
+    protected void OnBought() => Debug.Log("purchase");/* IncreasePrices() ;*/
 
     private void IncreasePrices()
     {
@@ -29,7 +29,7 @@ public abstract class Seller : MonoBehaviour
 
     protected void ReducePrices()
     {
-        Price = Convert.ToInt32(Price / PriceChange);
+        //Price = Convert.ToInt32(Price / PriceChange);
         PriceChanged?.Invoke(Price);
     }
 

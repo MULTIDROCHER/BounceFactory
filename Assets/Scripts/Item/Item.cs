@@ -1,7 +1,4 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using System.Linq;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(ItemMovement))]
@@ -16,12 +13,14 @@ public class Item : MonoBehaviour
     public ItemType Type => _type;
     public bool CanBeUpgraded => _canBeUpgraded;
     public SpriteRenderer Renderer { get; private set; }
+    public Collider2D Collider { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
 
     private void Awake()
     {
         Renderer = GetComponent<SpriteRenderer>();
+        Collider = GetComponent<Collider2D>();
 
         if (_canBeUpgraded)
         {
@@ -56,10 +55,5 @@ public class Item : MonoBehaviour
             gameObject.AddComponent<AccelerationItem>();
         else if (type == ItemType.BallGenerator)
             gameObject.AddComponent<BallGeneratorItem>();
-    }
-
-    private void SetItem()
-    {
-        
     }
 }

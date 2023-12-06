@@ -18,7 +18,6 @@ public class BallMerger : MonoBehaviour
     {
         _ballCount = _container.childCount;
         _colorSetter = GetComponent<ColorSetter>();
-        _button.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -28,7 +27,7 @@ public class BallMerger : MonoBehaviour
             _ballCount = _container.childCount;
 
             if (_ballCount < _requiredAmount)
-                _button.gameObject.SetActive(false);
+                ButtonOff();
             else
                 TryFindMatches();
         }
@@ -37,17 +36,20 @@ public class BallMerger : MonoBehaviour
     private void TryFindMatches()
     {
         List<Ball> balls = _container.GetComponentsInChildren<Ball>().ToList();
-        int level = balls.Count != 0 ? balls.Max(ball => ball.Level) : 0;
+        int level = balls.Max(ball => ball.Level);
 
         while (level > 0)
         {
-            Ball[] matchingBalls = balls.FindAll(ball => ball.Level == level).ToArray();
+            List<Ball> matchingBalls = balls.FindAll(ball => ball.Level == level);
 
-            if (matchingBalls.Length == 3)
+            if (matchingBalls.Count == _requiredAmount)
             {
-                _button.gameObject.SetActive(true);
-                _button.onClick.AddListener(() => Merge(matchingBalls.Take(3).ToList()));
+                ButtonOn(matchingBalls.Take(3).ToList());
                 break;
+            }
+            else
+            {
+                ButtonOff();
             }
 
             level--;
@@ -56,9 +58,8 @@ public class BallMerger : MonoBehaviour
 
     private void Merge(List<Ball> balls)
     {
-        _button.gameObject.SetActive(false);
-        _button.onClick.RemoveAllListeners();
         MoveToSpawner(balls);
+        ButtonOff();
     }
 
     private void MoveToSpawner(List<Ball> balls)
@@ -88,5 +89,17 @@ public class BallMerger : MonoBehaviour
 
         foreach (var lowLevel in balls.ToArray())
             Destroy(lowLevel.gameObject);
+    }
+
+    private void ButtonOn(List<Ball> balls)
+    {
+        _button.gameObject.SetActive(true);
+        _button.onClick.AddListener(() => Merge(balls));
+    }
+
+    private void ButtonOff()
+    {
+        _button.gameObject.SetActive(false);
+        _button.onClick.RemoveAllListeners();
     }
 }

@@ -17,6 +17,7 @@ public class TeleportItem : Item
     {
         _bonusHandler = GetComponent<BonusHandler>();
         _wait = new(_delay);
+        Collider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

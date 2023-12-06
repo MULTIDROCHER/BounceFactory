@@ -32,8 +32,6 @@ public class ItemSpawner : MonoBehaviour
                 ItemBought?.Invoke();
             }
         }
-        else
-            Debug.Log("something wrong");
     }
 
     private Item GetRandomItem()
