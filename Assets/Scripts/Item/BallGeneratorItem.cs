@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class BallGeneratorItem : Item, IAnimated
 {
+    private ParticleSystem _spawnEffect;
+    private ParticleSystem _destroyEffect;
     private Animator _animator;
     private int _amount = 2;
     private int _delay = 3;
@@ -20,6 +23,8 @@ public class BallGeneratorItem : Item, IAnimated
 
         TryGetComponent(out _animator);
         GetComponent<Collider2D>().isTrigger = true;
+        _spawnEffect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXR Impact Glowing HDR (Blue).prefab");
+        _destroyEffect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXM_Enemy_Explosion.prefab");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,9 +38,9 @@ public class BallGeneratorItem : Item, IAnimated
         }
     }
 
-    public override void LevelUp(ItemType type, Sprite sprite)
+    public override void LevelUp()
     {
-        base.LevelUp(type, sprite);
+        base.LevelUp();
 
         _delay++;
         _amount++;
@@ -50,6 +55,8 @@ public class BallGeneratorItem : Item, IAnimated
             rigidbody.velocity = SetDirection().normalized * _acceleration;
             _spawned.Add(clone);
         }
+
+        DoEffect(_spawnEffect, transform.position);
     }
 
     private IEnumerator DestroyBallsAfterDelay()
@@ -57,8 +64,10 @@ public class BallGeneratorItem : Item, IAnimated
         yield return new WaitForSeconds(_delay);
 
         foreach (var item in _spawned.ToArray())
-            if (item != null)
+            if (item != null){
                 Destroy(item.gameObject);
+                DoEffect(_destroyEffect, item.transform.position);
+            }
 
         Reset();
     }
@@ -72,4 +81,9 @@ public class BallGeneratorItem : Item, IAnimated
     private Vector2 SetDirection() => Vector2.right * Random.Range(0, 360);
 
     public void PlayAnimation(Collider2D other) => _animator.SetTrigger(IAnimated.Trigger);
+
+    private void DoEffect(ParticleSystem effect, Vector3 position)
+    {
+        Instantiate(effect, position, Quaternion.identity, transform);
+    }
 }

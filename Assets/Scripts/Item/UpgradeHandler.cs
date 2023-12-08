@@ -1,8 +1,11 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class UpgradeHandler : MonoBehaviour
 {
     private SpriteRenderer _renderer;
+    private ParticleSystem _effect;
     private Item _current;
     private Item _itemToMerge;
 
@@ -11,6 +14,8 @@ public class UpgradeHandler : MonoBehaviour
         TryGetComponent(out _renderer);
         TryGetComponent(out _current);
         enabled = false;
+
+        _effect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXR Electric Explosion.prefab");
     }
 
     private void OnTriggerEnter2D(Collider2D other) => HandleCollision(other.gameObject);
@@ -49,10 +54,15 @@ public class UpgradeHandler : MonoBehaviour
     private void LevelUp(Item item)
     {
         ItemMerger merger = new(_current, item);
-        merger.GetNewItemData(out ItemType type, out Sprite sprite);
+        var template = merger.ChooseItem();
 
-        _current.LevelUp(type, sprite);
-        Destroy(item.gameObject);
+        template.LevelUp();
+        DoEffect(template.transform);
+
+        if (template != item)
+            Destroy(item.gameObject);
+        else
+            Destroy(_current.gameObject);
     }
 
     private Item GetItem(GameObject other)
@@ -64,5 +74,10 @@ public class UpgradeHandler : MonoBehaviour
             return item;
         else
             return null;
+    }
+
+    private void DoEffect(Transform parent)
+    {
+        var poof = Instantiate(_effect, parent);
     }
 }

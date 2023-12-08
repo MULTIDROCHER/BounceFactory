@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &-4982095513225367198
 Rigidbody2D:
   serializedVersion: 4
@@ -235,10 +235,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.25800002, y: 0.216}
-      - {x: -0.25800002, y: -0.216}
-      - {x: 0.25800002, y: -0.216}
-      - {x: 0.25800002, y: 0.216}
+    - - {x: -0.23599999, y: -0.214}
+      - {x: 0.24399999, y: -0.206}
+      - {x: 0.25599998, y: 0.194}
+      - {x: -0.24399999, y: 0.206}
+      - {x: -0.24, y: -0.21000001}
   m_UseDelaunayMesh: 0
 --- !u!114 &-6282747897272566110
 MonoBehaviour:
@@ -258,18 +259,18 @@ MonoBehaviour:
   Decompose: 0
   RunInPlayMode: 1
   UseCache: 0
-  lastAlphaTolerance: 0
-  lastScale: 0
-  lastDistanceThreshold: 0
+  lastAlphaTolerance: 20
+  lastScale: 1
+  lastDistanceThreshold: 8
   lastDecompose: 0
-  lastSprite: {fileID: 0}
+  lastSprite: {fileID: -1638821690, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
   lastRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  lastOffset: {x: -99999, y: -99999}
-  lastPixelsPerUnit: 0
+    x: 5
+    y: 2
+    width: 129
+    height: 108
+  lastOffset: {x: 64.5, y: 54}
+  lastPixelsPerUnit: 250
   lastFlipX: 0
   lastFlipY: 0

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BallMerger : MonoBehaviour
 {
     [SerializeField] private Transform _container;
+    [SerializeField] private ParticleSystem _poofEffect;
     [SerializeField] private BallSpawner _spawner;
     [SerializeField] private Button _button;
 
@@ -18,6 +19,7 @@ public class BallMerger : MonoBehaviour
     {
         _ballCount = _container.childCount;
         _colorSetter = GetComponent<ColorSetter>();
+        ButtonOff();
     }
 
     private void FixedUpdate()
@@ -85,6 +87,7 @@ public class BallMerger : MonoBehaviour
         var ball = balls[0];
         balls.Remove(ball);
         ball.LevelUp(_colorSetter.SetColor(ball));
+        DoEffect();
         ball.GetComponent<Collider2D>().enabled = true;
 
         foreach (var lowLevel in balls.ToArray())
@@ -101,5 +104,11 @@ public class BallMerger : MonoBehaviour
     {
         _button.gameObject.SetActive(false);
         _button.onClick.RemoveAllListeners();
+    }
+
+    private void DoEffect()
+    {
+        var poof = Instantiate(_poofEffect, _spawner.transform.position, Quaternion.identity);
+        Destroy(poof.gameObject, _poofEffect.main.startLifetime.constant);
     }
 }

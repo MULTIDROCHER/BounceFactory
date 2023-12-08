@@ -29,31 +29,11 @@ public class Item : MonoBehaviour
         }
     }
 
-    public virtual void LevelUp(ItemType type, Sprite sprite)
+    public virtual void LevelUp()
     {
         Level++;
         Bonus += 2;
-        Renderer.sprite = sprite;
 
         gameObject.name = Level.ToString();
-
-        if (type != Type)
-        {
-            ChangeType(type, out Item previousType);
-            Destroy(previousType);
-        }
-    }
-
-    private void ChangeType(ItemType type, out Item previousType)
-    {
-        previousType = GetComponent<Item>();
-        Debug.Log($"prev type = {previousType}. new = {type}");
-
-        if (type == ItemType.Common)
-            gameObject.AddComponent<CommonItem>();
-        else if (type == ItemType.Acceleration)
-            gameObject.AddComponent<AccelerationItem>();
-        else if (type == ItemType.BallGenerator)
-            gameObject.AddComponent<BallGeneratorItem>();
     }
 }

@@ -185,6 +185,7 @@ MonoBehaviour:
   _type: 2
   _canBeUpgraded: 1
   _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
+  _effect: {fileID: 19800002, guid: 7734adec023cb7949b8ae69e29a492b8, type: 3}
 --- !u!114 &4742465689044266685
 MonoBehaviour:
   m_ObjectHideFlags: 0

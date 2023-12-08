@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PipeEnter : MonoBehaviour
 {
-    private readonly float _acceleration = 70f;
+    private readonly float _acceleration = 100f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
