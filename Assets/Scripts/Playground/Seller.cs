@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class Seller : MonoBehaviour
 {
@@ -14,7 +11,7 @@ public abstract class Seller : MonoBehaviour
 
     public event Action<int> PriceChanged;
 
-    protected void OnBought() => /*Debug.Log("purchase"); */IncreasePrices() ;
+    protected void OnBought() => IncreasePrices() ;
 
     private void IncreasePrices()
     {

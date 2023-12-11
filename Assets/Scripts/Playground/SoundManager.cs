@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Agava.WebUtility;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -29,7 +27,7 @@ public class SoundManager : MonoBehaviour
     public void SwitchSource(AudioSource source, SoundButton button)
     {
         Debug.Log(source.volume);
-        
+
         if (source.volume == 0)
             Unmute(source, button);
         else
@@ -46,5 +44,15 @@ public class SoundManager : MonoBehaviour
     {
         source.volume = 1;
         button.Unmute();
+    }
+
+    private void OnEnable() => WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
+
+    private void OnDisable() => WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
+
+    private void OnInBackgroundChange(bool inBackground)
+    {
+        AudioListener.pause = inBackground;
+        AudioListener.volume = inBackground ? 0f : 1f;
     }
 }

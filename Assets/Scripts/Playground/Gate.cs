@@ -11,8 +11,8 @@ public class Gate : MonoBehaviour
 
     private Vector3 _rotation;
 
-    private bool IsOpened => transform.rotation.eulerAngles != Vector3.zero;
     public int Bonus { get; private set; } = 5;
+    private bool IsOpened => transform.rotation.eulerAngles != Vector3.zero;
 
     private void Start() => _rotation = new(0, 0, _angle);
 
@@ -27,10 +27,7 @@ public class Gate : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent(out Ball ball) && IsOpened)
-        {
-            Debug.Log(IsOpened + " " + gameObject.name + transform.rotation.eulerAngles);
             AddAcceleration(ball);
-        }
     }
 
     private void AddAcceleration(Ball ball)

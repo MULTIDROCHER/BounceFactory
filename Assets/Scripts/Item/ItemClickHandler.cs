@@ -4,11 +4,13 @@ public class ItemClickHandler : MonoBehaviour
 {
     private ItemView _view;
     private PointView _pointView;
+    private BonusHandler _bonusHandler;
 
     private void Awake()
     {
         _view = FindObjectOfType<ItemView>();
         _pointView = FindObjectOfType<PointView>();
+        _bonusHandler = GetComponent<BonusHandler>();
     }
 
     private void OnMouseOver()
@@ -17,6 +19,7 @@ public class ItemClickHandler : MonoBehaviour
         {
             _view.ShowLevel();
             _pointView.ShowPoints();
+            _bonusHandler.enabled = false;
         }
     }
 
@@ -24,5 +27,6 @@ public class ItemClickHandler : MonoBehaviour
     {
         _view.HideLevel();
         _pointView.HidePoints();
+        _bonusHandler.enabled = true;
     }
 }

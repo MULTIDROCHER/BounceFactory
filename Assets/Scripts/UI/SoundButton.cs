@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -17,7 +15,6 @@ public class SoundButton : MonoBehaviour
 
     protected virtual void Start()
     {
-
         if (Source.volume == 0)
             Mute();
         else
@@ -28,7 +25,7 @@ public class SoundButton : MonoBehaviour
 
     private void OnDisable() => _button.onClick.RemoveAllListeners();
 
-    public void Mute() { _image.sprite = _muted; Debug.Log("mute" + gameObject.name); }
+    public void Mute() => _image.sprite = _muted;
 
-    public void Unmute() { _image.sprite = _unmuted; Debug.Log("unmute" + gameObject.name); }
+    public void Unmute()=> _image.sprite = _unmuted;
 }
