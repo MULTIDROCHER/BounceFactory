@@ -18,7 +18,7 @@ public class DeadZone : MonoBehaviour
 
             Destroy(ball.gameObject);
 
-            if (_ballContainer.childCount == 0)
+            if (_ballContainer.childCount == 1)
                 BallsOver?.Invoke();
         }
     }

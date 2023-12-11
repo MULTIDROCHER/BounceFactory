@@ -1,3 +1,6 @@
+
+using UnityEngine;
+
 public class BallSeller : Seller
 {
     private DeadZone _ballDestroyer;
@@ -27,8 +30,9 @@ public class BallSeller : Seller
 
     private void OnBallsOver()
     {
+        Price = 0;
         _purchasesCount = 0;
-        Price = 10;
+        OnBought();
     }
 
     protected override void SetPrices()
