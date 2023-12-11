@@ -214,6 +214,7 @@ MonoBehaviour:
   _type: 1
   _canBeUpgraded: 0
   _display: {fileID: 0}
+  _effect: {fileID: 2895778573958520624, guid: b0e9576f6ca80e144aa8bb18c0e2f8dd, type: 3}
 --- !u!114 &6246829056130496878
 MonoBehaviour:
   m_ObjectHideFlags: 0

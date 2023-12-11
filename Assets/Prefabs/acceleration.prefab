@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1248869221171133983}
   - component: {fileID: 3848129619763837750}
   - component: {fileID: 109820013801439062}
+  - component: {fileID: 8113875945649084321}
   m_Layer: 0
   m_Name: acceleration
   m_TagString: Untagged
@@ -183,8 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
-  _canBeUpgraded: 1
-  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _effect: {fileID: 19800002, guid: 7734adec023cb7949b8ae69e29a492b8, type: 3}
 --- !u!114 &4742465689044266685
 MonoBehaviour:
@@ -268,3 +267,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusDisplay: {fileID: 6214025846911086506, guid: 6357305de9471004abaed6511631fa05, type: 3}
+--- !u!114 &8113875945649084321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4068643389051220013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e8b0c6507c5534c95cacdfa4edfe92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
+  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}

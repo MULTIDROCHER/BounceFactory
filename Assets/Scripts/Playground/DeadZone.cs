@@ -7,6 +7,7 @@ public class DeadZone : MonoBehaviour
     [SerializeField] private Transform _ballContainer;
 
     public event Action BallDestroyed;
+    public event Action BallsOver;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,8 +15,11 @@ public class DeadZone : MonoBehaviour
         {
             if (IsNotClone(ball))
                 BallDestroyed?.Invoke();
-                
+
             Destroy(ball.gameObject);
+
+            if (_ballContainer.childCount == 0)
+                BallsOver?.Invoke();
         }
     }
 

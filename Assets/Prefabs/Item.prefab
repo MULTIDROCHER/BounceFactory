@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -7375451795871715379}
   - component: {fileID: 5350849683300647299}
   - component: {fileID: -6762500811697334765}
+  - component: {fileID: -7913900473555187972}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -241,8 +242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _canBeUpgraded: 1
-  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _sprites:
   - {fileID: -670916510, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
   - {fileID: 1221652569, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
@@ -299,3 +298,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusDisplay: {fileID: 6214025846911086506, guid: 6357305de9471004abaed6511631fa05, type: 3}
+--- !u!114 &-7913900473555187972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228264078072020680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e8b0c6507c5534c95cacdfa4edfe92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
+  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}

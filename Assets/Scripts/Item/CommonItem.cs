@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent(typeof(HingeJoint2D))]
@@ -16,8 +15,7 @@ public class CommonItem : Item
             Renderer.sprite = _sprites[Random.Range(0, _sprites.Count)];
 
         SetJoint();
-
-        _canBeUpgraded = true;
+        
         _type = ItemType.Common;
         Collider.isTrigger = false;
     }

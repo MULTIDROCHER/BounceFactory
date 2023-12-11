@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public abstract class Seller : MonoBehaviour
 {
-    private int _freePurchaseCount = 2;
-    private int _purchasesCount;
+    private int FreePurchaseCount = 2;
+    protected int _purchasesCount;
 
     public float PriceChange { get; protected set; }
     public int Price { get; protected set; }
 
     public event Action<int> PriceChanged;
 
-    protected void OnBought() => Debug.Log("purchase");/* IncreasePrices() ;*/
+    protected void OnBought() => /*Debug.Log("purchase"); */IncreasePrices() ;
 
     private void IncreasePrices()
     {
         _purchasesCount++;
 
-        if (_purchasesCount == _freePurchaseCount)
+        if (_purchasesCount == FreePurchaseCount)
             SetPrices();
 
         Price = Convert.ToInt32(Price * PriceChange);
@@ -29,7 +29,7 @@ public abstract class Seller : MonoBehaviour
 
     protected void ReducePrices()
     {
-        //Price = Convert.ToInt32(Price / PriceChange);
+        Price = Convert.ToInt32(Price / PriceChange);
         PriceChanged?.Invoke(Price);
     }
 

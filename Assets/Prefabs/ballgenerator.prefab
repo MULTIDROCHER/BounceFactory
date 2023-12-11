@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5219989994822625241}
   - component: {fileID: 3726529290672758484}
   - component: {fileID: -6282747897272566110}
+  - component: {fileID: 643221600439807927}
   m_Layer: 0
   m_Name: ballgenerator
   m_TagString: Untagged
@@ -132,8 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _canBeUpgraded: 1
-  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
+  _spawnEffect: {fileID: 2708598583397607910, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+  _destroyEffect: {fileID: 198591319186534902, guid: de73b98ff812c774783bd145fc25cadb, type: 3}
 --- !u!114 &8973782570689397465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,3 +275,17 @@ MonoBehaviour:
   lastPixelsPerUnit: 250
   lastFlipX: 0
   lastFlipY: 0
+--- !u!114 &643221600439807927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422785025111780435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e8b0c6507c5534c95cacdfa4edfe92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
+  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}

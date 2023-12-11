@@ -4,8 +4,9 @@ using UnityEngine.Video;
 
 public class UpgradeHandler : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _effect;
+    [SerializeField] private LevelDisplay _display;
     private SpriteRenderer _renderer;
-    private ParticleSystem _effect;
     private Item _current;
     private Item _itemToMerge;
 
@@ -15,7 +16,7 @@ public class UpgradeHandler : MonoBehaviour
         TryGetComponent(out _current);
         enabled = false;
 
-        _effect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXR Electric Explosion.prefab");
+        Instantiate(_display, transform);
     }
 
     private void OnTriggerEnter2D(Collider2D other) => HandleCollision(other.gameObject);
@@ -78,6 +79,6 @@ public class UpgradeHandler : MonoBehaviour
 
     private void DoEffect(Transform parent)
     {
-        var poof = Instantiate(_effect, parent);
+        Instantiate(_effect, parent);
     }
 }

@@ -5,6 +5,7 @@ public class ScoreCounter : MonoBehaviour
 {
     public static ScoreCounter Instance;
     private TMP_Text _scoreText;
+    private int _globalScore;
 
     public int Score { get; private set; } = 100;
 
@@ -22,6 +23,8 @@ public class ScoreCounter : MonoBehaviour
     public void AddScore(int amount)
     {
         Score += amount;
+        _globalScore += amount;
+        
         UpdateDisplay();
     }
 

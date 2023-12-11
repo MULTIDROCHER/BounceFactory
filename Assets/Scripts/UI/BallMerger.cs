@@ -19,7 +19,6 @@ public class BallMerger : MonoBehaviour
     {
         _ballCount = _container.childCount;
         _colorSetter = GetComponent<ColorSetter>();
-        ButtonOff();
     }
 
     private void FixedUpdate()
@@ -48,10 +47,6 @@ public class BallMerger : MonoBehaviour
             {
                 ButtonOn(matchingBalls.Take(3).ToList());
                 break;
-            }
-            else
-            {
-                ButtonOff();
             }
 
             level--;
@@ -100,11 +95,7 @@ public class BallMerger : MonoBehaviour
         _button.onClick.AddListener(() => Merge(balls));
     }
 
-    private void ButtonOff()
-    {
-        _button.gameObject.SetActive(false);
-        _button.onClick.RemoveAllListeners();
-    }
+    private void ButtonOff() => _button.gameObject.SetActive(false);
 
     private void DoEffect()
     {

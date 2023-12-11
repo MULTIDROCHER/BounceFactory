@@ -4,6 +4,7 @@ using DG.Tweening;
 public class Gate : MonoBehaviour
 {
     [SerializeField] private float _angle;
+    [SerializeField] private AudioClip _sound;
 
     private readonly float _delay = .1f;
     private readonly int _acceleration = 10;
@@ -17,6 +18,8 @@ public class Gate : MonoBehaviour
 
     public void Open()
     {
+        SoundManager.Instance.SFXSource.PlayOneShot(_sound);
+        
         transform.DORotate(_rotation, _delay).OnComplete(() =>
         { transform.DORotate(Vector3.zero, _delay); });
     }
@@ -25,7 +28,7 @@ public class Gate : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Ball ball) && IsOpened)
         {
-            Debug.Log(IsOpened +" " + gameObject.name+ transform.rotation.eulerAngles);
+            Debug.Log(IsOpened + " " + gameObject.name + transform.rotation.eulerAngles);
             AddAcceleration(ball);
         }
     }

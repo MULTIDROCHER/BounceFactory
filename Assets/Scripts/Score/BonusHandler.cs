@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 public class BonusHandler : MonoBehaviour
 {
@@ -8,10 +9,14 @@ public class BonusHandler : MonoBehaviour
 
     private void Start() => TryGetComponent(out _item);
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other) => TryGetRevard(other.gameObject, other.GetContact(0).point);
+
+    private void OnTriggerEnter2D(Collider2D other) => TryGetRevard(other.gameObject, transform.position);
+
+    private void TryGetRevard(GameObject other, Vector3 position)
     {
-        if (other.gameObject.TryGetComponent(out Ball ball))
-            AddBonus(other.GetContact(0).point, ball);
+        if (other.TryGetComponent(out Ball ball))
+            AddBonus(position, ball);
     }
 
     public void AddBonus(Vector3 position, Ball ball)

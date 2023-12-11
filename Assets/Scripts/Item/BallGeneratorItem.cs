@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BallGeneratorItem : Item, IAnimated
 {
-    private ParticleSystem _spawnEffect;
-    private ParticleSystem _destroyEffect;
+    [SerializeField] private ParticleSystem _spawnEffect;
+    [SerializeField] private ParticleSystem _destroyEffect;
     private Animator _animator;
     private int _amount = 2;
     private int _delay = 3;
@@ -17,14 +17,11 @@ public class BallGeneratorItem : Item, IAnimated
 
     private void Start()
     {
-        _canBeUpgraded = true;
         _type = ItemType.BallGenerator;
         Collider.isTrigger = true;
 
         TryGetComponent(out _animator);
         GetComponent<Collider2D>().isTrigger = true;
-        _spawnEffect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXR Impact Glowing HDR (Blue).prefab");
-        _destroyEffect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXM_Enemy_Explosion.prefab");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

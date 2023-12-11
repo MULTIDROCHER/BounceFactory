@@ -13,15 +13,23 @@ public class BallSeller : Seller
     {
         _spawner.BallBought += OnBought;
         _ballDestroyer.BallDestroyed += OnBallDestroyed;
+        _ballDestroyer.BallsOver += OnBallsOver;
     }
 
     private void OnDisable()
     {
         _spawner.BallBought -= OnBought;
         _ballDestroyer.BallDestroyed -= OnBallDestroyed;
+        _ballDestroyer.BallsOver -= OnBallsOver;
     }
 
     private void OnBallDestroyed() => ReducePrices();
+
+    private void OnBallsOver()
+    {
+        _purchasesCount = 0;
+        Price = 10;
+    }
 
     protected override void SetPrices()
     {

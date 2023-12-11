@@ -10,7 +10,7 @@ public class TeleportItem : Item
     public static List<Ball> InPortal { get; private set; } = new();
 
     private BonusHandler _bonusHandler;
-    private ParticleSystem _effect;
+    [SerializeField] private ParticleSystem _effect;
     private float _delay = 2;
     private float _duration = .5f;
     private Vector2 _defaultSize;
@@ -21,7 +21,6 @@ public class TeleportItem : Item
         _bonusHandler = GetComponent<BonusHandler>();
         _wait = new(_delay);
         Collider.isTrigger = true;
-        _effect = AssetDatabase.LoadAssetAtPath<ParticleSystem>("Assets/EFFECTS/CFXM_GroundAura.prefab");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
