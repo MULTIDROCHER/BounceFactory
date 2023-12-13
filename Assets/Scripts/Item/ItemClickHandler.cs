@@ -19,7 +19,7 @@ public class ItemClickHandler : MonoBehaviour
         {
             _view.ShowLevel();
             _pointView.ShowPoints();
-            _bonusHandler.enabled = false;
+            SetBonus(false);
         }
     }
 
@@ -27,6 +27,12 @@ public class ItemClickHandler : MonoBehaviour
     {
         _view.HideLevel();
         _pointView.HidePoints();
-        _bonusHandler.enabled = true;
+        SetBonus(true);
+    }
+
+    private void SetBonus(bool enabled)
+    {
+        if (_bonusHandler != null)
+            _bonusHandler.enabled = enabled;
     }
 }

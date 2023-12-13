@@ -1,14 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour, IPointerClickHandler
 {
-    public void StartGame() => SceneManager.LoadScene(1);
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        BackToMainMenu();
+
+        if (Input.GetKeyDown(KeyCode.W))
+        StartGame();
+        
+        if (Input.GetKeyDown(KeyCode.E))
+        OpenTestScene();
+    }
 
     public void BackToMainMenu() => SceneManager.LoadScene(0);
+
+    public void StartGame() => SceneManager.LoadScene(1);
 
     public void OpenTestScene() => SceneManager.LoadScene(2);
 

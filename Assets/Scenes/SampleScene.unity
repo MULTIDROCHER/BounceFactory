@@ -1176,6 +1176,10 @@ PrefabInstance:
       propertyPath: m_fontSizeMax
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 3188780570719048252, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5789238043194638629, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -2024,7 +2028,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 21.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2138,7 +2142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2248,6 +2252,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2883611559360339637, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188780570719048252, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
+      propertyPath: m_margin.w
+      value: 0.63477325
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188780570719048252, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
+      propertyPath: m_margin.x
+      value: 30.152756
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188780570719048252, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
+      propertyPath: m_margin.y
+      value: 6.478245
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188780570719048252, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
+      propertyPath: m_margin.z
+      value: 21.53775
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188780570719048252, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5789238043194638629, guid: b34815efdd561d44a8f99e559a7b7e8a, type: 3}
@@ -2879,7 +2903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2948,7 +2972,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -10.845333}
+  m_margin: {x: 30.152756, y: 6.478245, z: 21.53775, w: 0.63477325}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4179,7 +4203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4212,7 +4236,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 92.5
+  m_fontSize: 87.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4248,7 +4272,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.9037709, z: 0, w: 0}
+  m_margin: {x: 30.152756, y: 6.478245, z: 21.53775, w: 0.63477325}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4670,7 +4694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4739,7 +4763,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -10.845333}
+  m_margin: {x: 30.152756, y: 6.478245, z: 21.53775, w: 0.63477325}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4970,7 +4994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5039,7 +5063,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2.1243286, y: -2.1243286, z: 0, w: 0}
+  m_margin: {x: 30.152756, y: 6.478245, z: 21.53775, w: 0.63477325}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5212,7 +5236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5245,7 +5269,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 93.3
+  m_fontSize: 87.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5281,7 +5305,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 30.152756, y: 6.478245, z: 21.53775, w: 0.63477325}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7037,6 +7061,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnSFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3302287450081880266, guid: 9dab05c704a4f0d4eb79f07f1ef5cc59, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3632681252715476750, guid: 9dab05c704a4f0d4eb79f07f1ef5cc59, type: 3}
       propertyPath: _clip
       value: 
@@ -7522,6 +7550,10 @@ PrefabInstance:
     - target: {fileID: 2614021203386955797, guid: 10838501e16e46745a18c2dfa3949e9c, type: 3}
       propertyPath: m_Name
       value: btnVOLUME
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221817132504986663, guid: 10838501e16e46745a18c2dfa3949e9c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708276720789198961, guid: 10838501e16e46745a18c2dfa3949e9c, type: 3}
       propertyPath: m_Pivot.x
