@@ -10,7 +10,6 @@ public class Item : MonoBehaviour
 
     public ItemType Type => _type;
     public SpriteRenderer Renderer { get; private set; }
-    public Collider2D Collider { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
     public bool CanBeUpgraded => GetComponent<UpgradeHandler>() != null;
@@ -18,7 +17,6 @@ public class Item : MonoBehaviour
     private void Awake()
     {
         Renderer = GetComponent<SpriteRenderer>();
-        Collider = GetComponent<Collider2D>();
     }
 
     public virtual void LevelUp()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 947474845646060360}
   - component: {fileID: 5028650619702828696}
   m_Layer: 0
-  m_Name: point
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

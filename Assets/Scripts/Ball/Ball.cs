@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BounceController))]
+[RequireComponent(typeof(BounceHandler))]
 public class Ball : MonoBehaviour
 {
     private int _increaseBonus = 3;

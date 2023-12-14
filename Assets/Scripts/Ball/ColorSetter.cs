@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ColorSetter : MonoBehaviour
 {
-    private Dictionary<int, Color> _colorsByLevel = new();
+    private readonly Dictionary<int, Color> _colorsByLevel = new();
 
     private void Start() => _colorsByLevel.Add(1, Color.white);
 

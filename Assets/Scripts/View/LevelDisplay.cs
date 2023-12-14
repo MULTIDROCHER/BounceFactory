@@ -7,6 +7,7 @@ public class LevelDisplay : MonoBehaviour
     private Item _item;
     private bool isDisplayed;
     private Vector3 _offset = new(0, -.5f, 0);
+    
     private string Text => _item.Level.ToString();
 
     private void Awake()

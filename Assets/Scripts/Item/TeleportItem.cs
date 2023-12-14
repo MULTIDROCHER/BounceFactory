@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using System.Linq;
-using UnityEditor;
 
+[RequireComponent(typeof(BonusHandler))]
+[RequireComponent(typeof(EffectHandler))]
 public class TeleportItem : Item
 {
     public static List<Ball> InPortal { get; private set; } = new();
 
+    private readonly float _delay = 2;
+
     private BonusHandler _bonusHandler;
-    [SerializeField] private ParticleSystem _effect;
-    private float _delay = 2;
+    private EffectHandler _effectHandler;
+    private WaitForSeconds _wait;
     private float _duration = .5f;
     private Vector2 _defaultSize;
-    private WaitForSeconds _wait;
 
     private void Start()
     {
-        _bonusHandler = GetComponent<BonusHandler>();
+        TryGetComponent(out _bonusHandler);
+        TryGetComponent(out _effectHandler);
         _wait = new(_delay);
-        Collider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -48,7 +50,7 @@ public class TeleportItem : Item
 
     private void Disappear(Ball ball)
     {
-        DoEffect(transform.position);
+        _effectHandler.DoEffect(transform.position);
         ball.transform.DOMove(transform.position, _duration, false);
         ball.transform.DOScale(Vector3.zero, _duration).OnComplete(() =>
         ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static);
@@ -56,7 +58,7 @@ public class TeleportItem : Item
 
     private void Appear(Ball ball, TeleportItem portal)
     {
-        DoEffect(portal.transform.position);
+        _effectHandler.DoEffect(portal.transform.position);
         ball.transform.position = portal.transform.position;
         ball.transform.DOScale(_defaultSize, _duration).OnComplete(() =>
         {
@@ -85,10 +87,5 @@ public class TeleportItem : Item
 
         InPortal.Remove(ball);
         StopCoroutine(ReactivateBall(ball));
-    }
-
-    private void DoEffect(Vector3 position)
-    {
-        var effect = Instantiate(_effect, position, Quaternion.identity, transform);
     }
 }

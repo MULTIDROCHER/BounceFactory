@@ -1,18 +1,15 @@
-using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(EffectHandler))]
 public class AccelerationItem : Item
 {
-    [SerializeField] private ParticleSystem _effect;
-    private float _lifetime = 2;
     private readonly int _acceleration = 10;
+    private EffectHandler _effectHandler;
 
     private void Start()
     {
         _type = ItemType.Acceleration;
-        Collider.isTrigger = true;
-
-        GetComponent<Collider2D>().isTrigger = true;
+        TryGetComponent(out _effectHandler);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,13 +20,7 @@ public class AccelerationItem : Item
             rigidBody.velocity = transform.up.normalized * _acceleration;
 
             if (ball.GetComponentInChildren<ParticleSystem>() == null)
-                DoEffect(ball);
+                _effectHandler.DoEffect(ball);
         }
-    }
-
-    private void DoEffect(Ball ball)
-    {
-        var effect = Instantiate(_effect, ball.transform.position, Quaternion.identity, ball.transform);
-        Destroy(effect.gameObject, _lifetime);
     }
 }

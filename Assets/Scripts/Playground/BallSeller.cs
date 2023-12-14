@@ -1,6 +1,3 @@
-
-using UnityEngine;
-
 public class BallSeller : Seller
 {
     private DeadZone _ballDestroyer;

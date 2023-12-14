@@ -1,27 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(EffectHandler))]
 public class BallGeneratorItem : Item, IAnimated
 {
     [SerializeField] private ParticleSystem _spawnEffect;
     [SerializeField] private ParticleSystem _destroyEffect;
-    private Animator _animator;
-    private int _amount = 2;
-    private int _delay = 3;
+
     private readonly int _acceleration = 10;
     private readonly List<Ball> _spawned = new();
 
+    private Animator _animator;
+    private EffectHandler _effectHandler;
+    private int _amount = 2;
+    private int _delay = 3;
     private bool _isActive = true;
 
     private void Start()
     {
         _type = ItemType.BallGenerator;
-        Collider.isTrigger = true;
 
         TryGetComponent(out _animator);
-        GetComponent<Collider2D>().isTrigger = true;
+        TryGetComponent(out _effectHandler);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,6 +44,10 @@ public class BallGeneratorItem : Item, IAnimated
         _amount++;
     }
 
+    public void PlayAnimation(Collider2D _) => _animator.SetTrigger(IAnimated.Trigger);
+
+    private Vector2 SetDirection() => Vector2.right * Random.Range(0, 360);
+
     private void CreateClones(Ball ball)
     {
         for (int i = 0; i < _amount; i++)
@@ -53,7 +58,7 @@ public class BallGeneratorItem : Item, IAnimated
             _spawned.Add(clone);
         }
 
-        DoEffect(_spawnEffect, transform.position);
+        _effectHandler.DoEffect(_spawnEffect, transform.position);
     }
 
     private IEnumerator DestroyBallsAfterDelay()
@@ -61,9 +66,10 @@ public class BallGeneratorItem : Item, IAnimated
         yield return new WaitForSeconds(_delay);
 
         foreach (var item in _spawned.ToArray())
-            if (item != null){
+            if (item != null)
+            {
                 Destroy(item.gameObject);
-                DoEffect(_destroyEffect, item.transform.position);
+                _effectHandler.DoEffect(_destroyEffect, item.transform.position);
             }
 
         Reset();
@@ -73,14 +79,5 @@ public class BallGeneratorItem : Item, IAnimated
     {
         _spawned.Clear();
         _isActive = true;
-    }
-
-    private Vector2 SetDirection() => Vector2.right * Random.Range(0, 360);
-
-    public void PlayAnimation(Collider2D other) => _animator.SetTrigger(IAnimated.Trigger);
-
-    private void DoEffect(ParticleSystem effect, Vector3 position)
-    {
-        Instantiate(effect, position, Quaternion.identity, transform);
     }
 }
