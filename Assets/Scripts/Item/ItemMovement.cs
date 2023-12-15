@@ -1,12 +1,16 @@
+using System;
 using UnityEngine;
 
-public class ItemMovement : MonoBehaviour
+public class ItemMovement : MonoBehaviour, ITutorialEvent
 {
     private Camera _camera;
     private PointHandler _pointHandler;
     private UpgradeHandler _upgradeHandler;
     private bool _isDragged = false;
     private Vector3 _mousePos;
+    private SpawnPoint _newPoint;
+
+    public event Action Performed;
 
     private SpawnPoint PreviousPoint => _pointHandler.PreviousPoint;
 
@@ -29,6 +33,7 @@ public class ItemMovement : MonoBehaviour
     private void OnMouseDown()
     {
         _isDragged = true;
+        _newPoint = _pointHandler.PreviousPoint;
 
         if (_upgradeHandler != null)
             _upgradeHandler.enabled = true;
@@ -46,6 +51,9 @@ public class ItemMovement : MonoBehaviour
 
         transform.position = PreviousPoint.transform.position;
         Rotate();
+
+        if (_newPoint != PreviousPoint)
+            Performed?.Invoke();
     }
 
     private void Rotate()

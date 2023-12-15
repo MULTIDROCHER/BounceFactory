@@ -1,19 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BallMerger : MonoBehaviour
+public class BallMerger : MonoBehaviour,ITutorialEvent
 {
     [SerializeField] private Transform _container;
     [SerializeField] private ParticleSystem _poofEffect;
     [SerializeField] private BallSpawner _spawner;
     [SerializeField] private Button _button;
 
+    public Button Button => _button;
+
     private ColorSetter _colorSetter;
     private int _requiredAmount = 3;
     private int _ballCount;
+
+    public event Action Performed;
 
     private void Start()
     {
@@ -56,6 +61,7 @@ public class BallMerger : MonoBehaviour
     private void Merge(List<Ball> balls)
     {
         MoveToSpawner(balls);
+        Performed?.Invoke();
         ButtonOff();
     }
 

@@ -1,7 +1,11 @@
-public class BallSeller : Seller
+using System;
+
+public class BallSeller : Seller, ITutorialEvent
 {
     private DeadZone _ballDestroyer;
     private BallSpawner _spawner;
+
+    public event Action Performed;
 
     private void Awake()
     {
@@ -34,6 +38,7 @@ public class BallSeller : Seller
 
     protected override void SetPrices()
     {
+        Performed?.Invoke();
         Price = 50;
         PriceChange = 1.5f;
     }

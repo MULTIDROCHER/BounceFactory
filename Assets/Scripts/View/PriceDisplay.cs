@@ -10,16 +10,16 @@ public class PriceDisplay : MonoBehaviour
 
     private int _price;
 
+    public Button Button => _button;
+    public Seller Seller => _seller;
+
     private void OnEnable() => _seller.PriceChanged += OnPriceChanged;
 
     private void OnDisable() => _seller.PriceChanged -= OnPriceChanged;
 
     private void LateUpdate()
     {
-        if (ScoreCounter.Instance.Score >= _price)
-            _button.interactable = true;
-        else
-            _button.interactable = false;
+        _button.interactable = ScoreCounter.Instance.Score >= _price;
     }
 
     private void OnPriceChanged(int price)

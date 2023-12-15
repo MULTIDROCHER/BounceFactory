@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
-public class UpgradeHandler : MonoBehaviour
+public class UpgradeHandler : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private ParticleSystem _effect;
     [SerializeField] private LevelDisplay _display;
     private SpriteRenderer _renderer;
     private Item _current;
     private Item _itemToMerge;
+
+    public event Action Performed;
 
     private void Awake()
     {
@@ -52,6 +55,7 @@ public class UpgradeHandler : MonoBehaviour
 
     private void LevelUp(Item item)
     {
+        Performed?.Invoke();
         ItemMerger merger = new(_current, item);
         var template = merger.ChooseItem();
 

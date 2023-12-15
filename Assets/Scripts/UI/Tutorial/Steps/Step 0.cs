@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 
 public class Step0 : TutorialStep
 {
-    private const string MobileMessage = "нажми в правой части экрана чтобы поднять правый флиппер";
-    private const string ComputerMessage = "нажми X на клавиатуре чтобы поднять правый флиппер";
+    private const string MobileMessage = "нажми в правой части экрана\nчтобы поднять правый флиппер";
+    private const string ComputerMessage = "нажми X на клавиатуре\n чтобы поднять правый флиппер";
 
     private GameObject _mask;
     private FlipperController _controller;
@@ -21,29 +21,30 @@ public class Step0 : TutorialStep
 
     public override void Enter()
     {
-        OnComputer();
-        
         _controller = Object.FindObjectsOfType<FlipperController>()
             .Where(controller => controller.transform.position.x > 0).FirstOrDefault();
-        _controller.Performed += OnCompleted;
+        _controller.Performed += OnPerformed;
+        
+        OnNeedMask();
     }
 
     public override void Exit()
     {
-        _controller.Performed -= OnCompleted;
+        base.Exit();
+        _controller.Performed -= OnPerformed;
     }
 
-    protected override void OnMobile()
+    protected override void OnNeedMask()
     {
-        base.OnMobile();
+        base.OnNeedMask();
 
         ChangeText(MobileMessage);
         _mask.transform.position = GetMaskPosition(_controller.transform);
     }
 
-    protected override void OnComputer()
+    protected override void OnUnneedMask()
     {
-        base.OnComputer();
+        base.OnUnneedMask();
 
         ChangeText(ComputerMessage);
     }

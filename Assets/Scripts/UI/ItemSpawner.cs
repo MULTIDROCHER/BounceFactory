@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
+using System;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class ItemSpawner : MonoBehaviour
     private readonly int _ballgeneratorChance = 30;
 
     public UnityAction<Item> ItemSpawned;
-    public UnityAction ItemBought;
+    public event Action ItemBought;
 
     public void Spawn()
     {
@@ -36,7 +37,7 @@ public class ItemSpawner : MonoBehaviour
 
     private Item GetRandomItem()
     {
-        int chance = Random.Range(1, 101);
+        int chance = UnityEngine.Random.Range(1, 101);
 
         if (chance <= _accelerationChance)
             return GetItemByComponent<AccelerationItem>();
@@ -53,7 +54,7 @@ public class ItemSpawner : MonoBehaviour
         SpawnPoint[] emptyPoints = _spawnPoints.Where(point => point.IsEmpty).ToArray();
 
         if (emptyPoints.Length != 0)
-            return emptyPoints[Random.Range(0, emptyPoints.Length)];
+            return emptyPoints[UnityEngine.Random.Range(0, emptyPoints.Length)];
         else
             return null;
     }
@@ -63,7 +64,7 @@ public class ItemSpawner : MonoBehaviour
         int possibleAmount = 2;
         TeleportItem[] portals = FindObjectsOfType<TeleportItem>();
 
-        if (portals.Length < possibleAmount)
+        if (portals.Length < possibleAmount && _container.childCount >= possibleAmount)
             return 20;
         else
             return 0;
