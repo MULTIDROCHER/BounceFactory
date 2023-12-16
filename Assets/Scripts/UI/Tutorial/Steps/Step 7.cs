@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Step7 : TutorialStep
 {
@@ -12,26 +6,12 @@ public class Step7 : TutorialStep
 
     private UpgradeHandler _handler;
 
-    public Step7(TMP_Text text) : base(text)
-    {
-    }
-
     public override void Enter()
     {
         _handler = Object.FindObjectOfType<UpgradeHandler>();
         _handler.Performed += OnPerformed;
-        OnUnneedMask();
+        OnUnneedMask(Message);
     }
 
-    protected override void OnUnneedMask()
-    {
-        base.OnUnneedMask();
-        ChangeText(Message);
-    }
-
-    public override void Exit()
-    {
-        _handler.Performed -= OnPerformed;
-        base.Exit();
-    }
+    public override void Exit() => _handler.Performed -= OnPerformed;
 }

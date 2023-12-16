@@ -26,8 +26,6 @@ public class SoundManager : MonoBehaviour
 
     public void SwitchSource(AudioSource source, SoundButton button)
     {
-        Debug.Log(source.volume);
-
         if (source.volume == 0)
             Unmute(source, button);
         else

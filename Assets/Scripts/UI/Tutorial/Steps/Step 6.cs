@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Step6 : TutorialStep
 {
@@ -12,26 +6,12 @@ public class Step6 : TutorialStep
 
     private ItemSpawner _spawner;
 
-    public Step6(TMP_Text text) : base(text)
-    {
-    }
-
     public override void Enter()
     {
         _spawner = Object.FindObjectOfType<ItemSpawner>();
-        OnUnneedMask();
-    }
-
-    protected override void OnUnneedMask()
-    {
-        base.OnUnneedMask();
-        ChangeText(Message);
         _spawner.ItemBought += OnPerformed;
+        OnUnneedMask(Message);
     }
 
-    public override void Exit()
-    {
-        _spawner.ItemBought -= OnPerformed;
-        base.Exit();
-    }
+    public override void Exit() => _spawner.ItemBought -= OnPerformed;
 }

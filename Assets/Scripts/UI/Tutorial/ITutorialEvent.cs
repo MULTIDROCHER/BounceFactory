@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITutorialEvent
+using System;public interface ITutorialEvent
 {
    public event Action Performed;
 }

@@ -1,9 +1,7 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -15,9 +13,13 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject _mask;
     [SerializeField] private TMP_Text _text;
 
+    private readonly float _delay = .5f;
+
     private TutorialStateMachine _stateMachine;
     private WaitForSeconds _wait;
-    private float _delay = .5f;
+
+    public GameObject Mask => _mask;
+    public TMP_Text Text => _text;
 
     private void Awake()
     {
@@ -37,7 +39,7 @@ public class TutorialManager : MonoBehaviour
         _wait = new(_delay);
 
         _stateMachine = new();
-        Step0 step = new(_text, _mask);
+        Step0 step = new();
 
         _stateMachine.Initialize(step);
         step.Completed += Step1;
@@ -47,51 +49,44 @@ public class TutorialManager : MonoBehaviour
 
     private void Step1()
     {
-        Step1 step = new(_text, _mask);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += Step2;
+        Step1 step = new();
+        ExecuteStep(step, Step2);
     }
 
     private void Step2()
     {
-        Step2 step = new(_text, _mask);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += Step3;
+        Step2 step = new();
+        ExecuteStep(step, Step3);
     }
 
     private void Step3()
     {
-        Step3 step = new(_text, _mask);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += Step4;
+        Step3 step = new();
+        ExecuteStep(step, Step4);
     }
 
     private void Step4()
     {
-        Step4 step = new(_text, _mask);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += Step5;
+        Step4 step = new();
+        ExecuteStep(step, Step5);
     }
 
     private void Step5()
     {
-        Step5 step = new(_text);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += Step6;
+        Step5 step = new();
+        ExecuteStep(step, Step6);
     }
 
     private void Step6()
     {
-        Step6 step = new(_text);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += Step7;
+        Step6 step = new();
+        ExecuteStep(step, Step7);
     }
 
     private void Step7()
     {
-        Step7 step = new(_text);
-        StartCoroutine(ChangeStep(step));
-        step.Completed += End;
+        Step7 step = new();
+        ExecuteStep(step, End);
     }
 
     private void End()
@@ -100,6 +95,12 @@ public class TutorialManager : MonoBehaviour
         _text.text = EndMessage;
         StopAllCoroutines();
         Destroy(gameObject, 2);
+    }
+
+    private void ExecuteStep(TutorialStep step, Action nextStep)
+    {
+        StartCoroutine(ChangeStep(step));
+        step.Completed += nextStep;
     }
 
     private IEnumerator ChangeStep(TutorialStep step)

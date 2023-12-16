@@ -36,6 +36,8 @@ public class BallGeneratorItem : Item, IAnimated
         }
     }
 
+    private void OnDestroy() => Reset();
+
     public override void LevelUp()
     {
         base.LevelUp();

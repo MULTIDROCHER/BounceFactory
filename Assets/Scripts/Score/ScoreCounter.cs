@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -7,7 +8,10 @@ public class ScoreCounter : MonoBehaviour
     private TMP_Text _scoreText;
     private int _globalScore;
 
+    public event Action<int> ScoreAdded;
+
     public int Score { get; private set; } = 100;
+    public int GlobalScore => _globalScore;
 
     private void Awake()
     {
@@ -24,6 +28,7 @@ public class ScoreCounter : MonoBehaviour
     {
         Score += amount;
         _globalScore += amount;
+        ScoreAdded?.Invoke(amount);
         
         UpdateDisplay();
     }

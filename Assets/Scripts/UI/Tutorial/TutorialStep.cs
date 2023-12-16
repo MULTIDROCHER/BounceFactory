@@ -1,27 +1,34 @@
 using UnityEngine;
 using TMPro;
 using System;
-using System.Collections;
 
 public class TutorialStep
 {
-    protected TMP_Text Text;
+    protected TMP_Text Text = TutorialManager.Instance.Text;
+    protected GameObject Mask = TutorialManager.Instance.Mask;
 
     public event Action Completed;
 
-    public TutorialStep(TMP_Text text) => Text = text;
-
     public virtual void Enter() { }
 
-    public virtual void Exit() => OnUnneedMask();
+    public virtual void Exit() {}
+
+    protected virtual void OnNeedMask(string text, Transform target)
+    {
+        TutorialManager.Instance.SetOverlay(true);
+        Mask.transform.position = GetMaskPosition(target);
+        ChangeText(text);
+    }
+
+    protected virtual void OnUnneedMask(string text)
+    {
+        TutorialManager.Instance.SetOverlay(false);
+        ChangeText(text);
+    }
 
     protected void ChangeText(string text) => Text.text = text;
 
     protected virtual Vector3 GetMaskPosition(Transform target) => target.position;
 
     protected virtual void OnPerformed() => Completed?.Invoke();
-
-    protected virtual void OnNeedMask() => TutorialManager.Instance.SetOverlay(true);
-
-    protected virtual void OnUnneedMask() => TutorialManager.Instance.SetOverlay(false);
 }
