@@ -630,7 +630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.10437038, y: 0.2714375}
   m_AnchorMax: {x: 0.9025556, y: 0.7343126}
-  m_AnchoredPosition: {x: 1.1037598, y: -3.828125}
+  m_AnchoredPosition: {x: 1.1037598, y: 0}
   m_SizeDelta: {x: 2.268921, y: 6.1899414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &778436171866742158
@@ -1748,6 +1748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c4dee9a7c841748974bc266684226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _finishWindow: {fileID: 2610183111757014494}
 --- !u!1 &2559261702324855007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,7 +1788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.11206055, y: -0.2265625}
+  m_AnchoredPosition: {x: 0.11206055, y: 0}
   m_SizeDelta: {x: 0.22000122, y: -0.119903564}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6567663289930946068
@@ -1967,7 +1968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.06076703, y: 0.19958518}
   m_AnchorMax: {x: 0.94836575, y: 0.7642023}
-  m_AnchoredPosition: {x: -2.4996948, y: 2}
+  m_AnchoredPosition: {x: -2.4996948, y: 0}
   m_SizeDelta: {x: 61, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5175762701499600730
@@ -2164,7 +2165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.23, y: 0.18064839}
   m_AnchorMax: {x: 0.7666658, y: 0.3201758}
-  m_AnchoredPosition: {x: -0.5, y: 1.1602173}
+  m_AnchoredPosition: {x: -0.5, y: 0}
   m_SizeDelta: {x: -1, y: 4.1514893}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &843556484470410205
@@ -2672,6 +2673,7 @@ GameObject:
   - component: {fileID: 3984330549425188462}
   - component: {fileID: 1591153181593938405}
   - component: {fileID: 178610134525089799}
+  - component: {fileID: 5166741541758385043}
   m_Layer: 0
   m_Name: btnCONTINUE
   m_TagString: Untagged
@@ -2697,7 +2699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.23, y: 0.36600003}
   m_AnchorMax: {x: 0.7666658, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: 9.5}
+  m_AnchoredPosition: {x: 0.5, y: 0}
   m_SizeDelta: {x: -1, y: 9.151489}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4057345135303935963
@@ -2781,7 +2783,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3984330549425188462}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5166741541758385043}
+        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &178610134525089799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2795,6 +2809,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: fac780b1291ba534485e9114483a5673, type: 3}
+--- !u!114 &5166741541758385043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509837727262378133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa7d9101d511d84eb0817743f677a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4597683806150745406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,7 +3306,7 @@ GameObject:
   - component: {fileID: 5070309982585266887}
   - component: {fileID: 7700218870815174837}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3443,7 +3469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.06076703, y: 0.19958518}
   m_AnchorMax: {x: 0.94836575, y: 0.7642023}
-  m_AnchoredPosition: {x: -2.4996948, y: 2}
+  m_AnchoredPosition: {x: -2.4996948, y: 0}
   m_SizeDelta: {x: 61, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6098480142426519503

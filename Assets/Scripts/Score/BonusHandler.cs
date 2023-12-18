@@ -14,7 +14,7 @@ public class BonusHandler : MonoBehaviour
 
     private void TryGetRevard(GameObject other, Vector3 position)
     {
-        if (other.TryGetComponent(out Ball ball))
+        if (other.TryGetComponent(out Ball ball) && _item.Type != ItemType.Teleport)
             AddBonus(position, ball);
     }
 

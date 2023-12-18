@@ -43,4 +43,8 @@ public class ScoreCounter : MonoBehaviour
     }
 
     private void UpdateDisplay() => _scoreText.text = "score: " + Score;
+
+    public void TestChit(){
+        AddScore(1000);
+    }
 }

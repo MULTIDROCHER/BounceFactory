@@ -15,6 +15,8 @@ public class ProgressBar : MonoBehaviour
     private int _currentScore;
     private float _duration = .2f;
 
+    public event Action GoalRiched;
+
     private void OnEnable() => StartCoroutine(DelayedSubscription());
 
     private void OnDisable() => ScoreCounter.Instance.ScoreAdded -= UpdateProgressBar;
@@ -33,6 +35,9 @@ public class ProgressBar : MonoBehaviour
     {
         _currentScore += amount;
         _slider.DOValue(_currentScore, _duration).OnUpdate(() => UpdateProgressText());
+
+        if (_currentScore >= _goal)
+            GoalRiched?.Invoke();
     }
 
     private void UpdateProgressText() => _text.text = _currentScore + " / " + _goal;
