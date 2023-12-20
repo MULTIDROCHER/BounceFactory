@@ -23,6 +23,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
+
+        if (GameManager.Instance.IsTrained)
+        Destroy(gameObject);
+
         if (Instance == null)
         {
             Instance = this;
@@ -94,6 +98,7 @@ public class TutorialManager : MonoBehaviour
         _stateMachine.CurrentState.Exit();
         _text.text = EndMessage;
         StopAllCoroutines();
+        GameManager.Instance.TutorialPassed();
         Destroy(gameObject, 2);
     }
 

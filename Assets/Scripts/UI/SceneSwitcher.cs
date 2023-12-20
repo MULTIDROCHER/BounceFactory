@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class SceneSwitcher : MonoBehaviour, IPointerClickHandler
+public class SceneSwitcher : MonoBehaviour
 {
     private void Update()
     {
@@ -17,14 +18,9 @@ public class SceneSwitcher : MonoBehaviour, IPointerClickHandler
 
     public void StartGame() => SceneManager.LoadScene(1);
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log(gameObject.name);
-    }
-
     public void NextLevel()
     {
-        int index = SceneManager.GetActiveScene().buildIndex +1;
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
 
         if (index < SceneManager.sceneCountInBuildSettings)
             SceneManager.LoadScene(index);

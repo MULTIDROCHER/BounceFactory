@@ -4,14 +4,21 @@ public class Step7 : TutorialStep
 {
     private const string Message = "перемести один предмет на другой,\nчтобы объединить их";
 
-    private UpgradeHandler _handler;
+    private UpgradeHandler[] _handlers;
 
     public override void Enter()
     {
-        _handler = Object.FindObjectOfType<UpgradeHandler>();
-        _handler.Performed += OnPerformed;
+        _handlers = Object.FindObjectsOfType<UpgradeHandler>();
+
+        foreach (var handler in _handlers)
+            handler.Performed += OnPerformed;
+
         OnUnneedMask(Message);
     }
 
-    public override void Exit() => _handler.Performed -= OnPerformed;
+    public override void Exit()
+    {
+        foreach (var handler in _handlers)
+            handler.Performed -= OnPerformed;
+    }
 }

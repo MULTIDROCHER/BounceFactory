@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4840191502077175881}
   - component: {fileID: 5065571244955350851}
   - component: {fileID: 5869775256002331023}
-  - component: {fileID: 1522091609085223648}
+  - component: {fileID: 7256552418516809261}
   m_Layer: 5
   m_Name: UIMask
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!212 &1522091609085223648
+--- !u!212 &7256552418516809261
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 164
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

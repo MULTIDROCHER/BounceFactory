@@ -36,7 +36,11 @@ public class BallGeneratorItem : Item, IAnimated
         }
     }
 
-    private void OnDestroy() => Reset();
+    private void OnDestroy()
+    {
+        foreach (var ball in _spawned)
+            Destroy(ball);
+    }
 
     public override void LevelUp()
     {

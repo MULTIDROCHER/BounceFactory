@@ -15,8 +15,6 @@ public class Step1 : TutorialStep
         _controller.Performed += OnPerformed;
 
         OnNeedMask(MobileMessage, _controller.transform);
-
-        //or OnUnneedMask(ComputerMessage);
     }
 
     public override void Exit() => _controller.Performed -= OnPerformed;

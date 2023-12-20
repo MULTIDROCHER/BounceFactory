@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BallMerger : MonoBehaviour,ITutorialEvent
+public class BallMerger : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private Transform _container;
     [SerializeField] private ParticleSystem _poofEffect;
@@ -42,9 +42,8 @@ public class BallMerger : MonoBehaviour,ITutorialEvent
     private void TryFindMatches()
     {
         List<Ball> balls = _container.GetComponentsInChildren<Ball>().ToList();
-        int level = balls.Max(ball => ball.Level);
 
-        while (level > 0)
+        for (int level = balls.Max(ball => ball.Level); level > 0; level--)
         {
             List<Ball> matchingBalls = balls.FindAll(ball => ball.Level == level);
 
@@ -53,16 +52,14 @@ public class BallMerger : MonoBehaviour,ITutorialEvent
                 ButtonOn(matchingBalls.Take(3).ToList());
                 break;
             }
-
-            level--;
         }
     }
 
     private void Merge(List<Ball> balls)
     {
+        ButtonOff();
         MoveToSpawner(balls);
         Performed?.Invoke();
-        ButtonOff();
     }
 
     private void MoveToSpawner(List<Ball> balls)
@@ -101,7 +98,11 @@ public class BallMerger : MonoBehaviour,ITutorialEvent
         _button.onClick.AddListener(() => Merge(balls));
     }
 
-    private void ButtonOff() => _button.gameObject.SetActive(false);
+    private void ButtonOff()
+    {
+        _button.gameObject.SetActive(false);
+        TryFindMatches();
+    }
 
     private void DoEffect()
     {

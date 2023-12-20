@@ -18,5 +18,6 @@ public class Ball : MonoBehaviour
         Bonus += _increaseBonus;
 
         gameObject.name = Level.ToString();
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

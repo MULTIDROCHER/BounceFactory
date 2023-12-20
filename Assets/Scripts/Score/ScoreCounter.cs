@@ -29,7 +29,7 @@ public class ScoreCounter : MonoBehaviour
         Score += amount;
         _globalScore += amount;
         ScoreAdded?.Invoke(amount);
-        
+
         UpdateDisplay();
     }
 
@@ -44,7 +44,8 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateDisplay() => _scoreText.text = "score: " + Score;
 
-    public void TestChit(){
-        AddScore(1000);
+    public void TestChit()
+    {
+        AddScore(LevelManager.Instance.LevelGoal / 10);
     }
 }
