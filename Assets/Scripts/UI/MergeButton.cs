@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using System;
 
 public class MergeButton : MonoBehaviour
 {
@@ -19,10 +18,7 @@ public class MergeButton : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        _animation = transform.DOScale(_scale, _duration).SetLoops(-1, LoopType.Yoyo);
-    }
+    private void OnEnable() => _animation = transform.DOScale(_scale, _duration).SetLoops(-1, LoopType.Yoyo);
 
     private void OnDisable()
     {
