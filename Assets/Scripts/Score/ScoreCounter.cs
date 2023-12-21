@@ -10,17 +10,24 @@ public class ScoreCounter : MonoBehaviour
 
     public event Action<int> ScoreAdded;
 
-    public int Score { get; private set; } = 100;
+    public int Score { get; private set; }
     public int GlobalScore => _globalScore;
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else if (Instance == this)
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
-
+        }
+        
         _scoreText = GetComponent<TMP_Text>();
+
+        Score = SetPrice();
         UpdateDisplay();
     }
 
@@ -47,5 +54,13 @@ public class ScoreCounter : MonoBehaviour
     public void TestChit()
     {
         AddScore(LevelManager.Instance.LevelGoal / 10);
+    }
+
+    private int SetPrice()
+    {
+        if (Progress.Instance.Balance == 0)
+            return 100;
+        else
+            return Progress.Instance.Balance;
     }
 }

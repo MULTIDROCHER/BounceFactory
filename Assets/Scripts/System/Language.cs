@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -7,6 +5,9 @@ public class Language : MonoBehaviour
 {
     public static Language Instance;
     public static string CurrentLanguage;
+
+    [DllImport("_Internal")]
+    private static extern string GetLang();
 
     private void Awake()
     {
@@ -17,12 +18,9 @@ public class Language : MonoBehaviour
 
             CurrentLanguage = GetLang();
         }
-        else if (Instance == this)
+        else
         {
             Destroy(gameObject);
         }
     }
-
-    [DllImport("_Internal")]
-    private static extern string GetLang();
 }

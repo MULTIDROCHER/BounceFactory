@@ -6,11 +6,7 @@ public class AccelerationItem : Item
     private readonly int _acceleration = 10;
     private EffectHandler _effectHandler;
 
-    private void Start()
-    {
-        _type = ItemType.Acceleration;
-        TryGetComponent(out _effectHandler);
-    }
+    private void Start() => TryGetComponent(out _effectHandler);
 
     private void OnTriggerEnter2D(Collider2D other)
     {

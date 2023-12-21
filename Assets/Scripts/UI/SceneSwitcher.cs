@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
@@ -16,13 +14,17 @@ public class SceneSwitcher : MonoBehaviour
 
     public void BackToMainMenu() => SceneManager.LoadScene(0);
 
-    public void StartGame() => SceneManager.LoadScene(1);
+    public void StartGame() => SceneManager.LoadScene(Progress.Instance.Level);
+
+    public void RestartetGame()
+    {
+        Progress.Instance.Restart();
+        StartGame();
+    }
 
     public void NextLevel()
     {
-        int index = SceneManager.GetActiveScene().buildIndex + 1;
-
-        if (index < SceneManager.sceneCountInBuildSettings)
-            SceneManager.LoadScene(index);
+        Progress.Instance.LevelCompleted();
+        SceneManager.LoadScene(Progress.Instance.Level);
     }
 }

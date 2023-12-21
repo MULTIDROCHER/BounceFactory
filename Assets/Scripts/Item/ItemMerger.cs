@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ItemMerger
 {
-    private Item _current;
-    private Item _target;
+    private readonly Item _current;
+    private readonly Item _target;
 
     public ItemMerger(Item current, Item target)
     {

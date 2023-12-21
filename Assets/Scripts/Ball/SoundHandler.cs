@@ -7,7 +7,6 @@ public class SoundHandler : MonoBehaviour
     [SerializeField] private AudioClip _generatorSound;
     [SerializeField] private AudioClip _accelerationSound;
 
-
     private AudioSource _source;
 
     private void Start() => TryGetComponent(out _source);

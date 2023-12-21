@@ -23,19 +23,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (GameManager.Instance.IsTrained)
-        Destroy(gameObject);
-
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
             Destroy(gameObject);
-        }
+
+        Instance = this;
     }
 
     private void Start()

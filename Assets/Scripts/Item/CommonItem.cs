@@ -10,7 +10,5 @@ public class CommonItem : Item
     {
         if (Renderer.sprite == null)
             Renderer.sprite = _sprites[Random.Range(0, _sprites.Count)];
-        
-        _type = ItemType.Common;
     }
 }

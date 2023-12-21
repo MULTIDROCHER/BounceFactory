@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public bool IsTrained { get; private set; } = false;
-
+    public bool IsTrained { get; private set; } = true;
 
     private void Awake()
     {
@@ -16,8 +13,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if (Instance == this)
+        else
+        {
             Destroy(gameObject);
+        }
     }
 
     public void TutorialPassed() => IsTrained = true;

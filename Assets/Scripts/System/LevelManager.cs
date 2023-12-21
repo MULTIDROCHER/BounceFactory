@@ -13,9 +13,14 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else if (Instance == this)
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
+        }
 
         _progress = FindObjectOfType<ProgressBar>();
     }

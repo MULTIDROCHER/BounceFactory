@@ -19,8 +19,6 @@ public class BallGeneratorItem : Item, IAnimated
 
     private void Start()
     {
-        _type = ItemType.BallGenerator;
-
         TryGetComponent(out _animator);
         TryGetComponent(out _effectHandler);
     }
