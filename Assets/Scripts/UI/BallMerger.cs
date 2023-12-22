@@ -32,10 +32,10 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
         {
             _ballCount = _container.childCount;
 
-            if (_ballCount < _requiredAmount)
-                ButtonOff();
-            else
+            if (_ballCount >= _requiredAmount)
                 TryFindMatches();
+            else
+                ButtonOff();
         }
     }
 
@@ -47,10 +47,14 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
         {
             List<Ball> matchingBalls = balls.FindAll(ball => ball.Level == level);
 
-            if (matchingBalls.Count == _requiredAmount)
+            if (matchingBalls.Count >= _requiredAmount)
             {
-                ButtonOn(matchingBalls.Take(3).ToList());
+                ButtonOn(matchingBalls.Take(_requiredAmount).ToList());
                 break;
+            }
+            else
+            {
+                ButtonOff();
             }
         }
     }
@@ -101,7 +105,7 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
     private void ButtonOff()
     {
         _button.gameObject.SetActive(false);
-        TryFindMatches();
+        //TryFindMatches();
     }
 
     private void DoEffect()

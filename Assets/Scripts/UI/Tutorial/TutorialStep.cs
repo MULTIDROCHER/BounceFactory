@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class TutorialStep
 {
@@ -11,7 +12,7 @@ public class TutorialStep
 
     public virtual void Enter() { }
 
-    public virtual void Exit() {}
+    public virtual void Exit() { }
 
     protected virtual void OnNeedMask(string text, Transform target)
     {

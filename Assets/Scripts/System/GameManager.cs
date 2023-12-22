@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public bool IsTrained { get; private set; } = true;
+    public bool IsTrained { get; private set; } = false;
 
     private void Awake()
     {

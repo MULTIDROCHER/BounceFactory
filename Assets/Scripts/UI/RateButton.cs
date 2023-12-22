@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +9,7 @@ public class RateButton : MonoBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
-        gameObject.SetActive(Yandex.Instance.GameRated);
+        gameObject.SetActive(!Yandex.Instance.GameRated);
     }
     
     private void OnEnable()

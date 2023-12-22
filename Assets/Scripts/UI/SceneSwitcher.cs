@@ -14,7 +14,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void BackToMainMenu() => SceneManager.LoadScene(0);
 
-    public void StartGame() => SceneManager.LoadScene(Progress.Instance.Level);
+    public void StartGame() => SceneManager.LoadScene(Progress.Instance.PlayerInfo.Level);
 
     public void RestartetGame()
     {
@@ -25,6 +25,6 @@ public class SceneSwitcher : MonoBehaviour
     public void NextLevel()
     {
         Progress.Instance.LevelCompleted();
-        SceneManager.LoadScene(Progress.Instance.Level);
+        SceneManager.LoadScene(Progress.Instance.PlayerInfo.Level);
     }
 }

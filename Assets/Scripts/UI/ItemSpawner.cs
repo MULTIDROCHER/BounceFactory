@@ -7,15 +7,23 @@ using System;
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] private List<Item> _items;
-    [SerializeField] private List<SpawnPoint> _spawnPoints;
-    [SerializeField] private Transform _container;
-    [SerializeField] private ItemSeller _seller;
+
+    private SpawnPoint[] _spawnPoints;
+    private ItemContainer _container;
+    private ItemSeller _seller;
 
     private readonly int _accelerationChance = 10;
     private readonly int _ballgeneratorChance = 30;
 
     public UnityAction<Item> ItemSpawned;
     public event Action ItemBought;
+
+    private void Start()
+    {
+        _spawnPoints = FindObjectsOfType<SpawnPoint>();
+        _container = FindObjectOfType<ItemContainer>();
+        _seller = FindObjectOfType<ItemSeller>();
+    }
 
     public void Spawn()
     {
@@ -27,7 +35,7 @@ public class ItemSpawner : MonoBehaviour
 
             if (itemToSpawn != null)
             {
-                var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, _container);
+                var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, _container.transform);
                 ScoreCounter.Instance.Buy(_seller.Price);
                 ItemSpawned?.Invoke(spawned);
                 ItemBought?.Invoke();
@@ -43,7 +51,7 @@ public class ItemSpawner : MonoBehaviour
             return GetItemByComponent<AccelerationItem>();
         else if (chance <= TeleportChance())
             return GetItemByComponent<TeleportItem>();
-        else if (chance <= _ballgeneratorChance && _container.childCount >= 1)
+        else if (chance <= _ballgeneratorChance && _container.transform.childCount >= 1)
             return GetItemByComponent<BallGeneratorItem>();
         else
             return GetItemByComponent<CommonItem>();
@@ -64,7 +72,7 @@ public class ItemSpawner : MonoBehaviour
         int possibleAmount = 2;
         TeleportItem[] portals = FindObjectsOfType<TeleportItem>();
 
-        if (portals.Length < possibleAmount && _container.childCount >= possibleAmount)
+        if (portals.Length < possibleAmount && _container.transform.childCount >= possibleAmount)
             return 20;
         else
             return 0;

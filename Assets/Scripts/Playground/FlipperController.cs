@@ -10,15 +10,13 @@ public class FlipperController : MonoBehaviour, ITutorialEvent
 
     public KeyCode Key => _key;
 
-    private void OnMouseDown() => OpenFlipper();
-
     private void Update()
     {
         if (Input.GetKeyDown(_key))
             OpenFlipper();
     }
 
-    private void OpenFlipper()
+    public void OpenFlipper()
     {
         Performed?.Invoke();
         _flipper.Open();

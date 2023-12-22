@@ -58,9 +58,9 @@ public class ScoreCounter : MonoBehaviour
 
     private int SetPrice()
     {
-        if (Progress.Instance.Balance == 0)
+        if (Progress.Instance.PlayerInfo.Balance == 0)
             return 100;
         else
-            return Progress.Instance.Balance;
+            return Progress.Instance.PlayerInfo.Balance;
     }
 }

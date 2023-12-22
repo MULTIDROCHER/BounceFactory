@@ -23,6 +23,20 @@ mergeInto(LibraryManager.library, {
             }
         })
   },
+  
+  SaveExtern: function (date) {
+    console.log("________________________SAVE DATA________________________");
+    var dateString = JSON.UTF8ToString(date);
+    var myobj = JSON.parse(dateString);
+    player.setData(myobj); 
+  },
 
+  LoadExtern: function () {
+    console.log("________________________LOAD DATA________________________");
+    player.getData().then(_date => {
+      const myJSON = JSON.stringify(_date);
+      myGameInstance.SendMessage('Progress', 'Load', myJSON);
+    });
+  },
 
 });

@@ -10,6 +10,8 @@ public class Yandex : MonoBehaviour
 
     [SerializeField] private TMP_Text _test;
 
+    private string _userName = "Anonimus";
+
     public bool GameRated { get; private set; }
 
     [DllImport("__Internal")] private static extern void Hello();
@@ -28,9 +30,18 @@ public class Yandex : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _test.text = _userName;
+    }
+
     public void Test() => Hello();
 
-    public void SetName(string name) => _test.text = name;
+    public void SetName(string name)
+    {
+        _userName = name;
+        _test.text = _userName;
+    }
 
     public void RateButton() => RateGame();
 
