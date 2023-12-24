@@ -1,8 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Step6 : TutorialStep
 {
-    private const string Message = "теперь добавь еще один предмет";
+    private Dictionary<string, string> _messages = new(){
+{ "ru", "теперь добавь еще один предмет" },
+{ "en", "now add one more item" },
+{ "tr", "şimdi bir öğe daha ekleyin" },
+    };
 
     private ItemSpawner _spawner;
 
@@ -10,7 +15,7 @@ public class Step6 : TutorialStep
     {
         _spawner = Object.FindObjectOfType<ItemSpawner>();
         _spawner.ItemBought += OnPerformed;
-        OnUnneedMask(Message);
+        OnUnneedMask(_messages[Language]);
     }
 
     public override void Exit() => _spawner.ItemBought -= OnPerformed;

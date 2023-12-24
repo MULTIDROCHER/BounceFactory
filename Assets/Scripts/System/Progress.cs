@@ -4,25 +4,11 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
-
-[Serializable]
-public class PlayerInfo
-{
-    public int Level = 1;
-    public int Balance;
-    public int Score => ScoreCounter.Instance.GlobalScore;
-}
+using YG;
 
 public class Progress : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _playerInfoText;
     public static Progress Instance;
-
-    public PlayerInfo PlayerInfo;
-
-    [DllImport("__Internal")] private static extern void SaveExtern(string date);
-
-    [DllImport("__Internal")] private static extern void LoadExtern();
 
     private void Awake()
     {
@@ -30,10 +16,6 @@ public class Progress : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-#if UNITY_WEBGL
-            LoadExtern();
-#endif
         }
         else
         {
@@ -43,30 +25,14 @@ public class Progress : MonoBehaviour
 
     public void LevelCompleted()
     {
-        PlayerInfo.Level++;
-        PlayerInfo.Balance = ScoreCounter.Instance.Score;
-
-#if UNITY_WEBGL
-        Save();
-#endif
-
+        YandexGame.savesData.Level++;
+        YandexGame.savesData.Balance = ScoreCounter.Instance.Balance;
+        YandexGame.SaveProgress();
     }
 
     public void Restart()
     {
-        PlayerInfo.Level = 1;
-        PlayerInfo.Balance = 0;
-    }
-
-    public void Save()
-    {
-        string jsonString = JsonUtility.ToJson(PlayerInfo);
-        SaveExtern(jsonString);
-    }
-
-    public void Load(string value)
-    {
-        PlayerInfo = JsonUtility.FromJson<PlayerInfo>(value);
-        _playerInfoText.text = PlayerInfo.Level + "\n" + PlayerInfo.Balance + "\n" + PlayerInfo.Score;
+        YandexGame.savesData.Level = 1;
+        YandexGame.savesData.Balance = 0;
     }
 }

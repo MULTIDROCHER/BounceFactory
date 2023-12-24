@@ -1,0 +1,18 @@
+{
+  "idSave": 50,
+  "isFirstSession": false,
+  "language": "ru",
+  "promptDone": true,
+  "money": 1,
+  "newPlayerName": "Hello!",
+  "openLevels": [
+    false,
+    true,
+    false
+  ],
+  "Level": 5,
+  "Balance": 160100,
+  "Balls": null,
+  "Items": null,
+  "Score": 0
+}

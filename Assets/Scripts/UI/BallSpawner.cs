@@ -22,4 +22,9 @@ public class BallSpawner : MonoBehaviour
         ScoreCounter.Instance.Buy(_seller.Price);
         BallBought?.Invoke();
     }
+
+    public void Spawn(Ball ball){
+        Instantiate(_template, _container.transform.position, Quaternion.identity, _container.transform);
+        BallBought?.Invoke();
+    }
 }

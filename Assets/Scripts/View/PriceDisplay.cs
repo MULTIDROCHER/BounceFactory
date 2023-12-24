@@ -19,7 +19,7 @@ public class PriceDisplay : MonoBehaviour
 
     private void LateUpdate()
     {
-        _button.interactable = ScoreCounter.Instance.Score >= _price;
+        _button.interactable = ScoreCounter.Instance.Balance >= _price;
     }
 
     private void OnPriceChanged(int price)

@@ -1,22 +1,23 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-            BackToMainMenu();
-
-        if (Input.GetKeyDown(KeyCode.W))
-            StartGame();
+    public void BackToMainMenu(){
+        YandexGame.SaveProgress();
+        LoadingScreen.Instance.LoadScene(0);
     }
 
-    public void BackToMainMenu() => SceneManager.LoadScene(0);
+    public void StartGame()
+    {
+        if (YandexGame.savesData.Level >= SceneManager.sceneCountInBuildSettings)
+            RestartGame();
+        else
+            NextLevel();
+    }
 
-    public void StartGame() => SceneManager.LoadScene(Progress.Instance.PlayerInfo.Level);
-
-    public void RestartetGame()
+    public void RestartGame()
     {
         Progress.Instance.Restart();
         StartGame();
@@ -24,7 +25,6 @@ public class SceneSwitcher : MonoBehaviour
 
     public void NextLevel()
     {
-        Progress.Instance.LevelCompleted();
-        SceneManager.LoadScene(Progress.Instance.PlayerInfo.Level);
+        LoadingScreen.Instance.LoadScene(YandexGame.savesData.Level);
     }
 }

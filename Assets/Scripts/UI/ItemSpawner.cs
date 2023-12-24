@@ -15,7 +15,7 @@ public class ItemSpawner : MonoBehaviour
     private readonly int _accelerationChance = 10;
     private readonly int _ballgeneratorChance = 30;
 
-    public UnityAction<Item> ItemSpawned;
+    public event Action<Item> ItemSpawned;
     public event Action ItemBought;
 
     private void Start()
@@ -40,6 +40,17 @@ public class ItemSpawner : MonoBehaviour
                 ItemSpawned?.Invoke(spawned);
                 ItemBought?.Invoke();
             }
+        }
+    }
+
+    public void Spawn(Item item)
+    {
+        var point = GetPoint();
+
+        if (point != null)
+        {
+            var spawned = Instantiate(item, point.transform.position, Quaternion.identity, _container.transform);
+            ItemSpawned?.Invoke(spawned);
         }
     }
 

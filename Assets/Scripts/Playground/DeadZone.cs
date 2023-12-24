@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    [SerializeField] private Transform _ballContainer;
+    private Transform _ballContainer;
 
     public event Action BallDestroyed;
     public event Action BallsOver;
+
+    private void Awake() => _ballContainer = FindObjectOfType<BallContainer>().transform;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

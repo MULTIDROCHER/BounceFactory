@@ -1,11 +1,17 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class TutorialManager : MonoBehaviour
 {
-    private const string EndMessage = "Ура, теперь ты знаешь основные\nмеханики! Приятной игры! :)";
+    private Dictionary<string, string> _messages = new(){
+{ "ru", "Ура, теперь ты знаешь основные\nмеханики! Приятной игры! :)" },
+{ "en", "Yay, now you know the basic mechanics! Enjoy the game! :)" },
+{ "tr", "Yaşasın, artık temel mekanikleri biliyorsunuz! Oyunun tadını çıkarın! :)" },
+    };
 
     public static TutorialManager Instance;
 
@@ -81,16 +87,24 @@ public class TutorialManager : MonoBehaviour
     private void Step7()
     {
         Step7 step = new();
-        ExecuteStep(step, End);
+        ExecuteStep(step, () => StartCoroutine(End()));
     }
 
-    private void End()
+    private IEnumerator End()
+    {
+        int delay = 2;
+
+        _text.text = _messages[YandexGame.lang];
+        yield return new WaitForSeconds(delay);
+        Skip();
+    }
+
+    public void Skip()
     {
         _stateMachine.CurrentState.Exit();
-        _text.text = EndMessage;
-        StopAllCoroutines();
         GameManager.Instance.TutorialPassed();
-        Destroy(gameObject, 2);
+        StopAllCoroutines();
+        Destroy(gameObject);
     }
 
     private void ExecuteStep(TutorialStep step, Action nextStep)

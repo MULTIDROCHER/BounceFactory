@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using YG;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,4 +22,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void TutorialPassed() => IsTrained = true;
+
+    public void ShowLiderboard(){
+        
+    }
 }

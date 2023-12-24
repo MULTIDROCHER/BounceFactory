@@ -1,8 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Step7 : TutorialStep
 {
-    private const string Message = "перемести один предмет на другой,\nчтобы объединить их";
+    private Dictionary<string, string> _messages = new(){
+{ "ru", "перемести один предмет на другой,\nчтобы объединить их" },
+{ "en", "move one item over another\nto merge them" },
+{ "tr", "birleştirmek için bir öğeyi\ndiğerinin üzerine taşıyın" },
+    };
 
     private UpgradeHandler[] _handlers;
 
@@ -13,7 +18,7 @@ public class Step7 : TutorialStep
         foreach (var handler in _handlers)
             handler.Performed += OnPerformed;
 
-        OnUnneedMask(Message);
+        OnUnneedMask(_messages[Language]);
     }
 
     public override void Exit()

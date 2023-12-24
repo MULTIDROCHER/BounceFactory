@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class LevelManager : MonoBehaviour
 {
@@ -32,20 +33,22 @@ public class LevelManager : MonoBehaviour
 
         LevelGoal = values[sceneIndex - 1];
 
+        YandexGame.LoadProgress();
 
         _progress.GoalRiched += OnGoalRiched;
     }
 
     private void OnDisable()
     {
+        YandexGame.SaveProgress();
         _progress.GoalRiched -= OnGoalRiched;
     }
 
     private void OnGoalRiched()
     {
-        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        Progress.Instance.LevelCompleted();
 
-        if (index < SceneManager.sceneCountInBuildSettings)
+        if (YandexGame.savesData.Level < SceneManager.sceneCountInBuildSettings)
             _finishWindow.SetActive(true);
         else
             _endhWindow.SetActive(true);
