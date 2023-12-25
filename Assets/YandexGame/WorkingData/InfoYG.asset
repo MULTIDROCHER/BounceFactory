@@ -19,8 +19,8 @@ MonoBehaviour:
     authorized: 1
     isMobile: 0
     language: ru
-    name: Player this
-    uniqueID: 000
+    name: mr ignat
+    uniqueID: 666
     photo: https://justplaygames.ru/public/icon_player.png
   AdWhenLoadingScene: 1
   showFirstAd: 1
@@ -32,9 +32,9 @@ MonoBehaviour:
   testErrorOfRewardedAdsInEditor: 0
   saveCloud: 1
   flush: 0
-  localSaveSync: 1
+  localSaveSync: 0
   saveCloudInterval: 5
-  saveOnQuitGame: 0
+  saveOnQuitGame: 1
   quitGameParameters:
     objectName: YandexGame
     methodName: _SaveProgress
@@ -181,7 +181,7 @@ MonoBehaviour:
       rank: 2
       score: 10
   LocalizationEnable: 1
-  callingLanguageCheck: 0
+  callingLanguageCheck: 1
   translateMethod: 0
   domainAutoLocalization: com
   CSVFileTranslate:
@@ -245,7 +245,8 @@ MonoBehaviour:
     de: []
     hi: []
   fontsTMP:
-    defaultFont: []
+    defaultFont:
+    - {fileID: 11400000, guid: 3522040e2dc4f534fb867db7f7a42d61, type: 2}
     ru: []
     en: []
     tr: []
@@ -320,7 +321,7 @@ MonoBehaviour:
     imageURI: https://justplaygames.ru/public/Paymant3.png
     priceValue: 30
     consumed: 1
-  metricaEnable: 0
+  metricaEnable: 1
   metricaCounterID: 0
   debug: 1
   archivingBuild: 1

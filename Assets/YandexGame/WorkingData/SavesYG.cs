@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace YG
 {
@@ -22,8 +23,8 @@ namespace YG
 
         public int Level = 1;
         public int Balance;
-        public List<Ball> Balls;
-        public List<Item> Items;
+
+        public bool IsTrained => GameManager.Instance.IsTrained;
         public int Score => ScoreCounter.Instance.GlobalScore;
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
@@ -34,14 +35,7 @@ namespace YG
         {
             openLevels[1] = true;
             // Допустим, задать значения по умолчанию для отдельных элементов массива
-
-        }
-
-        public void ClearLevelData()
-        {
             Balance = 0;
-            Balls.Clear();
-            Items.Clear();
         }
     }
 }

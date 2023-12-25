@@ -5,11 +5,11 @@ using YG;
 
 public class SaveData : MonoBehaviour
 {
-    [SerializeField] private BallContainer _ballContainer;
+    /* [SerializeField] private BallContainer _ballContainer;
     [SerializeField] private ItemContainer _itemContainer;
 
-    public List<Ball> Balls { get; private set; }
-    public List<Item> Items { get; private set; }
+    public List<GameObject> Balls { get; private set; } = new();
+    public List<GameObject> Items { get; private set; } = new();
     public int Balance { get; private set; }
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
@@ -30,8 +30,8 @@ public class SaveData : MonoBehaviour
     {
         SetData();
 
-        YandexGame.savesData.Balls = Balls;
-        YandexGame.savesData.Items = Items;
+        //YandexGame.savesData.Balls = Balls.ToArray();
+        YandexGame.savesData.Items = Items.ToArray();
         YandexGame.savesData.Balance = Balance;
 
         YandexGame.SaveProgress();
@@ -44,27 +44,26 @@ public class SaveData : MonoBehaviour
         var ballSpawner = FindObjectOfType<BallSpawner>();
         var itemSpawner = FindObjectOfType<ItemSpawner>();
 
-        if (YandexGame.savesData.Balls.Count != 0)
-            foreach (var ball in YandexGame.savesData.Balls)
-                ballSpawner.Spawn(ball);
+        if (YandexGame.savesData.Balls.Length != 0)
+            for (int i = 0; i < YandexGame.savesData.Balls.Length; i++)
+                ballSpawner.Spawn(YandexGame.savesData.Balls[i]);
 
-        if (YandexGame.savesData.Items.Count != 0)
-        foreach (var item in YandexGame.savesData.Items)
-            itemSpawner.Spawn(item);
+        if (YandexGame.savesData.Items.Length != 0)
+            for (int i = 0; i < YandexGame.savesData.Items.Length; i++)
+                itemSpawner.Spawn(YandexGame.savesData.Items[i]);
     }
 
     public void SetData()
     {
-        SetChilds(Balls, _ballContainer.transform);
-        SetChilds(Items, _itemContainer.transform);
+        Balls.Clear();
+        Balls.AddRange(_ballContainer.transform.GetComponentsInChildren<Ball>());
+
+        Items.Clear();
+        foreach(Transform item in _itemContainer.transform){
+            if(item.TryGetComponent(out Item _))
+            Items.Add(item.gameObject);
+        }
+
         Balance = ScoreCounter.Instance.Balance;
-    }
-
-    private void SetChilds<T>(List<T> list, Transform container)
-    {
-        if (list.Count != 0)
-            list.Clear();
-
-        list.AddRange(container.GetComponentsInChildren<T>());
-    }
+    } */
 }

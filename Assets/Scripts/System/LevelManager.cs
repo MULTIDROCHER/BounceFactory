@@ -34,7 +34,6 @@ public class LevelManager : MonoBehaviour
         LevelGoal = values[sceneIndex - 1];
 
         YandexGame.LoadProgress();
-
         _progress.GoalRiched += OnGoalRiched;
     }
 

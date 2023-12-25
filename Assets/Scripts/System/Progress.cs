@@ -8,6 +8,9 @@ using YG;
 
 public class Progress : MonoBehaviour
 {
+    public int Level = 1;
+    public int Balance;
+
     public static Progress Instance;
 
     private void Awake()
@@ -25,14 +28,18 @@ public class Progress : MonoBehaviour
 
     public void LevelCompleted()
     {
-        YandexGame.savesData.Level++;
-        YandexGame.savesData.Balance = ScoreCounter.Instance.Balance;
-        YandexGame.SaveProgress();
+        Balance = ScoreCounter.Instance.Balance;
+        Level++;
+        //YandexGame.savesData.Level++;
+        //YandexGame.savesData.Balance = ScoreCounter.Instance.Balance;
+        //YandexGame.SaveProgress();
     }
 
     public void Restart()
     {
-        YandexGame.savesData.Level = 1;
-        YandexGame.savesData.Balance = 0;
+        Balance = 0;
+        Level = 1;
+        //YandexGame.savesData.Level = 1;
+        //YandexGame.savesData.Balance = 0;
     }
 }

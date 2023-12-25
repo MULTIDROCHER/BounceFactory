@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class BallContainer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Ball> Balls { get; private set; } = new();
 
-    // Update is called once per frame
-    void Update()
+    private int _childCount;
+
+    private void Update()
     {
-        
+        if (transform.childCount != _childCount)
+        {
+            _childCount = transform.childCount;
+            Balls.Clear();
+            Balls.AddRange(transform.GetComponentsInChildren<Ball>());
+        }
     }
 }

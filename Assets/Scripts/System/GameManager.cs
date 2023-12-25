@@ -21,9 +21,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TutorialPassed() => IsTrained = true;
+    public void TutorialPassed()
+    {
+        IsTrained = true;
+    }
 
-    public void ShowLiderboard(){
-        
+    public void OnLevelExit()
+    {
     }
 }

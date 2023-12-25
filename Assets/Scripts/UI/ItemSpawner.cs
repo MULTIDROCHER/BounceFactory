@@ -43,16 +43,16 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    public void Spawn(Item item)
+    /* public void Respawn(int[,,] item)
     {
         var point = GetPoint();
 
-        if (point != null)
+        if (point != null && item != null)
         {
             var spawned = Instantiate(item, point.transform.position, Quaternion.identity, _container.transform);
-            ItemSpawned?.Invoke(spawned);
+            ItemSpawned?.Invoke(spawned.GetComponent<Item>());
         }
-    }
+    } */
 
     private Item GetRandomItem()
     {

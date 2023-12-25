@@ -23,8 +23,22 @@ public class BallSpawner : MonoBehaviour
         BallBought?.Invoke();
     }
 
-    public void Spawn(Ball ball){
-        Instantiate(_template, _container.transform.position, Quaternion.identity, _container.transform);
-        BallBought?.Invoke();
+    public void Respawn(int[,] balls)
+    {
+        ColorSetter colorSetter = new();
+
+        for (int i = 0; i < balls.GetLength(0); i++)
+        {
+            for (int j = 0; j < balls[i, 0]; j++)
+            {
+                var ball = Instantiate(_template, _container.transform.position, Quaternion.identity, _container.transform);
+                BallBought?.Invoke();
+
+                while (ball.Level < balls[i, 1])
+                {
+                    ball.LevelUp(colorSetter.SetColor(ball));
+                }
+            }
+        }
     }
 }

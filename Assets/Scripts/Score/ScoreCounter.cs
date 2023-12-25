@@ -40,7 +40,6 @@ public class ScoreCounter : MonoBehaviour
         _globalScore += amount;
         ScoreAdded?.Invoke(amount);
 
-        TrySaveHighScore();
         UpdateDisplay();
     }
 
@@ -66,11 +65,5 @@ public class ScoreCounter : MonoBehaviour
             return 100;
         else
             return YandexGame.savesData.Balance;
-    }
-
-    private void TrySaveHighScore()
-    {
-        YandexGame.NewLeaderboardScores("LeaderBoardScore", GlobalScore);
-        Debug.Log("score upd");
     }
 }
