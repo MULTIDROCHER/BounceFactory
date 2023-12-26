@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class LevelCounter : MonoBehaviour
 {
@@ -15,9 +16,9 @@ public class LevelCounter : MonoBehaviour
 
     private void Update()
     {
-        if (Progress.Instance.Level != _current)
+        if (YandexGame.savesData.Level != _current)
         {
-            _current = Progress.Instance.Level;
+            _current = YandexGame.savesData.Level;
             UpdateDisplay();
         }
     }

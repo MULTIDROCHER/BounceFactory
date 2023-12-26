@@ -12,7 +12,7 @@ public class BallSpawner : MonoBehaviour
 
     private void Start()
     {
-        _container = FindObjectOfType<BallContainer>();
+        GetContainer();
         _seller = FindObjectOfType<BallSeller>();
     }
 
@@ -40,5 +40,13 @@ public class BallSpawner : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GetContainer(BallContainer container = null)
+    {
+        if (container == null)
+            _container = FindObjectOfType<BallContainer>();
+        else
+            _container = container;
     }
 }

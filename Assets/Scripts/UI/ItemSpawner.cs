@@ -20,7 +20,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void Start()
     {
-        _spawnPoints = FindObjectsOfType<SpawnPoint>();
+        GetPoints();
         _container = FindObjectOfType<ItemContainer>();
         _seller = FindObjectOfType<ItemSeller>();
     }
@@ -42,17 +42,6 @@ public class ItemSpawner : MonoBehaviour
             }
         }
     }
-
-    /* public void Respawn(int[,,] item)
-    {
-        var point = GetPoint();
-
-        if (point != null && item != null)
-        {
-            var spawned = Instantiate(item, point.transform.position, Quaternion.identity, _container.transform);
-            ItemSpawned?.Invoke(spawned.GetComponent<Item>());
-        }
-    } */
 
     private Item GetRandomItem()
     {
@@ -90,4 +79,12 @@ public class ItemSpawner : MonoBehaviour
     }
 
     private Item GetItemByComponent<T>() where T : Component => _items.Find(item => item.TryGetComponent(out T component));
+
+    public void GetPoints(SpawnPoint[] points = null)
+    {
+        if (points == null)
+            _spawnPoints =  FindObjectsOfType<SpawnPoint>();
+        else
+            _spawnPoints =  points;
+    }
 }

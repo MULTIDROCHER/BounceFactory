@@ -4,15 +4,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using YG;
 
 [RequireComponent(typeof(Slider))]
 public class ProgressBar : MonoBehaviour
 {
     private TMP_Text _text;
     private Slider _slider;
-    private int _goal;
-    private int _currentScore;
     private float _duration = .2f;
+    public int CurrentScore { get; private set; }
+
+    private int _goal;
 
     public event Action GoalRiched;
 
@@ -25,21 +27,22 @@ public class ProgressBar : MonoBehaviour
         _slider = GetComponent<Slider>();
         _text = GetComponentInChildren<TMP_Text>();
 
-        _goal = LevelManager.Instance.LevelGoal;
-        _slider.maxValue = _goal;
-        UpdateProgressText();
+        CurrentScore = YandexGame.savesData.LevelScore;
+        SetBar();
     }
 
-    private void UpdateProgressBar(int amount)
+    public void UpdateProgressBar(int amount)
     {
-        _currentScore += amount;
-        _slider.DOValue(_currentScore, _duration).OnUpdate(() => UpdateProgressText());
+        CurrentScore += amount;
 
-        if (_currentScore >= _goal)
+        _slider.DOValue(CurrentScore, _duration);
+        UpdateProgressText();
+
+        if (CurrentScore >= _goal)
             GoalRiched?.Invoke();
     }
 
-    private void UpdateProgressText() => _text.text = _currentScore + " / " + _goal;
+    private void UpdateProgressText() => _text.text = CurrentScore + " / " + _goal;
 
     private IEnumerator DelayedSubscription()
     {
@@ -48,5 +51,18 @@ public class ProgressBar : MonoBehaviour
 
         ScoreCounter.Instance.ScoreAdded += UpdateProgressBar;
         StopAllCoroutines();
+    }
+
+    public void Reset()
+    {
+        CurrentScore = 0;
+        SetBar();
+    }
+
+    private void SetBar()
+    {
+        _goal = YandexGame.savesData.Goal;
+        _slider.maxValue = _goal;
+        UpdateProgressBar(0);
     }
 }

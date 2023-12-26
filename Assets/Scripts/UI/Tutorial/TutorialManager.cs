@@ -9,8 +9,8 @@ public class TutorialManager : MonoBehaviour
 {
     private Dictionary<string, string> _messages = new(){
 { "ru", "Ура, теперь ты знаешь основные\nмеханики! Приятной игры! :)" },
-{ "en", "Yay, now you know the basic mechanics! Enjoy the game! :)" },
-{ "tr", "Yaşasın, artık temel mekanikleri biliyorsunuz! Oyunun tadını çıkarın! :)" },
+{ "en", "Yay, now you know the basic \nmechanics! Enjoy the game! :)" },
+{ "tr", "Yaşasın, artık temel mekanikleri \nbiliyorsunuz! Oyunun tadını çıkarın! :)" },
     };
 
     public static TutorialManager Instance;
@@ -29,7 +29,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.Instance.IsTrained)
+        if (YandexGame.savesData.IsTrained)
             Destroy(gameObject);
 
         Instance = this;
@@ -102,7 +102,7 @@ public class TutorialManager : MonoBehaviour
     public void Skip()
     {
         _stateMachine.CurrentState.Exit();
-        GameManager.Instance.TutorialPassed();
+        YandexGame.savesData.IsTrained = true;
         StopAllCoroutines();
         Destroy(gameObject);
     }

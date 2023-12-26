@@ -1,38 +1,47 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using YG;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    [SerializeField] private GameObject _messageWindow;
 
-    public void BackToMainMenu()
+    [SerializeField] private Toggle _showMessage;
+
+    public void Exit()
     {
-        YandexGame.NewLeaderboardScores("LeaderBoardScore", ScoreCounter.Instance.GlobalScore);
-        //FindObjectOfType<SaveData>().Save();
-        LoadingScreen.Instance.LoadScene(0);
+        if (_showMessage.isOn == false && _messageWindow != null)
+        {
+            _messageWindow.SetActive(true);
+        }
+        else
+        {
+            GameManager.Instance.LevelExit();
+            LevelManager.Instance.OnLevelExit();
+            YandexGame.Instance._SaveProgress();
+
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void StartGame()
     {
-        if (Progress.Instance.Level >= SceneManager.sceneCountInBuildSettings)
-            RestartGame();
-        else
-            NextLevel();
+        LoadingScreen.Instance.LoadScene(1);
     }
 
     public void RestartGame()
     {
-        Progress.Instance.Restart();
-       // YandexGame.ResetSaveProgress();
-        //YandexGame.SaveProgress();
+        YandexGame.Instance._ResetSaveProgress();
+        YandexGame.Instance._SaveProgress();
+
         StartGame();
     }
 
     public void NextLevel()
     {
-        //LoadingScreen.Instance.LoadScene(YandexGame.savesData.Level);
-        //YandexGame.Instance._LoadProgress();
-        LoadingScreen.Instance.LoadScene(Progress.Instance.Level);
+        YandexGame.FullscreenShow();
+        LevelManager.Instance.ChangeLevel();
     }
 }

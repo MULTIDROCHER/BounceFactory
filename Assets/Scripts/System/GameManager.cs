@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SocialPlatforms.Impl;
 using YG;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    public bool IsTrained { get; private set; } = false;
 
     private void Awake()
     {
@@ -23,10 +24,17 @@ public class GameManager : MonoBehaviour
 
     public void TutorialPassed()
     {
-        IsTrained = true;
+        YandexGame.savesData.IsTrained = true;
     }
 
-    public void OnLevelExit()
+    public void LevelExit()
     {
+        if (YandexGame.savesData.PreviousLevel < YandexGame.savesData.Level)
+        {
+            YandexGame.savesData.PreviousLevel = YandexGame.savesData.Level;
+            YandexGame.NewLeaderboardScores("LBLevel", YandexGame.savesData.PreviousLevel);
+        }
+
+        ScoreCounter.Instance.ReturnSpent();
     }
 }

@@ -8,12 +8,11 @@ public class ScoreCounter : MonoBehaviour
     public static ScoreCounter Instance;
     private TMP_Text _scoreText;
     private string _text;
-    private int _globalScore;
 
     public event Action<int> ScoreAdded;
 
     public int Balance { get; private set; }
-    public int GlobalScore => _globalScore;
+    public int SpentAmount { get; private set; }
 
     private void Awake()
     {
@@ -37,7 +36,6 @@ public class ScoreCounter : MonoBehaviour
     public void AddScore(int amount)
     {
         Balance += amount;
-        _globalScore += amount;
         ScoreAdded?.Invoke(amount);
 
         UpdateDisplay();
@@ -48,15 +46,22 @@ public class ScoreCounter : MonoBehaviour
         if (Balance >= price)
         {
             Balance -= price;
+            SpentAmount += price;
             UpdateDisplay();
         }
+    }
+
+    public void ReturnSpent()
+    {
+        Balance += SpentAmount;
+        SpentAmount = 0;
     }
 
     private void UpdateDisplay() => _scoreText.text = _text + Balance;
 
     public void TestChit()
     {
-        AddScore(LevelManager.Instance.LevelGoal / 10);
+        AddScore(YandexGame.savesData.Goal / 10);
     }
 
     private int SetBalance()

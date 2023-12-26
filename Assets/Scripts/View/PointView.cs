@@ -5,13 +5,13 @@ using UnityEngine;
 public class PointView : MonoBehaviour
 {
     private ItemSpawner _spawner;
-    private readonly List<SpawnPoint> _points = new();
+    private List<SpawnPoint> _points = new();
     private readonly List<Item> _items = new();
 
     private void Awake()
     {
         _spawner = FindObjectOfType<ItemSpawner>();
-        _points.AddRange(FindObjectsOfType<SpawnPoint>().ToList());
+        GetPoints();
     }
 
     private void OnEnable() => _spawner.ItemSpawned += OnItemSpawned;
@@ -30,5 +30,13 @@ public class PointView : MonoBehaviour
     {
         foreach (var point in _points)
             point.HidePoint();
+    }
+
+    public void GetPoints(SpawnPoint[] points = null)
+    {
+        if (points == null)
+            _points.AddRange(FindObjectsOfType<SpawnPoint>().ToList());
+        else
+            _points.AddRange(points.ToList());
     }
 }

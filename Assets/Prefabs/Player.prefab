@@ -224,7 +224,7 @@ MonoBehaviour:
   startLoad: 1
   rawImage: {fileID: 6394016587111554088}
   spriteImage: {fileID: 0}
-  urlImage: 
+  urlImage: https://sun9-34.userapi.com/impg/4x3mS20HTt5hy0RsxlZ_J9IvBU1CivL4pgLFbw/LINCc6OWPVc.jpg?size=1118x616&quality=96&sign=9cb882b1397d20b92b05782f09e836b9&type=album
   loadAnimObj: {fileID: 0}
   debug: 1
 --- !u!1 &3024687659233650097

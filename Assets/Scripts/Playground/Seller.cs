@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class Seller : MonoBehaviour
 {
-    private int FreePurchaseCount = 2;
-    protected int _purchasesCount;
+    protected readonly int FreePurchaseCount = 2;
+    protected int PurchasesCount;
 
     public float PriceChange { get; protected set; }
     public int Price { get; protected set; }
@@ -15,9 +15,9 @@ public abstract class Seller : MonoBehaviour
 
     private void IncreasePrices()
     {
-        _purchasesCount++;
+        PurchasesCount++;
 
-        if (_purchasesCount == FreePurchaseCount)
+        if (PurchasesCount == FreePurchaseCount)
             SetPrices();
 
         Price = Convert.ToInt32(Price * PriceChange);
@@ -33,4 +33,9 @@ public abstract class Seller : MonoBehaviour
     }
 
     protected abstract void SetPrices();
+
+    public void Reset(){
+        PurchasesCount = 0;
+        Price = 0;
+    }
 }

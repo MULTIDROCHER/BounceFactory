@@ -21,7 +21,7 @@ MonoBehaviour:
     language: ru
     name: mr ignat
     uniqueID: 666
-    photo: https://justplaygames.ru/public/icon_player.png
+    photo: https://sun9-61.userapi.com/impg/UFKZJ071_M6E6T_gWhE91kmyJ8QLwNdP4tSk8g/PxchZb5fzBQ.jpg?size=1000x647&quality=96&sign=4f29ae9aa8b1521385d40eaba312be79&type=album
   AdWhenLoadingScene: 1
   showFirstAd: 1
   rewardedAfterClosing: 1
@@ -41,108 +41,9 @@ MonoBehaviour:
   leaderboardEnable: 1
   saveScoreAnonymousPlayers: 1
   leaderboardSimulation:
-  - technoName: advanced
-    entries: 'Test LeaderBoard
-
-      Name: advanced
-
-      1. anonymous: 10
-
-      2.
-      Ivan: 15
-
-      3. Tanya: 23'
-    isDefault: 0
-    isInvertSortOrder: 0
-    decimalOffset: 0
-    type: numeric
-    players:
-    - rank: 1
-      name: anonymous
-      score: 10
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 123
-    - rank: 2
-      name: Ivan
-      score: 15
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
-    - rank: 3
-      name: Tanya
-      score: 23
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 456
-    - rank: 4
-      name: Player4
-      score: 30
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
-    - rank: 5
-      name: Player this
-      score: 40
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 000
-    - rank: 6
-      name: Player6
-      score: 50
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
-    thisPlayer:
-      rank: 2
-      score: 10
-  - technoName: simple
-    entries: "Test LeaderBoard\nName: simple\n1. \u0441\u043A\u0440\u044B\u0442:
-      10\n2. Max: 15\n3. Maria: 23"
-    isDefault: 0
-    isInvertSortOrder: 0
-    decimalOffset: 0
-    type: numeric
-    players:
-    - rank: 1
-      name: anonymous
-      score: 10
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 123
-    - rank: 2
-      name: Ivan
-      score: 15
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
-    - rank: 3
-      name: Tanya
-      score: 23
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 456
-    - rank: 4
-      name: player4
-      score: 30
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
-    - rank: 5
-      name: playerThis
-      score: 40
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 000
-    - rank: 6
-      name: player6
-      score: 50
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
-    thisPlayer:
-      rank: 0
-      score: 0
-  - technoName: time
-    entries: 'Test LeaderBoard
-
-      Name: time
-
-      1. anonymous: 10
-
-      2.
-      Max: 15
-
-      3. Maria: 23'
-    isDefault: 0
+  - technoName: LBLevel
+    entries: Level
+    isDefault: 1
     isInvertSortOrder: 0
     decimalOffset: 0
     type: numeric
@@ -322,7 +223,7 @@ MonoBehaviour:
     priceValue: 30
     consumed: 1
   metricaEnable: 1
-  metricaCounterID: 0
+  metricaCounterID: 96011288
   debug: 1
   archivingBuild: 1
   logoImageFormat: 1

@@ -21,11 +21,13 @@ namespace YG
 
         // Ваши сохранения
 
-        public int Level = 1;
+        public int Level;
+        public int PreviousLevel;
         public int Balance;
+        public int Goal;
+        public int LevelScore;
 
-        public bool IsTrained => GameManager.Instance.IsTrained;
-        public int Score => ScoreCounter.Instance.GlobalScore;
+        public bool IsTrained;
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
@@ -36,6 +38,10 @@ namespace YG
             openLevels[1] = true;
             // Допустим, задать значения по умолчанию для отдельных элементов массива
             Balance = 0;
+            Level = 1;
+            Goal = 1000;
+            LevelScore = 0;
+            IsTrained = false;
         }
     }
 }

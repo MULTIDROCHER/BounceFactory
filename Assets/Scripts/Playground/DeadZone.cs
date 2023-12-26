@@ -11,6 +11,12 @@ public class DeadZone : MonoBehaviour
 
     private void Awake() => _ballContainer = FindObjectOfType<BallContainer>().transform;
 
+    private void Update()
+    {
+        if (_ballContainer == null)
+            _ballContainer = FindObjectOfType<BallContainer>().transform;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out Ball ball))

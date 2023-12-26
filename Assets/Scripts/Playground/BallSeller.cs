@@ -40,7 +40,7 @@ public class BallSeller : Seller, ITutorialEvent
     private void OnBallsOver()
     {
         Price = 0;
-        _purchasesCount = 0;
+        PurchasesCount = 0;
         OnBought();
     }
 
