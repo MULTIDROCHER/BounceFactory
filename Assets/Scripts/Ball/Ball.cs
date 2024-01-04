@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BounceHandler))]
 public class Ball : MonoBehaviour
 {
-    private int _increaseBonus = 3;
+    private readonly int _increaseBonus = 3;
 
     public SpriteRenderer Sprite { get; private set; }
     public int Level { get; private set; } = 1;

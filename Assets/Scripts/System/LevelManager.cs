@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnGoalRiched()
     {
-        YandexGame.Instance._SaveProgress();
+        OnLevelExit();
 
         IDictionary<string, string> eventParams = new Dictionary<string, string>
     {

@@ -27,6 +27,7 @@ namespace YG
         public int Goal;
         public int LevelScore;
 
+        public bool HideSaveMessage;
         public bool IsTrained;
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
@@ -42,6 +43,7 @@ namespace YG
             Goal = 1000;
             LevelScore = 0;
             IsTrained = false;
+            HideSaveMessage = false;
         }
     }
 }

@@ -51,7 +51,7 @@ public class ItemSpawner : MonoBehaviour
             return GetItemByComponent<AccelerationItem>();
         else if (chance <= TeleportChance())
             return GetItemByComponent<TeleportItem>();
-        else if (chance <= _ballgeneratorChance && _container.transform.childCount >= 1)
+        else if (chance <= _ballgeneratorChance && _container.transform.childCount >= 2)
             return GetItemByComponent<BallGeneratorItem>();
         else
             return GetItemByComponent<CommonItem>();

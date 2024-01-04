@@ -17,4 +17,11 @@ public class ItemContainer : MonoBehaviour
             Items.AddRange(transform.GetComponentsInChildren<Item>());
         }
     }
+
+    public void Reset()
+    {
+        foreach (Item item in transform)
+            if (item != null)
+                Destroy(item.gameObject);
+    }
 }

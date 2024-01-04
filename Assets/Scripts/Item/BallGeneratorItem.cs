@@ -37,7 +37,7 @@ public class BallGeneratorItem : Item, IAnimated
     private void OnDestroy()
     {
         foreach (var ball in _spawned)
-            Destroy(ball);
+            Destroy(ball.gameObject);
     }
 
     public override void LevelUp()
@@ -69,11 +69,11 @@ public class BallGeneratorItem : Item, IAnimated
     {
         yield return new WaitForSeconds(_delay);
 
-        foreach (var item in _spawned.ToArray())
-            if (item != null)
+        foreach (var ball in _spawned.ToArray())
+            if (ball != null)
             {
-                Destroy(item.gameObject);
-                _effectHandler.DoEffect(_destroyEffect, item.transform.position);
+                Destroy(ball.gameObject);
+                _effectHandler.DoEffect(_destroyEffect, ball.transform.position);
             }
 
         Reset();

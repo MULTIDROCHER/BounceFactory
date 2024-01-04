@@ -50,34 +50,34 @@ MonoBehaviour:
     players:
     - rank: 1
       name: anonymous
-      score: 7123
-      photo: https://justplaygames.ru/public/icon_player.png
+      score: 2
+      photo: https://sun9-77.userapi.com/impg/ku4nqEsKaTdNfRC16dNreN_NGanpHI8R46ZTTQ/wT1Hexz1MXM.jpg?size=320x394&quality=96&sign=f0645b1a3c639e0061a9d8043b3488ab&c_uniq_tag=o36RjtSdgtMrttbgdCpfyR17-SEL2aco9VwIcrmHTzI&type=album
       uniqueID: 789
     - rank: 2
       name: Max
-      score: 15321
-      photo: https://justplaygames.ru/public/icon_player.png
+      score: 5
+      photo: https://sun9-77.userapi.com/impg/ku4nqEsKaTdNfRC16dNreN_NGanpHI8R46ZTTQ/wT1Hexz1MXM.jpg?size=320x394&quality=96&sign=f0645b1a3c639e0061a9d8043b3488ab&c_uniq_tag=o36RjtSdgtMrttbgdCpfyR17-SEL2aco9VwIcrmHTzI&type=album
       uniqueID: 987
     - rank: 3
       name: Maria
-      score: 62000
-      photo: https://justplaygames.ru/public/icon_player.png
+      score: 8
+      photo: https://sun9-13.userapi.com/impg/YW0W7BrU_m6cA9vLwaS3hDKUT_sjFRk-zwaLgQ/D34t63Ql7jE.jpg?size=200x200&quality=96&sign=56cd26189b80c13665d12601b9655363&c_uniq_tag=IIhyon6648XpOU-p2fzx-lHhsmtmsfeCRLuHpLWJRQM&type=album
       uniqueID: 891
     - rank: 4
       name: Player4
-      score: 122000
-      photo: https://justplaygames.ru/public/icon_player.png
+      score: 99
+      photo: https://sun9-13.userapi.com/impg/YW0W7BrU_m6cA9vLwaS3hDKUT_sjFRk-zwaLgQ/D34t63Ql7jE.jpg?size=200x200&quality=96&sign=56cd26189b80c13665d12601b9655363&c_uniq_tag=IIhyon6648XpOU-p2fzx-lHhsmtmsfeCRLuHpLWJRQM&type=album
       uniqueID: 321
     - rank: 5
       name: Player this
-      score: 127000
-      photo: https://justplaygames.ru/public/icon_player.png
+      score: 6
+      photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
       uniqueID: 000
     - rank: 6
       name: Player6
       score: 340000
-      photo: https://justplaygames.ru/public/icon_player.png
-      uniqueID: 321
+      photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
+      uniqueID: 21
     thisPlayer:
       rank: 2
       score: 10

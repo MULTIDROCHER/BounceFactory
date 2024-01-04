@@ -27,6 +27,8 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
         {
             _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _mousePos.z = 0;
+
+            transform.position = _mousePos;
         }
     }
 
@@ -37,12 +39,6 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
 
         if (_upgradeHandler != null)
             _upgradeHandler.enabled = true;
-    }
-
-    private void OnMouseDrag()
-    {
-        if (_isDragged)
-            transform.position = _mousePos;
     }
 
     private void OnMouseUp()

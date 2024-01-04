@@ -14,9 +14,9 @@ public class SpawnPoint : MonoBehaviour
         HidePoint();
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Item item))
+        if (other.TryGetComponent(out Item item) && IsEmpty)
         {
             Item = item;
             IsEmpty = false;
@@ -25,7 +25,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Item item) && item == Item)
+        if (Item != null && other.gameObject == Item.gameObject)
         {
             Item = null;
             IsEmpty = true;

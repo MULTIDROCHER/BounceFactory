@@ -17,4 +17,11 @@ public class BallContainer : MonoBehaviour
             Balls.AddRange(transform.GetComponentsInChildren<Ball>());
         }
     }
+
+    public void Reset()
+    {
+        foreach (Ball ball in transform)
+            if (ball != null)
+                Destroy(ball.gameObject);
+    }
 }

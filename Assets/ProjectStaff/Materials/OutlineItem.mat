@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
+  - _CONNECTEDALPHA_ON
   - _OUTLINEENABLED_ON
   - _OUTLINEMODE_IMAGE
   - _OUTLINEPOSITION_INSIDE_OVER_SPRITE
@@ -73,7 +74,7 @@ Material:
     - _AlphaThreshold: 0
     - _Angle: 45
     - _BumpScale: 1
-    - _ConnectedAlpha: 0
+    - _ConnectedAlpha: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0

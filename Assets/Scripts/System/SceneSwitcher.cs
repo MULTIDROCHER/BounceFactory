@@ -6,15 +6,13 @@ using YG;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    [SerializeField] private GameObject _messageWindow;
-
-    [SerializeField] private Toggle _showMessage;
+    [SerializeField] private MessageWindow _messageWindow;
 
     public void Exit()
     {
-        if (_showMessage.isOn == false && _messageWindow != null)
+        if (_messageWindow != null)
         {
-            _messageWindow.SetActive(true);
+            _messageWindow.gameObject.SetActive(true);
         }
         else
         {
@@ -33,10 +31,17 @@ public class SceneSwitcher : MonoBehaviour
 
     public void RestartGame()
     {
-        YandexGame.Instance._ResetSaveProgress();
-        YandexGame.Instance._SaveProgress();
+        if (_messageWindow != null)
+        {
+            _messageWindow.gameObject.SetActive(true);
+        }
+        else
+        {
+            YandexGame.Instance._ResetSaveProgress();
+            YandexGame.Instance._SaveProgress();
 
-        StartGame();
+            StartGame();
+        }
     }
 
     public void NextLevel()

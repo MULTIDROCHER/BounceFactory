@@ -11,14 +11,16 @@ public class Level : MonoBehaviour
     private BallSpawner _ballSpawner;
     private ItemSeller _itemSeller;
     private BallSeller _ballSeller;
+    private BallMerger _merger;
     private PointView _pointView;
-    private int _minmalBalance;
+    private int _minmalBalance = 100;
 
     private void Awake()
     {
         _ballSpawner = FindObjectOfType<BallSpawner>();
         _itemSpawner = FindObjectOfType<ItemSpawner>();
         _ballSeller = FindObjectOfType<BallSeller>();
+        _merger = FindObjectOfType<BallMerger>();
         _itemSeller = FindObjectOfType<ItemSeller>();
         _pointView = FindObjectOfType<PointView>();
 
@@ -33,8 +35,15 @@ public class Level : MonoBehaviour
     {
         _ballSpawner.GetContainer(_ballContainer);
         _itemSpawner.GetPoints(_spawnPoints);
+        _merger.GetContainer(_ballContainer);
+        _pointView.GetPoints(_spawnPoints);
+    }
+
+    private void OnDisable()
+    {
         _ballSeller.Reset();
         _itemSeller.Reset();
-        _pointView.GetPoints(_spawnPoints);
+        _ballContainer.Reset();
+        _itemContainer.Reset();
     }
 }

@@ -37,5 +37,6 @@ public abstract class Seller : MonoBehaviour
     public void Reset(){
         PurchasesCount = 0;
         Price = 0;
+        PriceChanged?.Invoke(Price);
     }
 }

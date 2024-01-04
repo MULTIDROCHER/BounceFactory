@@ -97,7 +97,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 10
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
@@ -224,7 +224,7 @@ MonoBehaviour:
   startLoad: 1
   rawImage: {fileID: 6394016587111554088}
   spriteImage: {fileID: 0}
-  urlImage: https://sun9-34.userapi.com/impg/4x3mS20HTt5hy0RsxlZ_J9IvBU1CivL4pgLFbw/LINCc6OWPVc.jpg?size=1118x616&quality=96&sign=9cb882b1397d20b92b05782f09e836b9&type=album
+  urlImage: 
   loadAnimObj: {fileID: 0}
   debug: 1
 --- !u!1 &3024687659233650097
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &-4768560067097373528
