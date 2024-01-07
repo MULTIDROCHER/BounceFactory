@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using YG;
 
 public class SceneSwitcher : MonoBehaviour
@@ -10,7 +8,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void Exit()
     {
-        if (_messageWindow != null)
+        if (_messageWindow != null && YandexGame.savesData.HideSaveMessage == false)
         {
             _messageWindow.gameObject.SetActive(true);
         }
@@ -24,14 +22,11 @@ public class SceneSwitcher : MonoBehaviour
         }
     }
 
-    public void StartGame()
-    {
-        LoadingScreen.Instance.LoadScene(1);
-    }
+    public void StartGame() => LoadingScreen.Instance.LoadScene(1);
 
     public void RestartGame()
     {
-        if (_messageWindow != null)
+        if (_messageWindow != null )
         {
             _messageWindow.gameObject.SetActive(true);
         }

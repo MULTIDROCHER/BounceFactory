@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SocialPlatforms.Impl;
 using YG;
 
 public class GameManager : MonoBehaviour
@@ -22,10 +18,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TutorialPassed()
-    {
-        YandexGame.savesData.IsTrained = true;
-    }
+    public void TutorialPassed() => YandexGame.savesData.IsTrained = true;
 
     public void LevelExit()
     {

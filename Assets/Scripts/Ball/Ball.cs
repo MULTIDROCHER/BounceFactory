@@ -1,20 +1,21 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BounceHandler))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Ball : MonoBehaviour
 {
     private readonly int _increaseBonus = 3;
 
-    public SpriteRenderer Sprite { get; private set; }
+    private SpriteRenderer _sprite;
+    
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
 
-    private void Start() => Sprite = GetComponent<SpriteRenderer>();
+    private void Start() => _sprite = GetComponent<SpriteRenderer>();
 
     public void LevelUp(Color spriteColor)
     {
         Level++;
-        Sprite.color = spriteColor;
+        _sprite.color = spriteColor;
         Bonus += _increaseBonus;
 
         gameObject.name = Level.ToString();

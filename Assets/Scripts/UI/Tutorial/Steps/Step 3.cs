@@ -8,7 +8,6 @@ public class Step3 : TutorialStep
 { "en", "when you have enough balls of the\nsame level, you can merge them" },
 { "tr", "Aynı seviyede yeterince topunuz \nolduğunda,onları birleştirebilirsiniz" },
     };
-
     private BallMerger _merger;
 
     public override void Enter()

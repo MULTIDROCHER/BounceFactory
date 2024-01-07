@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +19,7 @@ public class ItemContainer : MonoBehaviour
 
     public void Reset()
     {
-        foreach (Item item in transform)
+        foreach (var item in Items)
             if (item != null)
                 Destroy(item.gameObject);
     }

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using YG;
 
+[RequireComponent(typeof(TMP_Text))]
 public class ScoreCounter : MonoBehaviour
 {
     public static ScoreCounter Instance;
@@ -12,7 +13,7 @@ public class ScoreCounter : MonoBehaviour
     public event Action<int> ScoreAdded;
 
     public int Balance { get; private set; }
-    public int SpentAmount { get; private set; }
+    public int Spent { get; private set; }
 
     private void Awake()
     {
@@ -46,23 +47,20 @@ public class ScoreCounter : MonoBehaviour
         if (Balance >= price)
         {
             Balance -= price;
-            SpentAmount += price;
+            Spent += price;
             UpdateDisplay();
         }
     }
 
     public void ReturnSpent()
     {
-        Balance += SpentAmount;
-        SpentAmount = 0;
+        Balance += Spent;
+        Spent = 0;
     }
 
     private void UpdateDisplay() => _scoreText.text = _text + Balance;
 
-    public void TestChit()
-    {
-        AddScore(YandexGame.savesData.Goal / 10);
-    }
+    public void TestChit() => AddScore(YandexGame.savesData.Goal / 10);
 
     private int SetBalance()
     {

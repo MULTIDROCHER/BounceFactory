@@ -9,7 +9,6 @@ public class Step2 : TutorialStep
 { "en", "Great, now buy a couple balls" },
 { "tr", "Harika, şimdi birkaç balon al" },
     };
-
     private BallSeller _seller;
     private PriceDisplay _target;
 
@@ -18,6 +17,7 @@ public class Step2 : TutorialStep
         _seller = Object.FindObjectOfType<BallSeller>();
         _target = Object.FindObjectsOfType<PriceDisplay>().FirstOrDefault(display => display.Seller == _seller);
         _seller.Performed += OnPerformed;
+        
         OnNeedMask(_messages[Language], _target.transform.parent.parent);
     }
 

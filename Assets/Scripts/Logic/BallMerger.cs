@@ -11,14 +11,15 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
     [SerializeField] private BallSpawner _spawner;
     [SerializeField] private Button _button;
 
-    public Button Button => _button;
+    private readonly int _requiredAmount = 3;
 
     private BallContainer _container;
     private ColorSetter _colorSetter;
-    private int _requiredAmount = 3;
     private int _ballCount;
 
     public event Action Performed;
+
+    public Button Button => _button;
 
     private void Start()
     {
@@ -51,7 +52,6 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
             if (matchingBalls.Count >= _requiredAmount)
             {
                 List<Ball> taken = matchingBalls.Take(_requiredAmount).ToList();
-                Debug.Log(taken.Count);
                 ButtonOn(taken);
                 break;
             }
@@ -106,10 +106,7 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
         _button.onClick.AddListener(() => Merge(balls));
     }
 
-    private void ButtonOff()
-    {
-        _button.gameObject.SetActive(false);
-    }
+    private void ButtonOff() => _button.gameObject.SetActive(false);
 
     private void DoEffect()
     {

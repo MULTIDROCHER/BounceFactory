@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a9223ac4d63f479355950eee97789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bounceMaterial: {fileID: 6200000, guid: 91d1e26b02bf00145b12794923d911f9, type: 2}
-  _bounceEffect: {fileID: 198958788617170686, guid: daa91e11992e75b41b5515c7a938385b, type: 3}
+  _material: {fileID: 6200000, guid: 91d1e26b02bf00145b12794923d911f9, type: 2}
+  _effect: {fileID: 198958788617170686, guid: daa91e11992e75b41b5515c7a938385b, type: 3}
 --- !u!114 &-4768608833102011416
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -36,6 +36,8 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
             enabled = false;
     }
 
+    private void DoEffect(Transform parent) => Instantiate(_effect, parent);
+
     private void HandleCollision(GameObject other)
     {
         if (_itemToMerge == null)
@@ -71,16 +73,10 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
     private Item GetItem(GameObject other)
     {
         if (other.TryGetComponent(out Item item)
-            && item.CanBeUpgraded
             && item.Level == _current.Level
             && item != _current)
             return item;
         else
             return null;
-    }
-
-    private void DoEffect(Transform parent)
-    {
-        Instantiate(_effect, parent);
     }
 }

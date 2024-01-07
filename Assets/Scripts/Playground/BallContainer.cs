@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BallContainer : MonoBehaviour
 {
-    public List<Ball> Balls { get; private set; } = new();
-
     private int _childCount;
+
+    public List<Ball> Balls { get; private set; } = new();
 
     private void Update()
     {
@@ -20,7 +20,7 @@ public class BallContainer : MonoBehaviour
 
     public void Reset()
     {
-        foreach (Ball ball in transform)
+        foreach (var ball in Balls)
             if (ball != null)
                 Destroy(ball.gameObject);
     }

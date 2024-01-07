@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -9,7 +7,6 @@ public class LevelCounter : MonoBehaviour
     [SerializeField] TMP_Text _text;
 
     private string _baseText;
-
     private int _current;
 
     private void Awake() => _baseText = _text.text;

@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using YG;
 
 public class LoadingScreen : MonoBehaviour
 {
-    public static LoadingScreen Instance;
     [SerializeField] private Slider _slider;
+    
+    public static LoadingScreen Instance;
 
     private void Awake()
     {

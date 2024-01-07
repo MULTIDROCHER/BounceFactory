@@ -12,7 +12,6 @@ public class Item : MonoBehaviour
     public SpriteRenderer Renderer { get; private set; }
     public int Level { get; private set; } = 1;
     public int Bonus { get; private set; } = 1;
-    public bool CanBeUpgraded => GetComponent<UpgradeHandler>() != null;
 
     private void Awake() => Renderer = GetComponent<SpriteRenderer>();
 

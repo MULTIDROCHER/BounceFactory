@@ -1,9 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BounceHandler : MonoBehaviour
 {
-    [SerializeField] private PhysicsMaterial2D _bounceMaterial;
-    [SerializeField] private ParticleSystem _bounceEffect;
+    [SerializeField] private PhysicsMaterial2D _material;
+    [SerializeField] private ParticleSystem _effect;
 
     private Rigidbody2D _rigidbody;
     private EffectContainer _container;
@@ -12,13 +13,14 @@ public class BounceHandler : MonoBehaviour
     {
         _container = FindObjectOfType<EffectContainer>();
         TryGetComponent(out _rigidbody);
+
         EnableMaterial();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
-    => Instantiate(_bounceEffect, other.GetContact(0).point, Quaternion.identity, _container.transform);
+    => Instantiate(_effect, other.GetContact(0).point, Quaternion.identity, _container.transform);
 
-    public void EnableMaterial() => _rigidbody.sharedMaterial = _bounceMaterial;
+    public void EnableMaterial() => _rigidbody.sharedMaterial = _material;
 
     public void DisableMaterial() => _rigidbody.sharedMaterial = null;
 }

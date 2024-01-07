@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Video;
 
 public class Flipper : MonoBehaviour
 {
@@ -10,23 +11,25 @@ public class Flipper : MonoBehaviour
     private readonly int _acceleration = 10;
 
     private Vector3 _rotation;
-
-    public int Bonus { get; private set; } = 5;
-    private bool IsOpened => transform.rotation.eulerAngles != Vector3.zero;
+    private bool _isOpened = false;
 
     private void Start() => _rotation = new(0, 0, _angle);
 
     public void Open()
     {
         SoundManager.Instance.SFXSource.PlayOneShot(_sound);
-        
+        _isOpened = true;
+
         transform.DORotate(_rotation, _delay).OnComplete(() =>
-        { transform.DORotate(Vector3.zero, _delay); });
+        {
+            transform.DORotate(Vector3.zero, _delay)
+            .OnComplete(() => _isOpened = false);
+        });
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent(out Ball ball) && IsOpened)
+        if (other.gameObject.TryGetComponent(out Ball ball) && _isOpened)
             AddAcceleration(ball);
     }
 

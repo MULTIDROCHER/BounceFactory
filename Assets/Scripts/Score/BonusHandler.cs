@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Item))]
 public class BonusHandler : MonoBehaviour
 {
     [SerializeField] private BonusDisplay _bonusDisplay;

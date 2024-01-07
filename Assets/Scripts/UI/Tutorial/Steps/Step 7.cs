@@ -8,7 +8,6 @@ public class Step7 : TutorialStep
 { "en", "move one item over another\nto merge them" },
 { "tr", "birleştirmek için bir öğeyi\ndiğerinin üzerine taşıyın" },
     };
-
     private UpgradeHandler[] _handlers;
 
     public override void Enter()

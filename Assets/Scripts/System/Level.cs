@@ -7,13 +7,14 @@ public class Level : MonoBehaviour
     [SerializeField] private BallContainer _ballContainer;
     [SerializeField] private ItemContainer _itemContainer;
 
+    private readonly int _minmalBalance = 100;
+
     private ItemSpawner _itemSpawner;
     private BallSpawner _ballSpawner;
     private ItemSeller _itemSeller;
     private BallSeller _ballSeller;
     private BallMerger _merger;
     private PointView _pointView;
-    private int _minmalBalance = 100;
 
     private void Awake()
     {

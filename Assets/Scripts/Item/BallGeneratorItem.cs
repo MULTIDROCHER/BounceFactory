@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EffectHandler))]
+[RequireComponent(typeof(Animator))]
 public class BallGeneratorItem : Item, IAnimated
 {
     [SerializeField] private ParticleSystem _spawnEffect;

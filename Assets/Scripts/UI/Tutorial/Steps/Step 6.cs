@@ -8,13 +8,13 @@ public class Step6 : TutorialStep
 { "en", "now add one more item" },
 { "tr", "şimdi bir öğe daha ekleyin" },
     };
-
     private ItemSpawner _spawner;
 
     public override void Enter()
     {
         _spawner = Object.FindObjectOfType<ItemSpawner>();
         _spawner.ItemBought += OnPerformed;
+        
         OnUnneedMask(_messages[Language]);
     }
 

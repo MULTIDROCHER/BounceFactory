@@ -1,20 +1,13 @@
 {
-  "idSave": 38,
+  "idSave": 35,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
-  "money": 1,
-  "newPlayerName": "Hello!",
-  "openLevels": [
-    false,
-    true,
-    false
-  ],
-  "Level": 13,
-  "PreviousLevel": 5,
-  "Balance": 45622,
-  "Goal": 23296,
+  "Level": 2,
+  "PreviousLevel": 1,
+  "Balance": 55,
+  "Goal": 1300,
   "LevelScore": 0,
-  "HideSaveMessage": false,
+  "HideSaveMessage": true,
   "IsTrained": true
 }

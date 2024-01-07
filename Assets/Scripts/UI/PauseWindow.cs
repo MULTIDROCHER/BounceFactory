@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -19,10 +17,7 @@ public class PauseWindow : MonoBehaviour
                 _rateButton.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        Time.timeScale = 1;
-    }
+    private void OnDisable() => Time.timeScale = 1;
 
     public void RateGame() => YandexGame.ReviewShow(YandexGame.EnvironmentData.reviewCanShow);
 }

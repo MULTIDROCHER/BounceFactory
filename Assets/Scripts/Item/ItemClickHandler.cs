@@ -23,11 +23,14 @@ public class ItemClickHandler : MonoBehaviour
         }
     }
 
-    private void OnMouseUp()
+    private void OnMouseExit()
     {
-        _view.HideLevel();
-        _pointView.HidePoints();
-        SetBonus(true);
+        if (Input.GetMouseButton(0) == false)
+        {
+            _view.HideLevel();
+            _pointView.HidePoints();
+            SetBonus(true);
+        }
     }
 
     private void SetBonus(bool enabled)

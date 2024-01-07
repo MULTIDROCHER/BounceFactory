@@ -8,8 +8,6 @@ public class FlipperController : MonoBehaviour, ITutorialEvent
 
     public event Action Performed;
 
-    public KeyCode Key => _key;
-
     private void Update()
     {
         if (Input.GetKeyDown(_key))

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BonusHandler))]
 public class CommonItem : Item
 {
     [SerializeField] private List<Sprite> _sprites;

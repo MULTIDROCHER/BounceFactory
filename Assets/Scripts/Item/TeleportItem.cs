@@ -11,11 +11,11 @@ public class TeleportItem : Item
     public static List<Ball> InPortal { get; private set; } = new();
 
     private readonly float _delay = 2;
+    private readonly float _duration = .5f;
 
     private BonusHandler _bonusHandler;
     private EffectHandler _effectHandler;
     private WaitForSeconds _wait;
-    private float _duration = .5f;
     private Vector2 _defaultSize;
 
     private void Start()

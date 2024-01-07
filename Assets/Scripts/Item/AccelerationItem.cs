@@ -4,6 +4,7 @@ using UnityEngine;
 public class AccelerationItem : Item
 {
     private readonly int _acceleration = 10;
+    
     private EffectHandler _effectHandler;
 
     private void Start() => TryGetComponent(out _effectHandler);

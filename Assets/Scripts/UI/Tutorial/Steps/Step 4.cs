@@ -9,7 +9,6 @@ public class Step4 : TutorialStep
 { "en", "Now create an object so the balls\nhave something to collide with" },
 { "tr", "Şimdi bir nesne oluşturun, böylece\ntopların uğraşacağı bir şey olsun" },
     };
-
     private ItemSpawner _spawner;
     private PriceDisplay _target;
 
@@ -18,6 +17,7 @@ public class Step4 : TutorialStep
         _spawner = Object.FindObjectOfType<ItemSpawner>();
         _target = Object.FindObjectsOfType<PriceDisplay>().FirstOrDefault(display => display.Seller.GetComponent<ItemSeller>());
         _spawner.ItemBought += OnPerformed;
+        
         OnNeedMask(_messages[Language], _target.transform.parent.parent);
     }
 

@@ -10,13 +10,11 @@ public class Step0 : TutorialStep
 { "en", "press the right button\nto raise the right flipper" },
 { "tr", "sağ paleti kaldırmak \niçinsağ düğmeye basın" },
     };
-
     private Dictionary<string, string> _computerMessages = new(){
 { "ru", "нажми X на клавиатуре\n чтобы поднять правый флиппер" },
 { "en", "Press X on the keyboard\n to raise the right flipper" },
 { "tr", "Sağ paleti kaldırmak için \nklavye üzerindeki X tuşuna basın" },
     };
-
     private FlipperController _controller;
 
     public override void Enter()

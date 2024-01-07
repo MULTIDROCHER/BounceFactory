@@ -8,13 +8,13 @@ public class Step5 : TutorialStep
 { "en", "pinch and move the object\nto move it" },
 { "tr", "Nesneyi hareket ettirmek için\nsıkıştırın ve hareket ettirin" },
     };
-
     private ItemMovement _item;
 
     public override void Enter()
     {
         _item = Object.FindObjectOfType<ItemMovement>();
         _item.Performed += OnPerformed;
+
         OnUnneedMask(_messages[Language]);
     }
 

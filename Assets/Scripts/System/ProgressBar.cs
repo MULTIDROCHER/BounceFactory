@@ -9,14 +9,15 @@ using YG;
 [RequireComponent(typeof(Slider))]
 public class ProgressBar : MonoBehaviour
 {
+    private readonly float _duration = .2f;
+    
     private TMP_Text _text;
     private Slider _slider;
-    private float _duration = .2f;
-    public int CurrentScore { get; private set; }
-
     private int _goal;
 
     public event Action GoalRiched;
+
+    public int CurrentScore { get; private set; }
 
     private void OnEnable() => StartCoroutine(DelayedSubscription());
 

@@ -7,19 +7,19 @@ using YG;
 
 public class TutorialManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _overlay;
+    [SerializeField] private GameObject _mask;
+    [SerializeField] private TMP_Text _text;
+
+    public static TutorialManager Instance;
+
+    private readonly float _delay = .5f;
+
     private Dictionary<string, string> _messages = new(){
 { "ru", "Ура, теперь ты знаешь основные\nмеханики! Приятной игры! :)" },
 { "en", "Yay, now you know the basic \nmechanics! Enjoy the game! :)" },
 { "tr", "Yaşasın, artık temel mekanikleri \nbiliyorsunuz! Oyunun tadını çıkarın! :)" },
     };
-
-    public static TutorialManager Instance;
-
-    [SerializeField] private GameObject _overlay;
-    [SerializeField] private GameObject _mask;
-    [SerializeField] private TMP_Text _text;
-
-    private readonly float _delay = .5f;
 
     private TutorialStateMachine _stateMachine;
     private WaitForSeconds _wait;

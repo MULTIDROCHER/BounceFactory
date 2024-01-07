@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 
@@ -14,10 +13,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Sprite> _bgSprites;
     [SerializeField] private Image _background;
 
+    private readonly float _goalIncrease = 1.3f;
+
     private ProgressBar _progress;
     private Level _currentLevel;
-
-    private float _goalIncrease = 1.3f;
 
     private void Awake()
     {
@@ -33,16 +32,9 @@ public class LevelManager : MonoBehaviour
 
         _progress = FindObjectOfType<ProgressBar>();
         _currentLevel = FindObjectOfType<Level>();
-        YandexGame.Instance._LoadProgress();
-
-        Debug.Log("level loaded -Lm" + YandexGame.savesData.Level + "-level;" + YandexGame.savesData.Goal + "-goal");
     }
 
-    private void OnEnable()
-    {
-        YandexGame.Instance._LoadProgress();
-        _progress.GoalRiched += OnGoalRiched;
-    }
+    private void OnEnable() => _progress.GoalRiched += OnGoalRiched;
 
     private void OnDisable()
     {

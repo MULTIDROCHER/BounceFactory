@@ -4,25 +4,29 @@ using YG;
 
 public class MessageWindow : MonoBehaviour
 {
-    [SerializeField] private Toggle _hideMessage;
+    [SerializeField] private Toggle _toggle;
+    [SerializeField] private SceneSwitcher _trigger;
 
     private void Awake()
     {
-        if (_hideMessage != null)
+        if (_toggle != null)
         {
-            _hideMessage.isOn = YandexGame.savesData.HideSaveMessage;
-            
-            if (_hideMessage.isOn == true)
+            _toggle.isOn = YandexGame.savesData.HideSaveMessage;
+
+            if (_toggle.isOn)
                 Destroy(gameObject);
         }
     }
 
     private void OnDisable()
     {
-        if (_hideMessage != null && _hideMessage.isOn)
-        {
-            YandexGame.savesData.HideSaveMessage = true;
-            Destroy(gameObject);
-        }
+        if (_toggle != null && _toggle.isOn)
+            DontShowAgain();
+    }
+
+    public void DontShowAgain()
+    {
+        YandexGame.savesData.HideSaveMessage = true;
+        YandexGame.Instance._SaveProgress();
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SoundHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip _bounceSound;
