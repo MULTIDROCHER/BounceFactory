@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using YG;
 
 [RequireComponent(typeof(Button))]
-public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private AudioClip _clip;
 
@@ -21,13 +22,29 @@ public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _button.onClick.AddListener(() => PlaySound());
     }
 
+    public void OnPointerDown(PointerEventData eventData) => IncreaseScale();
+
+    public void OnPointerUp(PointerEventData eventData) => SetDefaultScale();
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (YandexGame.EnvironmentData.isDesktop)
+            SetDefaultScale();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (YandexGame.EnvironmentData.isDesktop)
+            IncreaseScale();
+    }
+
+    private void IncreaseScale()
     {
         if (_button.interactable)
             transform.localScale += _increasedScale;
     }
 
-    public void OnPointerExit(PointerEventData eventData) => transform.localScale = _defaultScale;
+    private void SetDefaultScale() => transform.localScale = _defaultScale;
 
     private void PlaySound() => _source.PlayOneShot(_clip);
 }

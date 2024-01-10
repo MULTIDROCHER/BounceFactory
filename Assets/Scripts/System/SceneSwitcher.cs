@@ -15,8 +15,6 @@ public class SceneSwitcher : MonoBehaviour
         else
         {
             GameManager.Instance.LevelExit();
-            LevelManager.Instance.OnLevelExit();
-            YandexGame.Instance._SaveProgress();
 
             SceneManager.LoadScene(0);
         }
@@ -26,13 +24,17 @@ public class SceneSwitcher : MonoBehaviour
 
     public void RestartGame()
     {
-        if (_messageWindow != null )
+        if (_messageWindow != null
+        && YandexGame.savesData.LevelScore != 0)
         {
             _messageWindow.gameObject.SetActive(true);
         }
         else
         {
+            var level = YandexGame.savesData.Level;
+
             YandexGame.Instance._ResetSaveProgress();
+            YandexGame.savesData.PreviousLevel = level;
             YandexGame.Instance._SaveProgress();
 
             StartGame();

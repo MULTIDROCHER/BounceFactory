@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _sfxSource;
 
     public static SoundManager Instance;
+
+    public event Action<float> VolumeChanged;
 
     public AudioSource MusicSource => _musicSource;
     public AudioSource SFXSource => _sfxSource;
@@ -29,6 +32,9 @@ public class SoundManager : MonoBehaviour
             Unmute(source, button);
         else
             Mute(source, button);
+
+        if (source == _sfxSource)
+            VolumeChanged?.Invoke(source.volume);
     }
 
     private void Mute(AudioSource source, SoundButton button)

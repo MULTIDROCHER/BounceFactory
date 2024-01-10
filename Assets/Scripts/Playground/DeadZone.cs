@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    private Transform _ballContainer;
+    private BallContainer _container;
 
     public event Action BallDestroyed;
     public event Action BallsOver;
 
-    private void Awake() => _ballContainer = FindObjectOfType<BallContainer>().transform;
+    private void Awake() => GetContainer();
 
-    private void Update()
+    public void GetContainer(BallContainer container = null)
     {
-        if (_ballContainer == null)
-            _ballContainer = FindObjectOfType<BallContainer>().transform;
+        if (container == null)
+            _container = FindObjectOfType<BallContainer>();
+        else
+            _container = container;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -26,14 +28,16 @@ public class DeadZone : MonoBehaviour
 
             Destroy(ball.gameObject);
 
-            if (_ballContainer.childCount <= 1)
+            if (_container.transform.childCount <= 1)
                 BallsOver?.Invoke();
+
+                Debug.Log("killed ball ostalos' -" +_container.transform.childCount);
         }
     }
 
     private bool IsNotClone(Ball ball)
     {
-        Ball[] balls = _ballContainer.GetComponentsInChildren<Ball>();
+        Ball[] balls = _container.GetComponentsInChildren<Ball>();
 
         return balls.Contains(ball);
     }

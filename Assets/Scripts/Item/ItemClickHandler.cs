@@ -10,30 +10,35 @@ public class ItemClickHandler : MonoBehaviour
     {
         _view = FindObjectOfType<ItemView>();
         _pointView = FindObjectOfType<PointView>();
-        _bonusHandler = GetComponent<BonusHandler>();
+
+        TryGetComponent(out _bonusHandler);
     }
 
     private void OnMouseOver()
     {
         if (Input.GetMouseButton(0))
-        {
-            _view.ShowLevel();
-            _pointView.ShowPoints();
-            SetBonus(false);
-        }
+            OnClicked();
+        else
+            OnDroped();
     }
 
-    private void OnMouseExit()
+    private void OnMouseExit() => OnDroped();
+
+    private void OnClicked()
     {
-        if (Input.GetMouseButton(0) == false)
-        {
-            _view.HideLevel();
-            _pointView.HidePoints();
-            SetBonus(true);
-        }
+        _view.ShowLevel();
+        _pointView.ShowPoints();
+        SetBonusHandler(false);
     }
 
-    private void SetBonus(bool enabled)
+    private void OnDroped()
+    {
+        _view.HideLevel();
+        _pointView.HidePoints();
+        SetBonusHandler(true);
+    }
+
+    private void SetBonusHandler(bool enabled)
     {
         if (_bonusHandler != null)
             _bonusHandler.enabled = enabled;

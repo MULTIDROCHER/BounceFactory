@@ -20,8 +20,8 @@ GameObject:
   - component: {fileID: -6282747897272566110}
   - component: {fileID: 643221600439807927}
   - component: {fileID: 9073000416776119941}
-  m_Layer: 0
-  m_Name: Ballgenerator
+  m_Layer: 6
+  m_Name: ballgenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1606892705
+  m_SortingLayer: 1
   m_SortingOrder: 60
   m_Sprite: {fileID: -1638821690, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -209,7 +209,7 @@ PolygonCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 10
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295

@@ -4,8 +4,8 @@ using YG;
 
 public class MessageWindow : MonoBehaviour
 {
-    [SerializeField] private Toggle _toggle;
     [SerializeField] private SceneSwitcher _trigger;
+    [SerializeField] private Toggle _toggle;
 
     private void Awake()
     {

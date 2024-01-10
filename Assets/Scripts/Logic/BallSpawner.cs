@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
@@ -10,7 +12,7 @@ public class BallSpawner : MonoBehaviour
 
     public event Action BallBought;
 
-    private void Start()
+    private void Awake()
     {
         GetContainer();
         _seller = FindObjectOfType<BallSeller>();
@@ -23,30 +25,14 @@ public class BallSpawner : MonoBehaviour
         BallBought?.Invoke();
     }
 
-    public void Respawn(int[,] balls)
-    {
-        ColorSetter colorSetter = new();
-
-        for (int i = 0; i < balls.GetLength(0); i++)
-        {
-            for (int j = 0; j < balls[i, 0]; j++)
-            {
-                var ball = Instantiate(_template, _container.transform.position, Quaternion.identity, _container.transform);
-                BallBought?.Invoke();
-
-                while (ball.Level < balls[i, 1])
-                {
-                    ball.LevelUp(colorSetter.SetColor(ball));
-                }
-            }
-        }
-    }
-
     public void GetContainer(BallContainer container = null)
     {
         if (container == null)
             _container = FindObjectOfType<BallContainer>();
         else
             _container = container;
+
+        if (_container.transform.childCount == 0)
+            Instantiate(_template, _container.transform.position, Quaternion.identity, _container.transform);
     }
 }

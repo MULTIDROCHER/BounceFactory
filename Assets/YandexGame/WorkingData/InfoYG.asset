@@ -33,11 +33,11 @@ MonoBehaviour:
   saveCloud: 1
   flush: 0
   localSaveSync: 1
-  saveCloudInterval: 5
+  saveCloudInterval: 2
   saveOnQuitGame: 1
   quitGameParameters:
-    objectName: YandexGame
-    methodName: _SaveProgress
+    objectName: GameManager
+    methodName: LevelExit
   leaderboardEnable: 1
   saveScoreAnonymousPlayers: 1
   leaderboardSimulation:
@@ -147,7 +147,7 @@ MonoBehaviour:
     hi: []
   fontsTMP:
     defaultFont:
-    - {fileID: 11400000, guid: 3522040e2dc4f534fb867db7f7a42d61, type: 2}
+    - {fileID: 11400000, guid: 6054fde5efefc514b8be2549bdf245d9, type: 2}
     ru: []
     en: []
     tr: []

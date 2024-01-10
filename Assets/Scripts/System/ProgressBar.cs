@@ -10,7 +10,7 @@ using YG;
 public class ProgressBar : MonoBehaviour
 {
     private readonly float _duration = .2f;
-    
+
     private TMP_Text _text;
     private Slider _slider;
     private int _goal;
@@ -43,7 +43,8 @@ public class ProgressBar : MonoBehaviour
             GoalRiched?.Invoke();
     }
 
-    private void UpdateProgressText() => _text.text = CurrentScore + " / " + _goal;
+    private void UpdateProgressText() =>
+    _text.text = NumsFormater.FormatedNumber(CurrentScore) + " / " + NumsFormater.FormatedNumber(_goal);
 
     private IEnumerator DelayedSubscription()
     {

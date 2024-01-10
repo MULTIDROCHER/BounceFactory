@@ -36,6 +36,6 @@ public class Flipper : MonoBehaviour
     private void AddAcceleration(Ball ball)
     {
         if (ball.TryGetComponent(out Rigidbody2D rigidbody))
-            rigidbody.velocity = rigidbody.velocity.normalized * _acceleration;
+            rigidbody.velocity = rigidbody.velocity.normalized *  _acceleration;
     }
 }

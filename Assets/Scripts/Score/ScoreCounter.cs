@@ -58,7 +58,7 @@ public class ScoreCounter : MonoBehaviour
         Spent = 0;
     }
 
-    private void UpdateDisplay() => _scoreText.text = _text + Balance;
+    private void UpdateDisplay() => _scoreText.text = _text + NumsFormater.FormatedNumber(Balance);
 
     public void TestChit() => AddScore(YandexGame.savesData.Goal / 10);
 

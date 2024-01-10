@@ -20,8 +20,8 @@ GameObject:
   - component: {fileID: 109820013801439062}
   - component: {fileID: 8113875945649084321}
   - component: {fileID: 172794577597667597}
-  m_Layer: 0
-  m_Name: Acceleration
+  m_Layer: 6
+  m_Name: acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1606892705
+  m_SortingLayer: 1
   m_SortingOrder: 60
   m_Sprite: {fileID: 1551567882, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -110,7 +110,7 @@ PolygonCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 10
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295

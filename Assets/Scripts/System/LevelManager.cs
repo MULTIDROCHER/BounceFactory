@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
         }
 
         _progress = FindObjectOfType<ProgressBar>();
-        _currentLevel = FindObjectOfType<Level>();
+        SetLevel();
     }
 
     private void OnEnable() => _progress.GoalRiched += OnGoalRiched;
@@ -51,17 +51,14 @@ public class LevelManager : MonoBehaviour
         { "Level", YandexGame.savesData.Level.ToString() },
         { "Balance", YandexGame.savesData.Balance.ToString() }
     };
-    
+
         YandexMetrica.Send("levelCompleted", eventParams);
         _finishWindow.SetActive(true);
     }
 
     public void ChangeLevel()
     {
-        _currentLevel.gameObject.SetActive(false);
-        _currentLevel = _templates[UnityEngine.Random.Range(0, _templates.Count)];
-        _currentLevel.gameObject.SetActive(true);
-        _background.sprite = _bgSprites[UnityEngine.Random.Range(0, _bgSprites.Count)];
+        SetLevel();
 
         YandexGame.savesData.Goal = Convert.ToInt32(YandexGame.savesData.Goal * _goalIncrease);
         YandexGame.savesData.Level++;
@@ -69,6 +66,18 @@ public class LevelManager : MonoBehaviour
         _progress.Reset();
         Time.timeScale = 1;
         OnLevelExit();
+    }
+
+    private void SetLevel()
+    {
+        _currentLevel = _templates[UnityEngine.Random.Range(0, _templates.Count)];
+        _background.sprite = _bgSprites[UnityEngine.Random.Range(0, _bgSprites.Count)];
+
+        foreach (var level in _templates)
+            if (level == _currentLevel)
+                level.gameObject.SetActive(true);
+            else
+                level.gameObject.SetActive(false);
     }
 
     public void OnLevelExit()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class BallMerger : MonoBehaviour, ITutorialEvent
 {
-    [SerializeField] private ParticleSystem _poofEffect;
+    [SerializeField] private EffectHandler _effectHandler;
     [SerializeField] private BallSpawner _spawner;
     [SerializeField] private Button _button;
 
@@ -41,6 +42,14 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
         }
     }
 
+    public void GetContainer(BallContainer container = null)
+    {
+        if (container == null)
+            _container = FindObjectOfType<BallContainer>();
+        else
+            _container = container;
+    }
+
     private void TryFindMatches()
     {
         List<Ball> balls = _container.GetComponentsInChildren<Ball>().ToList();
@@ -65,38 +74,37 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
     private void Merge(List<Ball> balls)
     {
         ButtonOff();
-        MoveToSpawner(balls);
+        StartCoroutine(PrepareToMerge(balls));
         Performed?.Invoke();
     }
 
-    private void MoveToSpawner(List<Ball> balls)
+    private IEnumerator PrepareToMerge(List<Ball> balls)
     {
-        int completedTweens = 0;
+        int delay = 2;
 
         foreach (var ball in balls)
         {
             ball.GetComponent<Collider2D>().enabled = false;
-            ball.transform.DOMove(_spawner.transform.position, 2)
-                .OnComplete(() =>
-                {
-                    completedTweens++;
-
-                    if (completedTweens == balls.Count)
-                        UpgradeOneBall(balls);
-                });
+            ball.transform.DOMove(_spawner.transform.position, delay);
         }
+
+        yield return new WaitForSeconds(delay);
+
+        var toUpgrade = balls[0];
+        balls.Remove(toUpgrade);
+
+        foreach (var ball in balls)
+            Destroy(ball.gameObject);
+
+        UpgradeOneBall(toUpgrade);
     }
 
-    private void UpgradeOneBall(List<Ball> balls)
+    private void UpgradeOneBall(Ball ball)
     {
-        var ball = balls[0];
-        balls.Remove(ball);
+        StopAllCoroutines();
 
-        foreach (var lowLevel in balls.ToArray())
-            Destroy(lowLevel.gameObject);
-
+        _effectHandler.DoEffect(_spawner.transform.position);
         ball.LevelUp(_colorSetter.SetColor(ball));
-        DoEffect();
         ball.GetComponent<Collider2D>().enabled = true;
     }
 
@@ -107,18 +115,4 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
     }
 
     private void ButtonOff() => _button.gameObject.SetActive(false);
-
-    private void DoEffect()
-    {
-        var poof = Instantiate(_poofEffect, _spawner.transform.position, Quaternion.identity);
-        Destroy(poof.gameObject, _poofEffect.main.startLifetime.constant);
-    }
-
-    public void GetContainer(BallContainer container = null)
-    {
-        if (container == null)
-            _container = FindObjectOfType<BallContainer>();
-        else
-            _container = container;
-    }
 }

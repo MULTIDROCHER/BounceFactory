@@ -10,7 +10,11 @@ public class SoundHandler : MonoBehaviour
 
     private AudioSource _source;
 
-    private void Start() => TryGetComponent(out _source);
+    private void Awake() => TryGetComponent(out _source);
+
+    private void OnEnable() => SoundManager.Instance.VolumeChanged += OnVolumeChanged;
+
+    private void OnDisable() => SoundManager.Instance.VolumeChanged -= OnVolumeChanged;
 
     private void OnCollisionEnter2D(Collision2D other) => _source.PlayOneShot(_bounceSound);
 
@@ -23,4 +27,6 @@ public class SoundHandler : MonoBehaviour
         else if (other.TryGetComponent(out AccelerationItem _))
             _source.PlayOneShot(_accelerationSound);
     }
+
+    private void OnVolumeChanged(float value) => _source.volume = value;
 }

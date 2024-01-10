@@ -14,6 +14,11 @@ public class SpawnPoint : MonoBehaviour
         HidePoint();
     }
 
+    private void OnMouseDown()
+    {
+        return;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Item item) && IsEmpty)

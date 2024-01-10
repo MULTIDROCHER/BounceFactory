@@ -29,5 +29,11 @@ public class GameManager : MonoBehaviour
         }
 
         ScoreCounter.Instance.ReturnSpent();
+
+        if (YandexGame.savesData.Level >= 2 && YandexGame.EnvironmentData.reviewCanShow)
+            YandexGame.ReviewShow(true);
+
+        LevelManager.Instance.OnLevelExit();
+        YandexGame.Instance._SaveProgress();
     }
 }
