@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2793025800630865065}
   - component: {fileID: 569647881072714873}
   - component: {fileID: 9117374843749914784}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: LevelDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +34,7 @@ RectTransform:
   m_Children:
   - {fileID: 6504927676264605809}
   m_Father: {fileID: 0}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -126,7 +127,7 @@ GameObject:
   - component: {fileID: 6504927676264605809}
   - component: {fileID: 9124728604973968343}
   - component: {fileID: 2942788797011103706}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,6 +147,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1836382916423553928}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

@@ -4,7 +4,6 @@ using YG;
 public class Level : MonoBehaviour
 {
     [SerializeField] private SpawnPoint[] _spawnPoints;
-    //[SerializeField] private DeadZone[] _deadZones;
     [SerializeField] private BallContainer _ballContainer;
     [SerializeField] private ItemContainer _itemContainer;
 
@@ -39,16 +38,16 @@ public class Level : MonoBehaviour
         _itemSpawner.GetPoints(_spawnPoints);
         _merger.GetContainer(_ballContainer);
         _pointView.GetPoints(_spawnPoints);
+        _ballContainer.Reset();
+        _itemContainer.Reset();
 
-        foreach(var deadZone in FindObjectsOfType<DeadZone>())
-        deadZone.GetContainer(_ballContainer);
+        foreach (var deadZone in FindObjectsOfType<DeadZone>())
+            deadZone.GetContainer(_ballContainer);
     }
 
     private void OnDisable()
     {
         _ballSeller.Reset();
         _itemSeller.Reset();
-        _ballContainer.Reset();
-        _itemContainer.Reset();
     }
 }

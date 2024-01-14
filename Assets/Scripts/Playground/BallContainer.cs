@@ -1,27 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BallContainer : MonoBehaviour
 {
-    private int _childCount;
+    [SerializeField] private BallSpawner _spawner;
 
-    public List<Ball> Balls { get; private set; } = new();
+    private int _childCount;
+    private List<Ball> _balls = new();
 
     private void Update()
     {
         if (transform.childCount != _childCount)
         {
             _childCount = transform.childCount;
-            Balls.Clear();
-            Balls.AddRange(transform.GetComponentsInChildren<Ball>());
+            _balls.Clear();
+            _balls.AddRange(transform.GetComponentsInChildren<Ball>());
         }
     }
 
     public void Reset()
     {
-        foreach (var ball in Balls)
+        foreach (var ball in _balls)
             if (ball != null)
                 Destroy(ball.gameObject);
+
+        if (transform.childCount == 0)
+            _spawner.Spawn();
     }
 }

@@ -70,6 +70,9 @@ public class LevelManager : MonoBehaviour
 
     private void SetLevel()
     {
+        if (_currentLevel != null)
+            _currentLevel.gameObject.SetActive(false);
+
         _currentLevel = _templates[UnityEngine.Random.Range(0, _templates.Count)];
         _background.sprite = _bgSprites[UnityEngine.Random.Range(0, _bgSprites.Count)];
 

@@ -6,12 +6,12 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
     private Camera _camera;
     private PointHandler _pointHandler;
     private UpgradeHandler _upgradeHandler;
-    private bool _isDragged = false;
     private Vector3 _mousePos;
     private SpawnPoint _newPoint;
 
     public event Action Performed;
 
+    public bool IsDragging { get; private set; } = false;
     private SpawnPoint PreviousPoint => _pointHandler.PreviousPoint;
 
     private void Start()
@@ -23,7 +23,7 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
 
     private void Update()
     {
-        if (_isDragged)
+        if (IsDragging)
         {
             _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _mousePos.z = 0;
@@ -32,18 +32,18 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
         }
     }
 
-    private void OnMouseDown()
+    public void OnStartMovement()
     {
-        _isDragged = true;
+        IsDragging = true;
         _newPoint = _pointHandler.PreviousPoint;
 
         if (_upgradeHandler != null)
             _upgradeHandler.enabled = true;
     }
 
-    private void OnMouseUp()
+    public void OnEndMovement()
     {
-        _isDragged = false;
+        IsDragging = false;
 
         transform.position = PreviousPoint.transform.position;
         Rotate();

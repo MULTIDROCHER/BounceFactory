@@ -9,7 +9,7 @@ public class LevelCounter : MonoBehaviour
     private string _baseText;
     private int _current;
 
-    private void Awake() => _baseText = _text.text;
+    private void Awake() => _baseText = _text.text + "\n";
 
     private void Update()
     {

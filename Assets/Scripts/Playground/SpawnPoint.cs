@@ -4,6 +4,7 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     private SpriteRenderer _renderer;
+    private ItemClickHandler _clickHandler;
 
     public Item Item { get; private set; }
     public bool IsEmpty { get; private set; } = true;
@@ -16,7 +17,14 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnMouseDown()
     {
-        return;
+        if(_clickHandler != null)
+            _clickHandler.OnClick();
+    }
+
+    private void OnMouseUp()
+    {
+        if(_clickHandler != null)
+            _clickHandler.OnDrop();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -24,6 +32,7 @@ public class SpawnPoint : MonoBehaviour
         if (other.TryGetComponent(out Item item) && IsEmpty)
         {
             Item = item;
+            _clickHandler = item.GetComponent<ItemClickHandler>();
             IsEmpty = false;
         }
     }
@@ -33,6 +42,7 @@ public class SpawnPoint : MonoBehaviour
         if (Item != null && other.gameObject == Item.gameObject)
         {
             Item = null;
+            _clickHandler = null;
             IsEmpty = true;
         }
     }

@@ -28,7 +28,7 @@ public class ScoreCounter : MonoBehaviour
         }
 
         _scoreText = GetComponent<TMP_Text>();
-        _text = _scoreText.text;
+        _text = _scoreText.text + "\n";
 
         Balance = SetBalance();
         UpdateDisplay();

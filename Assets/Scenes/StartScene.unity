@@ -424,7 +424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -43.669983}
+  m_AnchoredPosition: {x: 0, y: -43.66992}
   m_SizeDelta: {x: 0, y: 87.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372659537
@@ -1597,10 +1597,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 77.17
+  m_fontSize: 72
   m_fontSizeBase: 77.17
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -2414,10 +2414,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BOUNCy FACTORY
+  m_text: BOUNCY FACTORY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ad80c4c9f0ba33345b3a1aa94f32cfea, type: 2}
-  m_sharedMaterial: {fileID: 8667540393344145297, guid: ad80c4c9f0ba33345b3a1aa94f32cfea, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9d2966396cd20af41b7cca18fe33dc7c, type: 2}
+  m_sharedMaterial: {fileID: 4743066021390496782, guid: 9d2966396cd20af41b7cca18fe33dc7c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMPComponent: {fileID: 1300675379}
-  uniqueFontTMP: {fileID: 11400000, guid: ad80c4c9f0ba33345b3a1aa94f32cfea, type: 2}
+  uniqueFontTMP: {fileID: 11400000, guid: 9d2966396cd20af41b7cca18fe33dc7c, type: 2}
   textLComponent: {fileID: 0}
   infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
   text: 
@@ -2781,8 +2781,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading....
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ad80c4c9f0ba33345b3a1aa94f32cfea, type: 2}
-  m_sharedMaterial: {fileID: 8667540393344145297, guid: ad80c4c9f0ba33345b3a1aa94f32cfea, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6054fde5efefc514b8be2549bdf245d9, type: 2}
+  m_sharedMaterial: {fileID: 1936633241107767472, guid: 6054fde5efefc514b8be2549bdf245d9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
