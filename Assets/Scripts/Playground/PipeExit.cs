@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class PipeExit : MonoBehaviour, IAnimated
+public class PipeExit : MonoBehaviour
 {
-    private Animator _splash;
+    private ParticleSystem _splash;
 
-    private void Start() => _splash = GetComponentInChildren<Animator>();
+    private void Awake() => _splash = GetComponentInChildren<ParticleSystem>();
 
-    private void OnTriggerEnter2D(Collider2D other) => PlayAnimation(other);
+    private void OnTriggerEnter2D(Collider2D other) => DoSplash(other);
 
-    public void PlayAnimation(Collider2D other)
+    private void DoSplash(Collider2D other)
     {
         if (other.TryGetComponent(out Ball _))
-            _splash.SetTrigger(IAnimated.Trigger);
+            _splash.Play();
     }
 }

@@ -3,8 +3,7 @@ using UnityEngine;
 public class Booster : MonoBehaviour
 {
     [SerializeField] private Vector3 _direction;
-    
-    private readonly float _acceleration = 10;
+    [SerializeField] private float _acceleration;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

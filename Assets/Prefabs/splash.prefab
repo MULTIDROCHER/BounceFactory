@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2480953265891410632}
   - component: {fileID: 7681830130307211180}
   m_Layer: 0
-  m_Name: Splash
+  m_Name: splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001299490450757395}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.39549989, w: -0.91846603}
   m_LocalPosition: {x: 0.53, y: 3.89, z: 0}
   m_LocalScale: {x: 1.716, y: 1.716, z: 1.716}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 46.594}
 --- !u!212 &2480953265891410632
 SpriteRenderer:
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 1525559644, guid: bc3c5a2d6627a11498798090be3fb8ab, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.65197444, g: 1, b: 0.2971698, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

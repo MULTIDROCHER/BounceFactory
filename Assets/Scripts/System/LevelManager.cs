@@ -70,17 +70,17 @@ public class LevelManager : MonoBehaviour
 
     private void SetLevel()
     {
-        if (_currentLevel != null)
-            _currentLevel.gameObject.SetActive(false);
+        foreach (var level in _templates)
+            level.gameObject.SetActive(false);
 
-        _currentLevel = _templates[UnityEngine.Random.Range(0, _templates.Count)];
+        Level tempLevel = _currentLevel;
+
+        while (_currentLevel == tempLevel)
+            _currentLevel = _templates[UnityEngine.Random.Range(0, _templates.Count)];
+
         _background.sprite = _bgSprites[UnityEngine.Random.Range(0, _bgSprites.Count)];
 
-        foreach (var level in _templates)
-            if (level == _currentLevel)
-                level.gameObject.SetActive(true);
-            else
-                level.gameObject.SetActive(false);
+        _currentLevel.gameObject.SetActive(true);
     }
 
     public void OnLevelExit()
