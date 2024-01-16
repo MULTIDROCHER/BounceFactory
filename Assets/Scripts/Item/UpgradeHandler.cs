@@ -5,6 +5,9 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private ParticleSystem _effect;
     [SerializeField] private LevelDisplay _display;
+    [SerializeField] private Material _mergeMaterial;
+
+    private Material _defaultMaterial;
     private SpriteRenderer _renderer;
     private Item _current;
     private Item _itemToMerge;
@@ -18,6 +21,7 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
         enabled = false;
 
         Instantiate(_display, transform);
+        _defaultMaterial = _renderer.material;
     }
 
     private void OnTriggerEnter2D(Collider2D other) => HandleCollision(other.gameObject);
@@ -43,7 +47,7 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
         if (_itemToMerge == null)
             _itemToMerge = GetItem(other);
         else
-            _renderer.color = Color.cyan;
+            _renderer.material = _mergeMaterial;
     }
 
     private void ResetItem(GameObject item)
@@ -51,7 +55,7 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
         if (_itemToMerge == item.GetComponent<Item>())
         {
             _itemToMerge = null;
-            _renderer.color = Color.white;
+            _renderer.material = _defaultMaterial;
         }
     }
 
@@ -65,9 +69,9 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
         DoEffect(template.transform);
 
         if (template != item)
-            Destroy(item.gameObject);
+            TryToDestroy(item);
         else
-            Destroy(_current.gameObject);
+            TryToDestroy(_current);
     }
 
     private Item GetItem(GameObject other)
@@ -78,5 +82,13 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
             return item;
         else
             return null;
+    }
+
+    private void TryToDestroy(Item item)
+    {
+        if (item.TryGetComponent(out TeleportItem teleport))
+            StartCoroutine(teleport.Destroy());
+        else
+            Destroy(item.gameObject);
     }
 }

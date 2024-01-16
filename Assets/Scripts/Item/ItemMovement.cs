@@ -17,8 +17,9 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
     private void Start()
     {
         _camera = Camera.main;
+        
         _pointHandler = GetComponent<PointHandler>();
-        TryGetComponent(out _upgradeHandler);
+        _upgradeHandler = GetComponent<UpgradeHandler>();
     }
 
     private void Update()

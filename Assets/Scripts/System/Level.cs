@@ -38,8 +38,6 @@ public class Level : MonoBehaviour
         _itemSpawner.GetPoints(_spawnPoints);
         _merger.GetContainer(_ballContainer);
         _pointView.GetPoints(_spawnPoints);
-        _ballContainer.Reset();
-        _itemContainer.Reset();
 
         foreach (var deadZone in FindObjectsOfType<DeadZone>())
             deadZone.GetContainer(_ballContainer);

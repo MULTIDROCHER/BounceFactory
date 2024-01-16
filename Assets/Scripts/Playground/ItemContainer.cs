@@ -17,6 +17,8 @@ public class ItemContainer : MonoBehaviour
         }
     }
 
+    private void OnDisable() => Reset();
+
     public void Reset()
     {
         foreach (var item in Items)

@@ -81,6 +81,7 @@ public class LevelManager : MonoBehaviour
         _background.sprite = _bgSprites[UnityEngine.Random.Range(0, _bgSprites.Count)];
 
         _currentLevel.gameObject.SetActive(true);
+        Debug.Log(_currentLevel.gameObject.name);
     }
 
     public void OnLevelExit()

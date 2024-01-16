@@ -10,7 +10,11 @@ public class SoundHandler : MonoBehaviour
 
     private AudioSource _source;
 
-    private void Awake() => TryGetComponent(out _source);
+    private void Awake()
+    {
+        TryGetComponent(out _source);
+        _source.volume = SoundManager.Instance.SFXSource.volume;
+    }
 
     private void OnEnable() => SoundManager.Instance.VolumeChanged += OnVolumeChanged;
 
@@ -20,7 +24,7 @@ public class SoundHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out TeleportItem _))
+        if (other.TryGetComponent(out TeleportItem portal) && portal.CanTeleport)
             _source.PlayOneShot(_teleportSound);
         else if (other.TryGetComponent(out BallGeneratorItem _))
             _source.PlayOneShot(_generatorSound);

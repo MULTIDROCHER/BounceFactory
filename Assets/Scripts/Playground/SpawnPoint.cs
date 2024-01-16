@@ -11,7 +11,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out _renderer);
+        _renderer = GetComponent<SpriteRenderer>();
         HidePoint();
     }
 
@@ -29,7 +29,8 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Item item) && IsEmpty)
+        if (other.TryGetComponent(out Item item) 
+        && IsEmpty)
         {
             Item = item;
             _clickHandler = item.GetComponent<ItemClickHandler>();
@@ -39,7 +40,8 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (Item != null && other.gameObject == Item.gameObject)
+        if (Item != null 
+        && other.gameObject == Item.gameObject)
         {
             Item = null;
             _clickHandler = null;

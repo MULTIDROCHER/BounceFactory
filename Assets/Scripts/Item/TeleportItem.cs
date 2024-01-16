@@ -15,20 +15,39 @@ public class TeleportItem : Item
 
     private BonusHandler _bonusHandler;
     private EffectHandler _effectHandler;
+    private ItemMovement _movement;
     private WaitForSeconds _wait;
     private Vector2 _defaultSize;
+    public bool CanTeleport => _movement.IsDragging == false;
 
-    private void Start()
+    private void Awake()
     {
         TryGetComponent(out _bonusHandler);
         TryGetComponent(out _effectHandler);
+        TryGetComponent(out _movement);
+
         _wait = new(_delay);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Ball ball) && InPortal.Contains(ball) == false)
+        if (other.TryGetComponent(out Ball ball)
+        && CanTeleport
+        && InPortal.Contains(ball) == false)
             TryToTeleport(ball);
+    }
+
+    public IEnumerator Destroy()
+    {
+        GetComponent<SpriteRenderer>().color = new(1, 1, 1, 0);
+
+        if (InPortal.Count != 0)
+            foreach (var ball in InPortal)
+                Appear(ball, this);
+
+        yield return _wait;
+
+        Destroy(gameObject);
     }
 
     private void TryToTeleport(Ball ball)

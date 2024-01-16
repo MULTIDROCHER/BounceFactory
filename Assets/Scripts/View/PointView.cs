@@ -34,9 +34,11 @@ public class PointView : MonoBehaviour
 
     public void GetPoints(SpawnPoint[] points = null)
     {
+        _points.Clear();
+
         if (points == null)
-            _points.AddRange(FindObjectsOfType<SpawnPoint>().ToList());
+            _points.AddRange(FindObjectsOfType<SpawnPoint>());
         else
-            _points.AddRange(points.ToList());
+            _points.AddRange(points);
     }
 }
