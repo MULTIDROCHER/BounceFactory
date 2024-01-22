@@ -8,6 +8,8 @@ public class Item : MonoBehaviour
 {
     [SerializeField] protected ItemType _type;
 
+    private int _bonusIncrease = 2;
+
     public ItemType Type => _type;
     public SpriteRenderer Renderer { get; private set; }
     public int Level { get; private set; } = 1;
@@ -18,7 +20,7 @@ public class Item : MonoBehaviour
     public virtual void LevelUp()
     {
         Level++;
-        Bonus += 2;
+        Bonus += _bonusIncrease;
 
         gameObject.name = Level.ToString();
     }

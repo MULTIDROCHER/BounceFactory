@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class ItemView : MonoBehaviour
 {
-    [SerializeField] private Transform _container;
-
     private readonly List<LevelDisplay> _itemsLevel = new();
+
+    [SerializeField] private Transform _container;
 
     private int _childCount;
 

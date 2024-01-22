@@ -18,7 +18,7 @@ MonoBehaviour:
   playerInfoSimulation:
     authorized: 1
     isMobile: 0
-    language: ru
+    language: en
     name: mr ignat
     uniqueID: 666
     photo: https://sun9-61.userapi.com/impg/UFKZJ071_M6E6T_gWhE91kmyJ8QLwNdP4tSk8g/PxchZb5fzBQ.jpg?size=1000x647&quality=96&sign=4f29ae9aa8b1521385d40eaba312be79&type=album
@@ -73,6 +73,26 @@ MonoBehaviour:
       score: 6
       photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
       uniqueID: 000
+    - rank: 6
+      name: Player6
+      score: 340000
+      photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
+      uniqueID: 21
+    - rank: 6
+      name: Player6
+      score: 340000
+      photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
+      uniqueID: 21
+    - rank: 6
+      name: Player6
+      score: 340000
+      photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
+      uniqueID: 21
+    - rank: 6
+      name: Player6
+      score: 340000
+      photo: https://sun9-16.userapi.com/impg/di5chKdEiEHxYmWjhz3Ze7axO4r4Q5lHLIirxw/JS_i7um_aYs.jpg?size=320x330&quality=96&sign=3ea3971336c3e183aa45f695d7b6d015&c_uniq_tag=jjE8oATDv1MhbYaOhnWkZEBG3RGIWW6uPFMkkE_vTak&type=album
+      uniqueID: 21
     - rank: 6
       name: Player6
       score: 340000

@@ -11,7 +11,7 @@ public class ItemMerger
         _target = target;
     }
 
-    public Item ChooseItem()
+    public Item GetRandom()
     {
         int chance = Random.Range(0, 2);
 

@@ -27,7 +27,6 @@ public class ItemClickHandler : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("clicked " + gameObject.name);
         _view.ShowLevel();
         _pointView.ShowPoints();
         _itemMovement.OnStartMovement();
@@ -36,7 +35,6 @@ public class ItemClickHandler : MonoBehaviour
 
     public void OnDrop()
     {
-        Debug.Log("droped " + gameObject.name);
         _view.HideLevel();
         _pointView.HidePoints();
         _itemMovement.OnEndMovement();

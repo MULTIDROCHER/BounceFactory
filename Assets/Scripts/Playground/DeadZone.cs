@@ -30,8 +30,6 @@ public class DeadZone : MonoBehaviour
 
             if (_container.transform.childCount <= 1)
                 BallsOver?.Invoke();
-
-                Debug.Log("killed ball ostalos' -" +_container.transform.childCount);
         }
     }
 

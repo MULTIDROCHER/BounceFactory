@@ -42,6 +42,14 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
+    public void GetPoints(SpawnPoint[] points = null)
+    {
+        if (points == null)
+            _spawnPoints =  FindObjectsOfType<SpawnPoint>();
+        else
+            _spawnPoints =  points;
+    }
+
     private Item GetRandomItem()
     {
         int chance = UnityEngine.Random.Range(1, 101);
@@ -78,12 +86,4 @@ public class ItemSpawner : MonoBehaviour
     }
 
     private Item GetItemByComponent<T>() where T : Component => _items.Find(item => item.TryGetComponent(out T component));
-
-    public void GetPoints(SpawnPoint[] points = null)
-    {
-        if (points == null)
-            _spawnPoints =  FindObjectsOfType<SpawnPoint>();
-        else
-            _spawnPoints =  points;
-    }
 }

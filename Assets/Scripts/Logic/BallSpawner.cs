@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
@@ -35,12 +33,7 @@ public class BallSpawner : MonoBehaviour
         else
             _container = container;
 
-        Debug.Log(_container.transform.childCount + "--------------------");
-
         if (_container.transform.childCount == 0)
-        {
-            Debug.Log("spawned one ball--------------------");
             Instantiate(_template, _container.transform.position, Quaternion.identity, _container.transform);
-        }
     }
 }

@@ -25,7 +25,5 @@ public class BallContainer : MonoBehaviour
         foreach (var ball in _balls)
             if (ball != null)
                 Destroy(ball.gameObject);
-
-        Debug.Log("reset===============");
     }
 }

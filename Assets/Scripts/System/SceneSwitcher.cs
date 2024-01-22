@@ -15,7 +15,6 @@ public class SceneSwitcher : MonoBehaviour
         else
         {
             GameManager.Instance.LevelExit();
-
             SceneManager.LoadScene(0);
         }
     }
@@ -39,7 +38,6 @@ public class SceneSwitcher : MonoBehaviour
             YandexGame.Instance._SaveProgress();
 
             StartGame();
-            Debug.Log(YandexGame.savesData.PreviousLevel + "LEVEL============================");
         }
     }
 

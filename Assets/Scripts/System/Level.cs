@@ -47,5 +47,6 @@ public class Level : MonoBehaviour
     {
         _ballSeller.Reset();
         _itemSeller.Reset();
+        _itemContainer.Reset();
     }
 }

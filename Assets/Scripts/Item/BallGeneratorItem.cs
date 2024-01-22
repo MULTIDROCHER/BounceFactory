@@ -16,7 +16,7 @@ public class BallGeneratorItem : Item, IAnimated
     private EffectHandler _effectHandler;
     private int _amount = 2;
     private int _delay = 3;
-    private bool _isActive = true;
+    public bool IsActive { get; private set; } = true;
 
     private void Start()
     {
@@ -26,9 +26,9 @@ public class BallGeneratorItem : Item, IAnimated
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Ball ball) && _isActive)
+        if (other.TryGetComponent(out Ball ball) && IsActive)
         {
-            _isActive = false;
+            IsActive = false;
             PlayAnimation(other);
             CreateClones(ball);
             StartCoroutine(DestroyBallsAfterDelay());
@@ -83,6 +83,6 @@ public class BallGeneratorItem : Item, IAnimated
     private void Reset()
     {
         _spawned.Clear();
-        _isActive = true;
+        IsActive = true;
     }
 }

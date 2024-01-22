@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PointView : MonoBehaviour
 {
-    private ItemSpawner _spawner;
-    private List<SpawnPoint> _points = new();
+    private readonly List<SpawnPoint> _points = new();
     private readonly List<Item> _items = new();
+
+    private ItemSpawner _spawner;
 
     private void Awake()
     {
@@ -17,8 +17,6 @@ public class PointView : MonoBehaviour
     private void OnEnable() => _spawner.ItemSpawned += OnItemSpawned;
 
     private void OnDisable() => _spawner.ItemSpawned -= OnItemSpawned;
-
-    private void OnItemSpawned(Item item) => _items.Add(item);
 
     public void ShowPoints()
     {
@@ -41,4 +39,6 @@ public class PointView : MonoBehaviour
         else
             _points.AddRange(points);
     }
+
+    private void OnItemSpawned(Item item) => _items.Add(item);
 }

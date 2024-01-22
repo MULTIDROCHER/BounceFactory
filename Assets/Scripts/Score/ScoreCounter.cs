@@ -60,8 +60,6 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateDisplay() => _scoreText.text = _text + NumsFormater.FormatedNumber(Balance);
 
-    public void TestChit() => AddScore(YandexGame.savesData.Goal / 10);
-
     private int SetBalance()
     {
         if (YandexGame.savesData.Balance == 0)

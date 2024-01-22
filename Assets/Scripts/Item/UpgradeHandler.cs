@@ -63,7 +63,7 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
     {
         Performed?.Invoke();
         ItemMerger merger = new(_current, item);
-        var template = merger.ChooseItem();
+        var template = merger.GetRandom();
 
         template.LevelUp();
         DoEffect(template.transform);

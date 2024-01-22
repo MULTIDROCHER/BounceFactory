@@ -17,8 +17,6 @@ public class LevelDisplay : MonoBehaviour
         HideLevel();
     }
 
-    private void OnDestroy() => HideLevel();
-
     private void LateUpdate()
     {
         if (_item == null)
@@ -30,6 +28,8 @@ public class LevelDisplay : MonoBehaviour
             transform.SetPositionAndRotation(_item.transform.position + _offset, Quaternion.identity);
         }
     }
+
+    private void OnDestroy() => HideLevel();
 
     public void ShowLevel()
     {

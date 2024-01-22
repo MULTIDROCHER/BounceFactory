@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StuckPreventer : MonoBehaviour
 {
     private readonly float _delay = 2;
     private float _count;
+    private Rigidbody2D _rigidbody;
     private Vector3 _previousPosition;
     private Vector3 _step = new(2, 2, 0);
-    private Rigidbody2D _rigidbody;
 
     private void Start()
     {
