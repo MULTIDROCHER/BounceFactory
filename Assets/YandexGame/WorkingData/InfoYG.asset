@@ -18,7 +18,7 @@ MonoBehaviour:
   playerInfoSimulation:
     authorized: 1
     isMobile: 0
-    language: en
+    language: ru
     name: mr ignat
     uniqueID: 666
     photo: https://sun9-61.userapi.com/impg/UFKZJ071_M6E6T_gWhE91kmyJ8QLwNdP4tSk8g/PxchZb5fzBQ.jpg?size=1000x647&quality=96&sign=4f29ae9aa8b1521385d40eaba312be79&type=album
@@ -244,7 +244,7 @@ MonoBehaviour:
     consumed: 1
   metricaEnable: 1
   metricaCounterID: 96011288
-  debug: 1
+  debug: 0
   archivingBuild: 1
   logoImageFormat: 1
   backgroundImageFormat: 3

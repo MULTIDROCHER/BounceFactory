@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StuckPreventer : MonoBehaviour
@@ -5,31 +6,28 @@ public class StuckPreventer : MonoBehaviour
     private readonly float _delay = 2;
     private float _count;
     private Rigidbody2D _rigidbody;
-    private Vector3 _previousPosition;
-    private Vector3 _step = new(2, 2, 0);
+    private Vector2 _step = new(2, 2);
 
     private void Start()
     {
-        _previousPosition = transform.position;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        if (_previousPosition == transform.position)
+        if (_rigidbody.velocity.magnitude <= .5f)
             _count += Time.deltaTime;
-
+        else
+            _count = 0;
 
         if (_count >= _delay)
         {
             Push();
             _count = 0;
         }
-
-        _previousPosition = transform.position;
     }
 
     private void OnMouseDown() => Push();
 
-    private void Push() => _rigidbody.AddForce(_step);
+    private void Push() => _rigidbody.velocity += _step;
 }

@@ -21,6 +21,7 @@ public class Step0 : TutorialStep
     {
         _controller = Object.FindObjectsOfType<FlipperController>()
             .Where(controller => controller.transform.position.x > 0).FirstOrDefault();
+            Debug.Log(_controller != null);
         _controller.Performed += OnPerformed;
 
         if (YandexGame.EnvironmentData.isDesktop)

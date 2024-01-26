@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField] protected ItemType _type;
 
-    private int _bonusIncrease = 2;
+    private int _bonusIncrease = 5;
 
     public ItemType Type => _type;
     public SpriteRenderer Renderer { get; private set; }
