@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class LevelDisplay : MonoBehaviour
 {
-    private TMP_Text levelText;
+    private TMP_Text _levelText;
     private Item _item;
-    private bool isDisplayed;
+    private bool _isDisplayed;
     private Vector3 _offset = new(0, -.5f, 0);
     
-    private string Text => _item.Level.ToString();
+    private string ItemLevel => _item.Level.ToString();
 
     private void Awake()
     {
         _item = GetComponentInParent<Item>();
-        levelText = GetComponentInChildren<TMP_Text>();
+        _levelText = GetComponentInChildren<TMP_Text>();
+
         HideLevel();
     }
 
@@ -22,9 +23,9 @@ public class LevelDisplay : MonoBehaviour
         if (_item == null)
             _item = GetComponentInParent<Item>();
 
-        if (isDisplayed)
+        if (_isDisplayed)
         {
-            levelText.text = Text;
+            _levelText.text = ItemLevel;
             transform.SetPositionAndRotation(_item.transform.position + _offset, Quaternion.identity);
         }
     }
@@ -33,19 +34,19 @@ public class LevelDisplay : MonoBehaviour
 
     public void ShowLevel()
     {
-        if (levelText != null)
+        if (_levelText != null)
         {
-            levelText.gameObject.SetActive(true);
-            isDisplayed = true;
+            _levelText.gameObject.SetActive(true);
+            _isDisplayed = true;
         }
     }
 
     public void HideLevel()
     {
-        if (levelText != null)
+        if (_levelText != null)
         {
-            levelText.gameObject.SetActive(false);
-            isDisplayed = false;
+            _levelText.gameObject.SetActive(false);
+            _isDisplayed = false;
         }
     }
 }

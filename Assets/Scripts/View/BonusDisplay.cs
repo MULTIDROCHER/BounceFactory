@@ -14,7 +14,8 @@ public class BonusDisplay : MonoBehaviour
     private void Awake()
     {
         _text = GetComponentInChildren<TMP_Text>();
-        TryGetComponent(out _canvas);
+
+        _canvas = GetComponent<Canvas>();
         _canvas.worldCamera = Camera.main;
     }
 
@@ -22,14 +23,17 @@ public class BonusDisplay : MonoBehaviour
 
     public void ShowBonus(int bonus, Vector3 position)
     {
-        SetText(bonus, position);
+        SetText(BonusToString(bonus), position);
         Destroy(gameObject, _delay);
     }
 
-    private void SetText(int bonus, Vector3 pos)
+    private string BonusToString(int bonus) => "+" + bonus.ToString();
+
+    private void SetText(string text, Vector3 pos)
     {
-        _text.text = "+" + bonus.ToString();
+        _text.text = text;
         _position = pos;
-        _position += new Vector2(Random.Range(-_positionSpread.x, _positionSpread.x), Random.Range(-_positionSpread.y, _positionSpread.y));
+        _position += new Vector2(Random.Range(-_positionSpread.x, _positionSpread.x),
+                                Random.Range(-_positionSpread.y, _positionSpread.y));
     }
 }

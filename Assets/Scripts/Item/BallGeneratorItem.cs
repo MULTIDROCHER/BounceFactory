@@ -16,12 +16,13 @@ public class BallGeneratorItem : Item, IAnimated
     private EffectHandler _effectHandler;
     private int _amount = 2;
     private int _delay = 3;
+    
     public bool IsActive { get; private set; } = true;
 
     private void Start()
     {
-        TryGetComponent(out _animator);
-        TryGetComponent(out _effectHandler);
+        _animator = GetComponent<Animator>();
+        _effectHandler = GetComponent<EffectHandler>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

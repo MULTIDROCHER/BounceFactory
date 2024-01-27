@@ -32,9 +32,5 @@ public class Flipper : MonoBehaviour
         });
     }
 
-    private void AddAcceleration(Ball ball)
-    {
-        if (ball.TryGetComponent(out Rigidbody2D rigidbody))
-            rigidbody.velocity = new(0, _acceleration);
-    }
+    private void AddAcceleration(Ball ball) => ball.Rigidbody.velocity = new(0, _acceleration);
 }

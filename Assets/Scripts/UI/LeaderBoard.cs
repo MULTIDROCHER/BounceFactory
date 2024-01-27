@@ -3,11 +3,11 @@ using YG;
 
 public class LeaderBoard : MonoBehaviour
 {
-    [SerializeField] AuthWindow _authWindow;
+    [SerializeField] private AuthorizationWindow _authorizationWindow;
 
     private void OnEnable()
     {
         if (YandexGame.auth)
-            _authWindow.gameObject.SetActive(false);
+            _authorizationWindow.gameObject.SetActive(false);
     }
 }

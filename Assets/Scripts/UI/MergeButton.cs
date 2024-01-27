@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+[RequireComponent(typeof(Button))]
 public class MergeButton : MonoBehaviour
 {
     private readonly float _duration = .5f;
@@ -13,7 +14,7 @@ public class MergeButton : MonoBehaviour
 
     private void Start()
     {
-        TryGetComponent(out _button);
+        _button = GetComponent<Button>();
         _defaultScale = transform.localScale;
         gameObject.SetActive(false);
     }

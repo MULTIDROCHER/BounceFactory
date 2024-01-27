@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class StuckPreventer : MonoBehaviour
 {
     private readonly float _delay = 2;
@@ -8,10 +9,7 @@ public class StuckPreventer : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _step = new(2, 2);
 
-    private void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
+    private void Start() => _rigidbody = GetComponent<Rigidbody2D>();
 
     private void FixedUpdate()
     {

@@ -3,7 +3,7 @@ using YG;
 
 public class RateButton : MonoBehaviour
 {
-    [SerializeField] private AuthWindow _authWindow;
+    [SerializeField] private AuthorizationWindow _authorizationWindow;
     [SerializeField] private GameObject _ratedWindow;
 
     private void OnEnable()
@@ -15,7 +15,7 @@ public class RateButton : MonoBehaviour
     public void TryToRate()
     {
         if (YandexGame.auth == false)
-            _authWindow.gameObject.SetActive(true);
+            _authorizationWindow.gameObject.SetActive(true);
         else if (YandexGame.EnvironmentData.reviewCanShow == false)
             _ratedWindow.SetActive(true);
         else

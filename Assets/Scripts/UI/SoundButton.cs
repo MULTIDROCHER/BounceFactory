@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 
+[RequireComponent(typeof(Button))]
 public class SoundButton : MonoBehaviour
 {
     [SerializeField] private Sprite _unmuted;

@@ -13,9 +13,12 @@ public class ItemMerger
 
     public Item GetRandom()
     {
-        int chance = Random.Range(0, 2);
+        int minRange = 0;
+        int maxRange = 2;
 
-        if (chance == 0)
+        int chance = Random.Range(minRange, maxRange);
+
+        if (chance == minRange)
             return _target;
         else
             return _current;

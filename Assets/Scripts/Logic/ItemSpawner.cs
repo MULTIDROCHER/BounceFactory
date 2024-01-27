@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] private List<Item> _items;
@@ -12,7 +13,9 @@ public class ItemSpawner : MonoBehaviour
     private ItemSeller _seller;
 
     private readonly int _accelerationChance = 10;
+    private readonly int _teleportChance = 20;
     private readonly int _ballgeneratorChance = 30;
+    private readonly int _itemsOnSceneForGeneratorSpawn = 2;
 
     public event Action<Item> ItemSpawned;
     public event Action ItemBought;
@@ -45,23 +48,26 @@ public class ItemSpawner : MonoBehaviour
     public void GetPoints(SpawnPoint[] points = null)
     {
         if (points == null)
-            _spawnPoints =  FindObjectsOfType<SpawnPoint>();
+            _spawnPoints = FindObjectsOfType<SpawnPoint>();
         else
-            _spawnPoints =  points;
+            _spawnPoints = points;
     }
 
     private Item GetRandomItem()
     {
-        int chance = UnityEngine.Random.Range(1, 101);
+        int minRange = 0;
+        int maxRange = 101;
 
-        if (chance <= _accelerationChance)
-            return GetItemByComponent<AccelerationItem>();
-        else if (chance <= TeleportChance())
-            return GetItemByComponent<TeleportItem>();
-        else if (chance <= _ballgeneratorChance && _container.transform.childCount >= 2)
-            return GetItemByComponent<BallGeneratorItem>();
-        else
-            return GetItemByComponent<CommonItem>();
+        int chance = UnityEngine.Random.Range(minRange, maxRange);
+
+        return chance switch
+        {
+            int n when n <= _accelerationChance => GetItemByComponent<AccelerationItem>(),
+            int n when n <= GetTeleportChance() => GetItemByComponent<TeleportItem>(),
+            int n when n <= _ballgeneratorChance && _container.transform.childCount >= _itemsOnSceneForGeneratorSpawn 
+                => GetItemByComponent<BallGeneratorItem>(),
+            _ => GetItemByComponent<CommonItem>(),
+        };
     }
 
     private SpawnPoint GetPoint()
@@ -74,13 +80,13 @@ public class ItemSpawner : MonoBehaviour
             return null;
     }
 
-    private int TeleportChance()
+    private int GetTeleportChance()
     {
         int possibleAmount = 2;
         TeleportItem[] portals = FindObjectsOfType<TeleportItem>();
 
         if (portals.Length < possibleAmount && _container.transform.childCount >= possibleAmount)
-            return 20;
+            return _teleportChance;
         else
             return 0;
     }

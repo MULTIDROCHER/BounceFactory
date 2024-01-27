@@ -1,27 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(ItemMovement))]
 [RequireComponent(typeof(ItemClickHandler))]
 [RequireComponent(typeof(PointHandler))]
-public class Item : MonoBehaviour
+public class Item : IUpgradable
 {
-    [SerializeField] protected ItemType _type;
-
-    private int _bonusIncrease = 5;
+    [SerializeField] private ItemType _type;
 
     public ItemType Type => _type;
-    public SpriteRenderer Renderer { get; private set; }
-    public int Level { get; private set; } = 1;
-    public int Bonus { get; private set; } = 1;
 
-    private void Awake() => Renderer = GetComponent<SpriteRenderer>();
-
-    public virtual void LevelUp()
-    {
-        Level++;
-        Bonus += _bonusIncrease;
-
-        gameObject.name = Level.ToString();
+    protected override void Awake() {
+        base.Awake();
+        BonusIncrease = 3;
+        ObjectsAmount = 2;
     }
 }

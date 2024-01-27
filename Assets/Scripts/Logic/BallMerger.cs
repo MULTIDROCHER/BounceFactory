@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(ColorSetter))]
 public class BallMerger : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private EffectHandler _effectHandler;
@@ -104,7 +105,8 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
         StopAllCoroutines();
 
         _effectHandler.DoEffect(_spawner.transform.position);
-        ball.LevelUp(_colorSetter.SetColor(ball));
+        ball.ChangeColor(_colorSetter.SetColor(ball));
+        ball.LevelUp();
         ball.GetComponent<Collider2D>().enabled = true;
     }
 

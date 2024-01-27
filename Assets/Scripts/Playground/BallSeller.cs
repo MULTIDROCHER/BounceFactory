@@ -2,6 +2,9 @@ using System;
 
 public class BallSeller : Seller, ITutorialEvent
 {
+    private readonly int _startPrice = 50;
+    private readonly float _priceIncrease = 1.5f;
+
     private DeadZone[] _ballDestroyer;
     private BallSpawner _spawner;
 
@@ -47,7 +50,7 @@ public class BallSeller : Seller, ITutorialEvent
     protected override void SetPrices()
     {
         Performed?.Invoke();
-        Price = 50;
-        PriceChange = 1.5f;
+        Price = _startPrice;
+        PriceIncrease = _priceIncrease;
     }
 }

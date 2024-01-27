@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Item))]
 public class UpgradeHandler : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private ParticleSystem _effect;
@@ -16,8 +18,8 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
 
     private void Awake()
     {
-        TryGetComponent(out _renderer);
-        TryGetComponent(out _current);
+        _renderer = GetComponent<SpriteRenderer>();
+        _current = GetComponent<Item>();
         enabled = false;
 
         Instantiate(_display, transform);

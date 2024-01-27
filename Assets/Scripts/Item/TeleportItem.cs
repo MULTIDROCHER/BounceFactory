@@ -18,13 +18,14 @@ public class TeleportItem : Item
     private ItemMovement _movement;
     private WaitForSeconds _wait;
     private Vector2 _defaultSize;
+    
     public bool CanTeleport => _movement.IsDragging == false;
 
     private void Awake()
     {
-        TryGetComponent(out _bonusHandler);
-        TryGetComponent(out _effectHandler);
-        TryGetComponent(out _movement);
+        _bonusHandler = GetComponent<BonusHandler>();
+        _effectHandler = GetComponent<EffectHandler>();
+        _movement = GetComponent<ItemMovement>();
 
         _wait = new(_delay);
     }
@@ -39,7 +40,9 @@ public class TeleportItem : Item
 
     public IEnumerator Destroy()
     {
-        GetComponent<SpriteRenderer>().color = new(1, 1, 1, 0);
+        Color noAlpha = new(1, 1, 1, 0);
+
+        Renderer.color = noAlpha;
 
         if (InPortal.Count != 0)
             foreach (var ball in InPortal)
@@ -72,7 +75,7 @@ public class TeleportItem : Item
         _effectHandler.DoEffect(transform.position);
         ball.transform.DOMove(transform.position, _duration, false);
         ball.transform.DOScale(Vector3.zero, _duration).OnComplete(() =>
-        ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static);
+        ball.Rigidbody.bodyType = RigidbodyType2D.Static);
     }
 
     private void Appear(Ball ball, TeleportItem portal)
@@ -81,7 +84,7 @@ public class TeleportItem : Item
         ball.transform.position = portal.transform.position;
         ball.transform.DOScale(_defaultSize, _duration).OnComplete(() =>
         {
-            ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            ball.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
             _bonusHandler.AddBonus(portal.transform.position, ball);
         });
     }

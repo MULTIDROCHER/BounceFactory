@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class BallContainer : MonoBehaviour
 {
-    [SerializeField] private BallSpawner _spawner;
-
-    private int _childCount;
     private List<Ball> _balls = new();
+    private int _childCount;
 
     private void Update()
     {

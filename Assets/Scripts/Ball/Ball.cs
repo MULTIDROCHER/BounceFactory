@@ -1,25 +1,27 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class Ball : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class Ball : IUpgradable
 {
-    private readonly int _increaseBonus = 2;
-    private readonly int _ballsCount = 3;
+    private Rigidbody2D _rigidbody;
 
-    private SpriteRenderer _sprite;
+    public Rigidbody2D Rigidbody => _rigidbody;
 
-    public int Level { get; private set; } = 1;
-    public int Bonus { get; private set; } = 1;
-
-    private void Start() => _sprite = GetComponent<SpriteRenderer>();
-
-    public void LevelUp(Color spriteColor)
+    protected override void Awake()
     {
-        Level++;
-        _sprite.color = spriteColor;
-        Bonus = Bonus * _ballsCount + _increaseBonus;
+        base.Awake();
 
-        gameObject.name = Level.ToString();
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        BonusIncrease = 2;
+        ObjectsAmount = 3;
     }
+
+    public override void LevelUp()
+    {
+        base.LevelUp();
+
+        _rigidbody.velocity = Vector2.zero;
+    }
+
+    public void ChangeColor(Color color) => Renderer.color = color;
 }

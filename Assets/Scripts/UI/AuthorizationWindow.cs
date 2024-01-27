@@ -1,7 +1,7 @@
 using UnityEngine;
 using YG;
 
-public class AuthWindow : MonoBehaviour
+public class AuthorizationWindow : MonoBehaviour
 {
     public void Register() => YandexGame.Instance._OpenAuthDialog();
 }

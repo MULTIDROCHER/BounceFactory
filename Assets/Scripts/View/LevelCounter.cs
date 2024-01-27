@@ -16,9 +16,11 @@ public class LevelCounter : MonoBehaviour
         if (YandexGame.savesData.Level != _current)
         {
             _current = YandexGame.savesData.Level;
-            UpdateDisplay();
+            UpdateDisplay(LevelToString());
         }
     }
 
-    private void UpdateDisplay() => _text.text = _baseText + _current.ToString();
+    private string LevelToString() => _baseText + _current.ToString();
+
+    private void UpdateDisplay(string level) => _text.text = level;
 }

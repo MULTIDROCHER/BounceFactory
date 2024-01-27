@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(PointHandler))]
+[RequireComponent(typeof(UpgradeHandler))]
 public class ItemMovement : MonoBehaviour, ITutorialEvent
 {
     private Camera _camera;
@@ -8,6 +10,7 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
     private UpgradeHandler _upgradeHandler;
     private Vector3 _mousePos;
     private SpawnPoint _newPoint;
+    private Vector3 _rotation = new(0, 0, 90);
 
     public event Action Performed;
 
@@ -17,7 +20,7 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
     private void Start()
     {
         _camera = Camera.main;
-        
+
         _pointHandler = GetComponent<PointHandler>();
         _upgradeHandler = GetComponent<UpgradeHandler>();
     }
@@ -53,9 +56,5 @@ public class ItemMovement : MonoBehaviour, ITutorialEvent
             Performed?.Invoke();
     }
 
-    private void Rotate()
-    {
-        Vector3 rotation = new(0, 0, 90);
-        transform.rotation *= Quaternion.Euler(rotation);
-    }
+    private void Rotate() => transform.rotation *= Quaternion.Euler(_rotation);
 }

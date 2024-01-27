@@ -24,13 +24,23 @@ public class SoundHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out TeleportItem portal) && portal.CanTeleport)
-            _source.PlayOneShot(_teleportSound);
-        else if (other.TryGetComponent(out BallGeneratorItem generator) && generator.IsActive)
-            _source.PlayOneShot(_generatorSound);
-        else if (other.TryGetComponent(out AccelerationItem _))
-            _source.PlayOneShot(_accelerationSound);
+        other.TryGetComponent(out Item item);
+
+        switch (item)
+        {
+            case TeleportItem teleport when teleport.CanTeleport:
+                PlaySound(_teleportSound);
+                break;
+            case BallGeneratorItem generator when generator.IsActive:
+                PlaySound(_generatorSound);
+                break;
+            case AccelerationItem:
+                PlaySound(_accelerationSound);
+                break;
+        }
     }
+
+    private void PlaySound(AudioClip clip) => _source.PlayOneShot(clip);
 
     private void OnVolumeChanged(float value) => _source.volume = value;
 }

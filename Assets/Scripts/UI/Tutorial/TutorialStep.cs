@@ -7,6 +7,7 @@ public class TutorialStep
 {
     protected TMP_Text Text = TutorialManager.Instance.Text;
     protected GameObject Mask = TutorialManager.Instance.Mask;
+    
     protected string Language => YandexGame.lang;
 
     public event Action Completed;

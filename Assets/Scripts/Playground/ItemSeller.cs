@@ -1,5 +1,8 @@
 public class ItemSeller : Seller
 {
+    private readonly int _startPrice = 25;
+    private readonly float _priceIncrease = 1.7f;
+
     private ItemSpawner _spawner;
 
     private void Awake() => _spawner = FindObjectOfType<ItemSpawner>();
@@ -10,7 +13,7 @@ public class ItemSeller : Seller
 
     protected override void SetPrices()
     {
-        Price = 25;
-        PriceChange = 1.7f;
+        Price = _startPrice;
+        PriceIncrease = _priceIncrease;
     }
 }

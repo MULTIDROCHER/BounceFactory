@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ItemMovement))]
+[RequireComponent(typeof(BonusHandler))]
 public class ItemClickHandler : MonoBehaviour
 {
     private ItemView _view;

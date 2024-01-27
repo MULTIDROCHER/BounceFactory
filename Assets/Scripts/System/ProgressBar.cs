@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,40 +18,27 @@ public class ProgressBar : MonoBehaviour
 
     public int CurrentScore { get; private set; }
 
-    private void OnEnable() => StartCoroutine(DelayedSubscription());
-
-    private void OnDisable() => ScoreCounter.Instance.ScoreAdded -= UpdateProgressBar;
-
     private void Start()
     {
         _slider = GetComponent<Slider>();
         _text = GetComponentInChildren<TMP_Text>();
 
+        ScoreCounter.Instance.ScoreAdded += UpdateProgressBar;
         CurrentScore = YandexGame.savesData.LevelScore;
         SetBar();
     }
+
+    private void OnDestroy() => ScoreCounter.Instance.ScoreAdded -= UpdateProgressBar;
 
     public void UpdateProgressBar(int amount)
     {
         CurrentScore += amount;
 
         _slider.DOValue(CurrentScore, _duration);
-        UpdateProgressText();
+        UpdateProgressText(ProgressToString());
 
         if (CurrentScore >= _goal)
             GoalRiched?.Invoke();
-    }
-
-    private void UpdateProgressText() =>
-    _text.text = NumsFormater.FormatedNumber(CurrentScore) + " / " + NumsFormater.FormatedNumber(_goal);
-
-    private IEnumerator DelayedSubscription()
-    {
-        while (ScoreCounter.Instance == null)
-            yield return null;
-
-        ScoreCounter.Instance.ScoreAdded += UpdateProgressBar;
-        StopAllCoroutines();
     }
 
     public void Reset()
@@ -67,4 +53,8 @@ public class ProgressBar : MonoBehaviour
         _slider.maxValue = _goal;
         UpdateProgressBar(0);
     }
+
+    private string ProgressToString() => NumsFormater.FormatedNumber(CurrentScore) + " / " + NumsFormater.FormatedNumber(_goal);
+
+    private void UpdateProgressText(string progress) => _text.text = progress;
 }

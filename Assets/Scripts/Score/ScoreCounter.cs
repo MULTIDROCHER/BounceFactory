@@ -7,8 +7,11 @@ using YG;
 public class ScoreCounter : MonoBehaviour
 {
     public static ScoreCounter Instance;
+
+    private readonly int _minimalBalance = 100;
+    
     private TMP_Text _scoreText;
-    private string _text;
+    private string _baseText;
 
     public event Action<int> ScoreAdded;
 
@@ -28,10 +31,10 @@ public class ScoreCounter : MonoBehaviour
         }
 
         _scoreText = GetComponent<TMP_Text>();
-        _text = _scoreText.text + "\n";
+        _baseText = _scoreText.text + "\n";
 
         Balance = SetBalance();
-        UpdateDisplay();
+        UpdateDisplay(ScoreToString());
     }
 
     public void AddScore(int amount)
@@ -39,7 +42,7 @@ public class ScoreCounter : MonoBehaviour
         Balance += amount;
         ScoreAdded?.Invoke(amount);
 
-        UpdateDisplay();
+        UpdateDisplay(ScoreToString());
     }
 
     public void Buy(int price)
@@ -48,7 +51,7 @@ public class ScoreCounter : MonoBehaviour
         {
             Balance -= price;
             Spent += price;
-            UpdateDisplay();
+            UpdateDisplay(ScoreToString());
         }
     }
 
@@ -58,12 +61,14 @@ public class ScoreCounter : MonoBehaviour
         Spent = 0;
     }
 
-    private void UpdateDisplay() => _scoreText.text = _text + NumsFormater.FormatedNumber(Balance);
+    private string ScoreToString() => _baseText + NumsFormater.FormatedNumber(Balance);
+
+    private void UpdateDisplay(string score) => _scoreText.text = score;
 
     private int SetBalance()
     {
         if (YandexGame.savesData.Balance == 0)
-            return 100;
+            return _minimalBalance;
         else
             return YandexGame.savesData.Balance;
     }

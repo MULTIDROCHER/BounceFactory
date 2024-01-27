@@ -4,12 +4,14 @@ using UnityEngine;
 public class ColorSetter : MonoBehaviour
 {
     private readonly Dictionary<int, Color> _colorsByLevel = new();
+    private readonly int _startLevel = 1;
+    private readonly int _levelIncrease = 1;
 
-    private void Start() => _colorsByLevel.Add(1, Color.white);
+    private void Start() => _colorsByLevel.Add(_startLevel, Color.white);
 
     public Color SetColor(Ball ball)
     {
-        int level = ball.Level + 1;
+        int level = ball.Level + _levelIncrease;
 
         if (_colorsByLevel.TryGetValue(level, out Color color))
         {
@@ -17,17 +19,21 @@ public class ColorSetter : MonoBehaviour
         }
         else
         {
-            var newColor = RandomColor();
+            var newColor = GetRandomColor();
             _colorsByLevel.Add(level, newColor);
             return newColor;
         }
     }
 
-    private Color RandomColor()
+    private Color GetRandomColor()
     {
-        float r = Random.Range(0f, 1f);
-        float g = Random.Range(0f, 1f);
-        float b = Random.Range(0f, 1f);
+        float minRange = 0;
+        float maxRange = 1;
+
+        float r = Random.Range(minRange, maxRange);
+        float g = Random.Range(minRange, maxRange);
+        float b = Random.Range(minRange, maxRange);
+
         return new Color(r, g, b);
     }
 }

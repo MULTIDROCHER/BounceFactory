@@ -24,9 +24,7 @@ public class AccelerationItem : Item
     private IEnumerator SetAcceleration(Ball ball)
     {
         _previousBall = ball;
-        ball.TryGetComponent(out Rigidbody2D rigidBody);
-
-        rigidBody.velocity = transform.up.normalized * _acceleration;
+        ball.Rigidbody.velocity = transform.up.normalized * _acceleration;
 
         if (ball.GetComponentInChildren<ParticleSystem>() == null)
             _effectHandler.DoEffect(ball);
