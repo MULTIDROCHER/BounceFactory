@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Ball : IUpgradable
+public class Ball : UpgradableObject
 {
     private Rigidbody2D _rigidbody;
 

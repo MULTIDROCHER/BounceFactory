@@ -9,6 +9,8 @@ public class FlipperController : MonoBehaviour, ITutorialEvent
     [SerializeField] private Flipper _flipper;
     [SerializeField] private KeyCode _key;
 
+    public KeyCode KeyCode => _key;
+
     public event Action Performed;
 
     private void Awake()

@@ -19,8 +19,9 @@ public class BallGeneratorItem : Item, IAnimated
     
     public bool IsActive { get; private set; } = true;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _animator = GetComponent<Animator>();
         _effectHandler = GetComponent<EffectHandler>();
     }

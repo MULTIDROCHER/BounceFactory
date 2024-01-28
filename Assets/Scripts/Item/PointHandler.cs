@@ -4,7 +4,7 @@ public class PointHandler : MonoBehaviour
 {
     public SpawnPoint PreviousPoint { get; private set; }
 
-    private void Start() => GetPoint();
+    private void Start() => TrySetPoint();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,7 +12,7 @@ public class PointHandler : MonoBehaviour
             PreviousPoint = point;
     }
 
-    private void GetPoint()
+    private void TrySetPoint()
     {
         float radius = .5f;
 

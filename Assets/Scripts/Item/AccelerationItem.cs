@@ -10,7 +10,11 @@ public class AccelerationItem : Item
     private Ball _previousBall;
     private EffectHandler _effectHandler;
 
-    private void Start() => _effectHandler = GetComponent<EffectHandler>();
+    protected override void Awake()
+    {
+        base.Awake();
+        _effectHandler = GetComponent<EffectHandler>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

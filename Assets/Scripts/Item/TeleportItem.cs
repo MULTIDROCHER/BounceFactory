@@ -21,11 +21,11 @@ public class TeleportItem : Item
     
     public bool CanTeleport => _movement.IsDragging == false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _bonusHandler = GetComponent<BonusHandler>();
         _effectHandler = GetComponent<EffectHandler>();
-        _movement = GetComponent<ItemMovement>();
 
         _wait = new(_delay);
     }

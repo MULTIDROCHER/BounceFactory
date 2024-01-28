@@ -6,11 +6,13 @@ using DG.Tweening;
 public class MergeButton : MonoBehaviour
 {
     private readonly float _duration = .5f;
-    
+
     private Vector3 _defaultScale;
     private Vector3 _scale = new(.3f, .3f, 0);
     private Button _button;
     private Tween _animation;
+
+    public Button Button => _button;
 
     private void Start()
     {
