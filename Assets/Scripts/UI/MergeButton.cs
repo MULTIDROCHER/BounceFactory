@@ -14,7 +14,7 @@ public class MergeButton : MonoBehaviour
 
     public Button Button => _button;
 
-    private void Start()
+    private void Awake()
     {
         _button = GetComponent<Button>();
         _defaultScale = transform.localScale;

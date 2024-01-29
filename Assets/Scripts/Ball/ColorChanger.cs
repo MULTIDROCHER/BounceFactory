@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChanger<T> : MonoBehaviour where T : UpgradableObject
+public class ColorChanger : MonoBehaviour
 {
     private readonly Dictionary<int, Color> _colorsByLevel = new();
     private readonly int _startLevel = 1;
@@ -21,12 +21,12 @@ public class ColorChanger<T> : MonoBehaviour where T : UpgradableObject
 
     private Color AddNewColor(int level)
     {
-        var newColor = GetRandomColor();
+        var newColor = GenerateRandomColor();
         _colorsByLevel.Add(level, newColor);
         return newColor;
     }
 
-    private Color GetRandomColor()
+    private Color GenerateRandomColor()
     {
         float minRange = 0;
         float maxRange = 1;

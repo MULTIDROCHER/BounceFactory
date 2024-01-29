@@ -22,7 +22,7 @@ public class Flipper : MonoBehaviour
 
     public void Open()
     {
-        SoundManager.Instance.SFXSource.PlayOneShot(_sound);
+        AudioManager.Instance.SFXSource.PlayOneShot(_sound);
         _isOpened = true;
 
         transform.DORotate(_rotation, _delay).OnComplete(() =>

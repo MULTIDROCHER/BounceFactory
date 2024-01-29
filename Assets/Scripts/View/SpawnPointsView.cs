@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointView : MonoBehaviour
+public class SpawnPointsView : MonoBehaviour
 {
     private readonly List<SpawnPoint> _points = new();
     private readonly List<Item> _items = new();
@@ -10,8 +10,7 @@ public class PointView : MonoBehaviour
 
     private void Awake()
     {
-        _spawner = FindObjectOfType<ItemSpawner>();
-        GetPoints();
+        _spawner = FindFirstObjectByType<ItemSpawner>();
     }
 
     private void OnEnable() => _spawner.ItemSpawned += OnItemSpawned;
@@ -30,7 +29,7 @@ public class PointView : MonoBehaviour
             point.HidePoint();
     }
 
-    public void GetPoints(SpawnPoint[] points = null)
+    public void GetActivePoints(SpawnPoint[] points = null)
     {
         _points.Clear();
 

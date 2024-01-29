@@ -13,12 +13,12 @@ public class SoundHandler : MonoBehaviour
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
-        _source.volume = SoundManager.Instance.SFXSource.volume;
+        _source.volume = AudioManager.Instance.SFXSource.volume;
     }
 
-    private void OnEnable() => SoundManager.Instance.VolumeChanged += OnVolumeChanged;
+    private void OnEnable() => AudioManager.Instance.VolumeChanged += OnVolumeChanged;
 
-    private void OnDisable() => SoundManager.Instance.VolumeChanged -= OnVolumeChanged;
+    private void OnDisable() => AudioManager.Instance.VolumeChanged -= OnVolumeChanged;
 
     private void OnCollisionEnter2D(Collision2D other) => _source.PlayOneShot(_bounceSound);
 

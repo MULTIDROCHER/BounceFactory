@@ -11,7 +11,7 @@ public class BounceHandler : MonoBehaviour
 
     private void Start()
     {
-        _container = FindObjectOfType<EffectContainer>();
+        _container = FindFirstObjectByType<EffectContainer>();
         _rigidbody = GetComponent<Rigidbody2D>();
 
         EnableMaterial();

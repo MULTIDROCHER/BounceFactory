@@ -1,37 +1,38 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EffectHandler))]
+[RequireComponent(typeof(EffectApplier))]
 public class AccelerationItem : Item
 {
-    private readonly int _acceleration = 10;
+    private readonly int _accelerationAmount = 10;
     private readonly float _delay = .5f;
 
     private Ball _previousBall;
-    private EffectHandler _effectHandler;
+    private EffectApplier _effectApplier;
 
     protected override void Awake()
     {
         base.Awake();
-        _effectHandler = GetComponent<EffectHandler>();
+        _effectApplier = GetComponent<EffectApplier>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Ball ball))
             if (_previousBall != ball)
-                StartCoroutine(SetAcceleration(ball));
+                StartCoroutine(SetAcceleration(ball, ball.Rigidbody));
             else
                 return;
     }
 
-    private IEnumerator SetAcceleration(Ball ball)
+    private IEnumerator SetAcceleration(Ball ball, Rigidbody2D rigidbody)
     {
         _previousBall = ball;
-        ball.Rigidbody.velocity = transform.up.normalized * _acceleration;
+
+        rigidbody.velocity = transform.up.normalized * _accelerationAmount;
 
         if (ball.GetComponentInChildren<ParticleSystem>() == null)
-            _effectHandler.DoEffect(ball);
+            _effectApplier.DoEffect(ball);
 
         yield return new WaitForSeconds(_delay);
 

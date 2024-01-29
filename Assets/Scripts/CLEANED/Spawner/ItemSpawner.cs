@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-using BounceFactory;
 
 public class ItemSpawner : Spawner<Item>
 {
@@ -32,8 +30,8 @@ public class ItemSpawner : Spawner<Item>
 
             if (itemToSpawn != null)
             {
-                var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, Container.transform);
-                ScoreCounter.Instance.Buy(_seller.Price);
+                var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, Holder.transform);
+                ScoreCounter.Instance.Buy(PriceChanger.Price);
                 ItemSpawned?.Invoke(spawned);
                 Bought?.Invoke();
             }
@@ -59,7 +57,7 @@ public class ItemSpawner : Spawner<Item>
         {
             int n when n <= _accelerationChance => GetItemByComponent<AccelerationItem>(),
             int n when n <= GetTeleportChance() => GetItemByComponent<TeleportItem>(),
-            int n when n <= _ballgeneratorChance && Container.transform.childCount >= _itemsOnSceneForGeneratorSpawn 
+            int n when n <= _ballgeneratorChance && Holder.transform.childCount >= _itemsOnSceneForGeneratorSpawn 
                 => GetItemByComponent<BallGeneratorItem>(),
             _ => GetItemByComponent<CommonItem>(),
         };
@@ -80,7 +78,7 @@ public class ItemSpawner : Spawner<Item>
         int possibleAmount = 2;
         TeleportItem[] portals = FindObjectsOfType<TeleportItem>();
 
-        if (portals.Length < possibleAmount && Container.transform.childCount >= possibleAmount)
+        if (portals.Length < possibleAmount && Holder.transform.childCount >= possibleAmount)
             return _teleportChance;
         else
             return 0;

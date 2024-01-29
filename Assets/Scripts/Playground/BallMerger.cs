@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BounceFactory;
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(ColorChanger<Ball>))]
-[RequireComponent(typeof(EffectHandler))]
+[RequireComponent(typeof(ColorChanger))]
+[RequireComponent(typeof(EffectApplier))]
 public class BallMerger : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private BallSpawner _spawner;
@@ -14,10 +15,10 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
 
     private readonly int _requiredAmount = 3;
 
-    private BallContainer _container;
-    private ColorChanger<Ball> _colorChanger;
-    private EffectHandler _effectHandler;
-    private int _ballCount;
+    private Holder<Ball> _holder;
+    private ColorChanger _colorChanger;
+    private EffectApplier _effectApplier;
+    private float _duration = 2;
 
     public event Action Performed;
 
@@ -25,41 +26,37 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
 
     private void Start()
     {
-        GetContainer();
-        _ballCount = _container.transform.childCount;
-        _colorChanger = GetComponent<ColorChanger<Ball>>();
-        _effectHandler = GetComponent<EffectHandler>();
+        _colorChanger = GetComponent<ColorChanger>();
+        _effectApplier = GetComponent<EffectApplier>();
     }
 
+    private void OnDisable() => _holder.ChildAdded -= OnBallSpawned;
 
-    private void FixedUpdate()
+    public void SetContainer(Holder<Ball> holder = null)
     {
-        if (_container.transform.childCount != _ballCount)
-        {
-            _ballCount = _container.transform.childCount;
-
-            if (_ballCount >= _requiredAmount)
-                TryFindMatches();
-            else
-                ButtonOff();
-        }
-    }
-
-    public void GetContainer(BallContainer container = null)
-    {
-        if (container == null)
-            _container = FindObjectOfType<BallContainer>();
+        if (holder == null)
+            _holder = FindFirstObjectByType<Holder<Ball>>();
         else
-            _container = container;
+            _holder = holder;
+
+        _holder.ChildAdded += OnBallSpawned;
+    }
+
+    private void OnBallSpawned()
+    {
+        if (_holder.Contents.Count >= _requiredAmount)
+            TryFindMatches();
     }
 
     private void TryFindMatches()
     {
-        List<Ball> balls = _container.GetComponentsInChildren<Ball>().ToList();
+        List<Ball> balls = _holder.Contents.ToList();
+        int maxLevel = balls.Max(ball => ball.Level);
 
-        for (int level = balls.Max(ball => ball.Level); level > 0; level--)
+        for (int level = maxLevel; level > 0; level--)
         {
             List<Ball> matchingBalls = balls.FindAll(ball => ball.Level == level);
+            Debug.Log($"Found {matchingBalls.Count} balls with level {level}");
 
             if (matchingBalls.Count >= _requiredAmount)
             {
@@ -83,15 +80,13 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
 
     private IEnumerator PrepareToMerge(List<Ball> balls)
     {
-        int delay = 2;
-
         foreach (var ball in balls)
         {
-            ball.GetComponent<Collider2D>().enabled = false;
-            ball.transform.DOMove(_spawner.transform.position, delay);
+            ball.Collider.enabled = false;
+            ball.transform.DOMove(_spawner.transform.position, _duration);
         }
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(_duration);
 
         var toUpgrade = balls[0];
         balls.Remove(toUpgrade);
@@ -106,10 +101,10 @@ public class BallMerger : MonoBehaviour, ITutorialEvent
     {
         StopAllCoroutines();
 
-        _effectHandler.DoEffect(_spawner.transform.position);
+        _effectApplier.DoEffect(_spawner.transform.position);
         ball.ChangeColor(_colorChanger.ChangeColor(ball));
         ball.LevelUp();
-        ball.GetComponent<Collider2D>().enabled = true;
+        ball.Collider.enabled = true;
     }
 
     private void ButtonOn(List<Ball> balls)

@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _sfxSource;
 
-    public static SoundManager Instance;
+    public static AudioManager Instance;
 
     public event Action<float> VolumeChanged;
 

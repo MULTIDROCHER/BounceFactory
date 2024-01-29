@@ -4,49 +4,49 @@ using YG;
 public class Level : MonoBehaviour
 {
     [SerializeField] private SpawnPoint[] _spawnPoints;
-    [SerializeField] private BallContainer _ballContainer;
-    [SerializeField] private ItemContainer _itemContainer;
+    [SerializeField] private BallHolder _ballHolder;
+    [SerializeField] private ItemHolder _itemHolder;
 
     private readonly int _minmalBalance = 100;
 
     private ItemSpawner _itemSpawner;
     private BallSpawner _ballSpawner;
-    private ItemSeller _itemSeller;
-    private BallSeller _ballSeller;
+    private ItemPriceChanger _itemSeller;
+    private BallPriceChanger _ballSeller;
     private BallMerger _merger;
-    private PointView _pointView;
+    private SpawnPointsView _pointView;
 
     private void Awake()
     {
-        _ballSpawner = FindObjectOfType<BallSpawner>();
-        _itemSpawner = FindObjectOfType<ItemSpawner>();
-        _ballSeller = FindObjectOfType<BallSeller>();
-        _merger = FindObjectOfType<BallMerger>();
-        _itemSeller = FindObjectOfType<ItemSeller>();
-        _pointView = FindObjectOfType<PointView>();
+        _ballSpawner = FindFirstObjectByType<BallSpawner>();
+        _itemSpawner = FindFirstObjectByType<ItemSpawner>();
+        _ballSeller = FindFirstObjectByType<BallPriceChanger>();
+        _merger = FindFirstObjectByType<BallMerger>();
+        _itemSeller = FindFirstObjectByType<ItemPriceChanger>();
+        _pointView = FindFirstObjectByType<SpawnPointsView>();
 
         if (YandexGame.savesData.Balance < _minmalBalance)
             YandexGame.savesData.Balance = _minmalBalance;
 
-        for (int i = 0; i < _itemContainer.transform.childCount; i++)
-            Destroy(_itemContainer.transform.GetChild(i).gameObject);
+        for (int i = 0; i < _itemHolder.transform.childCount; i++)
+            Destroy(_itemHolder.transform.GetChild(i).gameObject);
     }
 
     private void OnEnable()
     {
-        _ballSpawner.GetContainer(_ballContainer);
+        _ballSpawner.SetHolder(_ballHolder);
         _itemSpawner.GetPoints(_spawnPoints);
-        _merger.GetContainer(_ballContainer);
-        _pointView.GetPoints(_spawnPoints);
+        _pointView.GetActivePoints(_spawnPoints);
+        _merger.SetContainer(_ballHolder);
 
         foreach (var deadZone in FindObjectsOfType<DeadZone>())
-            deadZone.GetContainer(_ballContainer);
+            deadZone.SetContainer(_ballHolder);
     }
 
     private void OnDisable()
     {
         _ballSeller.Reset();
         _itemSeller.Reset();
-        _itemContainer.Reset();
+        _itemHolder.Reset();
     }
 }

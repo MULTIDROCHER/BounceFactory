@@ -22,7 +22,7 @@ public class SoundButton : MonoBehaviour
             Unmute();
     }
 
-    private void OnEnable() => _button.onClick.AddListener(() => SoundManager.Instance.SwitchSource(Source, this));
+    private void OnEnable() => _button.onClick.AddListener(() => AudioManager.Instance.SwitchSource(Source, this));
 
     private void OnDisable() => _button.onClick.RemoveAllListeners();
 

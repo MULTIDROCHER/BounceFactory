@@ -5,13 +5,13 @@ using YG;
 public abstract class FlipperStep : TutorialStep
 {
     protected KeyCode KeyCode;
-    protected FlipperController Controller;
+    protected FlipperActivator Controller;
 
     public FlipperStep(KeyCode controllerKey) => KeyCode = controllerKey;
 
     public override void Enter()
     {
-        Controller = Object.FindObjectsOfType<FlipperController>().Where(controller => controller.KeyCode == KeyCode).FirstOrDefault();
+        Controller = Object.FindObjectsOfType<FlipperActivator>().Where(controller => controller.KeyCode == KeyCode).FirstOrDefault();
 
         Controller.Performed += OnPerformed;
 

@@ -5,27 +5,25 @@ using UnityEngine;
 using System.Linq;
 
 [RequireComponent(typeof(BonusHandler))]
-[RequireComponent(typeof(EffectHandler))]
+[RequireComponent(typeof(EffectApplier))]
 public class TeleportItem : Item
 {
-    public static List<Ball> InPortal { get; private set; } = new();
-
     private readonly float _delay = 2;
     private readonly float _duration = .5f;
 
+    private List<Ball> _inPortal = new();
     private BonusHandler _bonusHandler;
-    private EffectHandler _effectHandler;
-    private ItemMovement _movement;
+    private EffectApplier _effectHandler;
     private WaitForSeconds _wait;
     private Vector2 _defaultSize;
-    
-    public bool CanTeleport => _movement.IsDragging == false;
+
+    public bool CanTeleport => Movement.IsDragging == false;
 
     protected override void Awake()
     {
         base.Awake();
         _bonusHandler = GetComponent<BonusHandler>();
-        _effectHandler = GetComponent<EffectHandler>();
+        _effectHandler = GetComponent<EffectApplier>();
 
         _wait = new(_delay);
     }
@@ -34,7 +32,7 @@ public class TeleportItem : Item
     {
         if (other.TryGetComponent(out Ball ball)
         && CanTeleport
-        && InPortal.Contains(ball) == false)
+        && _inPortal.Contains(ball) == false)
             TryToTeleport(ball);
     }
 
@@ -44,8 +42,8 @@ public class TeleportItem : Item
 
         Renderer.color = noAlpha;
 
-        if (InPortal.Count != 0)
-            foreach (var ball in InPortal)
+        if (_inPortal.Count != 0)
+            foreach (var ball in _inPortal)
                 Appear(ball, this);
 
         yield return _wait;
@@ -55,19 +53,15 @@ public class TeleportItem : Item
 
     private void TryToTeleport(Ball ball)
     {
-        InPortal.Add(ball);
+        _inPortal.Add(ball);
         _defaultSize = ball.transform.localScale;
-        List<TeleportItem> portals = FindObjectsOfType<TeleportItem>().ToList();
 
-        if (portals.Count > 1)
-        {
-            var portal = portals.Find(portal => portal != this);
+        var portal = FindObjectsOfType<TeleportItem>().FirstOrDefault(portal => portal != this);
+
+        if (portal != null)
             StartCoroutine(Teleportation(ball, portal));
-        }
         else
-        {
             StartCoroutine(Teleportation(ball, this));
-        }
     }
 
     private void Disappear(Ball ball)
@@ -107,7 +101,7 @@ public class TeleportItem : Item
     {
         yield return _wait;
 
-        InPortal.Remove(ball);
+        _inPortal.Remove(ball);
         StopCoroutine(ReactivateBall(ball));
     }
 }

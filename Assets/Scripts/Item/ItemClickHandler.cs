@@ -4,47 +4,56 @@ using UnityEngine;
 [RequireComponent(typeof(BonusHandler))]
 public class ItemClickHandler : MonoBehaviour
 {
-    private ItemView _view;
-    private PointView _pointView;
+    private ItemLevelView _levelView;
+    private SpawnPointsView _pointView;
     private BonusHandler _bonusHandler;
     private ItemMovement _itemMovement;
 
+    public Item Item {get;private set;}
+
     private void Awake()
     {
-        _view = FindObjectOfType<ItemView>();
-        _pointView = FindObjectOfType<PointView>();
+        _levelView = FindFirstObjectByType<ItemLevelView>();
+        _pointView = FindFirstObjectByType<SpawnPointsView>();
 
         _bonusHandler = GetComponent<BonusHandler>();
         _itemMovement = GetComponent<ItemMovement>();
+        Item = GetComponent<Item>();
     }
 
     private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0))
             OnClick();
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
             OnDrop();
     }
 
     public void OnClick()
     {
-        _view.ShowLevel();
-        _pointView.ShowPoints();
         _itemMovement.OnStartMovement();
-        SetBonusHandler(false);
+        _pointView.ShowPoints();
+        _levelView.ShowLevel();
+        DisableBonusHandler();
     }
 
     public void OnDrop()
     {
-        _view.HideLevel();
+        _levelView.HideLevel();
         _pointView.HidePoints();
         _itemMovement.OnEndMovement();
-        SetBonusHandler(true);
+        EnableBonusHandler();
     }
 
-    private void SetBonusHandler(bool enabled)
+    private void EnableBonusHandler()
     {
         if (_bonusHandler != null)
-            _bonusHandler.enabled = enabled;
+            _bonusHandler.enabled = true;
+    }
+
+    private void DisableBonusHandler()
+    {
+        if (_bonusHandler != null)
+            _bonusHandler.enabled = false;
     }
 }

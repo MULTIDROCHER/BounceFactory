@@ -8,22 +8,22 @@ public class BallSpawner : Spawner<Ball>
 
     public override void Spawn()
     {
-        if (Container == null)
-            GetContainer();
+        if (Holder == null)
+            SetHolder();
 
-        Instantiate(GetTemplateToSpawn(), Container.transform.position, Quaternion.identity, Container.transform);
-        ScoreCounter.Instance.Buy(_seller.Price);
+        Instantiate(GetTemplateToSpawn(), Holder.transform.position, Quaternion.identity, Holder.transform);
+        ScoreCounter.Instance.Buy(PriceChanger.Price);
         Bought?.Invoke();
     }
 
-    public void GetContainer(BallContainer container = null)
+    public void SetHolder(BallHolder holder = null)
     {
-        if (container == null)
-            Container = FindObjectOfType<BallContainer>();
+        if (holder == null)
+            Holder = FindFirstObjectByType<BallHolder>();
         else
-            Container = container;
+            Holder = holder;
 
-        if (Container.transform.childCount == 0)
-            Instantiate(GetTemplateToSpawn(), Container.transform.position, Quaternion.identity, Container.transform);
+        if (Holder.transform.childCount == 0)
+            Instantiate(GetTemplateToSpawn(), Holder.transform.position, Quaternion.identity, Holder.transform);
     }
 }

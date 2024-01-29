@@ -15,15 +15,18 @@ public class UpgradeHandler : MonoBehaviour, ITutorialEvent
     private Item _itemToMerge;
 
     public event Action Performed;
+    
+    public LevelDisplay LevelDisplay => _display;
 
     private void Awake()
     {
         _renderer = GetComponent<SpriteRenderer>();
         _current = GetComponent<Item>();
-        enabled = false;
 
         Instantiate(_display, transform);
         _defaultMaterial = _renderer.material;
+        
+        enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other) => HandleCollision(other.gameObject);

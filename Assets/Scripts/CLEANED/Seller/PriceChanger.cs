@@ -1,8 +1,7 @@
 using System;
-using BounceFactory;
 using UnityEngine;
 
-public abstract class Seller<T> : MonoBehaviour where T : UpgradableObject
+public abstract class PriceChanger<T> : MonoBehaviour where T : UpgradableObject
 {
     [SerializeField] protected Spawner<T> _spawner;
 

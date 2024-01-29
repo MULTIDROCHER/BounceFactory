@@ -15,7 +15,7 @@ public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void Start()
     {
-        _source = SoundManager.Instance.SFXSource;
+        _source = AudioManager.Instance.SFXSource;
         _button = GetComponent<Button>();
         _defaultScale = transform.localScale;
 

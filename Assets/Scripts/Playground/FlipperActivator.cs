@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using YG;
 
 [RequireComponent(typeof(Image))]
-public class FlipperController : MonoBehaviour, ITutorialEvent
+public class FlipperActivator : MonoBehaviour, ITutorialEvent
 {
     [SerializeField] private Flipper _flipper;
     [SerializeField] private KeyCode _key;

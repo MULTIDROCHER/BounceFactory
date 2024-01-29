@@ -1,6 +1,6 @@
 using System;
 
-public class ItemSeller : Seller<Item>, ITutorialEvent
+public class ItemPriceChanger : PriceChanger<Item>, ITutorialEvent
 {
     private readonly int _startPrice = 25;
     private readonly float _priceIncrease = 1.7f;

@@ -14,7 +14,7 @@ public class ProgressBar : MonoBehaviour
     private Slider _slider;
     private int _goal;
 
-    public event Action GoalRiched;
+    public event Action GoalReached;
 
     public int CurrentScore { get; private set; }
 
@@ -38,7 +38,7 @@ public class ProgressBar : MonoBehaviour
         UpdateProgressText(ProgressToString());
 
         if (CurrentScore >= _goal)
-            GoalRiched?.Invoke();
+            GoalReached?.Invoke();
     }
 
     public void Reset()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EffectHandler : MonoBehaviour
+public class EffectApplier : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _effect;
 

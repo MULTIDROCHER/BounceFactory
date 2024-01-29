@@ -1,22 +1,21 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    private BallContainer _container;
+    private BallHolder _holder;
 
     public event Action BallDestroyed;
     public event Action BallsOver;
 
-    private void Awake() => GetContainer();
+    private void Awake() => SetContainer();
 
-    public void GetContainer(BallContainer container = null)
+    public void SetContainer(BallHolder holder = null)
     {
-        if (container == null)
-            _container = FindObjectOfType<BallContainer>();
+        if (holder == null)
+            _holder = FindObjectOfType<BallHolder>();
         else
-            _container = container;
+            _holder = holder;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -28,15 +27,10 @@ public class DeadZone : MonoBehaviour
 
             Destroy(ball.gameObject);
 
-            if (_container.transform.childCount <= 1)
+            if (_holder.transform.childCount <= 1)
                 BallsOver?.Invoke();
         }
     }
 
-    private bool IsNotClone(Ball ball)
-    {
-        Ball[] balls = _container.GetComponentsInChildren<Ball>();
-
-        return balls.Contains(ball);
-    }
+    private bool IsNotClone(Ball ball) => _holder.Contents.Contains(ball);
 }

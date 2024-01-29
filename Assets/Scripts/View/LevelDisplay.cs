@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelDisplay : MonoBehaviour
 {
-    private TMP_Text _levelText;
+    [SerializeField] private TMP_Text _levelText;
     private Item _item;
     private bool _isDisplayed;
     private Vector3 _offset = new(0, -.5f, 0);
@@ -13,9 +13,9 @@ public class LevelDisplay : MonoBehaviour
     private void Awake()
     {
         _item = GetComponentInParent<Item>();
-        _levelText = GetComponentInChildren<TMP_Text>();
 
-        HideLevel();
+        ShowLevel();
+        //HideLevel();
     }
 
     private void LateUpdate()
@@ -36,6 +36,7 @@ public class LevelDisplay : MonoBehaviour
     {
         if (_levelText != null)
         {
+            Debug.Log("show");
             _levelText.gameObject.SetActive(true);
             _isDisplayed = true;
         }
@@ -45,6 +46,7 @@ public class LevelDisplay : MonoBehaviour
     {
         if (_levelText != null)
         {
+            Debug.Log("hide");
             _levelText.gameObject.SetActive(false);
             _isDisplayed = false;
         }

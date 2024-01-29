@@ -1,3 +1,5 @@
+using System;
+using BounceFactory;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
@@ -5,6 +7,8 @@ using YG;
 public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField] private MessageWindow _messageWindow;
+    
+    private LoadingScreen _loadingScreen => GameManager.Instance.LoadingScreen;
 
     public void Exit()
     {
@@ -15,11 +19,11 @@ public class SceneSwitcher : MonoBehaviour
         else
         {
             GameManager.Instance.LevelExit();
-            SceneManager.LoadScene(0);
+            _loadingScreen.LoadScene(0);
         }
     }
 
-    public void StartGame() => LoadingScreen.Instance.LoadScene(1);
+    public void StartGame() => _loadingScreen.LoadScene(1);
 
     public void RestartGame()
     {
@@ -30,20 +34,8 @@ public class SceneSwitcher : MonoBehaviour
         }
         else
         {
-            var level = YandexGame.savesData.Level > YandexGame.savesData.PreviousLevel ? 
-            YandexGame.savesData.Level : YandexGame.savesData.PreviousLevel;
-
-            YandexGame.Instance._ResetSaveProgress();
-            YandexGame.savesData.PreviousLevel = level;
-            YandexGame.Instance._SaveProgress();
-
+            SavesController.ResetSavedProgress();
             StartGame();
         }
-    }
-
-    public void NextLevel()
-    {
-        YandexGame.FullscreenShow();
-        LevelManager.Instance.ChangeLevel();
     }
 }

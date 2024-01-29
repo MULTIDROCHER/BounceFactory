@@ -2,27 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    
-    public static LoadingScreen Instance;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        gameObject.SetActive(false);
-    }
+    private void Awake() => gameObject.SetActive(false);
 
     public void LoadScene(int sceneId)
     {
@@ -42,6 +28,9 @@ public class LoadingScreen : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        ShowAddBetweenScenes();
         StopAllCoroutines();
     }
+
+    private void ShowAddBetweenScenes() => YandexGame.FullscreenShow();
 }

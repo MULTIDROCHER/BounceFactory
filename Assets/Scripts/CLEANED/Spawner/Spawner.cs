@@ -6,13 +6,13 @@ using UnityEngine;
 public abstract class Spawner<T> : MonoBehaviour where T : UpgradableObject
     {
         [SerializeField] protected List<T> Templates = new();
-        [SerializeField] protected Seller<T> _seller;
+        [SerializeField] protected PriceChanger<T> PriceChanger;
 
         public abstract event Action Bought;
 
-        protected Container<T> Container;
+        protected Holder<T> Holder;
 
-        protected virtual void Start() => Container = FindObjectOfType<Container<T>>();
+        protected virtual void Start() => Holder = FindObjectOfType<Holder<T>>();
 
         public virtual void Spawn() { }
 

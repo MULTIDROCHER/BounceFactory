@@ -2,7 +2,7 @@ public class MusicButton : SoundButton
 {
     override protected void Start()
     {
-        Source = SoundManager.Instance.MusicSource;
+        Source = AudioManager.Instance.MusicSource;
         base.Start();
     }
 }

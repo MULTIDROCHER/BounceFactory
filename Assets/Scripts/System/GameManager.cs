@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using YG;
 
@@ -5,12 +6,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    private readonly int _lowestLevelToReview = 2;
+
+    [SerializeField] LoadingScreen _loadingScreen;
+    [SerializeField] ProgressBar _progressBar;
+
+    public event Action OnLevelExit;
+
+    public LoadingScreen LoadingScreen => _loadingScreen;
+    public ProgressBar ProgressBar => _progressBar;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            if (_progressBar != null)
+                DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -18,22 +31,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TutorialPassed() => YandexGame.savesData.IsTrained = true;
-
     public void LevelExit()
+    {
+        ScoreCounter.Instance.ReturnSpent();
+        TryToRewriteLeaderboardScore();
+        TryShowReview();
+
+        OnLevelExit?.Invoke();
+    }
+
+    private void TryToRewriteLeaderboardScore()
     {
         if (YandexGame.savesData.PreviousLevel < YandexGame.savesData.Level)
         {
             YandexGame.savesData.PreviousLevel = YandexGame.savesData.Level;
             YandexGame.NewLeaderboardScores("LBLevel", YandexGame.savesData.PreviousLevel);
         }
+    }
 
-        ScoreCounter.Instance.ReturnSpent();
-
-        if (YandexGame.savesData.Level >= 2 && YandexGame.EnvironmentData.reviewCanShow)
+    private void TryShowReview()
+    {
+        if (YandexGame.savesData.Level >= _lowestLevelToReview
+            && YandexGame.EnvironmentData.reviewCanShow)
             YandexGame.ReviewShow(true);
-
-        LevelManager.Instance.OnLevelExit();
-        YandexGame.Instance._SaveProgress();
     }
 }

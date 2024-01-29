@@ -2,7 +2,7 @@ public class SFXButton : SoundButton
 {
     override protected void Start()
     {
-        Source = SoundManager.Instance.SFXSource;
+        Source = AudioManager.Instance.SFXSource;
         base.Start();
     }
 }
