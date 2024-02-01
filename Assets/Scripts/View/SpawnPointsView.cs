@@ -1,43 +1,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPointsView : MonoBehaviour
+namespace BounceFactory
 {
-    private readonly List<SpawnPoint> _points = new();
-    private readonly List<Item> _items = new();
-
-    private ItemSpawner _spawner;
-
-    private void Awake()
+    public class SpawnPointsView : MonoBehaviour
     {
-        _spawner = FindFirstObjectByType<ItemSpawner>();
+        private List<SpawnPoint> _points = new();
+        private List<Item> _items = new();
+
+        private ItemSpawner _spawner;
+
+        private void Start()
+        {
+            _spawner = ActiveComponentsProvider.ItemSpawner as ItemSpawner;
+
+            if (_spawner != null)
+                _spawner.ItemSpawned += OnItemSpawned;
+
+            ActiveComponentsProvider.LevelChanged += OnLevelChanged;
+        }
+
+        private void OnDestroy()
+        {
+            if (_spawner != null)
+                _spawner.ItemSpawned -= OnItemSpawned;
+
+            ActiveComponentsProvider.LevelChanged += OnLevelChanged;
+        }
+
+        public void ShowPoints()
+        {
+            foreach (var point in _points)
+                point.ShowPoint();
+        }
+
+        public void HidePoints()
+        {
+            foreach (var point in _points)
+                point.HidePoint();
+        }
+
+        public void OnLevelChanged()
+        {
+            _points.Clear();
+            _points = ActiveComponentsProvider.ActivePoints;
+        }
+
+        private void OnItemSpawned(Item item) => _items.Add(item);
     }
-
-    private void OnEnable() => _spawner.ItemSpawned += OnItemSpawned;
-
-    private void OnDisable() => _spawner.ItemSpawned -= OnItemSpawned;
-
-    public void ShowPoints()
-    {
-        foreach (var point in _points)
-            point.ShowPoint();
-    }
-
-    public void HidePoints()
-    {
-        foreach (var point in _points)
-            point.HidePoint();
-    }
-
-    public void GetActivePoints(SpawnPoint[] points = null)
-    {
-        _points.Clear();
-
-        if (points == null)
-            _points.AddRange(FindObjectsOfType<SpawnPoint>());
-        else
-            _points.AddRange(points);
-    }
-
-    private void OnItemSpawned(Item item) => _items.Add(item);
 }

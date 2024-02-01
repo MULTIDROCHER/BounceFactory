@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class PauseWindow : MonoBehaviour
+namespace BounceFactory
 {
-    private void OnEnable() => Time.timeScale = 0;
+    public class PauseWindow : MonoBehaviour
+    {
+        private void OnEnable() => Time.timeScale = 0;
 
-    private void OnDisable() => Time.timeScale = 1;
+        private void OnDisable() => Time.timeScale = 1;
+    }
 }

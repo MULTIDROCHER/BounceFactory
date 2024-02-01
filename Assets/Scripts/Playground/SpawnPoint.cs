@@ -1,55 +1,58 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class SpawnPoint : MonoBehaviour
+namespace BounceFactory
 {
-    private SpriteRenderer _renderer;
-    private ItemClickHandler _clickHandler;
-
-    public Item Item { get; private set; }
-    public bool IsEmpty { get; private set; } = true;
-
-    private void Awake()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class SpawnPoint : MonoBehaviour
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        HidePoint();
-    }
+        private SpriteRenderer _renderer;
+        private ItemClickHandler _clickHandler;
 
-    private void OnMouseDown()
-    {
-        if(_clickHandler != null)
-            _clickHandler.OnClick();
-    }
+        public Item Item { get; private set; }
+        public bool IsEmpty { get; private set; } = true;
 
-    private void OnMouseUp()
-    {
-        if(_clickHandler != null)
-            _clickHandler.OnDrop();
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Item item) 
-        && IsEmpty)
+        private void Awake()
         {
-            Item = item;
-            _clickHandler = item.GetComponent<ItemClickHandler>();
-            IsEmpty = false;
+            _renderer = GetComponent<SpriteRenderer>();
+            HidePoint();
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (Item != null 
-        && other.gameObject == Item.gameObject)
+        private void OnMouseDown()
         {
-            Item = null;
-            _clickHandler = null;
-            IsEmpty = true;
+            if (_clickHandler != null)
+                _clickHandler.OnClick();
         }
+
+        private void OnMouseUp()
+        {
+            if (_clickHandler != null)
+                _clickHandler.OnDrop();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Item item)
+            && IsEmpty)
+            {
+                Item = item;
+                _clickHandler = item.GetComponent<ItemClickHandler>();
+                IsEmpty = false;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (Item != null
+            && other.gameObject == Item.gameObject)
+            {
+                Item = null;
+                _clickHandler = null;
+                IsEmpty = true;
+            }
+        }
+
+        public void ShowPoint() => _renderer.enabled = true;
+
+        public void HidePoint() => _renderer.enabled = false;
     }
-
-    public void ShowPoint() => _renderer.enabled = true;
-
-    public void HidePoint() => _renderer.enabled = false;
 }

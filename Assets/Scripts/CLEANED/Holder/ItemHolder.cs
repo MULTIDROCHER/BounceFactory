@@ -1,5 +1,6 @@
-using BounceFactory;
-
-public class ItemHolder : Holder<Item>
+namespace BounceFactory
 {
+    public class ItemHolder : Holder<Item>
+    {
+    }
 }

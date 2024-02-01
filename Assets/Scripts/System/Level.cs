@@ -1,52 +1,37 @@
 using UnityEngine;
 using YG;
 
-public class Level : MonoBehaviour
+namespace BounceFactory
 {
-    [SerializeField] private SpawnPoint[] _spawnPoints;
-    [SerializeField] private BallHolder _ballHolder;
-    [SerializeField] private ItemHolder _itemHolder;
-
-    private readonly int _minmalBalance = 100;
-
-    private ItemSpawner _itemSpawner;
-    private BallSpawner _ballSpawner;
-    private ItemPriceChanger _itemSeller;
-    private BallPriceChanger _ballSeller;
-    private BallMerger _merger;
-    private SpawnPointsView _pointView;
-
-    private void Awake()
+    public class Level : MonoBehaviour
     {
-        _ballSpawner = FindFirstObjectByType<BallSpawner>();
-        _itemSpawner = FindFirstObjectByType<ItemSpawner>();
-        _ballSeller = FindFirstObjectByType<BallPriceChanger>();
-        _merger = FindFirstObjectByType<BallMerger>();
-        _itemSeller = FindFirstObjectByType<ItemPriceChanger>();
-        _pointView = FindFirstObjectByType<SpawnPointsView>();
+        [SerializeField] private SpawnPoint[] _spawnPoints;
+        [SerializeField] private DeadZone[] _deadZones;
+        [SerializeField] private BallHolder _ballHolder;
+        [SerializeField] private ItemHolder _itemHolder;
+        [SerializeField] private BallPriceChanger _ballSeller;
+        [SerializeField] private ItemPriceChanger _itemSeller;
+        [SerializeField] private BallSpawner _ballSpawner;
+        [SerializeField] private ItemSpawner _itemSpawner;
 
-        if (YandexGame.savesData.Balance < _minmalBalance)
-            YandexGame.savesData.Balance = _minmalBalance;
+        private readonly int _minmalBalance = 100;
 
-        for (int i = 0; i < _itemHolder.transform.childCount; i++)
-            Destroy(_itemHolder.transform.GetChild(i).gameObject);
-    }
+        public SpawnPoint[] SpawnPoints => _spawnPoints;
+        public DeadZone[] DeadZones => _deadZones;
+        public BallHolder BallHolder => _ballHolder;
+        public ItemHolder ItemHolder => _itemHolder;
+        public BallPriceChanger BallPriceChanger => _ballSeller;
+        public ItemPriceChanger ItemPriceChanger => _itemSeller;
+        public BallSpawner BallSpawner => _ballSpawner;
+        public ItemSpawner ItemSpawner => _itemSpawner;
 
-    private void OnEnable()
-    {
-        _ballSpawner.SetHolder(_ballHolder);
-        _itemSpawner.GetPoints(_spawnPoints);
-        _pointView.GetActivePoints(_spawnPoints);
-        _merger.SetContainer(_ballHolder);
+        private void Awake()
+        {
+            if (YandexGame.savesData.Balance < _minmalBalance)
+                YandexGame.savesData.Balance = _minmalBalance;
 
-        foreach (var deadZone in FindObjectsOfType<DeadZone>())
-            deadZone.SetContainer(_ballHolder);
-    }
-
-    private void OnDisable()
-    {
-        _ballSeller.Reset();
-        _itemSeller.Reset();
-        _itemHolder.Reset();
+            if (_itemHolder.transform.childCount != 0)
+                _itemHolder.Reset();
+        }
     }
 }

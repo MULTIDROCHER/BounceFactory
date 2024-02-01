@@ -3,34 +3,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-[RequireComponent(typeof(Image))]
-public class FlipperActivator : MonoBehaviour, ITutorialEvent
+namespace BounceFactory
 {
-    [SerializeField] private Flipper _flipper;
-    [SerializeField] private KeyCode _key;
-
-    public KeyCode KeyCode => _key;
-
-    public event Action Performed;
-
-    private void Awake()
+    [RequireComponent(typeof(Image))]
+    public class FlipperActivator : MonoBehaviour, ITutorialEvent
     {
-        if (YandexGame.EnvironmentData.isDesktop)
+        [SerializeField] private Flipper _flipper;
+        [SerializeField] private KeyCode _key;
+
+        public KeyCode KeyCode => _key;
+
+        public event Action Performed;
+
+        private void Awake()
         {
-            var image = GetComponent<Image>();
-            image.color = new(1, 1, 1, 0);
+            if (YandexGame.EnvironmentData.isDesktop)
+            {
+                var image = GetComponent<Image>();
+                image.color = new(1, 1, 1, 0);
+            }
         }
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(_key))
-            OpenFlipper();
-    }
+        private void Update()
+        {
+            if (Input.GetKeyDown(_key))
+                OpenFlipper();
+        }
 
-    public void OpenFlipper()
-    {
-        Performed?.Invoke();
-        _flipper.Open();
+        public void OpenFlipper()
+        {
+            Performed?.Invoke();
+            _flipper.Open();
+        }
     }
 }

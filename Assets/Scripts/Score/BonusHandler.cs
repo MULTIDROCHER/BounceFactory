@@ -1,30 +1,33 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Item))]
-public class BonusHandler : MonoBehaviour
+namespace BounceFactory
 {
-    [SerializeField] private BonusDisplay _bonusDisplay;
-
-    private Item _item;
-
-    private void Start() => TryGetComponent(out _item);
-
-    private void OnCollisionEnter2D(Collision2D other) => TryGetRevard(other.gameObject, other.GetContact(0).point);
-
-    private void OnTriggerEnter2D(Collider2D other) => TryGetRevard(other.gameObject, transform.position);
-
-    private void TryGetRevard(GameObject other, Vector3 position)
+    [RequireComponent(typeof(Item))]
+    public class BonusHandler : MonoBehaviour
     {
-        if (enabled && other.TryGetComponent(out Ball ball) && _item.Type != ItemType.Teleport)
-            AddBonus(position, ball);
-    }
+        [SerializeField] private BonusDisplay _bonusDisplay;
 
-    public void AddBonus(Vector3 position, Ball ball)
-    {
-        int bonus = ball.Bonus + _item.Bonus;
-        ScoreCounter.Instance.AddScore(bonus);
+        private Item _item;
 
-        var display = Instantiate(_bonusDisplay, transform);
-        display.ShowBonus(bonus, position);
+        private void Start() => TryGetComponent(out _item);
+
+        private void OnCollisionEnter2D(Collision2D other) => TryGetRevard(other.gameObject, other.GetContact(0).point);
+
+        private void OnTriggerEnter2D(Collider2D other) => TryGetRevard(other.gameObject, transform.position);
+
+        private void TryGetRevard(GameObject other, Vector3 position)
+        {
+            if (enabled && other.TryGetComponent(out Ball ball) && _item.Type != ItemType.Teleport)
+                AddBonus(position, ball);
+        }
+
+        public void AddBonus(Vector3 position, Ball ball)
+        {
+            int bonus = ball.Bonus + _item.Bonus;
+            ScoreCounter.Instance.AddScore(bonus);
+
+            var display = Instantiate(_bonusDisplay, transform);
+            display.ShowBonus(bonus, position);
+        }
     }
 }

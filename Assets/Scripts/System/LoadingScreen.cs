@@ -4,33 +4,36 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 
-public class LoadingScreen : MonoBehaviour
+namespace BounceFactory
 {
-    [SerializeField] private Slider _slider;
-
-    private void Awake() => gameObject.SetActive(false);
-
-    public void LoadScene(int sceneId)
+    public class LoadingScreen : MonoBehaviour
     {
-        gameObject.SetActive(true);
-        StartCoroutine(LoadAsync(sceneId));
-    }
+        [SerializeField] private Slider _slider;
 
-    private IEnumerator LoadAsync(int sceneId)
-    {
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneId);
+        private void Awake() => gameObject.SetActive(false);
 
-        while (async.isDone == false)
+        public void LoadScene(int sceneId)
         {
-            _slider.value = async.progress;
-
-            yield return null;
+            gameObject.SetActive(true);
+            StartCoroutine(LoadAsync(sceneId));
         }
 
-        gameObject.SetActive(false);
-        ShowAddBetweenScenes();
-        StopAllCoroutines();
-    }
+        private IEnumerator LoadAsync(int sceneId)
+        {
+            AsyncOperation async = SceneManager.LoadSceneAsync(sceneId);
 
-    private void ShowAddBetweenScenes() => YandexGame.FullscreenShow();
+            while (async.isDone == false)
+            {
+                _slider.value = async.progress;
+
+                yield return null;
+            }
+
+            gameObject.SetActive(false);
+            ShowAddBetweenScenes();
+            StopAllCoroutines();
+        }
+
+        private void ShowAddBetweenScenes() => YandexGame.FullscreenShow();
+    }
 }

@@ -1,8 +1,10 @@
 using YG;
 
-public static class NumsFormater
+namespace BounceFactory
 {
-    private static readonly string[] _enNames = new[]{
+    public static class NumsFormater
+    {
+        private static readonly string[] _enNames = new[]{
         "",
         "K",
         "M",
@@ -12,7 +14,7 @@ public static class NumsFormater
         "QN",
     };
 
-    private static readonly string[] _ruNames = new[]{
+        private static readonly string[] _ruNames = new[]{
         "",
         "Т",
         "МЛ",
@@ -22,7 +24,7 @@ public static class NumsFormater
         "КТ",
     };
 
-    private static readonly string[] _trNames = new[]{
+        private static readonly string[] _trNames = new[]{
         "",
         "B",
         "ML",
@@ -32,28 +34,29 @@ public static class NumsFormater
         "KT",
     };
 
-    public static string FormatedNumber(decimal number)
-    {
-        var names = GetNames();
-
-        if (number == 0)
-            return "0";
-
-        int i = 0;
-
-        while (i + 1 < names.Length && number >= 1000)
+        public static string FormatedNumber(decimal number)
         {
-            number /= 1000;
-            i++;
+            var names = GetNames();
+
+            if (number == 0)
+                return "0";
+
+            int i = 0;
+
+            while (i + 1 < names.Length && number >= 1000)
+            {
+                number /= 1000;
+                i++;
+            }
+
+            return number.ToString(format: "#.##") + names[i];
         }
 
-        return number.ToString(format: "#.##") + names[i];
+        private static string[] GetNames() => YandexGame.lang switch
+        {
+            "ru" => _ruNames,
+            "tr" => _trNames,
+            _ => _enNames,
+        };
     }
-
-    private static string[] GetNames() => YandexGame.lang switch
-    {
-        "ru" => _ruNames,
-        "tr" => _trNames,
-        _ => _enNames,
-    };
 }

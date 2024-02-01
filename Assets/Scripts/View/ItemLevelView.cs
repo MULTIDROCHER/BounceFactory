@@ -2,40 +2,41 @@ using System.Collections.Generic;
 using BounceFactory;
 using UnityEngine;
 
-public class ItemLevelView : MonoBehaviour
+namespace BounceFactory
 {
-    private List<LevelDisplay> _itemsLevel = new();
-
-    [SerializeField] private Holder<Item> _holder;
-
-    private void OnEnable() => _holder.ChildAdded += () => GetLevelDisplays();
-
-    private void OnDisable() => _holder.ChildAdded -= () => GetLevelDisplays();
-
-    public void ShowLevel()
+    public class ItemLevelView : MonoBehaviour
     {
-        Debug.Log("ShowLevel from view");
-        foreach (var level in _itemsLevel)
-            level.ShowLevel();
-    }
+        private List<LevelDisplay> _itemsLevel = new();
 
-    public void HideLevel()
-    {
-        Debug.Log("hideLevel from view");
-        foreach (var level in _itemsLevel)
-            level.HideLevel();
-    }
+        [SerializeField] private Holder<Item> _holder;
 
-    private void GetLevelDisplays()
-    {
-        _itemsLevel.Clear();
+        private void OnEnable() => _holder.ChildAdded += () => GetLevelDisplays();
 
-        foreach (var item in _holder.Contents)
+        private void OnDisable() => _holder.ChildAdded -= () => GetLevelDisplays();
+
+        public void ShowLevel()
         {
-            var display = item.LevelDisplay;
+            foreach (var level in _itemsLevel)
+                level.ShowLevel();
+        }
 
-            if (display != null)
-                _itemsLevel.Add(display);
+        public void HideLevel()
+        {
+            foreach (var level in _itemsLevel)
+                level.HideLevel();
+        }
+
+        private void GetLevelDisplays()
+        {
+            _itemsLevel.Clear();
+
+            foreach (var item in _holder.Contents)
+            {
+                var display = item.LevelDisplay;
+
+                if (display != null)
+                    _itemsLevel.Add(display);
+            }
         }
     }
 }

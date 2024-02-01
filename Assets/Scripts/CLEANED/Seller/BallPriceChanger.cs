@@ -1,51 +1,54 @@
 using System;
+using System.Collections.Generic;
 
-public class BallPriceChanger : PriceChanger<Ball>, ITutorialEvent
+namespace BounceFactory
 {
-    private readonly int _startPrice = 50;
-    private readonly float _priceIncrease = 1.5f;
-
-    private DeadZone[] _ballDestroyer;
-
-    public event Action Performed;
-
-    private void Awake() => _ballDestroyer = FindObjectsOfType<DeadZone>();
-
-    protected override void OnEnable()
+    public class BallPriceChanger : PriceChanger<Ball>, ITutorialEvent
     {
-        base.OnEnable();
-        
-        foreach (var destroyer in _ballDestroyer)
+        private readonly int _startPrice = 50;
+        private readonly float _priceIncrease = 1.5f;
+
+        private List<DeadZone> _ballDestroyer => ActiveComponentsProvider.DeadZones;
+
+        public event Action Performed;
+        public event Action BallDestroyed;
+
+        private void Start()
         {
-            destroyer.BallDestroyed += OnBallDestroyed;
-            destroyer.BallsOver += OnBallsOver;
+            foreach (var destroyer in _ballDestroyer)
+            {
+                destroyer.BallDestroyed += OnBallDestroyed;
+                destroyer.BallsOver += OnBallsOver;
+            }
         }
-    }
 
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-
-        foreach (var destroyer in _ballDestroyer)
+        private void OnDestroy()
         {
-            destroyer.BallDestroyed -= OnBallDestroyed;
-            destroyer.BallsOver -= OnBallsOver;
+            foreach (var destroyer in _ballDestroyer)
+            {
+                destroyer.BallDestroyed -= OnBallDestroyed;
+                destroyer.BallsOver -= OnBallsOver;
+            }
         }
-    }
 
-    protected override void SetPrices()
-    {
-        Performed?.Invoke();
-        Price = _startPrice;
-        PriceIncrease = _priceIncrease;
-    }
+        protected override void SetPrices()
+        {
+            Performed?.Invoke();
+            Price = _startPrice;
+            PriceIncrease = _priceIncrease;
+        }
 
-    private void OnBallDestroyed() => ReducePrices();
+        private void OnBallDestroyed()
+        {
+            BallDestroyed?.Invoke();
+            ReducePrices();
+        }
 
-    private void OnBallsOver()
-    {
-        Price = 0;
-        PurchasesCount = 0;
-        OnBought();
+        private void OnBallsOver()
+        {
+            Price = 0;
+            PurchasesCount = 0;
+            OnBought();
+        }
     }
 }

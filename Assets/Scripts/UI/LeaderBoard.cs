@@ -1,13 +1,16 @@
 using UnityEngine;
 using YG;
 
-public class LeaderBoard : MonoBehaviour
+namespace BounceFactory
 {
-    [SerializeField] private AuthorizationWindow _authorizationWindow;
-
-    private void OnEnable()
+    public class LeaderBoard : MonoBehaviour
     {
-        if (YandexGame.auth)
-            _authorizationWindow.gameObject.SetActive(false);
+        [SerializeField] private AuthorizationWindow _authorizationWindow;
+
+        private void OnEnable()
+        {
+            if (YandexGame.auth)
+                _authorizationWindow.gameObject.SetActive(false);
+        }
     }
 }

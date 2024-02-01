@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using BounceFactory;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-public class LevelSwitcher : MonoBehaviour
+namespace BounceFactory
+{public class LevelSwitcher : MonoBehaviour
 {
     [SerializeField] private List<Level> _levelTemplates;
     [SerializeField] private List<Sprite> _backgroundSprites;
@@ -14,21 +14,21 @@ public class LevelSwitcher : MonoBehaviour
     private readonly float _goalIncrease = 1.3f;
 
     private Level _current;
-    
+
     private ProgressBar _progressBar => GameManager.Instance.ProgressBar;
 
-    private void Awake() => SetLevel();
+    private void Start() => SetLevel();
 
     private void OnEnable()
     {
         _progressBar.GoalReached += OnGoalReached;
-        GameManager.Instance.OnLevelExit += OnLevelExit;
+        GameManager.Instance.OnLevelExit += SaveChanges;
     }
 
     private void OnDisable()
     {
         _progressBar.GoalReached -= OnGoalReached;
-        GameManager.Instance.OnLevelExit -= OnLevelExit;
+        GameManager.Instance.OnLevelExit -= SaveChanges;
     }
 
     public void ChangeLevel()
@@ -40,14 +40,19 @@ public class LevelSwitcher : MonoBehaviour
 
         _progressBar.Reset();
         Time.timeScale = 1;
-        OnLevelExit();
+        SaveChanges();
     }
 
     private void SetLevel()
     {
+        if (_current != null)
+            ActiveComponentsProvider.Reset();
+
         SetRandomLevelTemplate();
         SetRandomBackground();
+
         _current.gameObject.SetActive(true);
+        ActiveComponentsProvider.GetLevelComponents(_current);
     }
 
     private void SetRandomLevelTemplate()
@@ -55,9 +60,14 @@ public class LevelSwitcher : MonoBehaviour
         Level tempLevel = _current;
 
         foreach (var level in _levelTemplates)
-            level.gameObject.SetActive(false);
+        {
+            if (level != null)
+                level.gameObject.SetActive(false);
+            else
+                Debug.Log(level.name);
+        }
 
-        while (_current == tempLevel)
+        while (_current == tempLevel || _current == null)
             _current = _levelTemplates[Random.Range(0, _levelTemplates.Count)];
     }
 
@@ -65,13 +75,13 @@ public class LevelSwitcher : MonoBehaviour
 
     private void OnGoalReached()
     {
-        OnLevelExit();
+        SaveChanges();
         _finishWindow.SetActive(true);
     }
 
-    private void OnLevelExit()
+    private void SaveChanges()
     {
-        MetricsSender.CreateMetrics();
         SavesController.SaveProgres(_progressBar);
+        MetricsSender.CreateMetrics();
     }
-}
+}}

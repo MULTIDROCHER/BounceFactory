@@ -1,107 +1,105 @@
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using System.Linq;
 
-[RequireComponent(typeof(BonusHandler))]
-[RequireComponent(typeof(EffectApplier))]
-public class TeleportItem : Item
+namespace BounceFactory
 {
-    private readonly float _delay = 2;
-    private readonly float _duration = .5f;
-
-    private List<Ball> _inPortal = new();
-    private BonusHandler _bonusHandler;
-    private EffectApplier _effectHandler;
-    private WaitForSeconds _wait;
-    private Vector2 _defaultSize;
-
-    public bool CanTeleport => Movement.IsDragging == false;
-
-    protected override void Awake()
+    [RequireComponent(typeof(BonusHandler))]
+    [RequireComponent(typeof(EffectApplier))]
+    public class TeleportItem : Item
     {
-        base.Awake();
-        _bonusHandler = GetComponent<BonusHandler>();
-        _effectHandler = GetComponent<EffectApplier>();
+        private readonly Color _destroyingColor = new(1, 1, 1, 0);
+        private readonly float _delay = 2;
 
-        _wait = new(_delay);
-    }
+        private List<TeleportableObject> _inPortal = new();
+        private Holder<Item> _holder;
+        private BonusHandler _bonusHandler;
+        private EffectApplier _effectApplier;
+        private WaitForSeconds _wait;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Ball ball)
-        && CanTeleport
-        && _inPortal.Contains(ball) == false)
-            TryToTeleport(ball);
-    }
+        public bool CanTeleport => Movement.IsDragging == false;
 
-    public IEnumerator Destroy()
-    {
-        Color noAlpha = new(1, 1, 1, 0);
-
-        Renderer.color = noAlpha;
-
-        if (_inPortal.Count != 0)
-            foreach (var ball in _inPortal)
-                Appear(ball, this);
-
-        yield return _wait;
-
-        Destroy(gameObject);
-    }
-
-    private void TryToTeleport(Ball ball)
-    {
-        _inPortal.Add(ball);
-        _defaultSize = ball.transform.localScale;
-
-        var portal = FindObjectsOfType<TeleportItem>().FirstOrDefault(portal => portal != this);
-
-        if (portal != null)
-            StartCoroutine(Teleportation(ball, portal));
-        else
-            StartCoroutine(Teleportation(ball, this));
-    }
-
-    private void Disappear(Ball ball)
-    {
-        _effectHandler.DoEffect(transform.position);
-        ball.transform.DOMove(transform.position, _duration, false);
-        ball.transform.DOScale(Vector3.zero, _duration).OnComplete(() =>
-        ball.Rigidbody.bodyType = RigidbodyType2D.Static);
-    }
-
-    private void Appear(Ball ball, TeleportItem portal)
-    {
-        _effectHandler.DoEffect(portal.transform.position);
-        ball.transform.position = portal.transform.position;
-        ball.transform.DOScale(_defaultSize, _duration).OnComplete(() =>
+        protected override void Awake()
         {
-            ball.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            _bonusHandler.AddBonus(portal.transform.position, ball);
-        });
-    }
+            base.Awake();
+            _wait = new(_delay);
+            Destroying = OnDestroying();
 
-    private IEnumerator Teleportation(Ball ball, TeleportItem portal)
-    {
-        if (ball != null)
-            Disappear(ball);
+            _holder = ActiveComponentsProvider.ItemHolder;
 
-        yield return _wait;
+            _bonusHandler = GetComponent<BonusHandler>();
+            _effectApplier = GetComponent<EffectApplier>();
+        }
 
-        if (ball != null)
-            Appear(ball, portal);
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out TeleportableObject teleportable)
+            && CanTeleport && teleportable.CanBeTeleported
+            && _inPortal.Contains(teleportable) == false)
+                TryToTeleport(teleportable);
+        }
 
-        StopCoroutine(Teleportation(ball, portal));
-        StartCoroutine(ReactivateBall(ball));
-    }
+        private IEnumerator OnDestroying()
+        {
+            Renderer.color = _destroyingColor;
+            Destroy(LevelDisplay.gameObject);
 
-    private IEnumerator ReactivateBall(Ball ball)
-    {
-        yield return _wait;
+            if (_inPortal.Count != 0)
+                foreach (var ball in _inPortal)
+                    Appear(ball, this);
 
-        _inPortal.Remove(ball);
-        StopCoroutine(ReactivateBall(ball));
+            yield return _wait;
+
+            Destroy(gameObject);
+        }
+
+        private void TryToTeleport(TeleportableObject teleportable)
+        {
+            _inPortal.Add(teleportable);
+
+            var portal = TryFindPortal();
+
+            if (portal != null)
+                StartCoroutine(Teleportation(teleportable, portal));
+            else
+                StartCoroutine(Teleportation(teleportable, this));
+        }
+
+        private void Disappear(TeleportableObject teleportable)
+        {
+            _effectApplier.DoEffect(transform.position);
+            teleportable.Disappear(transform.position);
+        }
+
+        private void Appear(TeleportableObject teleportable, TeleportItem portal)
+        {
+            _effectApplier.DoEffect(portal.transform.position);
+            teleportable.Appear(portal.transform.position, _bonusHandler);
+        }
+
+        private IEnumerator Teleportation(TeleportableObject teleportable, TeleportItem portal)
+        {
+            if (teleportable != null)
+                Disappear(teleportable);
+
+            yield return _wait;
+
+            if (teleportable != null)
+                Appear(teleportable, portal);
+
+            StartCoroutine(ReactivateTeleportable(teleportable));
+            StopCoroutine(Teleportation(teleportable, portal));
+        }
+
+        private IEnumerator ReactivateTeleportable(TeleportableObject teleportable)
+        {
+            yield return _wait;
+
+            _inPortal.Remove(teleportable);
+            StopCoroutine(ReactivateTeleportable(teleportable));
+        }
+
+        private TeleportItem TryFindPortal() => (TeleportItem)_holder.Contents.Find(item => item != this);
     }
 }

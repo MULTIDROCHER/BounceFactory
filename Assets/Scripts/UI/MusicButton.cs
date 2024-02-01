@@ -1,8 +1,11 @@
-public class MusicButton : SoundButton
+namespace BounceFactory
 {
-    override protected void Start()
+    public class MusicButton : SoundButton
     {
-        Source = AudioManager.Instance.MusicSource;
-        base.Start();
+        override protected void Start()
+        {
+            Source = AudioManager.Instance.MusicSource;
+            base.Start();
+        }
     }
 }

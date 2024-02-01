@@ -1,99 +1,94 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Item))]
-public class UpgradeHandler : MonoBehaviour, ITutorialEvent
+namespace BounceFactory
 {
-    [SerializeField] private ParticleSystem _effect;
-    [SerializeField] private LevelDisplay _display;
-    [SerializeField] private Material _mergeMaterial;
-
-    private Material _defaultMaterial;
-    private SpriteRenderer _renderer;
-    private Item _current;
-    private Item _itemToMerge;
-
-    public event Action Performed;
-    
-    public LevelDisplay LevelDisplay => _display;
-
-    private void Awake()
+    [RequireComponent(typeof(Item))]
+    public class UpgradeHandler : MonoBehaviour, ITutorialEvent
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        _current = GetComponent<Item>();
+        [SerializeField] private ParticleSystem _effect;
+        [SerializeField] private LevelDisplay _displayTemplate;
+        [SerializeField] private Material _mergeMaterial;
 
-        Instantiate(_display, transform);
-        _defaultMaterial = _renderer.material;
-        
-        enabled = false;
-    }
+        private Material _defaultMaterial;
+        private SpriteRenderer _renderer;
+        private LevelDisplay _display;
+        private Item _current;
+        private Item _itemToMerge;
 
-    private void OnTriggerEnter2D(Collider2D other) => HandleCollision(other.gameObject);
+        public event Action Performed;
 
-    private void OnCollisionEnter2D(Collision2D other) => HandleCollision(other.gameObject);
+        public LevelDisplay LevelDisplay => _display;
 
-    private void OnTriggerExit2D(Collider2D other) => ResetItem(other.gameObject);
-
-    private void OnCollisionExit2D(Collision2D other) => ResetItem(other.gameObject);
-
-    private void OnMouseUp()
-    {
-        if (_itemToMerge != null)
-            LevelUp(_itemToMerge);
-        else
-            enabled = false;
-    }
-
-    private void DoEffect(Transform parent) => Instantiate(_effect, parent);
-
-    private void HandleCollision(GameObject other)
-    {
-        if (_itemToMerge == null)
-            _itemToMerge = GetItem(other);
-        else
-            _renderer.material = _mergeMaterial;
-    }
-
-    private void ResetItem(GameObject item)
-    {
-        if (_itemToMerge == item.GetComponent<Item>())
+        private void Awake()
         {
-            _itemToMerge = null;
-            _renderer.material = _defaultMaterial;
+            _current = GetComponent<Item>();
+            _renderer = _current.Renderer;
+
+            _display = Instantiate(_displayTemplate, transform);
+            _defaultMaterial = _renderer.material;
+
+            enabled = false;
         }
-    }
 
-    private void LevelUp(Item item)
-    {
-        Performed?.Invoke();
-        ItemMerger merger = new(_current, item);
-        var template = merger.GetRandom();
+        private void OnTriggerEnter2D(Collider2D other) => HandleCollision(other.gameObject);
 
-        template.LevelUp();
-        DoEffect(template.transform);
+        private void OnCollisionEnter2D(Collision2D other) => HandleCollision(other.gameObject);
 
-        if (template != item)
-            TryToDestroy(item);
-        else
-            TryToDestroy(_current);
-    }
+        private void OnTriggerExit2D(Collider2D other) => ResetItem(other.gameObject);
 
-    private Item GetItem(GameObject other)
-    {
-        if (other.TryGetComponent(out Item item)
-            && item.Level == _current.Level
-            && item != _current)
-            return item;
-        else
-            return null;
-    }
+        private void OnCollisionExit2D(Collision2D other) => ResetItem(other.gameObject);
 
-    private void TryToDestroy(Item item)
-    {
-        if (item.TryGetComponent(out TeleportItem teleport))
-            StartCoroutine(teleport.Destroy());
-        else
-            Destroy(item.gameObject);
+        private void OnMouseUp()
+        {
+            if (_itemToMerge != null)
+                LevelUp(_itemToMerge);
+            else
+                enabled = false;
+        }
+
+        private void HandleCollision(GameObject other)
+        {
+            if (_itemToMerge == null)
+                _itemToMerge = GetItem(other);
+            else
+                _renderer.material = _mergeMaterial;
+        }
+
+        private Item GetItem(GameObject other)
+        {
+            if (other.TryGetComponent(out Item item)
+                && item.Level == _current.Level
+                && item != _current)
+                return item;
+            else
+                return null;
+        }
+
+        private void ResetItem(GameObject item)
+        {
+            if (_itemToMerge.gameObject == item)
+            {
+                _itemToMerge = null;
+                _renderer.material = _defaultMaterial;
+            }
+        }
+
+        private void LevelUp(Item item)
+        {
+            Performed?.Invoke();
+            ItemSelector merger = new(_current, item);
+            var template = merger.GetRandom();
+
+            template.LevelUp();
+            DoEffect(template.transform);
+
+            if (template != item)
+                item.Destroy();
+            else
+                _current.Destroy();
+        }
+
+        private void DoEffect(Transform parent) => Instantiate(_effect, parent);
     }
 }

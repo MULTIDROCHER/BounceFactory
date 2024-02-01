@@ -2,24 +2,27 @@ using System.Linq;
 using UnityEngine;
 using YG;
 
-public abstract class FlipperStep : TutorialStep
+namespace BounceFactory
 {
-    protected KeyCode KeyCode;
-    protected FlipperActivator Controller;
-
-    public FlipperStep(KeyCode controllerKey) => KeyCode = controllerKey;
-
-    public override void Enter()
+    public abstract class FlipperStep : TutorialStep
     {
-        Controller = Object.FindObjectsOfType<FlipperActivator>().Where(controller => controller.KeyCode == KeyCode).FirstOrDefault();
+        protected KeyCode KeyCode;
+        protected FlipperActivator Controller;
 
-        Controller.Performed += OnPerformed;
+        public FlipperStep(KeyCode controllerKey) => KeyCode = controllerKey;
 
-        if (YandexGame.EnvironmentData.isDesktop)
-            OnUnneedMask(ComputerMessages()[Language]);
-        else
-            OnNeedMask(MobileMessages()[Language], Controller.transform);
+        public override void Enter()
+        {
+            Controller = Object.FindObjectsOfType<FlipperActivator>().Where(controller => controller.KeyCode == KeyCode).FirstOrDefault();
+
+            Controller.Performed += OnPerformed;
+
+            if (YandexGame.EnvironmentData.isDesktop)
+                OnUnneedMask(ComputerMessages()[Language]);
+            else
+                OnNeedMask(MobileMessages()[Language], Controller.transform);
+        }
+
+        public override void Exit() => Controller.Performed -= OnPerformed;
     }
-
-    public override void Exit() => Controller.Performed -= OnPerformed;
 }

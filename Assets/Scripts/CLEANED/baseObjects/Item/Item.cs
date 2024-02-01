@@ -1,30 +1,44 @@
+using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(ItemMovement))]
-[RequireComponent(typeof(ItemClickHandler))]
-[RequireComponent(typeof(PointHandler))]
-[RequireComponent(typeof(UpgradeHandler))]
-public class Item : UpgradableObject
+namespace BounceFactory
 {
-    [SerializeField] private ItemType _type;
+    [RequireComponent(typeof(ItemMover))]
+    [RequireComponent(typeof(ItemClickHandler))]
+    [RequireComponent(typeof(PointHandler))]
+    [RequireComponent(typeof(UpgradeHandler))]
+    public class Item : UpgradableObject
+    {
+        [SerializeField] private ItemType _type;
 
-    private UpgradeHandler _upgradeHandler;
+        private UpgradeHandler _upgradeHandler;
 
-    protected ItemMovement Movement;
-    protected ItemClickHandler ClickHandler;
-    protected PointHandler PointHandler;
+        protected ItemMover Movement;
+        protected ItemClickHandler ClickHandler;
+        protected PointHandler PointHandler;
+        protected IEnumerator Destroying;
 
-    public ItemType Type => _type;
-    public LevelDisplay LevelDisplay => _upgradeHandler.LevelDisplay;
+        public ItemType Type => _type;
+        public LevelDisplay LevelDisplay => _upgradeHandler.LevelDisplay;
 
-    protected override void Awake() {
-        base.Awake();
-        BonusIncrease = 3;
-        ObjectsAmount = 2;
+        protected override void Awake()
+        {
+            base.Awake();
+            BonusIncrease = 3;
+            ObjectsAmount = 2;
 
-        Movement = GetComponent<ItemMovement>();
-        ClickHandler = GetComponent<ItemClickHandler>();
-        PointHandler = GetComponent<PointHandler>();
-        _upgradeHandler = GetComponent<UpgradeHandler>();
+            Movement = GetComponent<ItemMover>();
+            ClickHandler = GetComponent<ItemClickHandler>();
+            PointHandler = GetComponent<PointHandler>();
+            _upgradeHandler = GetComponent<UpgradeHandler>();
+        }
+
+        public void Destroy()
+        {
+            if (Destroying != null)
+                StartCoroutine(Destroying);
+            else
+                Destroy(gameObject);
+        }
     }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class EffectContainer : MonoBehaviour
+namespace BounceFactory
 {
+    public class EffectContainer : MonoBehaviour
+    {
+    }
 }

@@ -1,20 +1,23 @@
 using System.Collections.Generic;
 
-public class BallsPurchaseStep : PurchaseStep<Ball>
+namespace BounceFactory
 {
-    protected override Dictionary<string, string> CommonMessages()
+    public class BallsPurchaseStep : PurchaseStep<Ball>
     {
-        return new Dictionary<string, string>() {
+        protected override Dictionary<string, string> CommonMessages()
+        {
+            return new Dictionary<string, string>() {
 { "ru", "отлично, теперь купи пару шаров" },
 { "en", "Great, now buy a couple balls" },
 { "tr", "Harika, şimdi birkaç balon al" },
     };
-    }
+        }
 
-    public override void Enter()
-    {
-        base.Enter();
+        public override void Enter()
+        {
+            base.Enter();
 
-        OnNeedMask(CommonMessages()[Language], PriceView.transform.parent.parent);
+            OnNeedMask(CommonMessages()[Language], PriceView.transform.parent.parent);
+        }
     }
 }

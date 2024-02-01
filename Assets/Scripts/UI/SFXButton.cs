@@ -1,8 +1,11 @@
-public class SFXButton : SoundButton
+namespace BounceFactory
 {
-    override protected void Start()
+    public class SFXButton : SoundButton
     {
-        Source = AudioManager.Instance.SFXSource;
-        base.Start();
+        override protected void Start()
+        {
+            Source = AudioManager.Instance.SFXSource;
+            base.Start();
+        }
     }
 }

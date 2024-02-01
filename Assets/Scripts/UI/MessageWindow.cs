@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-public class MessageWindow : MonoBehaviour
+namespace BounceFactory
+{public class MessageWindow : MonoBehaviour
 {
     [SerializeField] private Toggle _toggle;
 
@@ -28,4 +29,4 @@ public class MessageWindow : MonoBehaviour
         YandexGame.savesData.HideSaveMessage = true;
         YandexGame.Instance._SaveProgress();
     }
-}
+}}

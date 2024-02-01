@@ -33,13 +33,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5833656486715923145}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7044516075408389551
 SpriteRenderer:
@@ -253,5 +253,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
-  _display: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
+  _displayTemplate: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _mergeMaterial: {fileID: 2100000, guid: 487f18665aaca2346b9cd7c90aa35f32, type: 2}

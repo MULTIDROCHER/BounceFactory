@@ -1,59 +1,63 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ItemMovement))]
-[RequireComponent(typeof(BonusHandler))]
-public class ItemClickHandler : MonoBehaviour
+namespace BounceFactory
 {
-    private ItemLevelView _levelView;
-    private SpawnPointsView _pointView;
-    private BonusHandler _bonusHandler;
-    private ItemMovement _itemMovement;
-
-    public Item Item {get;private set;}
-
-    private void Awake()
+    [RequireComponent(typeof(Item))]
+    [RequireComponent(typeof(ItemMover))]
+    [RequireComponent(typeof(BonusHandler))]
+    public class ItemClickHandler : MonoBehaviour
     {
-        _levelView = FindFirstObjectByType<ItemLevelView>();
-        _pointView = FindFirstObjectByType<SpawnPointsView>();
+        private ItemLevelView _levelView;
+        private SpawnPointsView _pointView;
+        private BonusHandler _bonusHandler;
+        private ItemMover _itemMovement;
 
-        _bonusHandler = GetComponent<BonusHandler>();
-        _itemMovement = GetComponent<ItemMovement>();
-        Item = GetComponent<Item>();
-    }
+        public Item Item { get; private set; }
 
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(0))
-            OnClick();
-        else if (Input.GetMouseButtonUp(0))
-            OnDrop();
-    }
+        private void Awake()
+        {
+            _levelView = FindFirstObjectByType<ItemLevelView>();
+            _pointView = FindFirstObjectByType<SpawnPointsView>();
 
-    public void OnClick()
-    {
-        _itemMovement.OnStartMovement();
-        _pointView.ShowPoints();
-        _levelView.ShowLevel();
-        DisableBonusHandler();
-    }
+            Item = GetComponent<Item>();
+            _itemMovement = GetComponent<ItemMover>();
+            _bonusHandler = GetComponent<BonusHandler>();
+        }
 
-    public void OnDrop()
-    {
-        _levelView.HideLevel();
-        _pointView.HidePoints();
-        _itemMovement.OnEndMovement();
-        EnableBonusHandler();
-    }
+        private void OnMouseOver()
+        {
+            if (Input.GetMouseButtonDown(0))
+                OnClick();
+            else if (Input.GetMouseButtonUp(0))
+                OnDrop();
+        }
 
-    private void EnableBonusHandler()
-    {
-        if (_bonusHandler != null)
-            _bonusHandler.enabled = true;
-    }
+        public void OnClick()
+        {
+            _itemMovement.OnStartMovement();
+            _pointView.ShowPoints();
+            _levelView.ShowLevel();
+            DisableBonusHandler();
+        }
 
-    private void DisableBonusHandler()
-    {
-        if (_bonusHandler != null)
-            _bonusHandler.enabled = false;
+        public void OnDrop()
+        {
+            _levelView.HideLevel();
+            _pointView.HidePoints();
+            _itemMovement.OnEndMovement();
+            EnableBonusHandler();
+        }
+
+        private void EnableBonusHandler()
+        {
+            if (_bonusHandler != null)
+                _bonusHandler.enabled = true;
+        }
+
+        private void DisableBonusHandler()
+        {
+            if (_bonusHandler != null)
+                _bonusHandler.enabled = false;
+        }
     }
 }

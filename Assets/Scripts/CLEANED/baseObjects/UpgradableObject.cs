@@ -1,25 +1,28 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public abstract class UpgradableObject : MonoBehaviour
+namespace BounceFactory
 {
-    protected int BonusIncrease;
-    protected int ObjectsAmount;
-
-    private SpriteRenderer _renderer;
-
-    public SpriteRenderer Renderer => _renderer;
-    public int Level { get; protected set; } = 1;
-    public int Bonus { get; protected set; } = 1;
-
-    protected virtual void Awake() => _renderer = GetComponent<SpriteRenderer>();
-
-    protected virtual int IncreaseBonus() => Bonus * ObjectsAmount + BonusIncrease;
-
-    public virtual void LevelUp()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public abstract class UpgradableObject : MonoBehaviour
     {
-        Level++;
-        Bonus = IncreaseBonus();
-        gameObject.name = Level.ToString();
+        protected int BonusIncrease;
+        protected int ObjectsAmount;
+
+        private SpriteRenderer _renderer;
+
+        public SpriteRenderer Renderer => _renderer;
+        public int Level { get; protected set; } = 1;
+        public int Bonus { get; protected set; } = 1;
+
+        protected virtual void Awake() => _renderer = GetComponent<SpriteRenderer>();
+
+        protected virtual int IncreaseBonus() => Bonus * ObjectsAmount + BonusIncrease;
+
+        public virtual void LevelUp()
+        {
+            Level++;
+            Bonus = IncreaseBonus();
+            gameObject.name = Level.ToString();
+        }
     }
 }

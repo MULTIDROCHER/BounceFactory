@@ -37,7 +37,7 @@ MonoBehaviour:
   saveOnQuitGame: 1
   quitGameParameters:
     objectName: GameManager
-    methodName: LevelExit
+    methodName: SaveChanges
   leaderboardEnable: 1
   saveScoreAnonymousPlayers: 1
   leaderboardSimulation:
@@ -244,7 +244,7 @@ MonoBehaviour:
     consumed: 1
   metricaEnable: 1
   metricaCounterID: 96011288
-  debug: 1
+  debug: 0
   archivingBuild: 1
   logoImageFormat: 1
   backgroundImageFormat: 3

@@ -1,15 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommonItem : Item
+namespace BounceFactory
 {
-    [SerializeField] private List<Sprite> _sprites;
-
-    protected override void Awake()
+    public class CommonItem : Item
     {
-        base.Awake();
-        
-        if (Renderer.sprite == null)
-            Renderer.sprite = _sprites[Random.Range(0, _sprites.Count)];
+        [SerializeField] private List<Sprite> _sprites;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (Renderer.sprite == null)
+                Renderer.sprite = _sprites[Random.Range(0, _sprites.Count)];
+        }
     }
 }

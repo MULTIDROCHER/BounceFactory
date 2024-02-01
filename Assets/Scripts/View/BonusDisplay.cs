@@ -1,39 +1,42 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(Canvas))]
-public class BonusDisplay : MonoBehaviour
+namespace BounceFactory
 {
-    private readonly float _delay = 2;
-
-    private Canvas _canvas;
-    private TMP_Text _text;
-    private Vector2 _position;
-    private Vector2 _positionSpread = new(.2f, .2f);
-
-    private void Awake()
+    [RequireComponent(typeof(Canvas))]
+    public class BonusDisplay : MonoBehaviour
     {
-        _text = GetComponentInChildren<TMP_Text>();
+        private readonly float _delay = 2;
 
-        _canvas = GetComponent<Canvas>();
-        _canvas.worldCamera = Camera.main;
-    }
+        private Canvas _canvas;
+        private TMP_Text _text;
+        private Vector2 _position;
+        private Vector2 _positionSpread = new(.2f, .2f);
 
-    private void LateUpdate() => transform.SetPositionAndRotation(_position, Quaternion.identity);
+        private void Awake()
+        {
+            _text = GetComponentInChildren<TMP_Text>();
 
-    public void ShowBonus(int bonus, Vector3 position)
-    {
-        SetText(BonusToString(bonus), position);
-        Destroy(gameObject, _delay);
-    }
+            _canvas = GetComponent<Canvas>();
+            _canvas.worldCamera = Camera.main;
+        }
 
-    private string BonusToString(int bonus) => "+" + bonus.ToString();
+        private void LateUpdate() => transform.SetPositionAndRotation(_position, Quaternion.identity);
 
-    private void SetText(string text, Vector3 pos)
-    {
-        _text.text = text;
-        _position = pos;
-        _position += new Vector2(Random.Range(-_positionSpread.x, _positionSpread.x),
-                                Random.Range(-_positionSpread.y, _positionSpread.y));
+        public void ShowBonus(int bonus, Vector3 position)
+        {
+            SetText(BonusToString(bonus), position);
+            Destroy(gameObject, _delay);
+        }
+
+        private string BonusToString(int bonus) => "+" + bonus.ToString();
+
+        private void SetText(string text, Vector3 pos)
+        {
+            _text.text = text;
+            _position = pos;
+            _position += new Vector2(Random.Range(-_positionSpread.x, _positionSpread.x),
+                                    Random.Range(-_positionSpread.y, _positionSpread.y));
+        }
     }
 }

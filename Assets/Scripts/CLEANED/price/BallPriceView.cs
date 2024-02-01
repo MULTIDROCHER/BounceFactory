@@ -1,3 +1,6 @@
-public class BallPriceView : PriceView<Ball>
+namespace BounceFactory
 {
+    public class BallPriceView : PriceView<Ball>
+    {
+    }
 }

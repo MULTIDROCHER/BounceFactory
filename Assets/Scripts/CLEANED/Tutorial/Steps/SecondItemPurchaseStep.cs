@@ -1,20 +1,23 @@
 using System.Collections.Generic;
 
-public class SecondItemPurchaseStep : PurchaseStep<Item>
+namespace BounceFactory
 {
-    protected override Dictionary<string, string> CommonMessages()
+    public class SecondItemPurchaseStep : PurchaseStep<Item>
     {
-        return new Dictionary<string, string>() {
+        protected override Dictionary<string, string> CommonMessages()
+        {
+            return new Dictionary<string, string>() {
 { "ru", "теперь добавь еще один предмет" },
 { "en", "now add one more item" },
 { "tr", "şimdi bir öğe daha ekleyin" },
     };
-    }
+        }
 
-    public override void Enter()
-    {
-        base.Enter();
+        public override void Enter()
+        {
+            base.Enter();
 
-        OnUnneedMask(CommonMessages()[Language]);
+            OnUnneedMask(CommonMessages()[Language]);
+        }
     }
 }

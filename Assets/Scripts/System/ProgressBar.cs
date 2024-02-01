@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using YG;
 
-[RequireComponent(typeof(Slider))]
+namespace BounceFactory
+{[RequireComponent(typeof(Slider))]
 public class ProgressBar : MonoBehaviour
 {
     private readonly float _duration = .2f;
@@ -57,4 +58,4 @@ public class ProgressBar : MonoBehaviour
     private string ProgressToString() => NumsFormater.FormatedNumber(CurrentScore) + " / " + NumsFormater.FormatedNumber(_goal);
 
     private void UpdateProgressText(string progress) => _text.text = progress;
-}
+}}

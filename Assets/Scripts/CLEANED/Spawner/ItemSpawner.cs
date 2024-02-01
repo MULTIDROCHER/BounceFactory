@@ -1,88 +1,94 @@
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
-public class ItemSpawner : Spawner<Item>
+namespace BounceFactory
 {
-    private SpawnPoint[] _spawnPoints;
-
-    private readonly int _accelerationChance = 10;
-    private readonly int _teleportChance = 20;
-    private readonly int _ballgeneratorChance = 30;
-    private readonly int _itemsOnSceneForGeneratorSpawn = 2;
-
-    public event Action<Item> ItemSpawned;
-    public override event Action Bought;
-
-    protected override void Start()
+    public class ItemSpawner : Spawner<Item>
     {
-        base.Start();
-        GetPoints();
-    }
+        private List<SpawnPoint> _spawnPoints = new();
 
-    public override void Spawn()
-    {
-        var point = GetPointToSpawn();
+        private readonly int _accelerationChance = 10;
+        private readonly int _teleportChance = 20;
+        private readonly int _ballgeneratorChance = 30;
+        private readonly int _itemsOnSceneForGeneratorSpawn = 2;
 
-        if (point != null)
+        public event Action<Item> ItemSpawned;
+        public override event Action Bought;
+
+        public override void Spawn()
         {
-            var itemToSpawn = GetRandomItem();
+            if (_spawnPoints.Count == 0 || _spawnPoints == null)
+                OnLevelChanged();
 
-            if (itemToSpawn != null)
+            var point = GetPointToSpawn();
+
+            if (point != null)
             {
-                var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, Holder.transform);
-                ScoreCounter.Instance.Buy(PriceChanger.Price);
-                ItemSpawned?.Invoke(spawned);
-                Bought?.Invoke();
+                var itemToSpawn = GetRandomItem();
+
+                if (itemToSpawn != null)
+                {
+                    var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, Holder.transform);
+                    ScoreCounter.Instance.Buy(PriceChanger.Price);
+                    ItemSpawned?.Invoke(spawned);
+                    Bought?.Invoke();
+                }
             }
         }
-    }
 
-    public void GetPoints(SpawnPoint[] points = null)
-    {
-        if (points == null)
-            _spawnPoints = FindObjectsOfType<SpawnPoint>();
-        else
-            _spawnPoints = points;
-    }
-
-    private Item GetRandomItem()
-    {
-        int minRange = 0;
-        int maxRange = 101;
-
-        int chance = UnityEngine.Random.Range(minRange, maxRange);
-
-        return chance switch
+        private Item GetRandomItem()
         {
-            int n when n <= _accelerationChance => GetItemByComponent<AccelerationItem>(),
-            int n when n <= GetTeleportChance() => GetItemByComponent<TeleportItem>(),
-            int n when n <= _ballgeneratorChance && Holder.transform.childCount >= _itemsOnSceneForGeneratorSpawn 
-                => GetItemByComponent<BallGeneratorItem>(),
-            _ => GetItemByComponent<CommonItem>(),
-        };
-    }
+            int minRange = 0;
+            int maxRange = 101;
 
-    private SpawnPoint GetPointToSpawn()
-    {
-        SpawnPoint[] emptyPoints = _spawnPoints.Where(point => point.IsEmpty).ToArray();
+            int chance = UnityEngine.Random.Range(minRange, maxRange);
 
-        if (emptyPoints.Length != 0)
-            return emptyPoints[UnityEngine.Random.Range(0, emptyPoints.Length)];
-        else
+            return chance switch
+            {
+                int n when n <= _accelerationChance => GetItemByComponent<AccelerationItem>(),
+                int n when n <= GetTeleportChance() => GetItemByComponent<TeleportItem>(),
+                int n when n <= _ballgeneratorChance && Holder.transform.childCount >= _itemsOnSceneForGeneratorSpawn
+                    => GetItemByComponent<BallGeneratorItem>(),
+                _ => GetItemByComponent<CommonItem>(),
+            };
+        }
+
+        private SpawnPoint GetPointToSpawn()
+        {
+            SpawnPoint[] emptyPoints = _spawnPoints.Where(point => point.IsEmpty).ToArray();
+
+            if (emptyPoints.Length != 0)
+                return emptyPoints[UnityEngine.Random.Range(0, emptyPoints.Length)];
+            else
+                return null;
+        }
+
+        private int GetTeleportChance()
+        {
+            int possibleAmount = 2;
+            TeleportItem[] portals = Holder.Contents.Where(item => item is TeleportItem).OfType<TeleportItem>().ToArray();
+
+            if (portals.Length < possibleAmount && Holder.transform.childCount >= possibleAmount)
+                return _teleportChance;
+            else
+                return 0;
+        }
+
+        private Item GetItemByComponent<T>() where T : Component
+        {
+            foreach (var item in Templates)
+                if (item.TryGetComponent(out T _))
+                    return item;
+
             return null;
+        }
+
+        protected override void OnLevelChanged()
+        {
+            _spawnPoints.Clear();
+            _spawnPoints = ActiveComponentsProvider.ActivePoints;
+        }
     }
-
-    private int GetTeleportChance()
-    {
-        int possibleAmount = 2;
-        TeleportItem[] portals = FindObjectsOfType<TeleportItem>();
-
-        if (portals.Length < possibleAmount && Holder.transform.childCount >= possibleAmount)
-            return _teleportChance;
-        else
-            return 0;
-    }
-
-    private Item GetItemByComponent<T>() where T : Component => Templates.Find(item => item.TryGetComponent(out T component));
 }

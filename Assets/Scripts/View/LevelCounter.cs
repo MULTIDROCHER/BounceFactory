@@ -2,7 +2,8 @@ using TMPro;
 using UnityEngine;
 using YG;
 
-public class LevelCounter : MonoBehaviour
+namespace BounceFactory
+{public class LevelCounter : MonoBehaviour
 {
     [SerializeField] TMP_Text _text;
 
@@ -23,4 +24,4 @@ public class LevelCounter : MonoBehaviour
     private string LevelToString() => _baseText + _current.ToString();
 
     private void UpdateDisplay(string level) => _text.text = level;
-}
+}}

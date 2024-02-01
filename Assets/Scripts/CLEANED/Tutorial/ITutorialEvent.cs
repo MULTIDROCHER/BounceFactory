@@ -1,5 +1,9 @@
 using System;
-public interface ITutorialEvent
+
+namespace BounceFactory
 {
-   public event Action Performed;
+   public interface ITutorialEvent
+   {
+      public event Action Performed;
+   }
 }

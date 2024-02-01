@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class PipeExit : MonoBehaviour
+namespace BounceFactory
 {
-    private ParticleSystem _splash;
-
-    private void Awake() => _splash = GetComponentInChildren<ParticleSystem>();
-
-    private void OnTriggerEnter2D(Collider2D other) => DoSplash(other);
-
-    private void DoSplash(Collider2D other)
+    public class PipeExit : MonoBehaviour
     {
-        if (other.TryGetComponent(out Ball _))
-            _splash.Play();
+        private ParticleSystem _splash;
+
+        private void Awake() => _splash = GetComponentInChildren<ParticleSystem>();
+
+        private void OnTriggerEnter2D(Collider2D other) => DoSplash(other);
+
+        private void DoSplash(Collider2D other)
+        {
+            if (other.TryGetComponent(out Ball _))
+                _splash.Play();
+        }
     }
 }

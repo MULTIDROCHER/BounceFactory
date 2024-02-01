@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
-using BounceFactory;
 using UnityEngine;
 
-public abstract class Spawner<T> : MonoBehaviour where T : UpgradableObject
+namespace BounceFactory
+{
+    public abstract class Spawner<T> : MonoBehaviour where T : UpgradableObject
     {
         [SerializeField] protected List<T> Templates = new();
         [SerializeField] protected PriceChanger<T> PriceChanger;
+        [SerializeField] protected Holder<T> Holder;
 
         public abstract event Action Bought;
 
-        protected Holder<T> Holder;
+        protected virtual void OnEnable() =>
+            ActiveComponentsProvider.LevelChanged += OnLevelChanged;
 
-        protected virtual void Start() => Holder = FindObjectOfType<Holder<T>>();
+        protected virtual void OnВшыable() =>
+            ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
+
+        protected abstract void OnLevelChanged();
 
         public virtual void Spawn() { }
 
         protected virtual T GetTemplateToSpawn() => Templates[UnityEngine.Random.Range(0, Templates.Count)];
     }
+}

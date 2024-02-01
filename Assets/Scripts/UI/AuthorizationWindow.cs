@@ -1,7 +1,10 @@
 using UnityEngine;
 using YG;
 
-public class AuthorizationWindow : MonoBehaviour
+namespace BounceFactory
 {
-    public void Register() => YandexGame.Instance._OpenAuthDialog();
+    public class AuthorizationWindow : MonoBehaviour
+    {
+        public void Register() => YandexGame.Instance._OpenAuthDialog();
+    }
 }

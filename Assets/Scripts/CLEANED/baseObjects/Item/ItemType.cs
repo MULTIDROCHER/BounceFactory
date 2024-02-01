@@ -1,7 +1,10 @@
-public enum ItemType
+namespace BounceFactory
 {
-    Common,
-    Teleport,
-    Acceleration,
-    BallGenerator
+    public enum ItemType
+    {
+        Common,
+        Teleport,
+        Acceleration,
+        BallGenerator
+    }
 }

@@ -6,39 +6,48 @@ namespace BounceFactory
 {
     public abstract class Holder<T> : MonoBehaviour where T : UpgradableObject
     {
-        protected List<T> Children = new();
+        [SerializeField] private Spawner<T> _spawner;
 
-        private Spawner<T> _spawner;
+        protected List<T> Children = new();
 
         public event Action ChildAdded;
 
         public List<T> Contents => Children;
 
-        private void Awake()
+        protected virtual void Start()
         {
-            _spawner = FindFirstObjectByType<Spawner<T>>();
-            CheckForNewChildren();
+            _spawner.Bought += () => UpdateContent();
         }
 
-        private void OnEnable() => _spawner.Bought += () => CheckForNewChildren();
-
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _spawner.Bought -= () => CheckForNewChildren();
-            Reset();
+            _spawner.Bought -= () => UpdateContent();
         }
 
-        public virtual void Reset() => Children.Clear();
-
-        private void CheckForNewChildren()
+        public virtual void Reset()
         {
-            if (transform.childCount != Children.Count)
-            {
-                Reset();
-                Children.AddRange(transform.GetComponentsInChildren<T>());
-                ChildAdded?.Invoke();
-                Debug.Log("Added new children");
-            }
+            for (int i = Children.Count - 1; i >= 0; i--)
+                Destroy(Children[i].gameObject);
+
+            Children.Clear();
+        }
+
+        public void UpdateContent()
+        {
+            /* if (Children.Count != transform.childCount || Children.Find(child => child == null) != null)
+            { */
+            Children.Clear();
+
+            var childrenComponents = transform.GetComponentsInChildren<T>();
+
+            foreach (var child in childrenComponents)
+                if (child != null)
+                    Children.Add(child);
+
+            ChildAdded?.Invoke();
+            Debug.Log($"Added new children now there are ==== {Children.Count}");
+            Debug.Log($"in transform ==== {transform.childCount}");
+            /* } */
         }
     }
 }

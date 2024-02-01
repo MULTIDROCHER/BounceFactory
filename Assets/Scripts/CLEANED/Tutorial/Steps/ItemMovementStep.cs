@@ -1,25 +1,37 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ItemMovementStep : TutorialStep
+namespace BounceFactory
 {
-    protected override Dictionary<string, string> CommonMessages()
+    public class ItemMovementStep : TutorialStep
     {
-        return new Dictionary<string, string>() {
+        protected override Dictionary<string, string> CommonMessages()
+        {
+            return new Dictionary<string, string>() {
 { "ru", "зажми и двигай предмет,\nчтобы переместить его" },
 { "en", "pinch and move the object\nto move it" },
 { "tr", "Nesneyi hareket ettirmek için\nsıkıştırın ve hareket ettirin" },
-    };}
+    };
+        }
 
-    private ItemMovement _item;
+        private List<ItemMover> _itemMovers;
 
-    public override void Enter()
-    {
-        _item = Object.FindFirstObjectByType<ItemMovement>();
-        _item.Performed += OnPerformed;
+        private ItemHolder _holder => TutorialManager.Instance.ItemHolder;
 
-        OnUnneedMask(CommonMessages()[Language]);
+        public override void Enter()
+        {
+            foreach (var item in _holder.Contents)
+                _itemMovers.Add(item.GetComponent<ItemMover>());
+
+            foreach (var mover in _itemMovers)
+                mover.Performed += OnPerformed;
+
+            OnUnneedMask(CommonMessages()[Language]);
+        }
+
+        public override void Exit()
+        {
+            foreach (var mover in _itemMovers)
+                mover.Performed -= OnPerformed;
+        }
     }
-
-    public override void Exit() => _item.Performed -= OnPerformed;
 }

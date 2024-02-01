@@ -1,7 +1,9 @@
 using System;
+using BounceFactory;
 using UnityEngine;
 
-public abstract class PriceChanger<T> : MonoBehaviour where T : UpgradableObject
+namespace BounceFactory
+{public abstract class PriceChanger<T> : MonoBehaviour where T : UpgradableObject
 {
     [SerializeField] protected Spawner<T> _spawner;
 
@@ -13,11 +15,31 @@ public abstract class PriceChanger<T> : MonoBehaviour where T : UpgradableObject
 
     public event Action<int> PriceChanged;
 
-    protected virtual void OnEnable() => _spawner.Bought += OnBought;
+    protected virtual void OnEnable()
+    {
+        ActiveComponentsProvider.LevelChanged += OnLevelChanged;
+        _spawner.Bought += OnBought;
+    }
 
-    protected virtual void OnDisable() => _spawner.Bought -= OnBought;
+    protected virtual void OnDisable()
+    {
+        ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
+        _spawner.Bought -= OnBought;
+    }
+
+    public void Reset()
+    {
+        PurchasesCount = 0;
+        Price = 0;
+        PriceChanged?.Invoke(Price);
+    }
 
     protected virtual void OnBought() => IncreasePrices();
+
+    protected virtual void OnLevelChanged()
+    {
+        Reset();
+    }
 
     private void IncreasePrices()
     {
@@ -39,11 +61,4 @@ public abstract class PriceChanger<T> : MonoBehaviour where T : UpgradableObject
     }
 
     protected abstract void SetPrices();
-
-    public void Reset()
-    {
-        PurchasesCount = 0;
-        Price = 0;
-        PriceChanged?.Invoke(Price);
-    }
-}
+}}

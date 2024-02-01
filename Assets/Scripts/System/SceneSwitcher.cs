@@ -1,10 +1,8 @@
-using System;
-using BounceFactory;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using YG;
 
-public class SceneSwitcher : MonoBehaviour
+namespace BounceFactory
+{public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField] private MessageWindow _messageWindow;
     
@@ -38,4 +36,4 @@ public class SceneSwitcher : MonoBehaviour
             StartGame();
         }
     }
-}
+}}

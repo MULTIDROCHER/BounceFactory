@@ -1,36 +1,42 @@
 using System;
+using BounceFactory;
 using UnityEngine;
 
-public class DeadZone : MonoBehaviour
+namespace BounceFactory
 {
-    private BallHolder _holder;
-
-    public event Action BallDestroyed;
-    public event Action BallsOver;
-
-    private void Awake() => SetContainer();
-
-    public void SetContainer(BallHolder holder = null)
+    public class DeadZone : MonoBehaviour
     {
-        if (holder == null)
-            _holder = FindObjectOfType<BallHolder>();
-        else
-            _holder = holder;
-    }
+        private Holder<Ball> _holder;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.TryGetComponent(out Ball ball))
+        public event Action BallDestroyed;
+        public event Action BallsOver;
+
+        private void OnEnable() => ActiveComponentsProvider.LevelChanged += OnLevelChanged;
+
+        private void OnDisable() => ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
+
+        public void OnLevelChanged() => _holder = ActiveComponentsProvider.BallHolder;
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsNotClone(ball))
-                BallDestroyed?.Invoke();
+            if (other.gameObject.TryGetComponent(out Ball ball))
+            {
+                if (IsNotClone(ball))
+                    BallDestroyed?.Invoke();
 
-            Destroy(ball.gameObject);
+                Destroy(ball.gameObject);
 
-            if (_holder.transform.childCount <= 1)
-                BallsOver?.Invoke();
+                if (_holder.transform.childCount <= 1)
+                    BallsOver?.Invoke();
+            }
+        }
+
+        private bool IsNotClone(Ball ball)
+        {
+            if (_holder == null)
+                _holder = ActiveComponentsProvider.BallHolder;
+
+            return _holder.Contents.Contains(ball);
         }
     }
-
-    private bool IsNotClone(Ball ball) => _holder.Contents.Contains(ball);
 }

@@ -1,36 +1,39 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Flipper : MonoBehaviour
+namespace BounceFactory
 {
-    private readonly float _delay = .1f;
-    private readonly int _acceleration = 10;
-
-    [SerializeField] private float _angle;
-    [SerializeField] private AudioClip _sound;
-
-    private Vector3 _rotation;
-    private bool _isOpened = false;
-
-    private void Start() => _rotation = new(0, 0, _angle);
-
-    private void OnCollisionEnter2D(Collision2D other)
+    public class Flipper : MonoBehaviour
     {
-        if (other.gameObject.TryGetComponent(out Ball ball) && _isOpened)
-            AddAcceleration(ball);
-    }
+        private readonly float _delay = .1f;
+        private readonly int _acceleration = 10;
 
-    public void Open()
-    {
-        AudioManager.Instance.SFXSource.PlayOneShot(_sound);
-        _isOpened = true;
+        [SerializeField] private float _angle;
+        [SerializeField] private AudioClip _sound;
 
-        transform.DORotate(_rotation, _delay).OnComplete(() =>
+        private Vector3 _rotation;
+        private bool _isOpened = false;
+
+        private void Start() => _rotation = new(0, 0, _angle);
+
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            transform.DORotate(Vector3.zero, _delay)
-            .OnComplete(() => _isOpened = false);
-        });
-    }
+            if (other.gameObject.TryGetComponent(out Ball ball) && _isOpened)
+                AddAcceleration(ball);
+        }
 
-    private void AddAcceleration(Ball ball) => ball.Rigidbody.velocity = new(0, _acceleration);
+        public void Open()
+        {
+            AudioManager.Instance.SFXSource.PlayOneShot(_sound);
+            _isOpened = true;
+
+            transform.DORotate(_rotation, _delay).OnComplete(() =>
+            {
+                transform.DORotate(Vector3.zero, _delay)
+                .OnComplete(() => _isOpened = false);
+            });
+        }
+
+        private void AddAcceleration(Ball ball) => ball.Rigidbody.velocity = new(0, _acceleration);
+    }
 }

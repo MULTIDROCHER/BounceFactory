@@ -1,51 +1,54 @@
 using System;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace BounceFactory
 {
-    [SerializeField] private AudioSource _musicSource;
-    [SerializeField] private AudioSource _sfxSource;
-
-    public static AudioManager Instance;
-
-    public event Action<float> VolumeChanged;
-
-    public AudioSource MusicSource => _musicSource;
-    public AudioSource SFXSource => _sfxSource;
-
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        if (Instance == null)
+        [SerializeField] private AudioSource _musicSource;
+        [SerializeField] private AudioSource _sfxSource;
+
+        public static AudioManager Instance;
+
+        public event Action<float> VolumeChanged;
+
+        public AudioSource MusicSource => _musicSource;
+        public AudioSource SFXSource => _sfxSource;
+
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        public void SwitchSource(AudioSource source, SoundButton button)
         {
-            Destroy(gameObject);
+            if (source.volume == 0)
+                Unmute(source, button);
+            else
+                Mute(source, button);
+
+            if (source == _sfxSource)
+                VolumeChanged?.Invoke(source.volume);
         }
-    }
 
-    public void SwitchSource(AudioSource source, SoundButton button)
-    {
-        if (source.volume == 0)
-            Unmute(source, button);
-        else
-            Mute(source, button);
+        private void Mute(AudioSource source, SoundButton button)
+        {
+            source.volume = 0;
+            button.Mute();
+        }
 
-        if (source == _sfxSource)
-            VolumeChanged?.Invoke(source.volume);
-    }
-
-    private void Mute(AudioSource source, SoundButton button)
-    {
-        source.volume = 0;
-        button.Mute();
-    }
-
-    private void Unmute(AudioSource source, SoundButton button)
-    {
-        source.volume = 1;
-        button.Unmute();
+        private void Unmute(AudioSource source, SoundButton button)
+        {
+            source.volume = 1;
+            button.Unmute();
+        }
     }
 }

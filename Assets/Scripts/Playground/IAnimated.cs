@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public interface IAnimated
+namespace BounceFactory
 {
-    const string Trigger = "BallEntered";
+    public interface IAnimated
+    {
+        const string Trigger = "BallEntered";
 
-    void PlayAnimation(Collider2D other);
+        void PlayAnimation(Collider2D other);
+    }
 }

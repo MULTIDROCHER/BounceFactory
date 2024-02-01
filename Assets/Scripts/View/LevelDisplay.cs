@@ -1,54 +1,49 @@
 using TMPro;
 using UnityEngine;
 
-public class LevelDisplay : MonoBehaviour
+namespace BounceFactory
 {
-    [SerializeField] private TMP_Text _levelText;
-    private Item _item;
-    private bool _isDisplayed;
-    private Vector3 _offset = new(0, -.5f, 0);
-    
-    private string ItemLevel => _item.Level.ToString();
-
-    private void Awake()
+    public class LevelDisplay : MonoBehaviour
     {
-        _item = GetComponentInParent<Item>();
+        [SerializeField] private TMP_Text _levelText;
+        private UpgradableObject _item;
+        private bool _isDisplayed;
+        private Vector3 _offset = new(0, -.5f, 0);
 
-        ShowLevel();
-        //HideLevel();
-    }
+        private string ItemLevel => _item.Level.ToString();
 
-    private void LateUpdate()
-    {
-        if (_item == null)
+        private void Awake()
+        {
             _item = GetComponentInParent<Item>();
 
-        if (_isDisplayed)
-        {
-            _levelText.text = ItemLevel;
-            transform.SetPositionAndRotation(_item.transform.position + _offset, Quaternion.identity);
+            HideLevel();
         }
-    }
 
-    private void OnDestroy() => HideLevel();
-
-    public void ShowLevel()
-    {
-        if (_levelText != null)
+        private void LateUpdate()
         {
-            Debug.Log("show");
-            _levelText.gameObject.SetActive(true);
-            _isDisplayed = true;
+            if (_isDisplayed)
+                transform.SetPositionAndRotation(_item.transform.position + _offset, Quaternion.identity);
         }
-    }
 
-    public void HideLevel()
-    {
-        if (_levelText != null)
+        private void OnDestroy() => HideLevel();
+
+        public void ShowLevel()
         {
-            Debug.Log("hide");
-            _levelText.gameObject.SetActive(false);
-            _isDisplayed = false;
+            if (_levelText != null)
+            {
+                _levelText.text = ItemLevel;
+                _levelText.gameObject.SetActive(true);
+                _isDisplayed = true;
+            }
+        }
+
+        public void HideLevel()
+        {
+            if (_levelText != null)
+            {
+                _levelText.gameObject.SetActive(false);
+                _isDisplayed = false;
+            }
         }
     }
 }

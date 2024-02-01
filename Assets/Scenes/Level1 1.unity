@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e11fd3dbc510984c94b2491b41bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 4810541280392428601}
 --- !u!1001 &29996133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3700,8 +3701,18 @@ MonoBehaviour:
   - {fileID: 3558370}
   - {fileID: 2145157856}
   - {fileID: 1111445472}
+  _deadZones:
+  - {fileID: 5003121887601137452}
+  - {fileID: 8339798809123266009}
+  - {fileID: 2079888977161611657}
+  - {fileID: 2400254100167034980}
+  - {fileID: 71679104}
   _ballHolder: {fileID: 27723987}
   _itemHolder: {fileID: 4148533289392668709}
+  _ballSeller: {fileID: 6786601416137551738}
+  _itemSeller: {fileID: 7323313388085828765}
+  _ballSpawner: {fileID: 4810541280392428601}
+  _itemSpawner: {fileID: 5695500454322376991}
 --- !u!1001 &400924452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6616,8 +6627,19 @@ MonoBehaviour:
   - {fileID: 2001278140}
   - {fileID: 2112314287}
   - {fileID: 1464666890}
+  _deadZones:
+  - {fileID: 5003121887601137452}
+  - {fileID: 8339798809123266009}
+  - {fileID: 2079888977161611657}
+  - {fileID: 2400254100167034980}
+  - {fileID: 1782099774}
+  - {fileID: 2165335756135288823}
   _ballHolder: {fileID: 1285809567}
   _itemHolder: {fileID: 4148533289392668709}
+  _ballSeller: {fileID: 6786601416137551738}
+  _itemSeller: {fileID: 7323313388085828765}
+  _ballSpawner: {fileID: 4810541280392428601}
+  _itemSpawner: {fileID: 5695500454322376991}
 --- !u!1 &828792411
 GameObject:
   m_ObjectHideFlags: 0
@@ -7060,6 +7082,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51efbc7cc9bbd8743bef38a4e21266cf, type: 3}
+--- !u!114 &848424729 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2165335756414051169, guid: 51efbc7cc9bbd8743bef38a4e21266cf, type: 3}
+  m_PrefabInstance: {fileID: 848424728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &851081706
 GameObject:
   m_ObjectHideFlags: 0
@@ -9298,6 +9331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e11fd3dbc510984c94b2491b41bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 4810541280392428601}
 --- !u!1001 &1083428058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10287,7 +10321,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.1
+  m_fontSize: 22
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10563,6 +10597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e11fd3dbc510984c94b2491b41bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 4810541280392428601}
 --- !u!1 &1288430085
 GameObject:
   m_ObjectHideFlags: 0
@@ -12210,8 +12245,18 @@ MonoBehaviour:
   - {fileID: 239750896}
   - {fileID: 1888299443}
   - {fileID: 1932413640}
+  _deadZones:
+  - {fileID: 5003121887601137452}
+  - {fileID: 8339798809123266009}
+  - {fileID: 2079888977161611657}
+  - {fileID: 2400254100167034980}
+  - {fileID: 848424729}
   _ballHolder: {fileID: 1899585468}
   _itemHolder: {fileID: 4148533289392668709}
+  _ballSeller: {fileID: 6786601416137551738}
+  _itemSeller: {fileID: 7323313388085828765}
+  _ballSpawner: {fileID: 4810541280392428601}
+  _itemSpawner: {fileID: 5695500454322376991}
 --- !u!1001 &1489479571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12732,8 +12777,18 @@ MonoBehaviour:
   - {fileID: 3789228562185009449}
   - {fileID: 4539233004253706358}
   - {fileID: 1799047624}
+  _deadZones:
+  - {fileID: 2165335755744813819}
+  - {fileID: 5003121887601137452}
+  - {fileID: 8339798809123266009}
+  - {fileID: 2079888977161611657}
+  - {fileID: 2400254100167034980}
   _ballHolder: {fileID: 6573810572073424919}
   _itemHolder: {fileID: 4148533289392668709}
+  _ballSeller: {fileID: 6786601416137551738}
+  _itemSeller: {fileID: 7323313388085828765}
+  _ballSpawner: {fileID: 4810541280392428601}
+  _itemSpawner: {fileID: 5695500454322376991}
 --- !u!1001 &1516839655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15533,8 +15588,18 @@ MonoBehaviour:
   - {fileID: 1846475708}
   - {fileID: 1294961418}
   - {fileID: 1965209523}
+  _deadZones:
+  - {fileID: 5003121887601137452}
+  - {fileID: 8339798809123266009}
+  - {fileID: 2079888977161611657}
+  - {fileID: 2400254100167034980}
+  - {fileID: 853253173}
   _ballHolder: {fileID: 1068514843}
   _itemHolder: {fileID: 4148533289392668709}
+  _ballSeller: {fileID: 6786601416137551738}
+  _itemSeller: {fileID: 7323313388085828765}
+  _ballSpawner: {fileID: 4810541280392428601}
+  _itemSpawner: {fileID: 5695500454322376991}
 --- !u!1001 &1872294061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15942,6 +16007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e11fd3dbc510984c94b2491b41bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 4810541280392428601}
 --- !u!1 &1908343534
 GameObject:
   m_ObjectHideFlags: 0
@@ -19228,7 +19294,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.95
+  m_fontSize: 14.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20076,7 +20142,7 @@ Transform:
   m_GameObject: {fileID: 553033684674308810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.02, y: 3.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20521,7 +20587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a4e41d5730cc94e9e30597d6697cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 4810541280392428601}
+  _seller: {fileID: 6786601416137551738}
   _button: {fileID: 5503219444747307737}
 --- !u!114 &1866196580757414516
 MonoBehaviour:
@@ -23064,6 +23130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d915a9c7b32784eb7f536bfb613ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 5695500454322376991}
 --- !u!114 &4198639142044177625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23922,6 +23989,7 @@ MonoBehaviour:
   Templates:
   - {fileID: 5893245641657076989, guid: 2342a7ea056b25c44b007cdc4ba92d21, type: 3}
   PriceChanger: {fileID: 6786601416137551738}
+  Holder: {fileID: 0}
 --- !u!1 &4856718599331185245
 GameObject:
   m_ObjectHideFlags: 0
@@ -24724,6 +24792,7 @@ MonoBehaviour:
   - {fileID: 1044407436595424873, guid: b67393629a492cd4b824730961c41e44, type: 3}
   - {fileID: -8270306399387905893, guid: a78a1c5e0b3713c40b922de576fb8742, type: 3}
   PriceChanger: {fileID: 7323313388085828765}
+  Holder: {fileID: 4148533289392668709}
 --- !u!114 &5747449358581375466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25924,6 +25993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e11fd3dbc510984c94b2491b41bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 4810541280392428601}
 --- !u!1 &6578450971092728124
 GameObject:
   m_ObjectHideFlags: 0
@@ -27548,6 +27618,8 @@ MonoBehaviour:
   _overlay: {fileID: 1468109589760026523}
   _mask: {fileID: 278097097826669176}
   _text: {fileID: 7626672723259234902}
+  _merger: {fileID: 1841780059030777404}
+  _itemHolder: {fileID: 4148533289392668709}
 --- !u!114 &8058004368914710563
 MonoBehaviour:
   m_ObjectHideFlags: 0

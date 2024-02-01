@@ -1,17 +1,20 @@
-public class TutorialStateMachine
+namespace BounceFactory
 {
-    public TutorialStep CurrentState { get; private set; }
-
-    public void Initialize(TutorialStep startState)
+    public class TutorialStateMachine
     {
-        CurrentState = startState;
-        CurrentState.Enter();
-    }
+        public TutorialStep CurrentState { get; private set; }
 
-    public void ChangeState(TutorialStep newState)
-    {
-        CurrentState.Exit();
-        CurrentState = newState;
-        CurrentState.Enter();
+        public void Initialize(TutorialStep startState)
+        {
+            CurrentState = startState;
+            CurrentState.Enter();
+        }
+
+        public void ChangeState(TutorialStep newState)
+        {
+            CurrentState.Exit();
+            CurrentState = newState;
+            CurrentState.Enter();
+        }
     }
 }

@@ -1,32 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsMergeStep : TutorialStep
+namespace BounceFactory
 {
-    protected override Dictionary<string, string> CommonMessages()
+    public class ItemsMergeStep : TutorialStep
     {
-        return new Dictionary<string, string>() {
+        protected override Dictionary<string, string> CommonMessages()
+        {
+            return new Dictionary<string, string>() {
 { "ru", "перемести один предмет на другой,\nчтобы объединить их" },
 { "en", "move one item over another\nto merge them" },
 { "tr", "birleştirmek için bir öğeyi\ndiğerinin üzerine taşıyın" },
     };
-    }
+        }
 
-    private UpgradeHandler[] _handlers;
+        private List<UpgradeHandler> _handlers;
 
-    public override void Enter()
-    {
-        _handlers = Object.FindObjectsOfType<UpgradeHandler>();
+        private ItemHolder _holder => TutorialManager.Instance.ItemHolder;
 
-        foreach (var handler in _handlers)
-            handler.Performed += OnPerformed;
+        public override void Enter()
+        {
+            foreach (var item in _holder.Contents)
+                _handlers.Add(item.GetComponent<UpgradeHandler>());
 
-        OnUnneedMask(CommonMessages()[Language]);
-    }
+            foreach (var handler in _handlers)
+                handler.Performed += OnPerformed;
 
-    public override void Exit()
-    {
-        foreach (var handler in _handlers)
-            handler.Performed -= OnPerformed;
+            OnUnneedMask(CommonMessages()[Language]);
+        }
+
+        public override void Exit()
+        {
+            foreach (var handler in _handlers)
+                handler.Performed -= OnPerformed;
+        }
     }
 }
