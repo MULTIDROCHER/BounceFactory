@@ -1,0 +1,376 @@
+{
+  "version": 2,
+  "warnings": [
+    {
+      "id": 0,
+      "falseAlarm": false,
+      "code": "Renew",
+      "cwe": 0,
+      "level": 1,
+      "message": "Your license will expire in 8 days. Click 'Renew' to learn more or contact us at support@viva64.com. This is an information message. You can continue using the analyzer with your current license. To hide this message, use the '--disableLicenseExpirationCheck' flag.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 0,
+          "endLine": 0,
+          "file": "",
+          "navigation": {
+            "currentLine": 0,
+            "previousLine": 0,
+            "nextLine": 0,
+            "columns": 0
+          }
+        }
+      ],
+      "projects": [],
+      "sastId": ""
+    },
+    {
+      "id": 1,
+      "falseAlarm": false,
+      "code": "V3149",
+      "cwe": 476,
+      "level": 3,
+      "message": "Dereferencing the result of 'as' operator can lead to NullReferenceException. Consider inspecting 'Performer'.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 19,
+          "endLine": 19,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Tutorial\\PurchaseStep.cs",
+          "navigation": {
+            "currentLine": -1498735303,
+            "previousLine": 72202920,
+            "nextLine": 125,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 18,
+          "endLine": 18,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Tutorial\\PurchaseStep.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 2,
+      "falseAlarm": false,
+      "code": "V3024",
+      "cwe": 682,
+      "level": 3,
+      "message": "An odd precise comparison: Source.volume == 0. Consider using a comparison with defined precision: Math.Abs(A - B) < Epsilon.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 22,
+          "endLine": 22,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\UI\\Sound\\SoundButton.cs",
+          "navigation": {
+            "currentLine": 49447653,
+            "previousLine": 123,
+            "nextLine": 6465,
+            "columns": 0
+          }
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 3,
+      "falseAlarm": false,
+      "code": "V3119",
+      "cwe": 0,
+      "level": 2,
+      "message": "Calling overridden event 'Bought' may lead to unpredictable behavior. Consider implementing event accessors explicitly or use 'sealed' keyword.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 20,
+          "endLine": 20,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Logic\\Spawning\\BallSpawner.cs",
+          "navigation": {
+            "currentLine": 6409009,
+            "previousLine": 2050770593,
+            "nextLine": 125,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 11,
+          "endLine": 11,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Logic\\Spawning\\BallSpawner.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 4,
+      "falseAlarm": false,
+      "code": "V3110",
+      "cwe": 674,
+      "level": 1,
+      "message": "Possible infinite recursion inside 'Teleportation' method.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 96,
+          "endLine": 96,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\BaseObjects\\TeleportItem.cs",
+          "navigation": {
+            "currentLine": -1837990724,
+            "previousLine": 910691736,
+            "nextLine": 125,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 85,
+          "endLine": 85,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\BaseObjects\\TeleportItem.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 5,
+      "falseAlarm": false,
+      "code": "V3110",
+      "cwe": 674,
+      "level": 1,
+      "message": "Possible infinite recursion inside 'ReactivateTeleportable' method.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 104,
+          "endLine": 104,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\BaseObjects\\TeleportItem.cs",
+          "navigation": {
+            "currentLine": 841616792,
+            "previousLine": -2056910974,
+            "nextLine": 125,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 99,
+          "endLine": 99,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\BaseObjects\\TeleportItem.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 6,
+      "falseAlarm": false,
+      "code": "V3084",
+      "cwe": 0,
+      "level": 1,
+      "message": "Anonymous function is used to unsubscribe from 'ChildAdded' event. No handlers will be unsubscribed, as a separate delegate instance is created for each anonymous function declaration.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 16,
+          "endLine": 16,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Display\\ItemLevel\\ItemLevelView.cs",
+          "navigation": {
+            "currentLine": 965561571,
+            "previousLine": 0,
+            "nextLine": 0,
+            "columns": 0
+          }
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 7,
+      "falseAlarm": false,
+      "code": "V3146",
+      "cwe": 476,
+      "level": 2,
+      "message": "Possible null dereference of 'Controller'. The 'FirstOrDefault' can return default null value.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 19,
+          "endLine": 19,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Tutorial\\FlipperStep.cs",
+          "navigation": {
+            "currentLine": -760537722,
+            "previousLine": 0,
+            "nextLine": 0,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 17,
+          "endLine": 17,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Tutorial\\FlipperStep.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 8,
+      "falseAlarm": false,
+      "code": "V3119",
+      "cwe": 0,
+      "level": 2,
+      "message": "Calling overridden event 'Bought' may lead to unpredictable behavior. Consider implementing event accessors explicitly or use 'sealed' keyword.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 39,
+          "endLine": 39,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Logic\\Spawning\\ItemSpawner.cs",
+          "navigation": {
+            "currentLine": 6409009,
+            "previousLine": 127792535,
+            "nextLine": 125,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 21,
+          "endLine": 21,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Logic\\Spawning\\ItemSpawner.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 9,
+      "falseAlarm": false,
+      "code": "V3027",
+      "cwe": 476,
+      "level": 1,
+      "message": "The variable '_spawnPoints' was utilized in the logical expression before it was verified against null in the same logical expression.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 25,
+          "endLine": 25,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\Logic\\Spawning\\ItemSpawner.cs",
+          "navigation": {
+            "currentLine": 640165772,
+            "previousLine": 123,
+            "nextLine": 6460505,
+            "columns": 0
+          }
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 10,
+      "falseAlarm": false,
+      "code": "V3024",
+      "cwe": 682,
+      "level": 3,
+      "message": "An odd precise comparison: source.volume == 0. Consider using a comparison with defined precision: Math.Abs(A - B) < Epsilon.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 34,
+          "endLine": 34,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\System\\Game\\AudioPlayer.cs",
+          "navigation": {
+            "currentLine": 47350501,
+            "previousLine": 123,
+            "nextLine": 242330921,
+            "columns": 0
+          }
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    },
+    {
+      "id": 11,
+      "falseAlarm": false,
+      "code": "V3188",
+      "cwe": 0,
+      "level": 1,
+      "message": "The value of the 'level' expression is a potentially destroyed Unity object or null. Property access on this value may lead to an exception.",
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 68,
+          "endLine": 68,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\System\\Game\\LevelSwitcher.cs",
+          "navigation": {
+            "currentLine": 214297029,
+            "previousLine": 539,
+            "nextLine": 125,
+            "columns": 0
+          }
+        },
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 65,
+          "endLine": 65,
+          "file": "e:\\REPOS\\BounceFactory\\Assets\\Scripts\\System\\Game\\LevelSwitcher.cs"
+        }
+      ],
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "sastId": ""
+    }
+  ]
+}

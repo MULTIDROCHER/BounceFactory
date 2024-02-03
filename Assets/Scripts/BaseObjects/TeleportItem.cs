@@ -13,8 +13,8 @@ namespace BounceFactory.BaseObjects
     [RequireComponent(typeof(EffectApplier))]
     public class TeleportItem : Item
     {
-        private readonly List<TeleportableObject> _inPortal = new ();
-        private readonly Color _destroyingColor = new (1, 1, 1, 0);
+        private readonly List<TeleportableObject> _inPortal = new();
+        private readonly Color _destroyingColor = new(1, 1, 1, 0);
         private readonly float _delay = 2;
 
         private Holder<Item> _holder;
@@ -27,7 +27,7 @@ namespace BounceFactory.BaseObjects
         protected override void Awake()
         {
             base.Awake();
-            _wait = new (_delay);
+            _wait = new(_delay);
             DestroyingCoroutine = OnDestroying();
 
             _holder = ActiveComponentsProvider.ItemHolder;
@@ -55,6 +55,7 @@ namespace BounceFactory.BaseObjects
 
             yield return _wait;
 
+            StopAllCoroutines();
             Destroy(gameObject);
         }
 
@@ -93,7 +94,6 @@ namespace BounceFactory.BaseObjects
                 Appear(teleportable, portal);
 
             StartCoroutine(ReactivateTeleportable(teleportable));
-            StopCoroutine(Teleportation(teleportable, portal));
         }
 
         private IEnumerator ReactivateTeleportable(TeleportableObject teleportable)
@@ -101,7 +101,6 @@ namespace BounceFactory.BaseObjects
             yield return _wait;
 
             _inPortal.Remove(teleportable);
-            StopCoroutine(ReactivateTeleportable(teleportable));
         }
 
         private TeleportItem TryFindPortal() => (TeleportItem)_holder.Contents.Find(item => item != this);

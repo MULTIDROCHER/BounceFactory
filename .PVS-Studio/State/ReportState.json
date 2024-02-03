@@ -1,0 +1,58 @@
+{
+  "json": [
+    {
+      "code": "V051",
+      "message": "Some of the references in 'Assembly-CSharp' project are missing or incorrect. The analysis results could be incomplete. Consider making the project fully compilable and building it before analysis.",
+      "falseAlarm": false,
+      "level": 3,
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 0,
+          "endLine": 0,
+          "file": "",
+          "navigation": {
+            "currentLine": 0,
+            "previousLine": 0,
+            "nextLine": 0,
+            "columns": 0
+          }
+        }
+      ],
+      "cwe": 0,
+      "sastId": "",
+      "projects": [
+        "Assembly-CSharp"
+      ],
+      "favorite": false,
+      "id": 0
+    },
+    {
+      "code": "Renew",
+      "message": "Your license will expire in 8 days. Click 'Renew' to learn more or contact us at support@viva64.com. This is an information message. You can continue using the analyzer with your current license. To hide this message, use the '--disableLicenseExpirationCheck' flag.",
+      "falseAlarm": false,
+      "level": 1,
+      "positions": [
+        {
+          "column": 1,
+          "endColumn": 1,
+          "line": 0,
+          "endLine": 0,
+          "file": "",
+          "navigation": {
+            "currentLine": 0,
+            "previousLine": 0,
+            "nextLine": 0,
+            "columns": 0
+          }
+        }
+      ],
+      "cwe": 0,
+      "sastId": "",
+      "projects": [],
+      "favorite": false,
+      "id": 1
+    }
+  ]
+}

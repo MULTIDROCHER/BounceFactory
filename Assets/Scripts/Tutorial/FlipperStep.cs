@@ -16,7 +16,8 @@ namespace BounceFactory.Tutorial
         {
             Controller = Object.FindObjectsOfType<FlipperActivator>().Where(controller => controller.KeyCode == KeyCode).FirstOrDefault();
 
-            Controller.Performed += OnPerformed;
+            if (Controller != null)
+                Controller.Performed += OnPerformed;
 
             if (YandexGame.EnvironmentData.isDesktop)
                 OnUnneedMask(ComputerMessages()[Language]);
@@ -24,6 +25,10 @@ namespace BounceFactory.Tutorial
                 OnNeedMask(MobileMessages()[Language], Controller.transform);
         }
 
-        public override void Exit() => Controller.Performed -= OnPerformed;
+        public override void Exit()
+        {
+            if (Controller != null)
+                Controller.Performed -= OnPerformed;
+        }
     }
 }

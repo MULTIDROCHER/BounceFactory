@@ -64,8 +64,6 @@ namespace BounceFactory.System.Game
             {
                 if (level != null)
                     level.gameObject.SetActive(false);
-                else
-                    Debug.Log(level.name);
             }
 
             while (_current == tempLevel || _current == null)

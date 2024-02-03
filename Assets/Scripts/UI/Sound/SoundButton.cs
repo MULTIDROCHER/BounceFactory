@@ -1,4 +1,5 @@
 using BounceFactory.System.Game;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ namespace BounceFactory.UI.Sound
 
         protected virtual void Start()
         {
-            if (Source.volume == 0)
+            if (Math.Abs(Source.volume - 0) < float.Epsilon)
                 Mute();
             else
                 Unmute();

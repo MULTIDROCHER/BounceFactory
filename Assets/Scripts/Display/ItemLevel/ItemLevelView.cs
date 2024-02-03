@@ -7,13 +7,13 @@ namespace BounceFactory.Display.ItemLevel
 {
     public class ItemLevelView : MonoBehaviour
     {
-        private List<ItemLevelDisplay> _itemsLevel = new ();
+        private List<ItemLevelDisplay> _itemsLevel = new();
 
         [SerializeField] private Holder<Item> _holder;
 
-        private void OnEnable() => _holder.ChildAdded += () => GetLevelDisplays();
+        private void OnEnable() => _holder.ChildAdded += OnItemAdded;
 
-        private void OnDisable() => _holder.ChildAdded -= () => GetLevelDisplays();
+        private void OnDisable() => _holder.ChildAdded -= OnItemAdded;
 
         public void ShowLevel()
         {
@@ -27,15 +27,13 @@ namespace BounceFactory.Display.ItemLevel
                 level.HideLevel();
         }
 
-        private void GetLevelDisplays()
+        private void OnItemAdded()
         {
-            _itemsLevel.Clear();
-
             foreach (var item in _holder.Contents)
             {
                 var display = item.LevelDisplay;
 
-                if (display != null)
+                if (display != null && _itemsLevel.Contains(display) == false)
                     _itemsLevel.Add(display);
             }
         }

@@ -5,9 +5,9 @@
     "message": "",
     "files": "",
     "level": [
-      0,
       1,
       2,
+      0,
       3
     ],
     "isColumnFiltersVisible": true,
@@ -15,10 +15,11 @@
     "isGroupFiltersVisible": true,
     "type": [
       "General",
-      "Optimization"
+      "Optimization",
+      "Custom",
+      "MISRA",
+      "OWASP"
     ]
   },
-  "loadableProcessIds": [
-    "loadState"
-  ]
+  "loadableProcessIds": []
 }

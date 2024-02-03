@@ -31,7 +31,7 @@ namespace BounceFactory.System.Game
 
         public void SwitchSource(AudioSource source, SoundButton button)
         {
-            if (source.volume == 0)
+            if (Math.Abs(source.volume) < float.Epsilon)
                 Unmute(source, button);
             else
                 Mute(source, button);

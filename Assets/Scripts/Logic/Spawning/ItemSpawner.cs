@@ -22,7 +22,7 @@ namespace BounceFactory.Logic.Spawning
 
         public override void Spawn()
         {
-            if (_spawnPoints.Count == 0 || _spawnPoints == null)
+            if (_spawnPoints == null || _spawnPoints.Count == 0)
                 OnLevelChanged();
 
             var point = GetPointToSpawn();

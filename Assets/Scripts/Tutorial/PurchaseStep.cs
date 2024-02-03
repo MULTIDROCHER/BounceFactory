@@ -16,9 +16,15 @@ namespace BounceFactory.Tutorial
             PriceView = Object.FindFirstObjectByType<PriceView<T>>();
             PriceChanger = PriceView.PriceChanger;
             Performer = PriceChanger as ITutorialEvent;
-            Performer.Performed += OnPerformed;
+
+            if (Performer != null)
+                Performer.Performed += OnPerformed;
         }
 
-        public override void Exit() => Performer.Performed -= OnPerformed;
+        public override void Exit()
+        {
+            if (Performer != null)
+                Performer.Performed -= OnPerformed;
+        }
     }
 }
