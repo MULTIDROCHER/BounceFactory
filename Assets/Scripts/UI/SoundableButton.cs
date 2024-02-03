@@ -1,9 +1,10 @@
+using BounceFactory.System.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using YG;
 
-namespace BounceFactory
+namespace BounceFactory.UI
 {
     [RequireComponent(typeof(Button))]
     public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
@@ -15,14 +16,19 @@ namespace BounceFactory
         private Vector3 _increasedScale = new(.1f, .1f, 0);
         private Vector3 _defaultScale;
 
+        private void Awake()
+        {
+            _button = GetComponent<Button>();
+            _source = AudioPlayer.Instance.SFXSource;
+        }
+
         private void Start()
         {
-            _source = AudioManager.Instance.SFXSource;
-            _button = GetComponent<Button>();
             _defaultScale = transform.localScale;
-
             _button.onClick.AddListener(() => PlaySound());
         }
+
+        private void OnDestroy() => _button.onClick.RemoveAllListeners();
 
         public void OnPointerDown(PointerEventData eventData) => IncreaseScale();
 

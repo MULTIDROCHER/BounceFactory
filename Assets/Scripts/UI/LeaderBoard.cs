@@ -1,7 +1,8 @@
+using BounceFactory.UI.Window;
 using UnityEngine;
 using YG;
 
-namespace BounceFactory
+namespace BounceFactory.UI
 {
     public class LeaderBoard : MonoBehaviour
     {

@@ -1,10 +1,10 @@
 using YG;
 
-namespace BounceFactory
+namespace BounceFactory.System
 {
     public static class NumsFormater
     {
-        private static readonly string[] _enNames = new[]{
+        private static readonly string[] _enNames = new []{
         "",
         "K",
         "M",
@@ -14,7 +14,7 @@ namespace BounceFactory
         "QN",
     };
 
-        private static readonly string[] _ruNames = new[]{
+        private static readonly string[] _ruNames = new []{
         "",
         "Т",
         "МЛ",
@@ -24,7 +24,7 @@ namespace BounceFactory
         "КТ",
     };
 
-        private static readonly string[] _trNames = new[]{
+        private static readonly string[] _trNames = new []{
         "",
         "B",
         "ML",

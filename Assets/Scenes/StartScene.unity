@@ -1046,6 +1046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _messageWindow: {fileID: 0}
+  _exitController: {fileID: 606697385}
 --- !u!114 &553466167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,6 +1470,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8353463384737388040, guid: ecd20ba3aeca5494d86411ff0781f2e3, type: 3}
   m_PrefabInstance: {fileID: 747960077}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &606697385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4729140355036526117, guid: ecd20ba3aeca5494d86411ff0781f2e3, type: 3}
+  m_PrefabInstance: {fileID: 747960077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606697384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3adacabe05667e45a3cda4bd4b5179f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &738226476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1569,10 +1581,6 @@ PrefabInstance:
       propertyPath: _loadingScreen
       value: 
       objectReference: {fileID: 1975063968}
-    - target: {fileID: 7831391666144059707, guid: ecd20ba3aeca5494d86411ff0781f2e3, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7831391666144059707, guid: ecd20ba3aeca5494d86411ff0781f2e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.18097092
@@ -4247,6 +4255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _messageWindow: {fileID: 0}
+  _exitController: {fileID: 606697385}
 --- !u!114 &3165826293425875509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6044,6 +6053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _messageWindow: {fileID: 6037580892013065142}
+  _exitController: {fileID: 606697385}
 --- !u!224 &8396261025847794313
 RectTransform:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ MonoBehaviour:
   saveOnQuitGame: 1
   quitGameParameters:
     objectName: GameManager
-    methodName: SaveChanges
+    methodName: ExitLevel
   leaderboardEnable: 1
   saveScoreAnonymousPlayers: 1
   leaderboardSimulation:

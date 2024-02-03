@@ -1,6 +1,8 @@
+using BounceFactory.BaseObjects;
+using BounceFactory.Display;
 using UnityEngine;
 
-namespace BounceFactory
+namespace BounceFactory.Score
 {
     [RequireComponent(typeof(Item))]
     public class BonusHandler : MonoBehaviour
@@ -9,7 +11,7 @@ namespace BounceFactory
 
         private Item _item;
 
-        private void Start() => TryGetComponent(out _item);
+        private void Start() => _item = GetComponent<Item>();
 
         private void OnCollisionEnter2D(Collision2D other) => TryGetRevard(other.gameObject, other.GetContact(0).point);
 
@@ -17,7 +19,8 @@ namespace BounceFactory
 
         private void TryGetRevard(GameObject other, Vector3 position)
         {
-            if (enabled && other.TryGetComponent(out Ball ball) && _item.Type != ItemType.Teleport)
+            if (enabled && other.TryGetComponent(out Ball ball)
+            && _item.TryGetComponent(out TeleportItem _) == false)
                 AddBonus(position, ball);
         }
 

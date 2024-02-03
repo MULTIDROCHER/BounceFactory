@@ -1,9 +1,10 @@
+using BounceFactory.System;
 using System;
 using TMPro;
 using UnityEngine;
 using YG;
 
-namespace BounceFactory
+namespace BounceFactory.Score
 {
     [RequireComponent(typeof(TMP_Text))]
     public class ScoreCounter : MonoBehaviour
@@ -23,14 +24,9 @@ namespace BounceFactory
         private void Awake()
         {
             if (Instance == null)
-            {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
             else
-            {
                 Destroy(gameObject);
-            }
 
             _scoreText = GetComponent<TMP_Text>();
             _baseText = _scoreText.text + "\n";

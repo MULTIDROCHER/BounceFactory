@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2239392c96d57974492e61ba99329b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
   _spawnEffect: {fileID: 2708598583397607910, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
   _destroyEffect: {fileID: 198591319186534902, guid: de73b98ff812c774783bd145fc25cadb, type: 3}
 --- !u!114 &8973782570689397465
@@ -317,4 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028b3ced929af50499000f7b46c7d8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bonusDisplay: {fileID: 0}
+  _bonusDisplay: {fileID: 6214025846911086506, guid: 6357305de9471004abaed6511631fa05, type: 3}
