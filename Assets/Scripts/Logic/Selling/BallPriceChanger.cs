@@ -11,7 +11,7 @@ namespace BounceFactory.Logic.Selling
         private readonly int _startPrice = 50;
         private readonly float _priceIncrease = 1.5f;
 
-        [SerializeField] private DeadZonesManager _zonesManager;
+        [SerializeField] private DeadZonesProcessor _zonesProcessor;
 
         public event Action Performed;
         
@@ -19,14 +19,14 @@ namespace BounceFactory.Logic.Selling
 
         private void Start()
         {
-            _zonesManager.BallDestroyed += OnBallDestroyed;
-            _zonesManager.BallsOver += OnBallsOver;
+            _zonesProcessor.BallDestroyed += OnBallDestroyed;
+            _zonesProcessor.BallsOver += OnBallsOver;
         }
 
         private void OnDestroy()
         {
-            _zonesManager.BallDestroyed -= OnBallDestroyed;
-            _zonesManager.BallsOver -= OnBallsOver;
+            _zonesProcessor.BallDestroyed -= OnBallDestroyed;
+            _zonesProcessor.BallsOver -= OnBallsOver;
         }
 
         protected override void SetPrices()

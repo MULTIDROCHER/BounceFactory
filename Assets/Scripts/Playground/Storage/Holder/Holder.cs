@@ -9,49 +9,49 @@ namespace BounceFactory.Playground.Storage.Holder
     public abstract class Holder<T> : MonoBehaviour 
     where T : UpgradableObject
     {
-        private readonly List<T> Children = new ();
+        private readonly List<T> _children = new ();
 
-        private int childCount;
+        private int _childCount;
 
         public event Action ChildAdded;
 
-        public List<T> Contents => Children;
+        public List<T> Contents => _children;
 
-        private void OnEnable() => ActiveComponentsProvider.LevelExit += Reset;
+        private void OnEnable() => ActiveComponentsProvider.LevelExit += OnLevelExit;
 
-        private void OnDisable() => ActiveComponentsProvider.LevelExit -= Reset;
+        private void OnDisable() => ActiveComponentsProvider.LevelExit -= OnLevelExit;
 
         private void FixedUpdate()
         {
-            if (transform.childCount != childCount)
+            if (transform.childCount != _childCount)
             {
-                childCount = transform.childCount;
+                _childCount = transform.childCount;
                 UpdateContent();
             }
         }
 
-        private void Reset()
-        {
-            for (int i = Children.Count - 1; i >= 0; i--)
-            {
-                if (Children[i] != null)
-                    Destroy(Children[i].gameObject);
-            }
-
-            Children.Clear();
-        }
-
         public void UpdateContent()
         {
-            Children.Clear();
+            _children.Clear();
 
             foreach (var child in transform.GetComponentsInChildren<T>())
             {
                 if (child != null)
-                    Children.Add(child);
+                    _children.Add(child);
             }
 
             ChildAdded?.Invoke();
+        }
+
+        private void OnLevelExit()
+        {
+            for (int i = _children.Count - 1; i >= 0; i--)
+            {
+                if (_children[i] != null)
+                    Destroy(_children[i].gameObject);
+            }
+
+            _children.Clear();
         }
     }
 }

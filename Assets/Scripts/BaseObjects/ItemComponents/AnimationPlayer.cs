@@ -4,7 +4,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
 {
     public class AnimationPlayer
     {
-        private const string Trigger = "BallEntered";
+        private const string BallEnterTrigger = "BallEntered";
 
         private readonly Animator _animator;
 
@@ -13,6 +13,6 @@ namespace BounceFactory.BaseObjects.ItemComponents
             _animator = animator;
         }
 
-        public void PlayAnimation() => _animator.SetTrigger(Trigger);
+        public void PlayAnimation() => _animator.SetTrigger(BallEnterTrigger);
     }
 }

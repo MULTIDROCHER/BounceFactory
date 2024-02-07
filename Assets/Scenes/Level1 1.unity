@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!61 &71679105
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7207,7 +7207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!61 &853253174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10255,7 +10255,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.55
+  m_fontSize: 20.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14416,7 +14416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!61 &1782099775
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18989,7 +18989,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.9
+  m_fontSize: 13.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20577,7 +20577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!1 &2099737988851416201
 GameObject:
   m_ObjectHideFlags: 0
@@ -20701,7 +20701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!114 &2165335756135288823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20714,7 +20714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!1 &2205508924407247237
 GameObject:
   m_ObjectHideFlags: 0
@@ -20871,7 +20871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!223 &2455963990506831423
 Canvas:
   m_ObjectHideFlags: 0
@@ -24101,7 +24101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!222 &5042075428015668358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26285,8 +26285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed851bcf7076354eab018fe253d9a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 4810541280392428601}
-  _zonesManager: {fileID: 5115113093811842076}
+  Spawner: {fileID: 4810541280392428601}
+  _zonesProcessor: {fileID: 5115113093811842076}
 --- !u!114 &6851667647648325802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26614,7 +26614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb410aa3291ef7d4f8036a931f4048ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 5695500454322376991}
+  Spawner: {fileID: 5695500454322376991}
 --- !u!114 &7372714356144017317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28073,7 +28073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10acecca78327845aaeef90854296ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonesManager: {fileID: 5115113093811842076}
+  _processor: {fileID: 0}
 --- !u!1 &8374965263536019488
 GameObject:
   m_ObjectHideFlags: 0

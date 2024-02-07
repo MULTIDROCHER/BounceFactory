@@ -7,28 +7,28 @@ namespace BounceFactory.Tutorial
 {
     public abstract class FlipperStep : TutorialStep
     {
-        protected KeyCode KeyCode;
-        protected FlipperActivator Controller;
+        protected KeyCode ActivatorButton;
+        protected FlipperActivator Activator;
 
-        public FlipperStep(KeyCode controllerKey) => KeyCode = controllerKey;
+        public FlipperStep(KeyCode activatorButton) => ActivatorButton = activatorButton;
 
         public override void Enter()
         {
-            Controller = Object.FindObjectsOfType<FlipperActivator>().Where(controller => controller.KeyCode == KeyCode).FirstOrDefault();
+            Activator = Object.FindObjectsOfType<FlipperActivator>().Where(activator => activator.KeyCode == ActivatorButton).FirstOrDefault();
 
-            if (Controller != null)
-                Controller.Performed += OnPerformed;
+            if (Activator != null)
+                Activator.Performed += OnPerformed;
 
             if (YandexGame.EnvironmentData.isDesktop)
                 OnUnneedMask(ComputerMessages()[Language]);
             else
-                OnNeedMask(MobileMessages()[Language], Controller.transform);
+                OnNeedMask(MobileMessages()[Language], Activator.transform);
         }
 
         public override void Exit()
         {
-            if (Controller != null)
-                Controller.Performed -= OnPerformed;
+            if (Activator != null)
+                Activator.Performed -= OnPerformed;
         }
     }
 }

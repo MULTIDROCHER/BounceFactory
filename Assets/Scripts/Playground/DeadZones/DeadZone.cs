@@ -5,14 +5,14 @@ namespace BounceFactory.Playground.DeadZones
 {
     public class DeadZone : MonoBehaviour
     {
-        [SerializeField] private DeadZonesManager _zonesManager;
+        [SerializeField] private DeadZonesProcessor _processor;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out Ball ball))
             {
                 if (IsNotClone(ball))
-                    _zonesManager.OnBallDestroyed();
+                    _processor.OnBallDestroyed();
 
                 Destroy(ball.gameObject);
             }

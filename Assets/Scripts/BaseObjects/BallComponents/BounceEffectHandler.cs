@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BounceFactory.BaseObjects.BallComponents
 {
-    public class BounceHandler : MonoBehaviour
+    public class BounceEffectHandler : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _effect;
 

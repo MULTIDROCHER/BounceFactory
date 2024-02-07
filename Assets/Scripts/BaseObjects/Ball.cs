@@ -3,6 +3,7 @@ using UnityEngine;
 namespace BounceFactory.BaseObjects
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     public class Ball : UpgradableObject
     {
         private Rigidbody2D _rigidbody;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BounceFactory.Playground.DeadZones
 {
-    public class DeadZonesManager : MonoBehaviour
+    public class DeadZonesProcessor : MonoBehaviour
     {
         private Holder<Ball> _ballHolder;
 

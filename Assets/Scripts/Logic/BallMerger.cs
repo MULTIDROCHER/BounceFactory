@@ -19,7 +19,7 @@ namespace BounceFactory.Logic
     public class BallMerger : MonoBehaviour, ITutorialEvent
     {
         [SerializeField] private BallPriceChanger _seller;
-        [SerializeField] private MergeButton _button;
+        [SerializeField] private BallsMergeButton _button;
 
         private readonly int _requiredAmount = 3;
         private readonly float _duration = 2;
@@ -31,7 +31,7 @@ namespace BounceFactory.Logic
 
         public event Action Performed;
 
-        public MergeButton Button => _button;
+        public BallsMergeButton Button => _button;
 
         private void Start()
         {
@@ -113,7 +113,7 @@ namespace BounceFactory.Logic
             StopAllCoroutines();
 
             _effectApplier.DoEffect(transform.position);
-            ball.ChangeColor(_colorChanger.ChangeColor(ball));
+            ball.ChangeColor(_colorChanger.SetColorByLevel(ball));
             ball.LevelUp();
             ball.Collider.enabled = true;
         }

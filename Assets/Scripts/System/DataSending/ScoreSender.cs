@@ -5,7 +5,7 @@ namespace BounceFactory.System.DataSending
 {
     public class ScoreSender : MonoBehaviour
     {
-        public void TryToRewriteLeaderboardScore()
+        public void RewriteLeaderboardScore()
         {
             if (YandexGame.savesData.PreviousLevel < YandexGame.savesData.Level)
             {

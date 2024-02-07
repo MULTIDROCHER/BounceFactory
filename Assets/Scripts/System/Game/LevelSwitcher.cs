@@ -16,7 +16,7 @@ namespace BounceFactory.System.Game
         [SerializeField] private Image _background;
         [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private GameObject _finishWindow;
-        [SerializeField] private ExitController _exitController;
+        [SerializeField] private LevelExitController _exitController;
 
         private LevelData _current;
 
@@ -25,13 +25,13 @@ namespace BounceFactory.System.Game
         private void OnEnable()
         {
             _progressBar.GoalReached += OnGoalReached;
-            _exitController.OnLevelExit += SaveChanges;
+            _exitController.LevelExited += SaveChanges;
         }
 
         private void OnDisable()
         {
             _progressBar.GoalReached -= OnGoalReached;
-            _exitController.OnLevelExit -= SaveChanges;
+            _exitController.LevelExited -= SaveChanges;
         }
 
         public void ChangeLevel()
@@ -82,7 +82,7 @@ namespace BounceFactory.System.Game
 
         private void SaveChanges()
         {
-            SavesController.SaveProgres(_progressBar);
+            ProgressSaver.SaveProgress(_progressBar);
             MetricsSender.CreateMetrics();
         }
     }

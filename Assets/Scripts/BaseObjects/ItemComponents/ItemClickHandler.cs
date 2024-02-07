@@ -7,12 +7,12 @@ namespace BounceFactory.BaseObjects.ItemComponents
 {
     [RequireComponent(typeof(Item))]
     [RequireComponent(typeof(ItemMover))]
-    [RequireComponent(typeof(BonusHandler))]
+    [RequireComponent(typeof(BonusAdder))]
     public class ItemClickHandler : MonoBehaviour
     {
         private ItemLevelView _levelView;
         private SpawnPointsView _pointView;
-        private BonusHandler _bonusHandler;
+        private BonusAdder _bonusHandler;
         private ItemMover _itemMovement;
 
         public Item Item { get; private set; }
@@ -24,7 +24,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
 
             Item = GetComponent<Item>();
             _itemMovement = GetComponent<ItemMover>();
-            _bonusHandler = GetComponent<BonusHandler>();
+            _bonusHandler = GetComponent<BonusAdder>();
         }
 
         private void OnMouseOver()

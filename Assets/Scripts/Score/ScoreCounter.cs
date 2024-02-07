@@ -12,6 +12,7 @@ namespace BounceFactory.Score
         public static ScoreCounter Instance;
 
         private readonly int _minimalBalance = 100;
+        private readonly string _newLine = "\n";
 
         private TMP_Text _scoreText;
         private string _baseText;
@@ -30,7 +31,7 @@ namespace BounceFactory.Score
                 Destroy(gameObject);
 
             _scoreText = GetComponent<TMP_Text>();
-            _baseText = _scoreText.text + "\n";
+            _baseText = _scoreText.text + _newLine;
 
             Balance = SetBalance();
             UpdateDisplay(ScoreToString());

@@ -28,13 +28,13 @@ namespace BounceFactory.BaseObjects.BallComponents
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        public void Appear(Vector3 portalPosition, BonusHandler bonusHandler)
+        public void Appear(Vector3 portalPosition, BonusAdder bonusHandler)
         {
             transform.position = portalPosition;
             transform.DOScale(_defaultSize, _duration).OnComplete(() =>
             {
                 _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-                bonusHandler.AddBonus(portalPosition, _ball);
+                bonusHandler.GiveRevard(portalPosition, _ball);
             });
             StartCoroutine(OnAppeared());
         }

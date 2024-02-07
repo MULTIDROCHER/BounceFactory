@@ -52,19 +52,24 @@ namespace BounceFactory.BaseObjects.ItemComponents
         private void HandleCollision(GameObject other)
         {
             if (_itemToMerge == null)
-                _itemToMerge = TryGetItem(other);
+                _itemToMerge = GetItemToMerge(other);
             else
                 _renderer.material = _mergeMaterial;
         }
 
-        private Item TryGetItem(GameObject other)
+        private Item GetItemToMerge(GameObject other)
         {
-            if (other.TryGetComponent(out Item item)
-                && item.Level == _current.Level
-                && item != _current)
+            if (TryGetItem(other, out Item item))
                 return item;
             else
                 return null;
+        }
+
+        private bool TryGetItem(GameObject other, out Item item)
+        {
+            item = other.GetComponent<Item>();
+
+            return item != null && item.Level == _current.Level && item != _current;
         }
 
         private void ResetItem(GameObject item)
@@ -79,7 +84,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         private void LevelUp(Item item)
         {
             Performed?.Invoke();
-            ItemSelector merger = new (_current, item);
+            ItemSelector merger = new(_current, item);
             var template = merger.GetRandom();
 
             template.LevelUp();

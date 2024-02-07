@@ -21,9 +21,9 @@ namespace BounceFactory.Tutorial.Steps
         {
             return new Dictionary<string, string>() 
         {
-            { "ru", $"нажми {KeyCode} на клавиатуре\n чтобы поднять правый флиппер" },
-            { "en", $"Press {KeyCode} on the keyboard\n to raise the right flipper" },
-            { "tr", $"Sağ paleti kaldırmak için \nklavye üzerindeki {KeyCode} tuşuna basın" },
+            { "ru", $"нажми {ActivatorButton} на клавиатуре\n чтобы поднять правый флиппер" },
+            { "en", $"Press {ActivatorButton} on the keyboard\n to raise the right flipper" },
+            { "tr", $"Sağ paleti kaldırmak için \nklavye üzerindeki {ActivatorButton} tuşuna basın" },
         };
         }
     }

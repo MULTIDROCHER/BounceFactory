@@ -4,7 +4,7 @@ using YG;
 
 namespace BounceFactory.System.Game
 {
-    public static class SavesController
+    public static class ProgressSaver
     {
         public static void ResetSavedProgress()
         {
@@ -16,7 +16,7 @@ namespace BounceFactory.System.Game
             YandexGame.Instance._SaveProgress();
         }
 
-        public static void SaveProgres(ProgressBar progressBar)
+        public static void SaveProgress(ProgressBar progressBar)
         {
             YandexGame.savesData.LevelScore = progressBar.CurrentScore;
             YandexGame.savesData.Balance = ScoreCounter.Instance.Balance;

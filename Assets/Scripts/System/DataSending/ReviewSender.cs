@@ -7,11 +7,12 @@ namespace BounceFactory.System.DataSending
     {
         private readonly int _lowestLevelToReview = 2;
 
-        public void TryShowReview()
+        public void ShowReview()
         {
-            if (YandexGame.savesData.Level >= _lowestLevelToReview
-                && YandexGame.EnvironmentData.reviewCanShow)
+            if (AbleToShow())
                 YandexGame.ReviewShow(true);
         }
+
+        private bool AbleToShow() => YandexGame.savesData.Level >= _lowestLevelToReview && YandexGame.EnvironmentData.reviewCanShow;
     }
 }

@@ -1,3 +1,4 @@
+using BounceFactory.System;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace BounceFactory.Display
     public class BonusDisplay : MonoBehaviour
     {
         private readonly float _delay = 2;
+        private readonly string _symbol = "+";
 
         private Canvas _canvas;
         private TMP_Text _text;
@@ -25,11 +27,11 @@ namespace BounceFactory.Display
 
         public void ShowBonus(int bonus, Vector3 position)
         {
-            SetText(BonusToString(bonus), position);
+            var text = ToStringConverter.GetTextWithNumber(_symbol, bonus);
+
+            SetText(text, position);
             Destroy(gameObject, _delay);
         }
-
-        private string BonusToString(int bonus) => "+" + bonus.ToString();
 
         private void SetText(string text, Vector3 pos)
         {

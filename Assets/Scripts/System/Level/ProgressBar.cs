@@ -12,6 +12,7 @@ namespace BounceFactory.System.Level
     public class ProgressBar : MonoBehaviour
     {
         private readonly float _duration = .2f;
+        private readonly string _splitter = " / ";
 
         private TMP_Text _text;
         private Slider _slider;
@@ -38,7 +39,9 @@ namespace BounceFactory.System.Level
             CurrentScore += amount;
 
             _slider.DOValue(CurrentScore, _duration);
-            UpdateProgressText(ProgressToString());
+            var updatedText = ToStringConverter.ConvertProgress(CurrentScore, _splitter, _goal);
+
+            UpdateProgressText(updatedText);
 
             if (CurrentScore >= _goal)
                 GoalReached?.Invoke();
@@ -56,8 +59,6 @@ namespace BounceFactory.System.Level
             _slider.maxValue = _goal;
             UpdateProgressBar(0);
         }
-
-        private string ProgressToString() => NumsFormater.FormatedNumber(CurrentScore) + " / " + NumsFormater.FormatedNumber(_goal);
 
         private void UpdateProgressText(string progress) => _text.text = progress;
     }

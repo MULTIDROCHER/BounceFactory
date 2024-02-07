@@ -11,24 +11,24 @@ namespace BounceFactory.BaseObjects.BallComponents
 
         private void Start() => _colorsByLevel.Add(_startLevel, Color.white);
 
-        public Color ChangeColor(UpgradableObject item)
+        public Color SetColorByLevel(UpgradableObject item)
         {
             int level = item.Level + _levelIncrease;
 
             if (_colorsByLevel.TryGetValue(level, out Color color))
                 return color;
             else
-                return AddNewColor(level);
+                return AssignNewColor(level);
         }
 
-        private Color AddNewColor(int level)
+        private Color AssignNewColor(int level)
         {
-            var newColor = GenerateRandomColor();
+            var newColor = GetRandomColor();
             _colorsByLevel.Add(level, newColor);
             return newColor;
         }
 
-        private Color GenerateRandomColor()
+        private Color GetRandomColor()
         {
             float minRange = 0;
             float maxRange = 1;

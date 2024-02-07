@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace BounceFactory.BaseObjects
 {
-    [RequireComponent(typeof(BonusHandler))]
+    [RequireComponent(typeof(BonusAdder))]
     [RequireComponent(typeof(EffectApplier))]
     public class TeleportItem : Item
     {
@@ -18,7 +18,7 @@ namespace BounceFactory.BaseObjects
         private readonly float _delay = 2;
 
         private Holder<Item> _holder;
-        private BonusHandler _bonusHandler;
+        private BonusAdder _bonusHandler;
         private EffectApplier _effectApplier;
         private WaitForSeconds _wait;
 
@@ -32,16 +32,17 @@ namespace BounceFactory.BaseObjects
 
             _holder = ActiveComponentsProvider.ItemHolder;
 
-            _bonusHandler = GetComponent<BonusHandler>();
+            _bonusHandler = GetComponent<BonusAdder>();
             _effectApplier = GetComponent<EffectApplier>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out TeleportableObject teleportable)
-            && CanTeleport && teleportable.CanBeTeleported
-            && _inPortal.Contains(teleportable) == false)
-                TryToTeleport(teleportable);
+            var teleportable = other.GetComponent<TeleportableObject>();
+
+            if (teleportable != null && teleportable.CanBeTeleported 
+            && CanTeleport && _inPortal.Contains(teleportable) == false)
+                Teleport(teleportable);
         }
 
         private IEnumerator OnDestroying()
@@ -61,11 +62,10 @@ namespace BounceFactory.BaseObjects
             Destroy(gameObject);
         }
 
-        private void TryToTeleport(TeleportableObject teleportable)
+        private void Teleport(TeleportableObject teleportable)
         {
             _inPortal.Add(teleportable);
-
-            var portal = TryFindPortal();
+            var portal = FindPortal();
 
             if (portal != null)
                 StartCoroutine(Teleportation(teleportable, portal));
@@ -105,6 +105,6 @@ namespace BounceFactory.BaseObjects
             _inPortal.Remove(teleportable);
         }
 
-        private TeleportItem TryFindPortal() => (TeleportItem)_holder.Contents.Find(item => item != this);
+        private TeleportItem FindPortal() => (TeleportItem)_holder.Contents.Find(item => item != this);
     }
 }

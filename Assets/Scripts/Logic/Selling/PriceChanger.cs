@@ -11,7 +11,7 @@ namespace BounceFactory.Logic.Selling
     {
         protected readonly int FreePurchaseCount = 2;
 
-        [SerializeField] protected Spawner<T> _spawner;
+        [SerializeField] protected Spawner<T> Spawner;
 
         protected int PurchasesCount;
 
@@ -24,13 +24,13 @@ namespace BounceFactory.Logic.Selling
         protected virtual void OnEnable()
         {
             ActiveComponentsProvider.LevelChanged += OnLevelChanged;
-            _spawner.Bought += OnBought;
+            Spawner.Bought += OnBought;
         }
 
         protected virtual void OnDisable()
         {
             ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
-            _spawner.Bought -= OnBought;
+            Spawner.Bought -= OnBought;
         }
 
         protected virtual void OnBought() => IncreasePrices();

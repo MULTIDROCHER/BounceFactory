@@ -5,7 +5,8 @@ using UnityEngine;
 namespace BounceFactory.BaseObjects.BallComponents
 {
     [RequireComponent(typeof(AudioSource))]
-    public class SoundHandler : MonoBehaviour
+    [RequireComponent(typeof(TeleportableObject))]
+    public class BallSoundsPlayer : MonoBehaviour
     {
         [SerializeField] private AudioClip _bounceSound;
         [SerializeField] private AudioClip _teleportSound;
@@ -40,7 +41,7 @@ namespace BounceFactory.BaseObjects.BallComponents
             switch (item)
             {
                 case TeleportItem teleport when teleport.CanTeleport
-                && _teleportable != null && _teleportable.CanBeTeleported:
+                && _teleportable.CanBeTeleported:
                     PlaySound(_teleportSound);
                     break;
                 case BallGeneratorItem generator when generator.IsActive:

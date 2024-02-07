@@ -7,6 +7,8 @@ namespace BounceFactory.System.Game
 {
     public class LevelCounter : MonoBehaviour
     {
+        private readonly string _newLine = "\n";
+
         [SerializeField] private TMP_Text _text;
 
         private string _baseText;
@@ -14,7 +16,7 @@ namespace BounceFactory.System.Game
 
         private void Start()
         {
-            _baseText = _text.text + "\n";
+            _baseText = _text.text + _newLine;
             SetLevel();
         }
 
@@ -27,11 +29,11 @@ namespace BounceFactory.System.Game
             if (YandexGame.savesData.Level != _current)
             {
                 _current = YandexGame.savesData.Level;
-                UpdateDisplay(LevelToString());
+                var updatedText = ToStringConverter.GetTextWithNumber(_baseText, _current);
+
+                UpdateDisplay(updatedText);
             }
         }
-
-        private string LevelToString() => _baseText + _current.ToString();
 
         private void UpdateDisplay(string level) => _text.text = level;
     }

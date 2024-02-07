@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace BounceFactory.Logic
 {
     [RequireComponent(typeof(Button))]
-    public class MergeButton : MonoBehaviour
+    public class BallsMergeButton : MonoBehaviour
     {
         private readonly float _duration = .5f;
 
