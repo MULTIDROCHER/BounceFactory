@@ -1,7 +1,7 @@
+using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Score;
 using BounceFactory.System.Level;
-using System;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Spawning

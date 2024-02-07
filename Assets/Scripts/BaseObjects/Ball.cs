@@ -9,6 +9,7 @@ namespace BounceFactory.BaseObjects
         private Collider2D _collider;
 
         public Rigidbody2D Rigidbody => _rigidbody;
+        
         public Collider2D Collider => _collider;
 
         protected override void Awake()

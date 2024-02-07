@@ -22,8 +22,10 @@ namespace BounceFactory.BaseObjects.ItemComponents
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
 
             foreach (Collider2D collider in colliders)
+            {
                 if (collider.TryGetComponent(out SpawnPoint point) && point.IsEmpty)
                     PreviousPoint = point;
+            }
         }
     }
 }

@@ -1,19 +1,20 @@
-using BounceFactory.UI.Sound;
 using System;
+using BounceFactory.UI.Sound;
 using UnityEngine;
 
 namespace BounceFactory.System.Game
 {
     public class AudioPlayer : MonoBehaviour
     {
+        public static AudioPlayer Instance;
+
         [SerializeField] private AudioSource _musicSource;
         [SerializeField] private AudioSource _sfxSource;
-
-        public static AudioPlayer Instance;
 
         public event Action<float> VolumeChanged;
 
         public AudioSource MusicSource => _musicSource;
+        
         public AudioSource SFXSource => _sfxSource;
 
         private void Awake()

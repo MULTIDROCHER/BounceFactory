@@ -1,6 +1,6 @@
-using BounceFactory.System.Level;
-using BounceFactory.System.DataSending;
 using System.Collections.Generic;
+using BounceFactory.System.DataSending;
+using BounceFactory.System.Level;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -9,14 +9,14 @@ namespace BounceFactory.System.Game
 {
     public class LevelSwitcher : MonoBehaviour
     {
+        private readonly float _goalIncrease = 1.3f;
+
         [SerializeField] private List<LevelData> _levelTemplates;
         [SerializeField] private List<Sprite> _backgroundSprites;
         [SerializeField] private Image _background;
         [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private GameObject _finishWindow;
         [SerializeField] private ExitController _exitController;
-
-        private readonly float _goalIncrease = 1.3f;
 
         private LevelData _current;
 
@@ -37,7 +37,6 @@ namespace BounceFactory.System.Game
         public void ChangeLevel()
         {
             SetLevel();
-
 
             _progressBar.Reset();
             Time.timeScale = 1;

@@ -4,9 +4,9 @@ namespace BounceFactory.BaseObjects.ItemComponents
 {
     public class EffectApplier : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem _effect;
-
         private readonly float _delay = 2;
+
+        [SerializeField] private ParticleSystem _effect;
 
         public void DoEffect(Ball ball)
         {

@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using BounceFactory.BaseObjects;
 using BounceFactory.BaseObjects.BallComponents;
 using BounceFactory.BaseObjects.ItemComponents;
@@ -6,10 +10,6 @@ using BounceFactory.Playground.Storage.Holder;
 using BounceFactory.System.Level;
 using BounceFactory.Tutorial;
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace BounceFactory.Logic
@@ -85,6 +85,7 @@ namespace BounceFactory.Logic
         private IEnumerator PrepareToMerge(List<Ball> balls)
         {
             foreach (var ball in balls)
+            {
                 if (ball != null)
                 {
                     ball.Collider.enabled = false;
@@ -94,6 +95,7 @@ namespace BounceFactory.Logic
                 {
                     StopCoroutine(PrepareToMerge(balls));
                 }
+            }
 
             yield return _wait;
 

@@ -5,11 +5,11 @@ namespace BounceFactory.System.DataSending
 {
     public static class MetricsSender
     {
-        private static readonly Dictionary<string, string> _eventParams = new()
+        private static readonly Dictionary<string, string> _eventParams = new ()
         {
             { "Level", YandexGame.savesData.Level.ToString() },
             { "Balance", YandexGame.savesData.Balance.ToString() },
-            {"CurrentScore", YandexGame.savesData.LevelScore.ToString()},
+            { "CurrentScore", YandexGame.savesData.LevelScore.ToString() },
         };
 
         public static void CreateMetrics(Dictionary<string, string> metrics = null)

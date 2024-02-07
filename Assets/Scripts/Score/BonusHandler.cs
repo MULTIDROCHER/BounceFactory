@@ -17,13 +17,6 @@ namespace BounceFactory.Score
 
         private void OnTriggerEnter2D(Collider2D other) => TryGetRevard(other.gameObject, transform.position);
 
-        private void TryGetRevard(GameObject other, Vector3 position)
-        {
-            if (enabled && other.TryGetComponent(out Ball ball)
-            && _item.TryGetComponent(out TeleportItem _) == false)
-                AddBonus(position, ball);
-        }
-
         public void AddBonus(Vector3 position, Ball ball)
         {
             int bonus = ball.Bonus + _item.Bonus;
@@ -31,6 +24,13 @@ namespace BounceFactory.Score
 
             var display = Instantiate(_bonusDisplay, transform);
             display.ShowBonus(bonus, position);
+        }
+
+        private void TryGetRevard(GameObject other, Vector3 position)
+        {
+            if (enabled && other.TryGetComponent(out Ball ball)
+            && _item.TryGetComponent(out TeleportItem _) == false)
+                AddBonus(position, ball);
         }
     }
 }

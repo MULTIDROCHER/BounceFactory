@@ -1,5 +1,5 @@
-using BounceFactory.BaseObjects.ItemComponents;
 using System.Collections;
+using BounceFactory.BaseObjects.ItemComponents;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
@@ -26,10 +26,12 @@ namespace BounceFactory.BaseObjects
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Ball ball))
+            {
                 if (_previousBall != ball)
                     StartCoroutine(SetAcceleration(ball, ball.Rigidbody));
                 else
                     return;
+            }
         }
 
         private IEnumerator SetAcceleration(Ball ball, Rigidbody2D rigidbody)

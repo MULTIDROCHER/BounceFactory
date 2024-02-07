@@ -9,6 +9,8 @@ namespace BounceFactory.System.Level
 {
     public class LevelData : MonoBehaviour
     {
+        private readonly int _minmalBalance = 100;
+
         [SerializeField] private SpawnPoint[] _spawnPoints;
         [SerializeField] private DeadZone[] _deadZones;
         [SerializeField] private BallHolder _ballHolder;
@@ -18,15 +20,20 @@ namespace BounceFactory.System.Level
         [SerializeField] private BallSpawner _ballSpawner;
         [SerializeField] private ItemSpawner _itemSpawner;
 
-        private readonly int _minmalBalance = 100;
-
         public SpawnPoint[] SpawnPoints => _spawnPoints;
+        
         public DeadZone[] DeadZones => _deadZones;
+
         public BallHolder BallHolder => _ballHolder;
+
         public ItemHolder ItemHolder => _itemHolder;
+
         public BallPriceChanger BallPriceChanger => _ballSeller;
+
         public ItemPriceChanger ItemPriceChanger => _itemSeller;
+
         public BallSpawner BallSpawner => _ballSpawner;
+
         public ItemSpawner ItemSpawner => _itemSpawner;
 
         private void Awake()

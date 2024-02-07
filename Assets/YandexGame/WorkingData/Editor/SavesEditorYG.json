@@ -1,14 +1,14 @@
 {
-  "idSave": 16,
+  "idSave": 4,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
-  "Level": 7,
+  "Level": 1,
   "PreviousLevel": 22,
-  "Balance": 11508,
-  "Goal": 4819,
-  "LevelScore": 0,
+  "Balance": 164,
+  "Goal": 1000,
+  "LevelScore": 64,
   "HideSaveMessage": true,
   "IsTrained": true,
-  "ReviewLeft": true
+  "ReviewLeft": false
 }

@@ -1,5 +1,5 @@
-using BounceFactory.System;
 using System;
+using BounceFactory.System;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -19,6 +19,7 @@ namespace BounceFactory.Score
         public event Action<int> ScoreAdded;
 
         public int Balance { get; private set; }
+        
         public int Spent { get; private set; }
 
         private void Awake()
@@ -33,15 +34,6 @@ namespace BounceFactory.Score
 
             Balance = SetBalance();
             UpdateDisplay(ScoreToString());
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("Pressed S");
-                AddScore(500);
-            }
         }
 
         public void AddScore(int amount)

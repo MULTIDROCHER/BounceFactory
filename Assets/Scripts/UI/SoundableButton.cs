@@ -13,7 +13,7 @@ namespace BounceFactory.UI
 
         private AudioSource _source;
         private Button _button;
-        private Vector3 _increasedScale = new(.1f, .1f, 0);
+        private Vector3 _increasedScale = new (.1f, .1f, 0);
         private Vector3 _defaultScale;
 
         private void Awake()

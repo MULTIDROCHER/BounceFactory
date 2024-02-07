@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace BounceFactory.Tutorial
 {
-    public abstract class PurchaseStep<T> : TutorialStep where T : UpgradableObject
+    public abstract class PurchaseStep<T> : TutorialStep 
+    where T : UpgradableObject
     {
         protected PriceChanger<T> PriceChanger;
         protected PriceView<T> PriceView;

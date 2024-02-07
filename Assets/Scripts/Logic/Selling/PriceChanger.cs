@@ -1,22 +1,25 @@
+using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Spawning;
 using BounceFactory.System.Level;
-using System;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Selling
 {
-    public abstract class PriceChanger<T> : MonoBehaviour where T : UpgradableObject
+    public abstract class PriceChanger<T> : MonoBehaviour 
+    where T : UpgradableObject
     {
+        protected readonly int FreePurchaseCount = 2;
+
         [SerializeField] protected Spawner<T> _spawner;
 
-        protected readonly int FreePurchaseCount = 2;
         protected int PurchasesCount;
 
-        public float PriceIncrease { get; protected set; }
-        public int Price { get; protected set; }
-
         public event Action<int> PriceChanged;
+
+        public float PriceIncrease { get; protected set; }
+        
+        public int Price { get; protected set; }
 
         protected virtual void OnEnable()
         {
@@ -30,16 +33,19 @@ namespace BounceFactory.Logic.Selling
             _spawner.Bought -= OnBought;
         }
 
-        private void Reset()
-        {
-            PurchasesCount = 0;
-            Price = 0;
-            PriceChanged?.Invoke(Price);
-        }
-
         protected virtual void OnBought() => IncreasePrices();
 
         protected virtual void OnLevelChanged() => Reset();
+
+        protected void ReducePrices()
+        {
+            if (Price != 0)
+                Price = Convert.ToInt32(Price / PriceIncrease);
+
+            PriceChanged?.Invoke(Price);
+        }
+
+        protected abstract void SetPrices();
 
         private void IncreasePrices()
         {
@@ -52,14 +58,11 @@ namespace BounceFactory.Logic.Selling
             PriceChanged?.Invoke(Price);
         }
 
-        protected void ReducePrices()
+        private void Reset()
         {
-            if (Price != 0)
-                Price = Convert.ToInt32(Price / PriceIncrease);
-
+            PurchasesCount = 0;
+            Price = 0;
             PriceChanged?.Invoke(Price);
         }
-
-        protected abstract void SetPrices();
     }
 }

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 namespace BounceFactory.Display.Price
 {
-    public abstract class PriceView<T> : MonoBehaviour where T : UpgradableObject
+    public abstract class PriceView<T> : MonoBehaviour 
+    where T : UpgradableObject
     {
         [SerializeField] private Button _button;
         [SerializeField] private PriceChanger<T> _priceChanger;
@@ -17,6 +18,7 @@ namespace BounceFactory.Display.Price
         public PriceChanger<T> PriceChanger => _priceChanger;
 
         private void OnEnable() => _priceChanger.PriceChanged += OnPriceChanged;
+
         private void OnDisable() => _priceChanger.PriceChanged -= OnPriceChanged;
 
         private void LateUpdate() => _button.interactable = ScoreCounter.Instance.Balance >= _price;

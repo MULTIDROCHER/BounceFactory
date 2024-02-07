@@ -7,7 +7,7 @@ namespace BounceFactory.System.Game
 {
     public class LevelCounter : MonoBehaviour
     {
-        [SerializeField] TMP_Text _text;
+        [SerializeField] private TMP_Text _text;
 
         private string _baseText;
         private int _current;

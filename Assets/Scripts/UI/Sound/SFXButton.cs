@@ -4,7 +4,7 @@ namespace BounceFactory.UI.Sound
 {
     public class SFXButton : SoundButton
     {
-        override protected void Start()
+        protected override void Start()
         {
             Source = AudioPlayer.Instance.SFXSource;
             base.Start();

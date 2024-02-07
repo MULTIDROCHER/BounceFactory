@@ -1,6 +1,6 @@
+using System;
 using BounceFactory.Display.ItemLevel;
 using BounceFactory.Tutorial;
-using System;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects.ItemComponents

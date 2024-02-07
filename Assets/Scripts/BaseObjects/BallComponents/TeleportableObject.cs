@@ -1,6 +1,6 @@
+using System.Collections;
 using BounceFactory.Score;
 using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects.BallComponents

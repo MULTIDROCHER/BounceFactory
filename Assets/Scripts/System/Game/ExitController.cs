@@ -1,7 +1,7 @@
-using BounceFactory.Score;
-using BounceFactory.UI;
-using BounceFactory.System.DataSending;
 using System;
+using BounceFactory.Score;
+using BounceFactory.System.DataSending;
+using BounceFactory.UI;
 using UnityEngine;
 
 namespace BounceFactory.System.Game

@@ -1,10 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using BounceFactory.BaseObjects.BallComponents;
 using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Playground.Storage.Holder;
 using BounceFactory.Score;
 using BounceFactory.System.Level;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
@@ -13,8 +13,8 @@ namespace BounceFactory.BaseObjects
     [RequireComponent(typeof(EffectApplier))]
     public class TeleportItem : Item
     {
-        private readonly List<TeleportableObject> _inPortal = new();
-        private readonly Color _destroyingColor = new(1, 1, 1, 0);
+        private readonly List<TeleportableObject> _inPortal = new ();
+        private readonly Color _destroyingColor = new (1, 1, 1, 0);
         private readonly float _delay = 2;
 
         private Holder<Item> _holder;
@@ -27,7 +27,7 @@ namespace BounceFactory.BaseObjects
         protected override void Awake()
         {
             base.Awake();
-            _wait = new(_delay);
+            _wait = new (_delay);
             DestroyingCoroutine = OnDestroying();
 
             _holder = ActiveComponentsProvider.ItemHolder;
@@ -50,8 +50,10 @@ namespace BounceFactory.BaseObjects
             Destroy(LevelDisplay.gameObject);
 
             if (_inPortal.Count != 0)
+            {
                 foreach (var ball in _inPortal)
                     Appear(ball, this);
+            }
 
             yield return _wait;
 

@@ -1,6 +1,6 @@
-using BounceFactory.BaseObjects.ItemComponents;
 using System.Collections;
 using System.Collections.Generic;
+using BounceFactory.BaseObjects.ItemComponents;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
@@ -9,11 +9,11 @@ namespace BounceFactory.BaseObjects
     [RequireComponent(typeof(Animator))]
     public class BallGeneratorItem : Item
     {
-        [SerializeField] private ParticleSystem _spawnEffect;
-        [SerializeField] private ParticleSystem _destroyEffect;
-
         private readonly int _accelerationAmount = 10;
         private readonly List<Ball> _spawned = new ();
+
+        [SerializeField] private ParticleSystem _spawnEffect;
+        [SerializeField] private ParticleSystem _destroyEffect;
 
         private EffectApplier _effectHandler;
         private Accelerator _accelerator;
@@ -49,8 +49,10 @@ namespace BounceFactory.BaseObjects
         private void OnDestroy()
         {
             foreach (var ball in _spawned)
+            {
                 if (ball != null)
                     Destroy(ball.gameObject);
+            }
         }
 
         public override void LevelUp()
@@ -80,11 +82,13 @@ namespace BounceFactory.BaseObjects
             yield return _wait;
 
             foreach (var ball in _spawned.ToArray())
+            {
                 if (ball != null)
                 {
                     Destroy(ball.gameObject);
                     _effectHandler.DoEffect(_destroyEffect, ball.transform.position);
                 }
+            }
 
             Reset();
         }

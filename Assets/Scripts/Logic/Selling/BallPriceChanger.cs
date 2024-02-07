@@ -1,19 +1,20 @@
+using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.DeadZones;
 using BounceFactory.Tutorial;
-using System;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Selling
 {
     public class BallPriceChanger : PriceChanger<Ball>, ITutorialEvent
     {
-        [SerializeField] private DeadZonesManager _zonesManager;
-
         private readonly int _startPrice = 50;
         private readonly float _priceIncrease = 1.5f;
 
+        [SerializeField] private DeadZonesManager _zonesManager;
+
         public event Action Performed;
+        
         public event Action BallDestroyed;
 
         private void Start()

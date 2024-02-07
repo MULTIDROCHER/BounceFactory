@@ -1,20 +1,11 @@
+using System.Collections.Generic;
 using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Playground.Storage.Holder;
-using System.Collections.Generic;
 
 namespace BounceFactory.Tutorial.Steps
 {
     public class ItemsMergeStep : TutorialStep
     {
-        protected override Dictionary<string, string> CommonMessages()
-        {
-            return new Dictionary<string, string>() {
-            { "ru", "перемести один предмет на другой,\nчтобы объединить их" },
-            { "en", "move one item over another\nto merge them" },
-            { "tr", "birleştirmek için bir öğeyi\ndiğerinin üzerine taşıyın" },
-        };
-        }
-
         private readonly List<UpgradeHandler> _handlers = new ();
 
         private ItemHolder Holder => TutorialGuide.Instance.ItemHolder;
@@ -36,6 +27,16 @@ namespace BounceFactory.Tutorial.Steps
         {
             foreach (var handler in _handlers)
                 handler.Performed -= OnPerformed;
+        }
+
+        protected override Dictionary<string, string> CommonMessages()
+        {
+            return new Dictionary<string, string>() 
+        {
+            { "ru", "перемести один предмет на другой,\nчтобы объединить их" },
+            { "en", "move one item over another\nto merge them" },
+            { "tr", "birleştirmek için bir öğeyi\ndiğerinin üzerine taşıyın" },
+        };
         }
     }
 }

@@ -1,5 +1,5 @@
-using BounceFactory.Tutorial;
 using System;
+using BounceFactory.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -12,9 +12,9 @@ namespace BounceFactory.Playground.FlipperSystem
         [SerializeField] private Flipper _flipper;
         [SerializeField] private KeyCode _key;
 
-        public KeyCode KeyCode => _key;
-
         public event Action Performed;
+
+        public KeyCode KeyCode => _key;
 
         private void Awake()
         {

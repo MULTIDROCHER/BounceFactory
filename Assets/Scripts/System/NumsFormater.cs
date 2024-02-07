@@ -4,35 +4,38 @@ namespace BounceFactory.System
 {
     public static class NumsFormater
     {
-        private static readonly string[] _enNames = new []{
-        "",
-        "K",
-        "M",
-        "B",
-        "T",
-        "QD",
-        "QN",
-    };
+        private static readonly string[] _enNames = new [] 
+        {
+            string.Empty,
+            "K",
+            "M",
+            "B",
+            "T",
+            "QD",
+            "QN",
+        };
 
-        private static readonly string[] _ruNames = new []{
-        "",
-        "Т",
-        "МЛ",
-        "МД",
-        "ТР",
-        "КВ",
-        "КТ",
-    };
+        private static readonly string[] _ruNames = new [] 
+        {
+            string.Empty,
+            "Т",
+            "МЛ",
+            "МД",
+            "ТР",
+            "КВ",
+            "КТ",
+        };
 
-        private static readonly string[] _trNames = new []{
-        "",
-        "B",
-        "ML",
-        "BL",
-        "TR",
-        "KR",
-        "KT",
-    };
+        private static readonly string[] _trNames = new [] 
+        {
+            string.Empty,
+            "B",
+            "ML",
+            "BL",
+            "TR",
+            "KR",
+            "KT",
+        };
 
         public static string FormatedNumber(decimal number)
         {

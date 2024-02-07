@@ -1,13 +1,13 @@
+using System.Collections.Generic;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.Storage.Holder;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BounceFactory.Display.ItemLevel
 {
     public class ItemLevelView : MonoBehaviour
     {
-        private List<ItemLevelDisplay> _itemsLevel = new();
+        private List<ItemLevelDisplay> _itemsLevel = new ();
 
         [SerializeField] private Holder<Item> _holder;
 

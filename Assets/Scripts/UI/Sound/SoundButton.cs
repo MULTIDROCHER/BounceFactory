@@ -1,5 +1,5 @@
-using BounceFactory.System.Game;
 using System;
+using BounceFactory.System.Game;
 using UnityEngine;
 using UnityEngine.UI;
 

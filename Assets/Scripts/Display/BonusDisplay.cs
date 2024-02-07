@@ -11,7 +11,7 @@ namespace BounceFactory.Display
         private Canvas _canvas;
         private TMP_Text _text;
         private Vector2 _position;
-        private Vector2 _positionSpread = new (.2f, .2f);
+        private Vector2 _positionSpread = new(.2f, .2f);
 
         private void Awake()
         {
@@ -35,8 +35,15 @@ namespace BounceFactory.Display
         {
             _text.text = text;
             _position = pos;
-            _position += new Vector2(Random.Range(-_positionSpread.x, _positionSpread.x),
-                                    Random.Range(-_positionSpread.y, _positionSpread.y));
+            _position += SetPositionSpread();
+        }
+
+        private Vector2 SetPositionSpread()
+        {
+            float spreadX = Random.Range(-_positionSpread.x, _positionSpread.x);
+            float spreadY = Random.Range(-_positionSpread.y, _positionSpread.y);
+
+            return new Vector2(spreadX, spreadY);
         }
     }
 }

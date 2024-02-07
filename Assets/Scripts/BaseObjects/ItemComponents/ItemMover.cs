@@ -1,6 +1,6 @@
+using System;
 using BounceFactory.Logic.Spawning;
 using BounceFactory.Tutorial;
-using System;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects.ItemComponents
@@ -19,6 +19,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         public event Action Performed;
 
         public bool IsDragging { get; private set; } = false;
+        
         private SpawnPoint PreviousPoint => _pointHandler.PreviousPoint;
 
         private void Start()

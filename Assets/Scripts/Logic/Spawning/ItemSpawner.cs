@@ -1,23 +1,24 @@
-using BounceFactory.BaseObjects;
-using BounceFactory.Score;
-using BounceFactory.System.Level;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BounceFactory.BaseObjects;
+using BounceFactory.Score;
+using BounceFactory.System.Level;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Spawning
 {
     public class ItemSpawner : Spawner<Item>
     {
-        private List<SpawnPoint> _spawnPoints = new ();
-
         private readonly int _accelerationChance = 10;
         private readonly int _teleportChance = 20;
         private readonly int _ballgeneratorChance = 30;
         private readonly int _itemsOnSceneForGeneratorSpawn = 2;
 
+        private List<SpawnPoint> _spawnPoints = new ();
+
         public event Action<Item> ItemSpawned;
+        
         public override event Action Bought;
 
         public override void Spawn()
@@ -39,6 +40,12 @@ namespace BounceFactory.Logic.Spawning
                     Bought?.Invoke();
                 }
             }
+        }
+
+        protected override void OnLevelChanged()
+        {
+            _spawnPoints.Clear();
+            _spawnPoints = ActiveComponentsProvider.ActivePoints;
         }
 
         private Item GetRandomItem()
@@ -79,19 +86,16 @@ namespace BounceFactory.Logic.Spawning
                 return 0;
         }
 
-        private Item GetItemByComponent<T>() where T : Component
+        private Item GetItemByComponent<T>() 
+        where T : Component
         {
             foreach (var item in Templates)
+            {
                 if (item.TryGetComponent(out T _))
                     return item;
+            }
 
             return null;
-        }
-
-        protected override void OnLevelChanged()
-        {
-            _spawnPoints.Clear();
-            _spawnPoints = ActiveComponentsProvider.ActivePoints;
         }
     }
 }

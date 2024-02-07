@@ -10,7 +10,7 @@ namespace BounceFactory.System.Game
         [SerializeField] private MessageWindow _messageWindow;
         [SerializeField] private ExitController _exitController;
 
-        private LoadingScreen _loadingScreen => _exitController.LoadingScreen;
+        private LoadingScreen LoadingScreen => _exitController.LoadingScreen;
 
         public void Exit()
         {
@@ -21,11 +21,11 @@ namespace BounceFactory.System.Game
             else
             {
                 _exitController.ExitLevel();
-                _loadingScreen.LoadScene(0);
+                LoadingScreen.LoadScene(0);
             }
         }
 
-        public void StartGame() => _loadingScreen.LoadScene(1);
+        public void StartGame() => LoadingScreen.LoadScene(1);
 
         public void RestartGame()
         {

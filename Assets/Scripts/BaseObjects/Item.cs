@@ -1,6 +1,6 @@
+using System.Collections;
 using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Display.ItemLevel;
-using System.Collections;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects

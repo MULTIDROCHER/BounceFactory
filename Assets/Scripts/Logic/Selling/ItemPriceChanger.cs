@@ -1,6 +1,6 @@
+using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Tutorial;
-using System;
 
 namespace BounceFactory.Logic.Selling
 {
