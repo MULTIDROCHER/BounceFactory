@@ -1,14 +1,18 @@
 using System.Collections.Generic;
 using BounceFactory.BaseObjects;
+using BounceFactory.Display.Price;
 
 namespace BounceFactory.Tutorial.Steps
 {
     public class SecondItemPurchaseStep : PurchaseStep<Item>
     {
+        public SecondItemPurchaseStep(TutorialGuide guide, PriceView<Item> priceView) : base(guide, priceView)
+        {
+        }
+
         public override void Enter()
         {
             base.Enter();
-
             OnUnneedMask(CommonMessages()[Language]);
         }
 

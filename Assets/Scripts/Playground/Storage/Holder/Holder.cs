@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using BounceFactory.BaseObjects;
-using BounceFactory.System.Level;
 using UnityEngine;
 
 namespace BounceFactory.Playground.Storage.Holder
@@ -16,10 +15,6 @@ namespace BounceFactory.Playground.Storage.Holder
         public event Action ChildAdded;
 
         public List<T> Contents => _children;
-
-        private void OnEnable() => ActiveComponentsProvider.LevelExit += OnLevelExit;
-
-        private void OnDisable() => ActiveComponentsProvider.LevelExit -= OnLevelExit;
 
         private void FixedUpdate()
         {
@@ -43,7 +38,7 @@ namespace BounceFactory.Playground.Storage.Holder
             ChildAdded?.Invoke();
         }
 
-        private void OnLevelExit()
+        protected void OnLevelExit()
         {
             for (int i = _children.Count - 1; i >= 0; i--)
             {

@@ -14,9 +14,9 @@ namespace BounceFactory.Playground.DeadZones
         
         public event Action BallsOver;
 
-        private void Start() => ActiveComponentsProvider.LevelChanged += OnLevelChanged;
+        private void Start() => BallComponentsProvider.LevelChanged += OnLevelChanged;
 
-        private void OnDestroy() => ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
+        private void OnDestroy() => BallComponentsProvider.LevelChanged -= OnLevelChanged;
 
         public void OnBallDestroyed()
         {
@@ -31,6 +31,6 @@ namespace BounceFactory.Playground.DeadZones
 
         private bool IsBallsOver() => _ballHolder.transform.childCount <= 1;
 
-        private void OnLevelChanged() => _ballHolder = ActiveComponentsProvider.BallHolder;
+        private void OnLevelChanged() => _ballHolder = BallComponentsProvider.BallHolder;
     }
 }

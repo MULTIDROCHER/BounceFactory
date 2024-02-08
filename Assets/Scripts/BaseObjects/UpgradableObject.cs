@@ -1,3 +1,4 @@
+using BounceFactory.Score;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
@@ -9,8 +10,11 @@ namespace BounceFactory.BaseObjects
         protected int ObjectsAmount;
 
         private SpriteRenderer _renderer;
+        private ScoreCounter _scoreCounter;
 
         public SpriteRenderer Renderer => _renderer;
+
+        public ScoreCounter ScoreCounter => _scoreCounter;
 
         public int Level { get; protected set; } = 1;
         
@@ -26,5 +30,7 @@ namespace BounceFactory.BaseObjects
         }
 
         protected virtual int IncreaseBonus() => (Bonus * ObjectsAmount) + BonusIncrease;
+
+        public void GetCounter(ScoreCounter counter) => _scoreCounter = counter; 
     }
 }

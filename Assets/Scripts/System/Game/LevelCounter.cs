@@ -10,6 +10,7 @@ namespace BounceFactory.System.Game
         private readonly string _newLine = "\n";
 
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private LevelSwitcher _levelSwitcher;
 
         private string _baseText;
         private int _current;
@@ -20,9 +21,17 @@ namespace BounceFactory.System.Game
             SetLevel();
         }
 
-        private void OnEnable() => ActiveComponentsProvider.LevelChanged += SetLevel;
+        private void OnEnable()
+        {
+            ItemComponentsProvider.LevelChanged += SetLevel;
+            BallComponentsProvider.LevelChanged += SetLevel;
+        }
 
-        private void OnDisable() => ActiveComponentsProvider.LevelChanged -= SetLevel;
+        private void OnDisable()
+        {
+            ItemComponentsProvider.LevelChanged -= SetLevel;
+            BallComponentsProvider.LevelChanged -= SetLevel;
+        }
 
         private void SetLevel()
         {

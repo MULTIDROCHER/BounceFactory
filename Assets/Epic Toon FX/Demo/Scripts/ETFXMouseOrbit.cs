@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace EpicToonFX
 {
 
-public class ETFXMouseOrbit : MonoBehaviour
+    public class ETFXMouseOrbit : MonoBehaviour
 {
     public Transform target;
     public float distance = 5.0f;

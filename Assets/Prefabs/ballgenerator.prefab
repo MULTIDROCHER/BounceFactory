@@ -288,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e8b0c6507c5534c95cacdfa4edfe92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
   _displayTemplate: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _mergeMaterial: {fileID: 2100000, guid: 487f18665aaca2346b9cd7c90aa35f32, type: 2}
 --- !u!114 &9073000416776119941
@@ -304,6 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effect: {fileID: 198591319186534902, guid: de73b98ff812c774783bd145fc25cadb, type: 3}
+  _upgradeEffect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
 --- !u!114 &2405477210787970786
 MonoBehaviour:
   m_ObjectHideFlags: 0

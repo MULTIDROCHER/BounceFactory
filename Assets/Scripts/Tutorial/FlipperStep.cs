@@ -10,11 +10,16 @@ namespace BounceFactory.Tutorial
         protected KeyCode ActivatorButton;
         protected FlipperActivator Activator;
 
-        public FlipperStep(KeyCode activatorButton) => ActivatorButton = activatorButton;
+        protected FlipperStep(TutorialGuide guide, KeyCode activatorButton) : base(guide)
+        {
+            ActivatorButton = activatorButton;
+        }
 
         public override void Enter()
         {
-            Activator = Object.FindObjectsOfType<FlipperActivator>().Where(activator => activator.KeyCode == ActivatorButton).FirstOrDefault();
+            base.Enter();
+            Activator = Guide.Activators.FirstOrDefault(activator => activator.gameObject.activeInHierarchy 
+            && activator.KeyCode == ActivatorButton);
 
             if (Activator != null)
                 Activator.Performed += OnPerformed;

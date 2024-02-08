@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using BounceFactory.BaseObjects;
+using BounceFactory.Display.Price;
 using BounceFactory.Logic;
+using BounceFactory.Playground.FlipperSystem;
+using BounceFactory.Playground.Storage;
 using BounceFactory.Playground.Storage.Holder;
 using BounceFactory.Tutorial.Steps;
 using TMPro;
@@ -11,8 +15,6 @@ namespace BounceFactory.Tutorial
 {
     public class TutorialGuide : MonoBehaviour
     {
-        public static TutorialGuide Instance;
-
         private readonly float _delay = 2;
         private readonly TutorialStateMachine _stateMachine = new ();
         private readonly Dictionary<string, string> _messages = new () 
@@ -21,23 +23,16 @@ namespace BounceFactory.Tutorial
             { "en", "Yay, now you know the basic \nmechanics! Enjoy the game! :)" },
             { "tr", "Yaşasın, artık temel mekanikleri \nbiliyorsunuz! Oyunun tadını çıkarın! :)" },
         };
-        private readonly List<TutorialStep> _steps = new () 
-        {
-            new RightFlipperStep(KeyCode.X),
-            new LeftFlipperStep(KeyCode.Z),
-            new BallsPurchaseStep(),
-            new BallsMergeStep(),
-            new FirstItemPurchaseStep(),
-            new ItemMovementStep(),
-            new SecondItemPurchaseStep(),
-            new ItemsMergeStep(),
-        };
+        private readonly List<TutorialStep> _steps = new () { };
 
         [SerializeField] private GameObject _overlay;
         [SerializeField] private GameObject _mask;
         [SerializeField] private TMP_Text _text;
         [SerializeField] private BallMerger _merger;
         [SerializeField] private ItemHolder _itemHolder;
+        [SerializeField] private FlipperActivatorsContainer _activatorsContainer;
+        [SerializeField] private PriceView<Ball> _ballPrice;
+        [SerializeField] private PriceView<Item> _itemPrice;
 
         private int _currentStepIndex = 0;
         private WaitForSeconds _wait;
@@ -50,20 +45,32 @@ namespace BounceFactory.Tutorial
         
         public ItemHolder ItemHolder => _itemHolder;
 
+        public FlipperActivator[] Activators => _activatorsContainer.Activators;
+
+        public PriceView<Ball> BallPrice => _ballPrice;
+
+        public PriceView<Item> ItemPrice => _itemPrice;
+
         private void Awake()
         {
-            if (Instance != null)
-                Destroy(gameObject);
-            else
-                Instance = this;
-
             if (YandexGame.savesData.IsTrained)
                 Destroy(gameObject);
+
+            _wait = new WaitForSeconds(_delay);
         }
 
         private void Start()
         {
-            _wait = new WaitForSeconds(_delay);
+            _steps.Add(new RightFlipperStep(this, KeyCode.X));
+            _steps.Add(new LeftFlipperStep(this, KeyCode.Z));
+            _steps.Add(new BallsPurchaseStep(this, _ballPrice));
+            _steps.Add(new BallsMergeStep(this));
+            _steps.Add(new FirstItemPurchaseStep(this, _itemPrice));
+            _steps.Add(new ItemMovementStep(this));
+            _steps.Add(new SecondItemPurchaseStep(this, _itemPrice));
+            _steps.Add(new ItemsMergeStep(this));
+
+            
 
             _stateMachine.Initialize(_steps[_currentStepIndex]);
             _steps[_currentStepIndex].Completed += NextStep;

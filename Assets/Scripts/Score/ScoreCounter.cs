@@ -1,21 +1,15 @@
 using System;
-using BounceFactory.System;
-using TMPro;
 using UnityEngine;
 using YG;
 
 namespace BounceFactory.Score
 {
-    [RequireComponent(typeof(TMP_Text))]
+    [RequireComponent(typeof(ScoreDisplay))]
     public class ScoreCounter : MonoBehaviour
     {
-        public static ScoreCounter Instance;
-
         private readonly int _minimalBalance = 100;
-        private readonly string _newLine = "\n";
 
-        private TMP_Text _scoreText;
-        private string _baseText;
+        private ScoreDisplay _scoreDisplay;
 
         public event Action<int> ScoreAdded;
 
@@ -25,24 +19,15 @@ namespace BounceFactory.Score
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(gameObject);
-
-            _scoreText = GetComponent<TMP_Text>();
-            _baseText = _scoreText.text + _newLine;
-
+            _scoreDisplay = GetComponent<ScoreDisplay>();
             Balance = SetBalance();
-            UpdateDisplay(ScoreToString());
         }
 
         public void AddScore(int amount)
         {
             Balance += amount;
             ScoreAdded?.Invoke(amount);
-
-            UpdateDisplay(ScoreToString());
+            _scoreDisplay.UpdateDisplay(Balance);
         }
 
         public void Buy(int price)
@@ -51,7 +36,7 @@ namespace BounceFactory.Score
             {
                 Balance -= price;
                 Spent += price;
-                UpdateDisplay(ScoreToString());
+                _scoreDisplay.UpdateDisplay(Balance);
             }
         }
 
@@ -60,10 +45,6 @@ namespace BounceFactory.Score
             Balance += Spent;
             Spent = 0;
         }
-
-        private string ScoreToString() => _baseText + NumsFormater.FormatedNumber(Balance);
-
-        private void UpdateDisplay(string score) => _scoreText.text = score;
 
         private int SetBalance()
         {

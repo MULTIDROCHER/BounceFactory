@@ -8,10 +8,15 @@ namespace BounceFactory.Tutorial.Steps
     {
         private readonly List<ItemMover> _movers = new ();
 
-        private ItemHolder Holder => TutorialGuide.Instance.ItemHolder;
+        public ItemMovementStep(TutorialGuide guide) : base(guide)
+        {
+        }
+
+        private ItemHolder Holder => Guide.ItemHolder;
 
         public override void Enter()
         {
+            base.Enter();
             Holder.UpdateContent();
 
             foreach (var item in Holder.Contents)

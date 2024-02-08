@@ -9,7 +9,7 @@ namespace BounceFactory.BaseObjects
     [RequireComponent(typeof(Animator))]
     public class BallGeneratorItem : Item
     {
-        private readonly int _accelerationAmount = 10;
+        private readonly int _accelerationAmount = 3;
         private readonly List<Ball> _spawned = new ();
 
         [SerializeField] private ParticleSystem _spawnEffect;
@@ -43,6 +43,7 @@ namespace BounceFactory.BaseObjects
                 _player.PlayAnimation();
                 CreateClones(ball);
                 StartCoroutine(DestroyBallsAfterDelay());
+                BonusAdder.GiveRevard(transform.position, ball);
             }
         }
 

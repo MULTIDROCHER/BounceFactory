@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BounceFactory.BaseObjects.BallComponents;
 using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Playground.Storage.Holder;
-using BounceFactory.Score;
 using BounceFactory.System.Level;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
 {
-    [RequireComponent(typeof(BonusAdder))]
     [RequireComponent(typeof(EffectApplier))]
     public class TeleportItem : Item
     {
@@ -18,7 +17,6 @@ namespace BounceFactory.BaseObjects
         private readonly float _delay = 2;
 
         private Holder<Item> _holder;
-        private BonusAdder _bonusHandler;
         private EffectApplier _effectApplier;
         private WaitForSeconds _wait;
 
@@ -30,9 +28,7 @@ namespace BounceFactory.BaseObjects
             _wait = new (_delay);
             DestroyingCoroutine = OnDestroying();
 
-            _holder = ActiveComponentsProvider.ItemHolder;
-
-            _bonusHandler = GetComponent<BonusAdder>();
+            _holder = ItemComponentsProvider.ItemHolder;
             _effectApplier = GetComponent<EffectApplier>();
         }
 
@@ -65,9 +61,8 @@ namespace BounceFactory.BaseObjects
         private void Teleport(TeleportableObject teleportable)
         {
             _inPortal.Add(teleportable);
-            var portal = FindPortal();
 
-            if (portal != null)
+            if (TryFindPortal(out TeleportItem portal))
                 StartCoroutine(Teleportation(teleportable, portal));
             else
                 StartCoroutine(Teleportation(teleportable, this));
@@ -82,7 +77,7 @@ namespace BounceFactory.BaseObjects
         private void Appear(TeleportableObject teleportable, TeleportItem portal)
         {
             _effectApplier.DoEffect(portal.transform.position);
-            teleportable.Appear(portal.transform.position, _bonusHandler);
+            teleportable.Appear(portal.transform.position, BonusAdder);
         }
 
         private IEnumerator Teleportation(TeleportableObject teleportable, TeleportItem portal)
@@ -105,6 +100,10 @@ namespace BounceFactory.BaseObjects
             _inPortal.Remove(teleportable);
         }
 
-        private TeleportItem FindPortal() => (TeleportItem)_holder.Contents.Find(item => item != this);
+        private bool TryFindPortal(out TeleportItem teleport)
+        {
+            teleport = _holder.Contents.FirstOrDefault(item => item != this) as TeleportItem;
+            return teleport != null;
+        }
     }
 }

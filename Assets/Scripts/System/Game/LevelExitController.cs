@@ -11,6 +11,7 @@ namespace BounceFactory.System.Game
         [SerializeField] private LoadingScreen _loadingScreen;
         [SerializeField] private ReviewSender _reviewSender;
         [SerializeField] private ScoreSender _scoreSender;
+        [SerializeField] private ScoreCounter _scoreCounter;
 
         public event Action LevelExited;
 
@@ -18,7 +19,7 @@ namespace BounceFactory.System.Game
 
         public void ExitLevel()
         {
-            ScoreCounter.Instance.ReturnSpent();
+            _scoreCounter.ReturnSpent();
             _scoreSender.RewriteLeaderboardScore();
             _reviewSender.ShowReview();
 

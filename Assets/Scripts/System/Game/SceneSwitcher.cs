@@ -11,8 +11,13 @@ namespace BounceFactory.System.Game
         [SerializeField] private LevelExitController _exitController;
 
         private LoadingScreen _loadingScreen;
+        private ProgressSaver _progressSaver;
 
-        private void Awake() => _loadingScreen = _exitController.LoadingScreen;
+        private void Awake()
+        {
+            _loadingScreen = _exitController.LoadingScreen;
+            _progressSaver = new ();
+        }
 
         public void Exit()
         {
@@ -38,7 +43,7 @@ namespace BounceFactory.System.Game
             }
             else
             {
-                ProgressSaver.ResetSavedProgress();
+                _progressSaver.ResetSavedProgress();
                 StartGame();
             }
         }

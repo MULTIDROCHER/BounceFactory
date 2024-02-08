@@ -1,7 +1,6 @@
 using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Spawning;
-using BounceFactory.System.Level;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Selling
@@ -21,17 +20,9 @@ namespace BounceFactory.Logic.Selling
         
         public int Price { get; protected set; }
 
-        protected virtual void OnEnable()
-        {
-            ActiveComponentsProvider.LevelChanged += OnLevelChanged;
-            Spawner.Bought += OnBought;
-        }
+        protected virtual void OnEnable() => Spawner.Bought += OnBought;
 
-        protected virtual void OnDisable()
-        {
-            ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
-            Spawner.Bought -= OnBought;
-        }
+        protected virtual void OnDisable() => Spawner.Bought -= OnBought;
 
         protected virtual void OnBought() => IncreasePrices();
 

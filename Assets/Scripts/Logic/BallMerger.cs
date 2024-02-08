@@ -43,36 +43,34 @@ namespace BounceFactory.Logic
 
         private void OnEnable()
         {
-            ActiveComponentsProvider.LevelChanged += SetHolder;
+            BallComponentsProvider.LevelChanged += SetHolder;
             _seller.BallDestroyed += OnBallsAmountChanged;
         }
 
         private void OnDisable()
         {
-            ActiveComponentsProvider.LevelChanged -= SetHolder;
+            BallComponentsProvider.LevelChanged -= SetHolder;
             _seller.BallDestroyed -= OnBallsAmountChanged;
         }
 
-        private void TryFindMatches()
+        private void FindMatches()
         {
-            List<Ball> balls = _holder.Contents.ToList();
+            var balls = _holder.Contents;
             int maxLevel = balls.Max(ball => ball.Level);
 
             for (int level = maxLevel; level > 0; level--)
             {
-                List<Ball> matchingBalls = balls.FindAll(ball => ball != null && ball.Level == level);
+                var matchingBalls = balls.Where(ball => ball != null && ball.Level == level).ToList();
 
                 if (matchingBalls.Count >= _requiredAmount)
                 {
-                    List<Ball> taken = matchingBalls.Take(_requiredAmount).ToList();
+                    var taken = matchingBalls.GetRange(0, _requiredAmount);
                     EnableButton(taken);
-                    break;
-                }
-                else
-                {
-                    DisableButton();
+                    return;
                 }
             }
+
+            DisableButton();
         }
 
         private void Merge(List<Ball> balls)
@@ -131,7 +129,7 @@ namespace BounceFactory.Logic
             if (_holder != null)
                 _holder.ChildAdded -= OnBallsAmountChanged;
 
-            _holder = ActiveComponentsProvider.BallHolder;
+            _holder = BallComponentsProvider.BallHolder;
             _holder.ChildAdded += OnBallsAmountChanged;
             OnBallsAmountChanged();
         }
@@ -139,7 +137,7 @@ namespace BounceFactory.Logic
         private void OnBallsAmountChanged()
         {
             if (_holder.Contents.Count >= _requiredAmount)
-                TryFindMatches();
+                FindMatches();
             else
                 DisableButton();
         }

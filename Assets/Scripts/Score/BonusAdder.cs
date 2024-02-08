@@ -10,8 +10,13 @@ namespace BounceFactory.Score
         [SerializeField] private BonusDisplay _bonusDisplay;
 
         private Item _item;
+        private ScoreCounter _scoreCounter;
 
-        private void Start() => _item = GetComponent<Item>();
+        private void Start()
+        {
+            _item = GetComponent<Item>();
+            _scoreCounter = _item.ScoreCounter;
+        } 
 
         private void OnCollisionEnter2D(Collision2D other) => GiveRevardOnCollision(other.gameObject, other.GetContact(0).point);
 
@@ -20,7 +25,7 @@ namespace BounceFactory.Score
         public void GiveRevard(Vector3 position, Ball ball)
         {
             int bonus = ball.Bonus + _item.Bonus;
-            ScoreCounter.Instance.AddScore(bonus);
+            _scoreCounter.AddScore(bonus);
 
             var display = Instantiate(_bonusDisplay, transform);
             display.ShowBonus(bonus, position);
@@ -35,8 +40,9 @@ namespace BounceFactory.Score
         private bool AbleToGetReward(GameObject other, out Ball ball)
         {
             ball = other.GetComponent<Ball>();
+            bool isRequiredType = _item.GetComponent<BallGeneratorItem>() == null && _item.GetComponent<TeleportItem>() == null;
 
-            return enabled && ball != null && _item.TryGetComponent(out TeleportItem _) == false;
+            return enabled && ball != null && isRequiredType;
         }
     }
 }

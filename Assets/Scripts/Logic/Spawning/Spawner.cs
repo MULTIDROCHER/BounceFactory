@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Selling;
 using BounceFactory.Playground.Storage.Holder;
-using BounceFactory.System.Level;
+using BounceFactory.Score;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Spawning
@@ -14,14 +14,9 @@ namespace BounceFactory.Logic.Spawning
         [SerializeField] protected List<T> Templates = new ();
         [SerializeField] protected PriceChanger<T> PriceChanger;
         [SerializeField] protected Holder<T> Holder;
+        [SerializeField] protected ScoreCounter ScoreCounter;
 
         public abstract event Action Bought;
-
-        protected virtual void OnEnable() =>
-            ActiveComponentsProvider.LevelChanged += OnLevelChanged;
-
-        protected virtual void OnDisable() =>
-            ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
 
         public virtual void Spawn() 
         { 

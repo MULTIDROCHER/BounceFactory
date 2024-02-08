@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BounceFactory.sln"
+    "dotnet.defaultSolution": "BounceFactory.sln",
+    "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

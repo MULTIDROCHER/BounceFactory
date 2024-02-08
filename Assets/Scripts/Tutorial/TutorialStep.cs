@@ -8,15 +8,22 @@ namespace BounceFactory.Tutorial
 {
     public abstract class TutorialStep
     {
+        protected TMP_Text Text;
+        protected GameObject Mask;
+
+        protected TutorialGuide Guide;
+
         public event Action Completed;
 
-        protected TMP_Text Text => TutorialGuide.Instance.Text;
-
-        protected GameObject Mask => TutorialGuide.Instance.Mask;
-        
         protected string Language => YandexGame.lang;
 
-        public virtual void Enter() { }
+        protected TutorialStep(TutorialGuide guide) => Guide = guide;
+
+        public virtual void Enter()
+        {
+            Text = Guide.Text;
+            Mask = Guide.Mask;
+        }
 
         public virtual void Exit() { }
 
@@ -37,14 +44,14 @@ namespace BounceFactory.Tutorial
 
         protected virtual void OnNeedMask(string text, Transform target)
         {
-            TutorialGuide.Instance.EnableOverlay();
-            Mask.transform.position = GetMaskPosition(target);
+            Guide.EnableOverlay();
+            Mask.transform.position = target.position;
             ChangeText(text);
         }
 
         protected virtual void OnUnneedMask(string text)
         {
-            TutorialGuide.Instance.DisableOverlay();
+            Guide.DisableOverlay();
             ChangeText(text);
         }
 
@@ -52,8 +59,6 @@ namespace BounceFactory.Tutorial
         {
             Text.text = text;
         }
-
-        protected virtual Vector3 GetMaskPosition(Transform target) => target.position;
 
         protected virtual void OnPerformed()
         {

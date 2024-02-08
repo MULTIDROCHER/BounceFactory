@@ -5,10 +5,15 @@ namespace BounceFactory.Tutorial.Steps
 {
     public class BallsMergeStep : TutorialStep
     {
-        private BallMerger Merger => TutorialGuide.Instance.Merger;
+        public BallsMergeStep(TutorialGuide guide) : base(guide)
+        {
+        }
+
+        private BallMerger Merger => Guide.Merger;
 
         public override void Enter()
         {
+            base.Enter();
             Merger.Performed += OnPerformed;
             OnNeedMask(CommonMessages()[Language], Merger.Button.transform);
         }

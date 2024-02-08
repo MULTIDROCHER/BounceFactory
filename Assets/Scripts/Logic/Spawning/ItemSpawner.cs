@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BounceFactory.BaseObjects;
+using BounceFactory.Display;
+using BounceFactory.Display.ItemLevel;
 using BounceFactory.Score;
 using BounceFactory.System.Level;
 using UnityEngine;
@@ -14,12 +16,21 @@ namespace BounceFactory.Logic.Spawning
         private readonly int _teleportChance = 20;
         private readonly int _ballgeneratorChance = 30;
         private readonly int _itemsOnSceneForGeneratorSpawn = 2;
+        
+        [SerializeField] private ItemLevelView _levelView;
+        [SerializeField] private SpawnPointsView _pointView;
 
         private List<SpawnPoint> _spawnPoints = new ();
 
         public event Action<Item> ItemSpawned;
         
         public override event Action Bought;
+
+        protected virtual void OnEnable() =>
+            ItemComponentsProvider.LevelChanged += OnLevelChanged;
+
+        protected virtual void OnDisable() =>
+            ItemComponentsProvider.LevelChanged -= OnLevelChanged;
 
         public override void Spawn()
         {
@@ -35,7 +46,10 @@ namespace BounceFactory.Logic.Spawning
                 if (itemToSpawn != null)
                 {
                     var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, Holder.transform);
-                    ScoreCounter.Instance.Buy(PriceChanger.Price);
+                    spawned.ClickHandler.GetViews(_levelView, _pointView);
+                    spawned.GetCounter(ScoreCounter);
+
+                    ScoreCounter.Buy(PriceChanger.Price);
                     ItemSpawned?.Invoke(spawned);
                     Bought?.Invoke();
                 }
@@ -45,7 +59,7 @@ namespace BounceFactory.Logic.Spawning
         protected override void OnLevelChanged()
         {
             _spawnPoints.Clear();
-            _spawnPoints = ActiveComponentsProvider.ActivePoints;
+            _spawnPoints = ItemComponentsProvider.ActivePoints;
         }
 
         private Item GetRandomItem()

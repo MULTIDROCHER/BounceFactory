@@ -7,6 +7,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         private readonly float _delay = 2;
 
         [SerializeField] private ParticleSystem _effect;
+        [SerializeField] private ParticleSystem _upgradeEffect;
 
         public void DoEffect(Ball ball)
         {
@@ -17,5 +18,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         public void DoEffect(Vector3 position) => Instantiate(_effect, position, Quaternion.identity, transform);
 
         public void DoEffect(ParticleSystem effect, Vector3 position) => Instantiate(effect, position, Quaternion.identity, transform);
+
+        public void DoUpgradeEffect(Transform item) => Instantiate(_upgradeEffect, item);
     }
 }

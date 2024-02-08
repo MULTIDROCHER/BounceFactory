@@ -1,7 +1,6 @@
 using BounceFactory.BaseObjects;
 using BounceFactory.Display.Price;
 using BounceFactory.Logic.Selling;
-using UnityEngine;
 
 namespace BounceFactory.Tutorial
 {
@@ -12,9 +11,18 @@ namespace BounceFactory.Tutorial
         protected PriceView<T> PriceView;
         protected ITutorialEvent Performer;
 
+        public PurchaseStep(TutorialGuide guide) : base(guide)
+        {
+        }
+
+        protected PurchaseStep(TutorialGuide guide, PriceView<T> priceView) : base(guide)
+        {
+            PriceView = priceView;
+        }
+
         public override void Enter()
         {
-            PriceView = Object.FindFirstObjectByType<PriceView<T>>();
+            base.Enter();
             PriceChanger = PriceView.PriceChanger;
             Performer = PriceChanger as ITutorialEvent;
 

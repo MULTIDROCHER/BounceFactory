@@ -19,8 +19,15 @@ namespace BounceFactory.System.Game
         [SerializeField] private LevelExitController _exitController;
 
         private LevelData _current;
+        private ProgressSaver _progressSaver;
+        private LevelPrepairer _prepairer;
 
-        private void Start() => SetLevel();
+        private void Start()
+        {
+            _progressSaver = new (_progressBar);
+            _prepairer = new (_levelTemplates, _backgroundSprites);
+            SetLevel();
+        }
 
         private void OnEnable()
         {
@@ -46,30 +53,19 @@ namespace BounceFactory.System.Game
         private void SetLevel()
         {
             if (_current != null)
-                ActiveComponentsProvider.Reset();
-
-            SetRandomLevelTemplate();
-            SetRandomBackground();
-
-            ActiveComponentsProvider.GetLevelComponents(_current);
-            _current.gameObject.SetActive(true);
-        }
-
-        private void SetRandomLevelTemplate()
-        {
-            LevelData tempLevel = _current;
-
-            foreach (var level in _levelTemplates)
             {
-                if (level != null)
-                    level.gameObject.SetActive(false);
+                BallComponentsProvider.Reset();
+                ItemComponentsProvider.Reset();
             }
 
-            while (_current == tempLevel || _current == null)
-                _current = _levelTemplates[Random.Range(0, _levelTemplates.Count)];
-        }
+            _current = _prepairer.GetRandomLevel(_current);
+            _background.sprite = _prepairer.GetRandomBackground();
 
-        private void SetRandomBackground() => _background.sprite = _backgroundSprites[Random.Range(0, _backgroundSprites.Count)];
+            BallComponentsProvider.GetLevelComponents(_current.BallData);
+            ItemComponentsProvider.GetLevelComponents(_current.ItemData);
+
+            _current.gameObject.SetActive(true);
+        }
 
         private void OnGoalReached()
         {
@@ -82,7 +78,7 @@ namespace BounceFactory.System.Game
 
         private void SaveChanges()
         {
-            ProgressSaver.SaveProgress(_progressBar);
+            _progressSaver.SaveProgress();
             MetricsSender.CreateMetrics();
         }
     }

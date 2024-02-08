@@ -6,7 +6,9 @@ namespace BounceFactory.System.Game
 {
     public class AudioPlayer : MonoBehaviour
     {
-        public static AudioPlayer Instance;
+        private static AudioPlayer _instance;
+
+        public static AudioPlayer Instance => _instance;
 
         [SerializeField] private AudioSource _musicSource;
         [SerializeField] private AudioSource _sfxSource;
@@ -14,20 +16,19 @@ namespace BounceFactory.System.Game
         public event Action<float> VolumeChanged;
 
         public AudioSource MusicSource => _musicSource;
-        
+
         public AudioSource SFXSource => _sfxSource;
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
+            if (_instance != null && _instance != this)
             {
                 Destroy(gameObject);
+                return;
             }
+
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         public void SwitchSource(AudioSource source, SoundButton button)

@@ -5,7 +5,9 @@ namespace BounceFactory.Tutorial.Steps
 {
     public class LeftFlipperStep : FlipperStep
     {
-        public LeftFlipperStep(KeyCode controllerKey) : base(controllerKey) { }
+        public LeftFlipperStep(TutorialGuide guide, KeyCode activatorButton) : base(guide, activatorButton)
+        {
+        }
 
         protected override Dictionary<string, string> MobileMessages()
         {

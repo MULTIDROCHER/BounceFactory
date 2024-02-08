@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5350849683300647299}
   - component: {fileID: -6762500811697334765}
   - component: {fileID: -7913900473555187972}
+  - component: {fileID: 5449329527766196838}
   m_Layer: 6
   m_Name: Item
   m_TagString: Untagged
@@ -241,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a0269f963428542a287f8a981c92b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
   _sprites:
   - {fileID: -670916510, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
   - {fileID: 1221652569, guid: 19c9d85108739b24b89cadb1ce226773, type: 3}
@@ -310,6 +310,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e8b0c6507c5534c95cacdfa4edfe92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}
   _displayTemplate: {fileID: 9117374843749914784, guid: 04cae28697be3c5469a15eebcbe1c82f, type: 3}
   _mergeMaterial: {fileID: 2100000, guid: 487f18665aaca2346b9cd7c90aa35f32, type: 2}
+--- !u!114 &5449329527766196838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228264078072020680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cf5b4f8a1178746ae8b346861c5039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 0}
+  _upgradeEffect: {fileID: 1814315751473787961, guid: e9459def1a517a24ba482f9e639df7ff, type: 3}

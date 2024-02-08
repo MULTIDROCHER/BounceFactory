@@ -1,6 +1,7 @@
 using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.DeadZones;
+using BounceFactory.System.Level;
 using BounceFactory.Tutorial;
 using UnityEngine;
 
@@ -21,6 +22,18 @@ namespace BounceFactory.Logic.Selling
         {
             _zonesProcessor.BallDestroyed += OnBallDestroyed;
             _zonesProcessor.BallsOver += OnBallsOver;
+        }
+
+        protected override void OnEnable()
+        {
+            BallComponentsProvider.LevelChanged += OnLevelChanged;
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            BallComponentsProvider.LevelChanged -= OnLevelChanged;
+            base.OnDisable();
         }
 
         private void OnDestroy()

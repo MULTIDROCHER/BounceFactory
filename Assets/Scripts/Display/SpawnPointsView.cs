@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Spawning;
 using BounceFactory.System.Level;
 using UnityEngine;
@@ -10,9 +9,9 @@ namespace BounceFactory.Display
     {
         private List<SpawnPoint> _points = new ();
 
-        private void Start() => ActiveComponentsProvider.LevelChanged += OnLevelChanged;
+        private void Start() => ItemComponentsProvider.LevelChanged += OnLevelChanged;
 
-        private void OnDestroy() => ActiveComponentsProvider.LevelChanged -= OnLevelChanged;
+        private void OnDestroy() => ItemComponentsProvider.LevelChanged -= OnLevelChanged;
 
         public void ShowPoints()
         {
@@ -29,7 +28,7 @@ namespace BounceFactory.Display
         private void OnLevelChanged()
         {
             _points.Clear();
-            _points = ActiveComponentsProvider.ActivePoints;
+            _points = ItemComponentsProvider.ActivePoints;
         }
     }
 }

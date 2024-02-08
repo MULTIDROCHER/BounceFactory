@@ -7,7 +7,6 @@ namespace BounceFactory.BaseObjects.ItemComponents
 {
     [RequireComponent(typeof(Item))]
     [RequireComponent(typeof(ItemMover))]
-    [RequireComponent(typeof(BonusAdder))]
     public class ItemClickHandler : MonoBehaviour
     {
         private ItemLevelView _levelView;
@@ -19,12 +18,9 @@ namespace BounceFactory.BaseObjects.ItemComponents
 
         private void Awake()
         {
-            _levelView = FindFirstObjectByType<ItemLevelView>();
-            _pointView = FindFirstObjectByType<SpawnPointsView>();
-
             Item = GetComponent<Item>();
             _itemMovement = GetComponent<ItemMover>();
-            _bonusHandler = GetComponent<BonusAdder>();
+            _bonusHandler = Item.BonusAdder;
         }
 
         private void OnMouseOver()
@@ -33,6 +29,12 @@ namespace BounceFactory.BaseObjects.ItemComponents
                 OnClick();
             else if (Input.GetMouseButtonUp(0))
                 OnDrop();
+        }
+
+        public void GetViews(ItemLevelView levelView, SpawnPointsView pointsView)
+        {
+            _levelView = levelView;
+            _pointView = pointsView;
         }
 
         public void OnClick()

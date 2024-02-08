@@ -1,5 +1,6 @@
 using System;
 using BounceFactory.BaseObjects;
+using BounceFactory.System.Level;
 using BounceFactory.Tutorial;
 
 namespace BounceFactory.Logic.Selling
@@ -10,6 +11,18 @@ namespace BounceFactory.Logic.Selling
         private readonly float _priceIncrease = 1.7f;
 
         public event Action Performed;
+
+        protected override void OnEnable()
+        {
+            ItemComponentsProvider.LevelChanged += OnLevelChanged;
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            ItemComponentsProvider.LevelChanged -= OnLevelChanged;
+            base.OnDisable();
+        }
 
         protected override void OnBought()
         {

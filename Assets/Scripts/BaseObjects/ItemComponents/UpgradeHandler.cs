@@ -6,12 +6,13 @@ using UnityEngine;
 namespace BounceFactory.BaseObjects.ItemComponents
 {
     [RequireComponent(typeof(Item))]
+    [RequireComponent(typeof(EffectApplier))]
     public class UpgradeHandler : MonoBehaviour, ITutorialEvent
     {
-        [SerializeField] private ParticleSystem _effect;
         [SerializeField] private ItemLevelDisplay _displayTemplate;
         [SerializeField] private Material _mergeMaterial;
 
+        private EffectApplier _effectApplier;
         private Material _defaultMaterial;
         private SpriteRenderer _renderer;
         private ItemLevelDisplay _display;
@@ -24,6 +25,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
 
         private void Awake()
         {
+            _effectApplier = GetComponent<EffectApplier>();
             _current = GetComponent<Item>();
             _renderer = _current.Renderer;
 
@@ -88,14 +90,12 @@ namespace BounceFactory.BaseObjects.ItemComponents
             var template = merger.GetRandom();
 
             template.LevelUp();
-            DoEffect(template.transform);
+            _effectApplier.DoUpgradeEffect(template.transform);
 
             if (template != item)
                 item.Destroy();
             else
                 _current.Destroy();
         }
-
-        private void DoEffect(Transform parent) => Instantiate(_effect, parent);
     }
 }

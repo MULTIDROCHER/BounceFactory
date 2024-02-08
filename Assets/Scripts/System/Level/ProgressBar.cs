@@ -14,6 +14,8 @@ namespace BounceFactory.System.Level
         private readonly float _duration = .2f;
         private readonly string _splitter = " / ";
 
+        [SerializeField] private ScoreCounter _scoreCounter;
+
         private TMP_Text _text;
         private Slider _slider;
         private int _goal;
@@ -22,17 +24,19 @@ namespace BounceFactory.System.Level
 
         public int CurrentScore { get; private set; }
 
+        public ScoreCounter Counter => _scoreCounter;
+
         private void Start()
         {
             _slider = GetComponent<Slider>();
             _text = GetComponentInChildren<TMP_Text>();
 
-            ScoreCounter.Instance.ScoreAdded += UpdateProgressBar;
+            _scoreCounter.ScoreAdded += UpdateProgressBar;
             CurrentScore = YandexGame.savesData.LevelScore;
             SetBar();
         }
 
-        private void OnDestroy() => ScoreCounter.Instance.ScoreAdded -= UpdateProgressBar;
+        private void OnDestroy() => _scoreCounter.ScoreAdded -= UpdateProgressBar;
 
         public void UpdateProgressBar(int amount)
         {

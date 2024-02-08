@@ -1,3 +1,4 @@
+using BounceFactory.Playground.Storage;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
@@ -8,10 +9,13 @@ namespace BounceFactory.BaseObjects
     {
         private Rigidbody2D _rigidbody;
         private Collider2D _collider;
+        private EffectContainer _effectContainer;
 
         public Rigidbody2D Rigidbody => _rigidbody;
         
         public Collider2D Collider => _collider;
+
+        public EffectContainer EffectContainer => _effectContainer;
 
         protected override void Awake()
         {
@@ -32,5 +36,7 @@ namespace BounceFactory.BaseObjects
         }
 
         public void ChangeColor(Color color) => Renderer.color = color;
+
+        public void GetEffectContainer(EffectContainer container) => _effectContainer = container;
     }
 }
