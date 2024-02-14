@@ -1,4 +1,4 @@
-using BounceFactory.System.Game;
+using BounceFactory.System.Game.SoundSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,26 +9,25 @@ namespace BounceFactory.UI
     [RequireComponent(typeof(Button))]
     public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
-        [SerializeField] private AudioClip _clip;
+        protected AudioSource Source;
+        protected Button Button;
 
-        private AudioSource _source;
-        private Button _button;
-        private Vector3 _increasedScale = new (.1f, .1f, 0);
+        private Vector3 _increasedScale = new(.1f, .1f, 0);
         private Vector3 _defaultScale;
 
         private void Awake()
         {
-            _button = GetComponent<Button>();
-            _source = AudioPlayer.Instance.SFXSource;
-        }
-
-        private void Start()
-        {
+            Button = GetComponent<Button>();
             _defaultScale = transform.localScale;
-            _button.onClick.AddListener(() => PlaySound());
+        } 
+
+        protected virtual void Start()
+        {
+            if (SourcePool.SFXSources.TryGetValue(System.Game.SoundSystem.Sound.Click, out Source))
+                Button.onClick.AddListener(() => SoundManager.PlayOneShot(Source));
         }
 
-        private void OnDestroy() => _button.onClick.RemoveAllListeners();
+        private void OnDestroy() => Button.onClick.RemoveAllListeners();
 
         public void OnPointerDown(PointerEventData eventData) => IncreaseScale();
 
@@ -48,12 +47,10 @@ namespace BounceFactory.UI
 
         private void IncreaseScale()
         {
-            if (_button.interactable)
+            if (Button.interactable)
                 transform.localScale += _increasedScale;
         }
 
         private void SetDefaultScale() => transform.localScale = _defaultScale;
-
-        private void PlaySound() => _source.PlayOneShot(_clip);
     }
 }

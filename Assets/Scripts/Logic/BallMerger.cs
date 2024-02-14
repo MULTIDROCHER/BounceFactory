@@ -7,6 +7,7 @@ using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Logic.Selling;
 using BounceFactory.Playground.Storage.Holder;
 using BounceFactory.System.Game;
+using BounceFactory.System.Game.SoundSystem;
 using BounceFactory.Tutorial;
 using DG.Tweening;
 using UnityEngine;
@@ -109,6 +110,8 @@ namespace BounceFactory.Logic
             StopAllCoroutines();
 
             _effectApplier.DoEffect(transform.position);
+            SoundManager.PlayOneShot(Sound.BallMerge);
+
             ball.ChangeColor(_colorChanger.GetColorByLevel(ball));
             ball.LevelUp();
             ball.Collider.enabled = true;

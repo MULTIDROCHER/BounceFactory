@@ -14,13 +14,6 @@ namespace BounceFactory.Score
             UpdateDisplay();
         }
 
-        private void Update() {
-            if(Input.GetKeyDown(KeyCode.Space)){
-                Debug.Log("dont forget to delete dont forget to delete dont forget to delete dont forget to delete dont forget to delete dont forget to delete dont forget to delete ");
-                AddScore(500);
-            }
-        }
-
         public void Buy(int price)
         {
             if (Balance >= price)

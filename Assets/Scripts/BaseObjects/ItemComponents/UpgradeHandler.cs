@@ -1,5 +1,6 @@
 using System;
 using BounceFactory.Display.ItemLevel;
+using BounceFactory.System.Game.SoundSystem;
 using BounceFactory.Tutorial;
 using UnityEngine;
 
@@ -91,6 +92,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
 
             template.LevelUp();
             _effectApplier.DoUpgradeEffect(template.transform);
+            SoundManager.PlayOneShot(Sound.ItemMerge);
 
             if (template != item)
                 item.Destroy();

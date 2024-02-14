@@ -1,5 +1,5 @@
 using BounceFactory.Playground.DeadZones;
-using BounceFactory.System.Game;
+using BounceFactory.System.Game.SoundSystem;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects.BallComponents
@@ -8,30 +8,14 @@ namespace BounceFactory.BaseObjects.BallComponents
     [RequireComponent(typeof(TeleportableObject))]
     public class BallSoundsPlayer : MonoBehaviour
     {
-        [SerializeField] private AudioClip _bounceSound;
-        [SerializeField] private AudioClip _teleportSound;
-        [SerializeField] private AudioClip _generatorSound;
-        [SerializeField] private AudioClip _accelerationSound;
-
-        private AudioSource _source;
         private TeleportableObject _teleportable;
 
-        private void Awake()
-        {
-            _teleportable = GetComponent<TeleportableObject>();
-            _source = GetComponent<AudioSource>();
-
-            _source.volume = AudioPlayer.Instance.SFXSource.volume;
-        }
-
-        private void OnEnable() => AudioPlayer.Instance.VolumeChanged += OnVolumeChanged;
-
-        private void OnDisable() => AudioPlayer.Instance.VolumeChanged -= OnVolumeChanged;
+        private void Awake() => _teleportable = GetComponent<TeleportableObject>();
 
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent(out DeadZone _) == false)
-                _source.PlayOneShot(_bounceSound);
+                PlaySound(Sound.BallBounce);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -42,19 +26,17 @@ namespace BounceFactory.BaseObjects.BallComponents
             {
                 case PortalItem teleport when teleport.CanTeleport
                 && _teleportable.CanBeTeleported:
-                    PlaySound(_teleportSound);
+                    PlaySound(Sound.Teleportation);
                     break;
                 case BallGeneratorItem generator when generator.IsActive:
-                    PlaySound(_generatorSound);
+                    PlaySound(Sound.BallGeneration);
                     break;
                 case AccelerationItem:
-                    PlaySound(_accelerationSound);
+                    PlaySound(Sound.Acceleration);
                     break;
             }
         }
 
-        private void PlaySound(AudioClip clip) => _source.PlayOneShot(clip);
-
-        private void OnVolumeChanged(float value) => _source.volume = value;
+        private void PlaySound(Sound sound) => SoundManager.PlayOneShot(sound);
     }
 }

@@ -1,13 +1,19 @@
-using BounceFactory.System.Game;
+using BounceFactory.System.Game.SoundSystem;
 
 namespace BounceFactory.UI.Sound
 {
     public class MusicButton : SoundButton
     {
-        protected override void Start()
+        private void OnEnable()
         {
-            Source = AudioPlayer.Instance.MusicSource;
-            base.Start();
+            Button.onClick.AddListener(SoundAssets.Instance.SwitchMusicSource);
+            SoundManager.VolumeChanger.MusicVolumeChanged += OnVolumeChanged;
+        }
+
+        private void OnDisable()
+        {
+            Button.onClick.RemoveListener(SoundAssets.Instance.SwitchMusicSource);
+            SoundManager.VolumeChanger.MusicVolumeChanged -= OnVolumeChanged;
         }
     }
 }

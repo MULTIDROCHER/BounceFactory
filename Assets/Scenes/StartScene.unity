@@ -1059,7 +1059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e09bd3b3e3a13488f400eb0e3d8242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: fac780b1291ba534485e9114483a5673, type: 3}
 --- !u!114 &553466168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4268,7 +4267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e09bd3b3e3a13488f400eb0e3d8242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: fac780b1291ba534485e9114483a5673, type: 3}
 --- !u!224 &3278993375723685755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4300,7 +4298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e09bd3b3e3a13488f400eb0e3d8242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: fac780b1291ba534485e9114483a5673, type: 3}
 --- !u!224 &3333411657648351372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5802,10 +5799,6 @@ PrefabInstance:
     - target: {fileID: 167754024817280004, guid: caaacbe924f8a1747ba7dddf886157da, type: 3}
       propertyPath: m_Name
       value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381469084530207027, guid: caaacbe924f8a1747ba7dddf886157da, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1381469084530207027, guid: caaacbe924f8a1747ba7dddf886157da, type: 3}
       propertyPath: m_LocalPosition.x

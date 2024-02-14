@@ -1,5 +1,5 @@
 using BounceFactory.BaseObjects;
-using BounceFactory.System.Game;
+using BounceFactory.System.Game.SoundSystem;
 using DG.Tweening;
 using UnityEngine;
 
@@ -11,7 +11,6 @@ namespace BounceFactory.Playground.FlipperSystem
         private readonly int _acceleration = 10;
 
         [SerializeField] private float _angle;
-        [SerializeField] private AudioClip _sound;
 
         private Vector3 _rotation;
         private bool _isOpened = false;
@@ -26,7 +25,7 @@ namespace BounceFactory.Playground.FlipperSystem
 
         public void Open()
         {
-            AudioPlayer.Instance.SFXSource.PlayOneShot(_sound);
+            SoundManager.PlayOneShot(Sound.Flipper);
             _isOpened = true;
 
             transform.DORotate(_rotation, _delay).OnComplete(() =>
