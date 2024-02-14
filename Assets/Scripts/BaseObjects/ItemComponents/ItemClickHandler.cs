@@ -31,7 +31,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
                 OnDrop();
         }
 
-        public void GetViews(ItemLevelView levelView, SpawnPointsView pointsView)
+        public void SetViews(ItemLevelView levelView, SpawnPointsView pointsView)
         {
             _levelView = levelView;
             _pointView = pointsView;

@@ -10,14 +10,13 @@ namespace BounceFactory.Tutorial
     {
         protected TMP_Text Text;
         protected GameObject Mask;
-
         protected TutorialGuide Guide;
 
         public event Action Completed;
 
-        protected string Language => YandexGame.lang;
-
         protected TutorialStep(TutorialGuide guide) => Guide = guide;
+
+        protected string Language => YandexGame.lang;
 
         public virtual void Enter()
         {
@@ -25,21 +24,23 @@ namespace BounceFactory.Tutorial
             Mask = Guide.Mask;
         }
 
-        public virtual void Exit() { }
+        public virtual void Exit()
+        {
+        }
 
         protected virtual Dictionary<string, string> ComputerMessages()
         {
-            return new();
+            return new ();
         }
 
         protected virtual Dictionary<string, string> MobileMessages()
         {
-            return new();
+            return new ();
         }
 
         protected virtual Dictionary<string, string> CommonMessages()
         {
-            return new();
+            return new ();
         }
 
         protected virtual void OnNeedMask(string text, Transform target)

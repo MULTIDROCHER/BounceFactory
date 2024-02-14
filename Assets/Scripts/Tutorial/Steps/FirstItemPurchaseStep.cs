@@ -6,7 +6,8 @@ namespace BounceFactory.Tutorial.Steps
 {
     public class FirstItemPurchaseStep : PurchaseStep<Item>
     {
-        public FirstItemPurchaseStep(TutorialGuide guide, PriceView<Item> priceView) : base(guide, priceView)
+        public FirstItemPurchaseStep(TutorialGuide guide, PriceView<Item> priceView)
+        : base(guide, priceView)
         {
         }
 
@@ -18,7 +19,7 @@ namespace BounceFactory.Tutorial.Steps
 
         protected override Dictionary<string, string> CommonMessages()
         {
-            return new Dictionary<string, string>() 
+            return new Dictionary<string, string>()
         {
             { "ru", "теперь создай предмет,\nчтобы шарам было с чем сталкиваться" },
             { "en", "Now create an object so the balls\nhave something to collide with" },

@@ -10,18 +10,11 @@ namespace BounceFactory.Display
         private readonly float _delay = 2;
         private readonly string _symbol = "+";
 
-        private Canvas _canvas;
         private TMP_Text _text;
         private Vector2 _position;
-        private Vector2 _positionSpread = new(.2f, .2f);
+        private Vector2 _positionSpread = new (.2f, .2f);
 
-        private void Awake()
-        {
-            _text = GetComponentInChildren<TMP_Text>();
-
-            _canvas = GetComponent<Canvas>();
-            _canvas.worldCamera = Camera.main;
-        }
+        private void Awake() => _text = GetComponentInChildren<TMP_Text>();
 
         private void LateUpdate() => transform.SetPositionAndRotation(_position, Quaternion.identity);
 
@@ -37,10 +30,10 @@ namespace BounceFactory.Display
         {
             _text.text = text;
             _position = pos;
-            _position += SetPositionSpread();
+            _position += GetPositionSpread();
         }
 
-        private Vector2 SetPositionSpread()
+        private Vector2 GetPositionSpread()
         {
             float spreadX = Random.Range(-_positionSpread.x, _positionSpread.x);
             float spreadY = Random.Range(-_positionSpread.y, _positionSpread.y);

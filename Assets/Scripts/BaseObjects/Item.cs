@@ -13,14 +13,14 @@ namespace BounceFactory.BaseObjects
     [RequireComponent(typeof(BonusAdder))]
     public class Item : UpgradableObject
     {
-        private UpgradeHandler _upgradeHandler;
-
         protected ItemMover Movement;
         protected PointHandler PointHandler;
         protected IEnumerator DestroyingCoroutine;
 
+        private UpgradeHandler _upgradeHandler;
+
         public ItemLevelDisplay LevelDisplay => _upgradeHandler.LevelDisplay;
-        
+
         public ItemClickHandler ClickHandler { get; protected set; }
 
         public BonusAdder BonusAdder { get; protected set; }

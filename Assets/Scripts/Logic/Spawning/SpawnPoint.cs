@@ -11,7 +11,7 @@ namespace BounceFactory.Logic.Spawning
         private ItemClickHandler _clickHandler;
 
         public Item Item { get; private set; }
-        
+
         public bool IsEmpty { get; private set; } = true;
 
         private void Awake()

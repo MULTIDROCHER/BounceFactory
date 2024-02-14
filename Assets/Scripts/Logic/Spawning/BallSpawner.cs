@@ -2,7 +2,6 @@ using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.Storage;
 using BounceFactory.Score;
-using BounceFactory.System.Level;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Spawning
@@ -13,23 +12,19 @@ namespace BounceFactory.Logic.Spawning
 
         public override event Action Bought;
 
-        protected virtual void OnEnable() => BallComponentsProvider.LevelChanged += OnLevelChanged;
-
-        protected virtual void OnDisable() => BallComponentsProvider.LevelChanged -= OnLevelChanged;
-
         public override void Spawn()
         {
             if (Holder == null)
                 OnLevelChanged();
 
             SpawnAndSetBall();
-            ScoreCounter.Buy(PriceChanger.Price);
+            ScoreOperations.Buy(PriceChanger.Price);
             Bought?.Invoke();
         }
 
         protected override void OnLevelChanged()
         {
-            Holder = BallComponentsProvider.BallHolder;
+            Holder = LevelSwitcher.CurrentLevel.BallData.BallHolder;
 
             if (Holder.transform.childCount == 0)
                 SpawnAndSetBall();
@@ -39,7 +34,7 @@ namespace BounceFactory.Logic.Spawning
         {
             var ball = Instantiate(GetTemplateToSpawn(), Holder.transform.position, Quaternion.identity, Holder.transform);
             ball.GetEffectContainer(_effectContainer);
-            ball.GetCounter(ScoreCounter);
+            ball.SetScoreOperator(ScoreOperations);
         }
     }
 }

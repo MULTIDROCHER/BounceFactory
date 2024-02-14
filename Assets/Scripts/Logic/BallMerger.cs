@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using BounceFactory.BaseObjects;
 using BounceFactory.BaseObjects.BallComponents;
 using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Logic.Selling;
 using BounceFactory.Playground.Storage.Holder;
-using BounceFactory.System.Level;
+using BounceFactory.System.Game;
 using BounceFactory.Tutorial;
 using DG.Tweening;
 using UnityEngine;
@@ -16,68 +15,67 @@ namespace BounceFactory.Logic
 {
     [RequireComponent(typeof(ColorChanger))]
     [RequireComponent(typeof(EffectApplier))]
+    [RequireComponent(typeof(MergeButtonController))]
     public class BallMerger : MonoBehaviour, ITutorialEvent
     {
-        [SerializeField] private BallPriceChanger _seller;
-        [SerializeField] private BallsMergeButton _button;
-
-        private readonly int _requiredAmount = 3;
         private readonly float _duration = 2;
 
+        [SerializeField] private BallPriceChanger _seller;
+        [SerializeField] private LevelSwitcher _levelSwitcher;
+
+        private MergeButtonController _buttonController;
+        private BallMatchesSeeker _matchesSeeker;
         private Holder<Ball> _holder;
         private ColorChanger _colorChanger;
         private EffectApplier _effectApplier;
         private WaitForSeconds _wait;
 
         public event Action Performed;
+        public event Action<List<Ball>> MatchFounded;
+        public event Action MatchLosted;
 
-        public BallsMergeButton Button => _button;
+        public MergeButton Button => _buttonController.Button;
 
         private void Start()
         {
             _colorChanger = GetComponent<ColorChanger>();
             _effectApplier = GetComponent<EffectApplier>();
+            _buttonController = GetComponent<MergeButtonController>();
+            _matchesSeeker = new ();
 
-            _wait = new WaitForSeconds(_duration);
+            _wait = new (_duration);
         }
 
         private void OnEnable()
         {
-            BallComponentsProvider.LevelChanged += SetHolder;
+            _levelSwitcher.LevelChanged += SetHolder;
             _seller.BallDestroyed += OnBallsAmountChanged;
         }
 
         private void OnDisable()
         {
-            BallComponentsProvider.LevelChanged -= SetHolder;
+            _levelSwitcher.LevelChanged -= SetHolder;
             _seller.BallDestroyed -= OnBallsAmountChanged;
+        }
+
+        public void Merge(List<Ball> balls)
+        {
+            MatchLosted?.Invoke();
+            StartCoroutine(PrepareToMerge(balls));
+            Performed?.Invoke();
         }
 
         private void FindMatches()
         {
-            var balls = _holder.Contents;
-            int maxLevel = balls.Max(ball => ball.Level);
+            var match = _matchesSeeker.GetMatch(_holder);
 
-            for (int level = maxLevel; level > 0; level--)
+            if (match != null)
             {
-                var matchingBalls = balls.Where(ball => ball != null && ball.Level == level).ToList();
-
-                if (matchingBalls.Count >= _requiredAmount)
-                {
-                    var taken = matchingBalls.GetRange(0, _requiredAmount);
-                    EnableButton(taken);
-                    return;
-                }
+                MatchFounded?.Invoke(match);
+                return;
             }
 
-            DisableButton();
-        }
-
-        private void Merge(List<Ball> balls)
-        {
-            DisableButton();
-            StartCoroutine(PrepareToMerge(balls));
-            Performed?.Invoke();
+            MatchLosted?.Invoke();
         }
 
         private IEnumerator PrepareToMerge(List<Ball> balls)
@@ -111,35 +109,27 @@ namespace BounceFactory.Logic
             StopAllCoroutines();
 
             _effectApplier.DoEffect(transform.position);
-            ball.ChangeColor(_colorChanger.SetColorByLevel(ball));
+            ball.ChangeColor(_colorChanger.GetColorByLevel(ball));
             ball.LevelUp();
             ball.Collider.enabled = true;
         }
-
-        private void EnableButton(List<Ball> balls)
-        {
-            _button.gameObject.SetActive(true);
-            _button.Button.onClick.AddListener(() => Merge(balls));
-        }
-
-        private void DisableButton() => _button.gameObject.SetActive(false);
 
         private void SetHolder()
         {
             if (_holder != null)
                 _holder.ChildAdded -= OnBallsAmountChanged;
 
-            _holder = BallComponentsProvider.BallHolder;
+            _holder = _levelSwitcher.CurrentLevel.BallData.BallHolder;
             _holder.ChildAdded += OnBallsAmountChanged;
             OnBallsAmountChanged();
         }
 
         private void OnBallsAmountChanged()
         {
-            if (_holder.Contents.Count >= _requiredAmount)
+            if (_holder.Contents.Count >= _matchesSeeker.RequiredAmount)
                 FindMatches();
             else
-                DisableButton();
+                MatchLosted?.Invoke();
         }
     }
 }

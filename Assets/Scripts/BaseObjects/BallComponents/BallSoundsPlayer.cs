@@ -40,7 +40,7 @@ namespace BounceFactory.BaseObjects.BallComponents
 
             switch (item)
             {
-                case TeleportItem teleport when teleport.CanTeleport
+                case PortalItem teleport when teleport.CanTeleport
                 && _teleportable.CanBeTeleported:
                     PlaySound(_teleportSound);
                     break;

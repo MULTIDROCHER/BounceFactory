@@ -5,13 +5,14 @@ namespace BounceFactory.Tutorial.Steps
 {
     public class LeftFlipperStep : FlipperStep
     {
-        public LeftFlipperStep(TutorialGuide guide, KeyCode activatorButton) : base(guide, activatorButton)
+        public LeftFlipperStep(TutorialGuide guide, KeyCode activatorButton)
+        : base(guide, activatorButton)
         {
         }
 
         protected override Dictionary<string, string> MobileMessages()
         {
-            return new Dictionary<string, string>() 
+            return new Dictionary<string, string>()
         {
             { "ru", "нажми левую кнопку\nчтобы поднять левый флиппер" },
             { "en", "press the left button\nto raise the left flipper" },
@@ -21,7 +22,7 @@ namespace BounceFactory.Tutorial.Steps
 
         protected override Dictionary<string, string> ComputerMessages()
         {
-            return new Dictionary<string, string>() 
+            return new Dictionary<string, string>()
         {
             { "ru", $"нажми {ActivatorButton} на клавиатуре\n чтобы поднять левый флиппер" },
             { "en", $"Press {ActivatorButton} on the keyboard\n to raise the left flipper" },

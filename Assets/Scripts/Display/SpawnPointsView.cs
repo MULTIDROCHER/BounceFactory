@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using BounceFactory.Logic.Spawning;
-using BounceFactory.System.Level;
+using BounceFactory.System.Game;
 using UnityEngine;
 
 namespace BounceFactory.Display
 {
     public class SpawnPointsView : MonoBehaviour
     {
+        [SerializeField] private LevelSwitcher _levelSwitcher;
+
         private List<SpawnPoint> _points = new ();
 
-        private void Start() => ItemComponentsProvider.LevelChanged += OnLevelChanged;
+        private void Start() => _levelSwitcher.LevelChanged += OnLevelChanged;
 
-        private void OnDestroy() => ItemComponentsProvider.LevelChanged -= OnLevelChanged;
+        private void OnDestroy() => _levelSwitcher.LevelChanged -= OnLevelChanged;
 
         public void ShowPoints()
         {
@@ -28,7 +30,7 @@ namespace BounceFactory.Display
         private void OnLevelChanged()
         {
             _points.Clear();
-            _points = ItemComponentsProvider.ActivePoints;
+            _points = _levelSwitcher.CurrentLevel.ItemData.SpawnPoints;
         }
     }
 }

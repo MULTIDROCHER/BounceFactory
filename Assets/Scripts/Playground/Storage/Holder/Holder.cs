@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
 using BounceFactory.BaseObjects;
+using BounceFactory.System.Game;
 using UnityEngine;
 
 namespace BounceFactory.Playground.Storage.Holder
 {
-    public abstract class Holder<T> : MonoBehaviour 
+    public abstract class Holder<T> : MonoBehaviour
     where T : UpgradableObject
     {
         private readonly List<T> _children = new ();
+
+        [SerializeField] private LevelSwitcher _levelSwitcher;
 
         private int _childCount;
 
         public event Action ChildAdded;
 
         public List<T> Contents => _children;
+
+        private void OnEnable() => _levelSwitcher.LevelChanged += OnLevelExit;
+
+        private void OnDisable() => _levelSwitcher.LevelChanged -= OnLevelExit;
 
         private void FixedUpdate()
         {

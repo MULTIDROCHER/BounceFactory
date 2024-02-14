@@ -6,14 +6,35 @@ namespace BounceFactory.System.Game
 {
     public class AudioPlayer : MonoBehaviour
     {
-        private static AudioPlayer _instance;
+        private static readonly object _lock = new ();
 
-        public static AudioPlayer Instance => _instance;
+        private static AudioPlayer _instance;
 
         [SerializeField] private AudioSource _musicSource;
         [SerializeField] private AudioSource _sfxSource;
 
         public event Action<float> VolumeChanged;
+
+        public static AudioPlayer Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_instance == null)
+                        {
+                            GameObject audioPlayer = new GameObject("AudioPlayer");
+                            _instance = audioPlayer.AddComponent<AudioPlayer>();
+                            DontDestroyOnLoad(audioPlayer);
+                        }
+                    }
+                }
+
+                return _instance;
+            }
+        }
 
         public AudioSource MusicSource => _musicSource;
 

@@ -10,7 +10,7 @@ using UnityEngine;
 namespace BounceFactory.BaseObjects
 {
     [RequireComponent(typeof(EffectApplier))]
-    public class TeleportItem : Item
+    public class PortalItem : Item
     {
         private readonly List<TeleportableObject> _inPortal = new ();
         private readonly Color _destroyingColor = new (1, 1, 1, 0);
@@ -28,7 +28,7 @@ namespace BounceFactory.BaseObjects
             _wait = new (_delay);
             DestroyingCoroutine = OnDestroying();
 
-            _holder = ItemComponentsProvider.ItemHolder;
+            _holder = GetComponentInParent<Holder<Item>>();
             _effectApplier = GetComponent<EffectApplier>();
         }
 
@@ -36,7 +36,7 @@ namespace BounceFactory.BaseObjects
         {
             var teleportable = other.GetComponent<TeleportableObject>();
 
-            if (teleportable != null && teleportable.CanBeTeleported 
+            if (teleportable != null && teleportable.CanBeTeleported
             && CanTeleport && _inPortal.Contains(teleportable) == false)
                 Teleport(teleportable);
         }
@@ -62,7 +62,7 @@ namespace BounceFactory.BaseObjects
         {
             _inPortal.Add(teleportable);
 
-            if (TryFindPortal(out TeleportItem portal))
+            if (TryFindPortal(out PortalItem portal))
                 StartCoroutine(Teleportation(teleportable, portal));
             else
                 StartCoroutine(Teleportation(teleportable, this));
@@ -74,13 +74,13 @@ namespace BounceFactory.BaseObjects
             teleportable.Disappear(transform.position);
         }
 
-        private void Appear(TeleportableObject teleportable, TeleportItem portal)
+        private void Appear(TeleportableObject teleportable, PortalItem portal)
         {
             _effectApplier.DoEffect(portal.transform.position);
             teleportable.Appear(portal.transform.position, BonusAdder);
         }
 
-        private IEnumerator Teleportation(TeleportableObject teleportable, TeleportItem portal)
+        private IEnumerator Teleportation(TeleportableObject teleportable, PortalItem portal)
         {
             if (teleportable != null)
                 Disappear(teleportable);
@@ -100,9 +100,9 @@ namespace BounceFactory.BaseObjects
             _inPortal.Remove(teleportable);
         }
 
-        private bool TryFindPortal(out TeleportItem teleport)
+        private bool TryFindPortal(out PortalItem teleport)
         {
-            teleport = _holder.Contents.FirstOrDefault(item => item != this) as TeleportItem;
+            teleport = _holder.Contents.FirstOrDefault(item => item != this) as PortalItem;
             return teleport != null;
         }
     }

@@ -1,7 +1,6 @@
 using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.DeadZones;
-using BounceFactory.System.Level;
 using BounceFactory.Tutorial;
 using UnityEngine;
 
@@ -12,34 +11,22 @@ namespace BounceFactory.Logic.Selling
         private readonly int _startPrice = 50;
         private readonly float _priceIncrease = 1.5f;
 
-        [SerializeField] private DeadZonesProcessor _zonesProcessor;
+        [SerializeField] private DeadZonesEventHandler _zonesEventHandler;
 
         public event Action Performed;
-        
+
         public event Action BallDestroyed;
 
         private void Start()
         {
-            _zonesProcessor.BallDestroyed += OnBallDestroyed;
-            _zonesProcessor.BallsOver += OnBallsOver;
-        }
-
-        protected override void OnEnable()
-        {
-            BallComponentsProvider.LevelChanged += OnLevelChanged;
-            base.OnEnable();
-        }
-
-        protected override void OnDisable()
-        {
-            BallComponentsProvider.LevelChanged -= OnLevelChanged;
-            base.OnDisable();
+            _zonesEventHandler.BallDestroyed += OnBallDestroyed;
+            _zonesEventHandler.BallsOver += OnBallsOver;
         }
 
         private void OnDestroy()
         {
-            _zonesProcessor.BallDestroyed -= OnBallDestroyed;
-            _zonesProcessor.BallsOver -= OnBallsOver;
+            _zonesEventHandler.BallDestroyed -= OnBallDestroyed;
+            _zonesEventHandler.BallsOver -= OnBallsOver;
         }
 
         protected override void SetPrices()

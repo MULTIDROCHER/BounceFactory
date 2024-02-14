@@ -4,7 +4,7 @@ namespace BounceFactory.System
     {
         public static string GetTextWithNumber(string text, int number)
         {
-            return text +  NumsFormater.FormatedNumber(number);
+            return text + NumsFormater.FormatedNumber(number);
         }
 
         public static string ConvertProgress(int current, string splitter, int goal)

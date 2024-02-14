@@ -8,7 +8,7 @@ namespace BounceFactory.System.Game
     public class SceneSwitcher : MonoBehaviour
     {
         [SerializeField] private MessageWindow _messageWindow;
-        [SerializeField] private LevelExitController _exitController;
+        [SerializeField] private ExitController _exitController;
 
         private LoadingScreen _loadingScreen;
         private ProgressSaver _progressSaver;
@@ -43,7 +43,7 @@ namespace BounceFactory.System.Game
             }
             else
             {
-                _progressSaver.ResetSavedProgress();
+                _progressSaver.Reset();
                 StartGame();
             }
         }

@@ -31,7 +31,7 @@ namespace BounceFactory.BaseObjects
             _animator = GetComponent<Animator>();
             _player = new (_animator);
             _effectHandler = GetComponent<EffectApplier>();
-            _accelerator = new (_accelerationAmount, SetDirection());
+            _accelerator = new (_accelerationAmount, GetRandomDirection());
             _wait = new (_delay);
         }
 
@@ -64,7 +64,13 @@ namespace BounceFactory.BaseObjects
             _amount++;
         }
 
-        private Vector2 SetDirection() => Vector2.right * Random.Range(0, 360);
+        private Vector2 GetRandomDirection()
+        {
+            var minAngle = 0;
+            var maxAngle = 360;
+
+            return Vector2.right * Random.Range(minAngle, maxAngle);
+        }
 
         private void CreateClones(Ball ballToClone)
         {

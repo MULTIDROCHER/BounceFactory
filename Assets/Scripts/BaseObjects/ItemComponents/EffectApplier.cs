@@ -15,6 +15,8 @@ namespace BounceFactory.BaseObjects.ItemComponents
             Destroy(effect.gameObject, _delay);
         }
 
+        public void DoEffect(Vector3 position, Transform parent) => Instantiate(_effect, position, Quaternion.identity, parent);
+
         public void DoEffect(Vector3 position) => Instantiate(_effect, position, Quaternion.identity, transform);
 
         public void DoEffect(ParticleSystem effect, Vector3 position) => Instantiate(effect, position, Quaternion.identity, transform);

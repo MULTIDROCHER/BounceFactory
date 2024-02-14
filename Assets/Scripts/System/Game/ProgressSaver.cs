@@ -12,7 +12,7 @@ namespace BounceFactory.System.Game
             _progressBar = progressBar;
         }
 
-        public void ResetSavedProgress()
+        public void Reset()
         {
             var level = YandexGame.savesData.Level > YandexGame.savesData.PreviousLevel ?
             YandexGame.savesData.Level : YandexGame.savesData.PreviousLevel;
@@ -22,7 +22,7 @@ namespace BounceFactory.System.Game
             YandexGame.Instance._SaveProgress();
         }
 
-        public void SaveProgress()
+        public void Save()
         {
             if (_progressBar != null)
                 YandexGame.savesData.LevelScore = _progressBar.CurrentScore;

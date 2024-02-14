@@ -15,7 +15,7 @@ namespace BounceFactory.UI
                 gameObject.SetActive(false);
         }
 
-        public void TryToRate()
+        public void Rate()
         {
             if (YandexGame.auth == false)
                 _authorizationWindow.gameObject.SetActive(true);

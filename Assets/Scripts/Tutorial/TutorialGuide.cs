@@ -17,12 +17,13 @@ namespace BounceFactory.Tutorial
     {
         private readonly float _delay = 2;
         private readonly TutorialStateMachine _stateMachine = new ();
-        private readonly Dictionary<string, string> _messages = new () 
+        private readonly Dictionary<string, string> _messages = new ()
         {
             { "ru", "Ура, теперь ты знаешь основные\nмеханики! Приятной игры! :)" },
             { "en", "Yay, now you know the basic \nmechanics! Enjoy the game! :)" },
             { "tr", "Yaşasın, artık temel mekanikleri \nbiliyorsunuz! Oyunun tadını çıkarın! :)" },
         };
+
         private readonly List<TutorialStep> _steps = new () { };
 
         [SerializeField] private GameObject _overlay;
@@ -42,14 +43,10 @@ namespace BounceFactory.Tutorial
         public TMP_Text Text => _text;
 
         public BallMerger Merger => _merger;
-        
+
         public ItemHolder ItemHolder => _itemHolder;
 
         public FlipperActivator[] Activators => _activatorsContainer.Activators;
-
-        public PriceView<Ball> BallPrice => _ballPrice;
-
-        public PriceView<Item> ItemPrice => _itemPrice;
 
         private void Awake()
         {
@@ -69,8 +66,6 @@ namespace BounceFactory.Tutorial
             _steps.Add(new ItemMovementStep(this));
             _steps.Add(new SecondItemPurchaseStep(this, _itemPrice));
             _steps.Add(new ItemsMergeStep(this));
-
-            
 
             _stateMachine.Initialize(_steps[_currentStepIndex]);
             _steps[_currentStepIndex].Completed += NextStep;

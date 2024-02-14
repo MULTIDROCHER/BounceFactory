@@ -8,7 +8,8 @@ namespace BounceFactory.Tutorial.Steps
     {
         private readonly List<ItemMover> _movers = new ();
 
-        public ItemMovementStep(TutorialGuide guide) : base(guide)
+        public ItemMovementStep(TutorialGuide guide)
+        : base(guide)
         {
         }
 
@@ -36,7 +37,7 @@ namespace BounceFactory.Tutorial.Steps
 
         protected override Dictionary<string, string> CommonMessages()
         {
-            return new Dictionary<string, string>() 
+            return new Dictionary<string, string>()
         {
             { "ru", "зажми и двигай предмет,\nчтобы переместить его" },
             { "en", "pinch and move the object\nto move it" },

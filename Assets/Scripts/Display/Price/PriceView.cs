@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 namespace BounceFactory.Display.Price
 {
-    public class PriceView<T> : MonoBehaviour 
+    public class PriceView<T> : MonoBehaviour
     where T : UpgradableObject
     {
         [SerializeField] private Button _button;
         [SerializeField] private PriceChanger<T> _priceChanger;
         [SerializeField] private TMP_Text _text;
-        [SerializeField] private ScoreCounter _scoreCounter;
-        
+        [SerializeField] private ScoreManager _scoreCounter;
+
         private int _price;
 
         public PriceChanger<T> PriceChanger => _priceChanger;

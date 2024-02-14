@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace BounceFactory.System.Game
 {
-    public class LevelExitController : MonoBehaviour
+    public class ExitController : MonoBehaviour
     {
         [SerializeField] private LoadingScreen _loadingScreen;
         [SerializeField] private ReviewSender _reviewSender;
         [SerializeField] private ScoreSender _scoreSender;
-        [SerializeField] private ScoreCounter _scoreCounter;
+        [SerializeField] private ScoreOperations _scoreOperations;
 
         public event Action LevelExited;
 
@@ -19,7 +19,7 @@ namespace BounceFactory.System.Game
 
         public void ExitLevel()
         {
-            _scoreCounter.ReturnSpent();
+            _scoreOperations.ReturnSpent();
             _scoreSender.RewriteLeaderboardScore();
             _reviewSender.ShowReview();
 

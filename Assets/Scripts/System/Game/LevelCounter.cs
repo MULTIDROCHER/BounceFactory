@@ -1,4 +1,3 @@
-using BounceFactory.System.Level;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -21,17 +20,9 @@ namespace BounceFactory.System.Game
             SetLevel();
         }
 
-        private void OnEnable()
-        {
-            ItemComponentsProvider.LevelChanged += SetLevel;
-            BallComponentsProvider.LevelChanged += SetLevel;
-        }
+        private void OnEnable() => _levelSwitcher.LevelChanged += SetLevel;
 
-        private void OnDisable()
-        {
-            ItemComponentsProvider.LevelChanged -= SetLevel;
-            BallComponentsProvider.LevelChanged -= SetLevel;
-        }
+        private void OnDisable() => _levelSwitcher.LevelChanged -= SetLevel;
 
         private void SetLevel()
         {

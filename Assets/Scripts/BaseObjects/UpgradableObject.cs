@@ -10,14 +10,14 @@ namespace BounceFactory.BaseObjects
         protected int ObjectsAmount;
 
         private SpriteRenderer _renderer;
-        private ScoreCounter _scoreCounter;
+        private ScoreOperations _scoreOperations;
 
         public SpriteRenderer Renderer => _renderer;
 
-        public ScoreCounter ScoreCounter => _scoreCounter;
+        public ScoreOperations ScoreOperations => _scoreOperations;
 
         public int Level { get; protected set; } = 1;
-        
+
         public int Bonus { get; protected set; } = 1;
 
         protected virtual void Awake() => _renderer = GetComponent<SpriteRenderer>();
@@ -29,8 +29,8 @@ namespace BounceFactory.BaseObjects
             gameObject.name = Level.ToString();
         }
 
-        protected virtual int IncreaseBonus() => (Bonus * ObjectsAmount) + BonusIncrease;
+        public void SetScoreOperator(ScoreOperations operations) => _scoreOperations = operations;
 
-        public void GetCounter(ScoreCounter counter) => _scoreCounter = counter; 
+        protected virtual int IncreaseBonus() => (Bonus * ObjectsAmount) + BonusIncrease;
     }
 }

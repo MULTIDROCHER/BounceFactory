@@ -12,7 +12,7 @@ namespace BounceFactory.System.Level
         [SerializeField] private BallHolder _ballHolder;
         [SerializeField] private BallPriceChanger _ballSeller;
         [SerializeField] private BallSpawner _ballSpawner;
-        
+
         public DeadZone[] DeadZones => _deadZones;
 
         public BallHolder BallHolder => _ballHolder;

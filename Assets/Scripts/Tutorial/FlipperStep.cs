@@ -10,7 +10,8 @@ namespace BounceFactory.Tutorial
         protected KeyCode ActivatorButton;
         protected FlipperActivator Activator;
 
-        protected FlipperStep(TutorialGuide guide, KeyCode activatorButton) : base(guide)
+        protected FlipperStep(TutorialGuide guide, KeyCode activatorButton)
+        : base(guide)
         {
             ActivatorButton = activatorButton;
         }
@@ -18,7 +19,7 @@ namespace BounceFactory.Tutorial
         public override void Enter()
         {
             base.Enter();
-            Activator = Guide.Activators.FirstOrDefault(activator => activator.gameObject.activeInHierarchy 
+            Activator = Guide.Activators.FirstOrDefault(activator => activator.gameObject.activeInHierarchy
             && activator.KeyCode == ActivatorButton);
 
             if (Activator != null)

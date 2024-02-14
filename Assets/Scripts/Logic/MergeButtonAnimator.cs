@@ -1,24 +1,19 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace BounceFactory.Logic
+namespace BounceFactory
 {
-    [RequireComponent(typeof(Button))]
-    public class BallsMergeButton : MonoBehaviour
+    [RequireComponent(typeof(MergeButton))]
+    public class MergeButtonAnimator : MonoBehaviour
     {
         private readonly float _duration = .5f;
 
         private Vector3 _defaultScale;
         private Vector3 _scale = new (.3f, .3f, 0);
-        private Button _button;
         private Tween _animation;
-
-        public Button Button => _button;
 
         private void Awake()
         {
-            _button = GetComponent<Button>();
             _defaultScale = transform.localScale;
             gameObject.SetActive(false);
         }
@@ -29,7 +24,6 @@ namespace BounceFactory.Logic
         {
             _animation.Kill();
             transform.localScale = _defaultScale;
-            _button.onClick.RemoveAllListeners();
         }
     }
 }

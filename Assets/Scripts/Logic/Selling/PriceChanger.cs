@@ -1,28 +1,38 @@
 using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Spawning;
+using BounceFactory.System.Game;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Selling
 {
-    public abstract class PriceChanger<T> : MonoBehaviour 
+    public abstract class PriceChanger<T> : MonoBehaviour
     where T : UpgradableObject
     {
         protected readonly int FreePurchaseCount = 2;
 
         [SerializeField] protected Spawner<T> Spawner;
+        [SerializeField] protected LevelSwitcher LevelSwitcher;
 
         protected int PurchasesCount;
 
         public event Action<int> PriceChanged;
 
         public float PriceIncrease { get; protected set; }
-        
+
         public int Price { get; protected set; }
 
-        protected virtual void OnEnable() => Spawner.Bought += OnBought;
+        private void OnEnable()
+        {
+            LevelSwitcher.LevelChanged += OnLevelChanged;
+            Spawner.Bought += OnBought;
+        }
 
-        protected virtual void OnDisable() => Spawner.Bought -= OnBought;
+        private void OnDisable()
+        {
+            LevelSwitcher.LevelChanged -= OnLevelChanged;
+            Spawner.Bought -= OnBought;
+        }
 
         protected virtual void OnBought() => IncreasePrices();
 

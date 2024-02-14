@@ -4,7 +4,7 @@ namespace BounceFactory.System
 {
     public static class NumsFormater
     {
-        private static readonly string[] _enNames = new [] 
+        private static readonly string[] _enNames = new []
         {
             string.Empty,
             "K",
@@ -15,7 +15,7 @@ namespace BounceFactory.System
             "QN",
         };
 
-        private static readonly string[] _ruNames = new [] 
+        private static readonly string[] _ruNames = new []
         {
             string.Empty,
             "Т",
@@ -26,7 +26,7 @@ namespace BounceFactory.System
             "КТ",
         };
 
-        private static readonly string[] _trNames = new [] 
+        private static readonly string[] _trNames = new []
         {
             string.Empty,
             "B",

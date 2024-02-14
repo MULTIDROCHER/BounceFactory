@@ -8,7 +8,8 @@ namespace BounceFactory.Tutorial.Steps
     {
         private readonly List<UpgradeHandler> _handlers = new ();
 
-        public ItemsMergeStep(TutorialGuide guide) : base(guide)
+        public ItemsMergeStep(TutorialGuide guide)
+        : base(guide)
         {
         }
 
@@ -36,7 +37,7 @@ namespace BounceFactory.Tutorial.Steps
 
         protected override Dictionary<string, string> CommonMessages()
         {
-            return new Dictionary<string, string>() 
+            return new Dictionary<string, string>()
         {
             { "ru", "перемести один предмет на другой,\nчтобы объединить их" },
             { "en", "move one item over another\nto merge them" },

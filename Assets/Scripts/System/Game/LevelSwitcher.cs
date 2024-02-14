@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BounceFactory.System.DataSending;
 using BounceFactory.System.Level;
@@ -16,11 +17,15 @@ namespace BounceFactory.System.Game
         [SerializeField] private Image _background;
         [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private GameObject _finishWindow;
-        [SerializeField] private LevelExitController _exitController;
+        [SerializeField] private ExitController _exitController;
 
         private LevelData _current;
         private ProgressSaver _progressSaver;
         private LevelPrepairer _prepairer;
+
+        public event Action LevelChanged;
+
+        public LevelData CurrentLevel => _current;
 
         private void Start()
         {
@@ -52,19 +57,11 @@ namespace BounceFactory.System.Game
 
         private void SetLevel()
         {
-            if (_current != null)
-            {
-                BallComponentsProvider.Reset();
-                ItemComponentsProvider.Reset();
-            }
-
             _current = _prepairer.GetRandomLevel(_current);
             _background.sprite = _prepairer.GetRandomBackground();
 
-            BallComponentsProvider.GetLevelComponents(_current.BallData);
-            ItemComponentsProvider.GetLevelComponents(_current.ItemData);
-
             _current.gameObject.SetActive(true);
+            LevelChanged?.Invoke();
         }
 
         private void OnGoalReached()
@@ -78,7 +75,7 @@ namespace BounceFactory.System.Game
 
         private void SaveChanges()
         {
-            _progressSaver.SaveProgress();
+            _progressSaver.Save();
             MetricsSender.CreateMetrics();
         }
     }

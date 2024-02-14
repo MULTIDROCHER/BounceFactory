@@ -5,7 +5,6 @@ using BounceFactory.BaseObjects;
 using BounceFactory.Display;
 using BounceFactory.Display.ItemLevel;
 using BounceFactory.Score;
-using BounceFactory.System.Level;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Spawning
@@ -16,21 +15,15 @@ namespace BounceFactory.Logic.Spawning
         private readonly int _teleportChance = 20;
         private readonly int _ballgeneratorChance = 30;
         private readonly int _itemsOnSceneForGeneratorSpawn = 2;
-        
+
         [SerializeField] private ItemLevelView _levelView;
         [SerializeField] private SpawnPointsView _pointView;
 
         private List<SpawnPoint> _spawnPoints = new ();
 
         public event Action<Item> ItemSpawned;
-        
+
         public override event Action Bought;
-
-        protected virtual void OnEnable() =>
-            ItemComponentsProvider.LevelChanged += OnLevelChanged;
-
-        protected virtual void OnDisable() =>
-            ItemComponentsProvider.LevelChanged -= OnLevelChanged;
 
         public override void Spawn()
         {
@@ -46,10 +39,10 @@ namespace BounceFactory.Logic.Spawning
                 if (itemToSpawn != null)
                 {
                     var spawned = Instantiate(itemToSpawn, point.transform.position, Quaternion.identity, Holder.transform);
-                    spawned.ClickHandler.GetViews(_levelView, _pointView);
-                    spawned.GetCounter(ScoreCounter);
+                    spawned.ClickHandler.SetViews(_levelView, _pointView);
+                    spawned.SetScoreOperator(ScoreOperations);
 
-                    ScoreCounter.Buy(PriceChanger.Price);
+                    ScoreOperations.Buy(PriceChanger.Price);
                     ItemSpawned?.Invoke(spawned);
                     Bought?.Invoke();
                 }
@@ -59,7 +52,7 @@ namespace BounceFactory.Logic.Spawning
         protected override void OnLevelChanged()
         {
             _spawnPoints.Clear();
-            _spawnPoints = ItemComponentsProvider.ActivePoints;
+            _spawnPoints = LevelSwitcher.CurrentLevel.ItemData.SpawnPoints;
         }
 
         private Item GetRandomItem()
@@ -72,7 +65,7 @@ namespace BounceFactory.Logic.Spawning
             return chance switch
             {
                 int n when n <= _accelerationChance => GetItemByComponent<AccelerationItem>(),
-                int n when n <= GetTeleportChance() => GetItemByComponent<TeleportItem>(),
+                int n when n <= GetTeleportChance() => GetItemByComponent<PortalItem>(),
                 int n when n <= _ballgeneratorChance && Holder.transform.childCount >= _itemsOnSceneForGeneratorSpawn
                     => GetItemByComponent<BallGeneratorItem>(),
                 _ => GetItemByComponent<CommonItem>(),
@@ -92,7 +85,7 @@ namespace BounceFactory.Logic.Spawning
         private int GetTeleportChance()
         {
             int possibleAmount = 2;
-            TeleportItem[] portals = Holder.Contents.Where(item => item is TeleportItem).OfType<TeleportItem>().ToArray();
+            PortalItem[] portals = Holder.Contents.Where(item => item is PortalItem).OfType<PortalItem>().ToArray();
 
             if (portals.Length < possibleAmount && Holder.transform.childCount >= possibleAmount)
                 return _teleportChance;
@@ -100,7 +93,7 @@ namespace BounceFactory.Logic.Spawning
                 return 0;
         }
 
-        private Item GetItemByComponent<T>() 
+        private Item GetItemByComponent<T>()
         where T : Component
         {
             foreach (var item in Templates)

@@ -1,22 +1,24 @@
 using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.Storage.Holder;
-using BounceFactory.System.Level;
+using BounceFactory.System.Game;
 using UnityEngine;
 
 namespace BounceFactory.Playground.DeadZones
 {
-    public class DeadZonesProcessor : MonoBehaviour
+    public class DeadZonesEventHandler : MonoBehaviour
     {
+        [SerializeField] private LevelSwitcher _levelSwitcher;
+
         private Holder<Ball> _ballHolder;
 
         public event Action BallDestroyed;
-        
+
         public event Action BallsOver;
 
-        private void Start() => BallComponentsProvider.LevelChanged += OnLevelChanged;
+        private void Start() => _levelSwitcher.LevelChanged += OnLevelChanged;
 
-        private void OnDestroy() => BallComponentsProvider.LevelChanged -= OnLevelChanged;
+        private void OnDestroy() => _levelSwitcher.LevelChanged -= OnLevelChanged;
 
         public void OnBallDestroyed()
         {
@@ -31,6 +33,6 @@ namespace BounceFactory.Playground.DeadZones
 
         private bool IsBallsOver() => _ballHolder.transform.childCount <= 1;
 
-        private void OnLevelChanged() => _ballHolder = BallComponentsProvider.BallHolder;
+        private void OnLevelChanged() => _ballHolder = _levelSwitcher.CurrentLevel.BallData.BallHolder;
     }
 }

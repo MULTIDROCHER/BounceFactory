@@ -5,7 +5,8 @@ namespace BounceFactory.Tutorial.Steps
 {
     public class BallsMergeStep : TutorialStep
     {
-        public BallsMergeStep(TutorialGuide guide) : base(guide)
+        public BallsMergeStep(TutorialGuide guide)
+        : base(guide)
         {
         }
 
@@ -22,7 +23,7 @@ namespace BounceFactory.Tutorial.Steps
 
         protected override Dictionary<string, string> CommonMessages()
         {
-            return new Dictionary<string, string>() 
+            return new Dictionary<string, string>()
         {
             { "ru", "когда у тебя достаточно шаров одного\nуровня, ты можешь их объединять" },
             { "en", "when you have enough balls of the\nsame level, you can merge them" },

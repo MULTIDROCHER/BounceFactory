@@ -86,7 +86,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         private void LevelUp(Item item)
         {
             Performed?.Invoke();
-            ItemSelector merger = new(_current, item);
+            ItemSelector merger = new (_current, item);
             var template = merger.GetRandom();
 
             template.LevelUp();

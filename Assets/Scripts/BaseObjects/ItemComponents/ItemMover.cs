@@ -19,7 +19,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         public event Action Performed;
 
         public bool IsDragging { get; private set; } = false;
-        
+
         private SpawnPoint PreviousPoint => _pointHandler.PreviousPoint;
 
         private void Start()
