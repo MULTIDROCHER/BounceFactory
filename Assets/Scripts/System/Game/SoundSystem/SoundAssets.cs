@@ -9,7 +9,7 @@ namespace BounceFactory.System.Game.SoundSystem
 
         private static SoundAssets _instance;
 
-        [SerializeField] private SoundClip[] Clips;
+        [SerializeField] private SoundClip[] _clips;
         [SerializeField] private Transform _container;
 
         public static SoundAssets Instance
@@ -23,7 +23,7 @@ namespace BounceFactory.System.Game.SoundSystem
             }
         }
 
-        public SoundClip[] SoundClips => Clips;
+        public SoundClip[] SoundClips => _clips;
 
         private void Awake()
         {
