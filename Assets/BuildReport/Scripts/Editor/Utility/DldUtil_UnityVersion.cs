@@ -1,10 +1,9 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
 
 namespace DldUtil
 {
-	public static class UnityVersion
+    public static class UnityVersion
 	{
 		public static void GetUnityVersionNumbers(string unityVersionString, out int major, out int minor, out int patch)
 		{

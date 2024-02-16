@@ -1,11 +1,11 @@
 using UnityEngine;
 using YG;
 
-namespace BounceFactory.Score
+namespace BounceFactory.ScoreSystem
 {
     [RequireComponent(typeof(ScoreDisplay))]
     [RequireComponent(typeof(ScoreOperations))]
-    public class ScoreManager : MonoBehaviour
+    public class Score : MonoBehaviour
     {
         private readonly int _minimalBalance = 100;
 

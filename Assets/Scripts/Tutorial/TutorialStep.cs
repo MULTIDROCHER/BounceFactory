@@ -12,9 +12,9 @@ namespace BounceFactory.Tutorial
         protected GameObject Mask;
         protected TutorialGuide Guide;
 
-        public event Action Completed;
-
         protected TutorialStep(TutorialGuide guide) => Guide = guide;
+
+        public event Action Completed;
 
         protected string Language => YandexGame.lang;
 

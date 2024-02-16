@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 
-namespace BounceFactory.Score
+namespace BounceFactory.ScoreSystem
 {
-    public class ScoreOperations : ScoreManager
+    public class ScoreOperations : Score
     {
         public event Action<int> ScoreAdded;
 

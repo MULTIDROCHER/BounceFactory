@@ -6,13 +6,13 @@ namespace BounceFactory.UI.Sound
     {
         private void OnEnable()
         {
-            Button.onClick.AddListener(SoundAssets.Instance.SwitchMusicSource);
+            Button.onClick.AddListener(SoundManager.VolumeChanger.SwitchMusicSource);
             SoundManager.VolumeChanger.MusicVolumeChanged += OnVolumeChanged;
         }
 
         private void OnDisable()
         {
-            Button.onClick.RemoveListener(SoundAssets.Instance.SwitchMusicSource);
+            Button.onClick.RemoveListener(SoundManager.VolumeChanger.SwitchMusicSource);
             SoundManager.VolumeChanger.MusicVolumeChanged -= OnVolumeChanged;
         }
     }

@@ -1,5 +1,5 @@
 using System.Collections;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using DG.Tweening;
 using UnityEngine;
 

@@ -1,12 +1,12 @@
 using System;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using BounceFactory.System.DataSending;
 using BounceFactory.UI;
 using UnityEngine;
 
 namespace BounceFactory.System.Game
 {
-    public class ExitController : MonoBehaviour
+    public class LevelExitEvent : MonoBehaviour
     {
         [SerializeField] private LoadingScreen _loadingScreen;
         [SerializeField] private ReviewSender _reviewSender;

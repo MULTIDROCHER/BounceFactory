@@ -2,25 +2,25 @@ using BounceFactory.System;
 using TMPro;
 using UnityEngine;
 
-namespace BounceFactory.Score
+namespace BounceFactory.ScoreSystem
 {
     [RequireComponent(typeof(TMP_Text))]
-    [RequireComponent(typeof(ScoreManager))]
+    [RequireComponent(typeof(Score))]
     public class ScoreDisplay : MonoBehaviour
     {
         private readonly string _newLine = "\n";
 
         private TMP_Text _scoreText;
-        private ScoreManager _counter;
+        private Score _score;
         private string _baseText;
 
         private void Start()
         {
             _scoreText = GetComponent<TMP_Text>();
-            _counter = GetComponent<ScoreManager>();
+            _score = GetComponent<Score>();
 
             _baseText = _scoreText.text + _newLine;
-            UpdateDisplay(_counter.Balance);
+            UpdateDisplay(_score.Balance);
         }
 
         public void UpdateDisplay(int newScore)

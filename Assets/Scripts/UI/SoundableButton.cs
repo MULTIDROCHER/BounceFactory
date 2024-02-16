@@ -9,22 +9,24 @@ namespace BounceFactory.UI
     [RequireComponent(typeof(Button))]
     public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
-        protected AudioSource Source;
+        protected SoundName Sound;
+        protected SoundPlayer Player;
         protected Button Button;
 
-        private Vector3 _increasedScale = new(.1f, .1f, 0);
+        private Vector3 _increasedScale = new (.1f, .1f, 0);
         private Vector3 _defaultScale;
 
         private void Awake()
         {
             Button = GetComponent<Button>();
             _defaultScale = transform.localScale;
-        } 
+            Sound = SoundName.Click;
+        }
 
         protected virtual void Start()
         {
-            if (SourcePool.SFXSources.TryGetValue(System.Game.SoundSystem.Sound.Click, out Source))
-                Button.onClick.AddListener(() => SoundManager.PlayOneShot(Source));
+            Player = new (Sound);
+            Button.onClick.AddListener(Player.PlaySound);
         }
 
         private void OnDestroy() => Button.onClick.RemoveAllListeners();

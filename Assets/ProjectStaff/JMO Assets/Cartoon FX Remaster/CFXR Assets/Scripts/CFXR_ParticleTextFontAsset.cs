@@ -3,7 +3,6 @@
 // (c) 2012-2020 Jean Moreno
 //--------------------------------------------------------------------------------------------------------------------------------
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -12,7 +11,7 @@ using UnityEditor;
 
 namespace CartoonFX
 {
-	public class CFXR_ParticleTextFontAsset : ScriptableObject
+    public class CFXR_ParticleTextFontAsset : ScriptableObject
 	{
 		public enum LetterCase
 		{

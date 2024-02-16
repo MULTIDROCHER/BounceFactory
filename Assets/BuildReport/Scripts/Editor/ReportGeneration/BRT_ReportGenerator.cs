@@ -3,8 +3,6 @@
 using UnityEngine;
 using UnityEditor;
 #if UNITY_5_3_OR_NEWER
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 #endif
 using System;
 using System.Collections.Generic;
@@ -103,7 +101,7 @@ hopefully UT would provide proper script access to this
 
 namespace BuildReportTool
 {
-	public struct ExtraData
+    public struct ExtraData
 	{
 		public string SavedPath;
 		public string Contents;

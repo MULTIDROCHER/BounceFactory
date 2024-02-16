@@ -1,4 +1,4 @@
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects

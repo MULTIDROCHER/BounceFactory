@@ -14,6 +14,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
         [SerializeField] private Material _mergeMaterial;
 
         private EffectApplier _effectApplier;
+        private SoundPlayer _player;
         private Material _defaultMaterial;
         private SpriteRenderer _renderer;
         private ItemLevelDisplay _display;
@@ -29,6 +30,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
             _effectApplier = GetComponent<EffectApplier>();
             _current = GetComponent<Item>();
             _renderer = _current.Renderer;
+            _player = new (SoundName.ItemMerge);
 
             _display = Instantiate(_displayTemplate, transform);
             _defaultMaterial = _renderer.material;
@@ -92,7 +94,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
 
             template.LevelUp();
             _effectApplier.DoUpgradeEffect(template.transform);
-            SoundManager.PlayOneShot(Sound.ItemMerge);
+            _player.PlaySound();
 
             if (template != item)
                 item.Destroy();

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FuzzyString
+﻿namespace FuzzyString
 {
-	public static partial class ComparisonMetrics
+    public static partial class ComparisonMetrics
 	{
 		public static int HammingDistance(this string source, string target)
 		{

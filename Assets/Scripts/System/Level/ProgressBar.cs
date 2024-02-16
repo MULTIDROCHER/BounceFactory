@@ -1,5 +1,5 @@
 using System;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace BounceFactory.System.Level
 
         public int CurrentScore { get; private set; }
 
-        public ScoreManager Counter => _scoreOperations;
+        public Score Counter => _scoreOperations;
 
         private void Start()
         {

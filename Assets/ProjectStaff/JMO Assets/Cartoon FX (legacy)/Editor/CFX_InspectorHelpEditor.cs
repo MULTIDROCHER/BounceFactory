@@ -9,7 +9,6 @@
 
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor(typeof(CFX_InspectorHelp))]
 public class CFX_InspectorHelpEditor : Editor

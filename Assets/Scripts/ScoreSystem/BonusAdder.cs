@@ -2,7 +2,7 @@ using BounceFactory.BaseObjects;
 using BounceFactory.Display;
 using UnityEngine;
 
-namespace BounceFactory.Score
+namespace BounceFactory.ScoreSystem
 {
     [RequireComponent(typeof(Item))]
     public class BonusAdder : MonoBehaviour

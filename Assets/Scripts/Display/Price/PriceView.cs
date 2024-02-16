@@ -1,6 +1,6 @@
 using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Selling;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,7 @@ namespace BounceFactory.Display.Price
         [SerializeField] private Button _button;
         [SerializeField] private PriceChanger<T> _priceChanger;
         [SerializeField] private TMP_Text _text;
-        [SerializeField] private ScoreManager _scoreCounter;
+        [SerializeField] private Score _score;
 
         private int _price;
 
@@ -23,7 +23,7 @@ namespace BounceFactory.Display.Price
 
         private void OnDisable() => _priceChanger.PriceChanged -= OnPriceChanged;
 
-        private void LateUpdate() => _button.interactable = _scoreCounter.Balance >= _price;
+        private void LateUpdate() => _button.interactable = _score.Balance >= _price;
 
         private void OnPriceChanged(int price)
         {

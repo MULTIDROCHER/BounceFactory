@@ -17,7 +17,7 @@ namespace BounceFactory.System.Game
         [SerializeField] private Image _background;
         [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private GameObject _finishWindow;
-        [SerializeField] private ExitController _exitController;
+        [SerializeField] private LevelExitEvent _exitController;
 
         private LevelData _current;
         private ProgressSaver _progressSaver;
@@ -51,7 +51,6 @@ namespace BounceFactory.System.Game
             SetLevel();
 
             _progressBar.Reset();
-            Time.timeScale = 1;
             SaveChanges();
         }
 

@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEditor;
 
 namespace BuildReportTool.Window.Screen
 {
-	public class Overview : BaseScreen
+    public class Overview : BaseScreen
 	{
 		Vector2 _scrollPos = Vector2.zero;
 

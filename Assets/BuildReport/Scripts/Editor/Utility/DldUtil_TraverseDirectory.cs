@@ -1,13 +1,12 @@
 using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 using System.Collections.Generic;
 using System.IO;
 
 namespace DldUtil
 {
-	public static class TraverseDirectory
+    public static class TraverseDirectory
 	{
 		struct TraversalStack
 		{

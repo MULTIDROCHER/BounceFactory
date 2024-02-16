@@ -1,6 +1,6 @@
 namespace BounceFactory.System.Game.SoundSystem
 {
-    public enum Sound
+    public enum SoundName
     {
         BackgroundMusic,
         Click,

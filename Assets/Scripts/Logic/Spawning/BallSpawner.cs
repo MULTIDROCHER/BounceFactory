@@ -1,7 +1,7 @@
 using System;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.Storage;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using UnityEngine;
 
 namespace BounceFactory.Logic.Spawning

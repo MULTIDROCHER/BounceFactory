@@ -5,6 +5,7 @@ namespace BounceFactory.System.Game.SoundSystem
 {
     public class VolumeChanger
     {
+        private readonly SourcePool _pool;
         private readonly float _muted = 0;
         private readonly float _unmuted = 1;
 
@@ -13,9 +14,11 @@ namespace BounceFactory.System.Game.SoundSystem
         public event Action<bool> SFXVolumeChanged;
         public event Action<bool> MusicVolumeChanged;
 
+        public VolumeChanger(SourcePool pool) => _pool = pool;
+
         public void SwitchSFXSources()
         {
-            foreach (var source in SourcePool.SFXSources)
+            foreach (var source in _pool.SFXSources)
                 SwitchSource(source.Value, out _value);
 
             SFXVolumeChanged?.Invoke(_value);
@@ -23,7 +26,7 @@ namespace BounceFactory.System.Game.SoundSystem
 
         public void SwitchMusicSource()
         {
-            SwitchSource(SourcePool.MusicSource, out _value);
+            SwitchSource(_pool.MusicSource, out _value);
 
             MusicVolumeChanged?.Invoke(_value);
         }

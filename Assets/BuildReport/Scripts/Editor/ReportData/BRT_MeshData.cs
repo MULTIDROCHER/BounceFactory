@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace BuildReportTool
 {
-	[System.Serializable, System.Xml.Serialization.XmlRoot("MeshData")]
+    [System.Serializable, System.Xml.Serialization.XmlRoot("MeshData")]
 	public class MeshData : BuildReportTool.IDataFile
 	{
 		// ==================================================================================

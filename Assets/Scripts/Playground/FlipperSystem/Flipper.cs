@@ -13,9 +13,14 @@ namespace BounceFactory.Playground.FlipperSystem
         [SerializeField] private float _angle;
 
         private Vector3 _rotation;
+        private SoundPlayer _player;
         private bool _isOpened = false;
 
-        private void Start() => _rotation = new (0, 0, _angle);
+        private void Start()
+        {
+            _rotation = new (0, 0, _angle);
+            _player = new (SoundName.Flipper);
+        }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -25,7 +30,7 @@ namespace BounceFactory.Playground.FlipperSystem
 
         public void Open()
         {
-            SoundManager.PlayOneShot(Sound.Flipper);
+            _player.PlaySound();
             _isOpened = true;
 
             transform.DORotate(_rotation, _delay).OnComplete(() =>

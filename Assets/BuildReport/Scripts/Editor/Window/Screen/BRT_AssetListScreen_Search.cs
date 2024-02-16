@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEditor;
 using FuzzyString;
@@ -8,7 +7,7 @@ using FuzzyString;
 
 namespace BuildReportTool.Window.Screen
 {
-	public partial class AssetList
+    public partial class AssetList
 	{
 		BuildReportTool.SizePart[] _searchResults;
 

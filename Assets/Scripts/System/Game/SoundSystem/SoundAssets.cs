@@ -4,46 +4,36 @@ namespace BounceFactory.System.Game.SoundSystem
 {
     public class SoundAssets : MonoBehaviour
     {
-        private static readonly string _containerName = "container";
-        private static readonly string _objectName = "SoundAssets";
-
         private static SoundAssets _instance;
+
+        private readonly string _containerName = "container";
 
         [SerializeField] private SoundClip[] _clips;
         [SerializeField] private Transform _container;
 
-        public static SoundAssets Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = Instantiate(Resources.Load<SoundAssets>(_objectName));
-
-                return _instance;
-            }
-        }
+        private SourcePool _pool;
 
         public SoundClip[] SoundClips => _clips;
 
         private void Awake()
         {
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
+            if (_instance == null)
             {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
             }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             SetContainer();
-            SourcePool.Initiallize(_container);
-        }
+            _pool = new (this);
+            _pool.Initiallize(_container);
 
-        public void SwitchSFXSources() => SoundManager.VolumeChanger.SwitchSFXSources();
-        
-        public void SwitchMusicSource() => SoundManager.VolumeChanger.SwitchMusicSource();
+            SoundManager.SetPool(_pool);
+            SoundManager.SetVolumeChanger();
+        }
 
         private void SetContainer()
         {

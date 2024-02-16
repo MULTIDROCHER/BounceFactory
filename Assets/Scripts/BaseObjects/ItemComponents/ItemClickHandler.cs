@@ -1,6 +1,6 @@
 using BounceFactory.Display;
 using BounceFactory.Display.ItemLevel;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects.ItemComponents

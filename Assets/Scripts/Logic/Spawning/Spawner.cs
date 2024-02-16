@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BounceFactory.BaseObjects;
 using BounceFactory.Logic.Selling;
 using BounceFactory.Playground.Storage.Holder;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using BounceFactory.System.Game;
 using UnityEngine;
 

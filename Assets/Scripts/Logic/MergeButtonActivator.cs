@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BounceFactory.Logic
 {
     [RequireComponent(typeof(BallMerger))]
-    public class MergeButtonController : MonoBehaviour
+    public class MergeButtonActivator : MonoBehaviour
     {
         [SerializeField] private MergeButton _button;
 

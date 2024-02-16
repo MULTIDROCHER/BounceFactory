@@ -1,24 +1,26 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BounceFactory.System.Game.SoundSystem
 {
     public static class SoundManager
     {
-        public static VolumeChanger VolumeChanger = new ();
+        public static VolumeChanger VolumeChanger;
+        public static SourcePool Pool;
 
-        public static void PlayOneShot(Sound sound)
+        public static void SetPool(SourcePool pool) => Pool = pool;
+
+        public static void SetVolumeChanger() => VolumeChanger = new (Pool);
+
+        public static void PlayOneShot(SoundName sound)
         {
-            var source = SourcePool.SFXSources.GetValueOrDefault(sound);
+            if (Pool != null)
+            {
+                var source = Pool.SFXSources.GetValueOrDefault(sound);
 
-            if (source != null)
-                source.PlayOneShot(source.clip);
-        }
-
-        public static void PlayOneShot(AudioSource source)
-        {
-            if(source != null)
-                source.PlayOneShot(source.clip);
+                if (source != null)
+                    source.PlayOneShot(source.clip);
+            }
         }
     }
 }

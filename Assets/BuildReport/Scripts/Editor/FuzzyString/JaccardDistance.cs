@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FuzzyString
 {
-	public static partial class ComparisonMetrics
+    public static partial class ComparisonMetrics
 	{
 		public static double JaccardDistance(this string source, string target)
 		{

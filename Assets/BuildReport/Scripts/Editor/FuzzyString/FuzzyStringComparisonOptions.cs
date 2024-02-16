@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FuzzyString
+﻿namespace FuzzyString
 {
-	public enum FuzzyStringComparisonOptions
+    public enum FuzzyStringComparisonOptions
 	{
 		UseHammingDistance,
 

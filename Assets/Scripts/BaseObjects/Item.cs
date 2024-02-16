@@ -1,7 +1,7 @@
 using System.Collections;
 using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Display.ItemLevel;
-using BounceFactory.Score;
+using BounceFactory.ScoreSystem;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects
