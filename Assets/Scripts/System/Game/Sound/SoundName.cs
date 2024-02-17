@@ -1,4 +1,4 @@
-namespace BounceFactory.System.Game.SoundSystem
+namespace BounceFactory.System.Game.Sound
 {
     public enum SoundName
     {

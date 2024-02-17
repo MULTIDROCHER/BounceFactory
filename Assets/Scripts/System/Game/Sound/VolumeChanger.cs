@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BounceFactory.System.Game.SoundSystem
+namespace BounceFactory.System.Game.Sound
 {
     public class VolumeChanger
     {
@@ -12,6 +12,7 @@ namespace BounceFactory.System.Game.SoundSystem
         private bool _value = false;
 
         public event Action<bool> SFXVolumeChanged;
+
         public event Action<bool> MusicVolumeChanged;
 
         public VolumeChanger(SourcePool pool) => _pool = pool;

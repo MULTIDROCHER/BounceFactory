@@ -1,4 +1,4 @@
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 
 namespace BounceFactory.UI.Sound
 {
@@ -6,14 +6,14 @@ namespace BounceFactory.UI.Sound
     {
         private void OnEnable()
         {
-            Button.onClick.AddListener(SoundManager.VolumeChanger.SwitchMusicSource);
-            SoundManager.VolumeChanger.MusicVolumeChanged += OnVolumeChanged;
+            Button.onClick.AddListener(VolumeChanger.SwitchMusicSource);
+            VolumeChanger.MusicVolumeChanged += OnVolumeChanged;
         }
 
         private void OnDisable()
         {
-            Button.onClick.RemoveListener(SoundManager.VolumeChanger.SwitchMusicSource);
-            SoundManager.VolumeChanger.MusicVolumeChanged -= OnVolumeChanged;
+            Button.onClick.RemoveListener(VolumeChanger.SwitchMusicSource);
+            VolumeChanger.MusicVolumeChanged -= OnVolumeChanged;
         }
     }
 }

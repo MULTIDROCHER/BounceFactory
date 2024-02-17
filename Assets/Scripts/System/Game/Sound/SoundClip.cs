@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BounceFactory.System.Game.SoundSystem
+namespace BounceFactory.System.Game.Sound
 {
     [Serializable]
     public class SoundClip
@@ -10,7 +10,7 @@ namespace BounceFactory.System.Game.SoundSystem
         [SerializeField] private AudioClip _clip;
 
         public SoundName Name => _name;
-        
+
         public AudioClip Clip => _clip;
     }
 }

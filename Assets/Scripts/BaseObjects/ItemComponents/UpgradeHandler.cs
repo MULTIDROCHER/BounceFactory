@@ -1,6 +1,6 @@
 using System;
 using BounceFactory.Display.ItemLevel;
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using BounceFactory.Tutorial;
 using UnityEngine;
 

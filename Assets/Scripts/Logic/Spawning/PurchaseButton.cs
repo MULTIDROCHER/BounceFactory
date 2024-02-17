@@ -1,4 +1,4 @@
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using BounceFactory.UI;
 
 namespace BounceFactory.Logic.Spawning

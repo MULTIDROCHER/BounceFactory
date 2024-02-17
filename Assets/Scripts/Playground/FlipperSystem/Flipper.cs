@@ -1,5 +1,5 @@
 using BounceFactory.BaseObjects;
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using DG.Tweening;
 using UnityEngine;
 

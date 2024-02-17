@@ -1,4 +1,4 @@
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +10,13 @@ namespace BounceFactory.UI.Sound
         [SerializeField] private Sprite _unmuted;
         [SerializeField] private Sprite _muted;
         [SerializeField] private Image _image;
-        [SerializeField] private SoundAssets _assets;
 
         protected Button Button;
 
-        private void Awake() => Button = GetComponent<Button>();
+        protected VolumeChanger VolumeChanger => SourceProvider.SoundSystem.VolumeChanger;
 
         protected void OnVolumeChanged(bool muted) => _image.sprite = muted ? _unmuted : _muted;
+
+        private void Awake() => Button = GetComponent<Button>();
     }
 }

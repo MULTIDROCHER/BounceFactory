@@ -1,4 +1,4 @@
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

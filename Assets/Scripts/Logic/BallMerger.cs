@@ -7,7 +7,7 @@ using BounceFactory.BaseObjects.ItemComponents;
 using BounceFactory.Logic.Selling;
 using BounceFactory.Playground.Storage.Holder;
 using BounceFactory.System.Game;
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using BounceFactory.Tutorial;
 using DG.Tweening;
 using UnityEngine;

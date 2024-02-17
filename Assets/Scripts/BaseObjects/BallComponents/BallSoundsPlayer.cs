@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using BounceFactory.Playground.DeadZones;
-using BounceFactory.System.Game.SoundSystem;
+using BounceFactory.System.Game.Sound;
 using UnityEngine;
 
 namespace BounceFactory.BaseObjects.BallComponents
