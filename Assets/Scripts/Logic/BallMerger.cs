@@ -17,6 +17,7 @@ namespace BounceFactory.Logic
     [RequireComponent(typeof(ColorChanger))]
     [RequireComponent(typeof(EffectApplier))]
     [RequireComponent(typeof(MergeButtonActivator))]
+    [RequireComponent(typeof(SoundPlayer))]
     public class BallMerger : MonoBehaviour, ITutorialEvent
     {
         private readonly float _duration = 2;
@@ -35,7 +36,7 @@ namespace BounceFactory.Logic
         public event Action Performed;
 
         public event Action<List<Ball>> MatchFounded;
-        
+
         public event Action MatchLosted;
 
         public MergeButton Button => _buttonActivator.Button;
@@ -46,7 +47,7 @@ namespace BounceFactory.Logic
             _effectApplier = GetComponent<EffectApplier>();
             _buttonActivator = GetComponent<MergeButtonActivator>();
             _matchesSeeker = new ();
-            _player = new (SoundName.BallMerge);
+            _player = GetComponent<SoundPlayer>();
 
             _wait = new (_duration);
         }
@@ -114,7 +115,7 @@ namespace BounceFactory.Logic
             StopAllCoroutines();
 
             _effectApplier.DoEffect(transform.position);
-            _player.PlaySound();
+            _player.Play(default);
 
             ball.ChangeColor(_colorChanger.GetColorByLevel(ball));
             ball.LevelUp();

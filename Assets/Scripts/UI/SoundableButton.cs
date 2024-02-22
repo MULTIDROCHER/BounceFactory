@@ -1,4 +1,3 @@
-using BounceFactory.System.Game.Sound;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,29 +6,26 @@ using YG;
 namespace BounceFactory.UI
 {
     [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(AudioSource))]
     public class SoundableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
-        protected SoundName Sound;
-        protected SoundPlayer Player;
-        protected Button Button;
+        private AudioSource _source;
+        private Button _button;
 
-        private Vector3 _increasedScale = new (.1f, .1f, 0);
+        private Vector3 _increasedScale = new(.1f, .1f, 0);
         private Vector3 _defaultScale;
 
         private void Awake()
         {
-            Button = GetComponent<Button>();
+            _button = GetComponent<Button>();
+            _source = GetComponent<AudioSource>();
+
             _defaultScale = transform.localScale;
-            Sound = SoundName.Click;
         }
 
-        protected virtual void Start()
-        {
-            Player = new (Sound);
-            Button.onClick.AddListener(Player.PlaySound);
-        }
+        private void Start() => _button.onClick.AddListener(() => _source.PlayOneShot(_source.clip));
 
-        private void OnDestroy() => Button.onClick.RemoveAllListeners();
+        private void OnDestroy() => _button.onClick.RemoveAllListeners();
 
         public void OnPointerDown(PointerEventData eventData) => IncreaseScale();
 
@@ -49,7 +45,7 @@ namespace BounceFactory.UI
 
         private void IncreaseScale()
         {
-            if (Button.interactable)
+            if (_button.interactable)
                 transform.localScale += _increasedScale;
         }
 

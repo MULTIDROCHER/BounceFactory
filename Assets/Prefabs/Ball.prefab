@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6674928487091093027}
   - component: {fileID: 4856758053243480636}
   - component: {fileID: -8719827017842411495}
+  - component: {fileID: 709946349541959064}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -190,10 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43620d9307cd61a43aa2eebc47df9e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bounceSound: {fileID: 8300000, guid: a834b907e9aaba94f92c1174321e9fae, type: 3}
-  _teleportSound: {fileID: 8300000, guid: ef40b61004835704695f151974c3b630, type: 3}
-  _generatorSound: {fileID: 8300000, guid: e33e27658489236418197af1129394da, type: 3}
-  _accelerationSound: {fileID: 8300000, guid: 77a7b6b197ac9934f8e4d1d5c67541e6, type: 3}
 --- !u!82 &6674928487091093027
 AudioSource:
   m_ObjectHideFlags: 0
@@ -204,8 +201,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: a834b907e9aaba94f92c1174321e9fae, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -316,3 +313,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effect: {fileID: 198958788617170686, guid: daa91e11992e75b41b5515c7a938385b, type: 3}
   _upgradeEffect: {fileID: 0}
+--- !u!114 &709946349541959064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884036590251738169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297a78808f26b064ca6926e2da0310b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips:
+  - _name: 3
+    _clip: {fileID: 8300000, guid: 77a7b6b197ac9934f8e4d1d5c67541e6, type: 3}
+  - _name: 4
+    _clip: {fileID: 8300000, guid: ef40b61004835704695f151974c3b630, type: 3}
+  - _name: 5
+    _clip: {fileID: 8300000, guid: e33e27658489236418197af1129394da, type: 3}

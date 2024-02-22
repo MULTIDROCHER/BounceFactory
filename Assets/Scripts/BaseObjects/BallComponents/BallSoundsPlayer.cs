@@ -4,29 +4,23 @@ using UnityEngine;
 
 namespace BounceFactory.BaseObjects.BallComponents
 {
-    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(SoundPlayer))]
     [RequireComponent(typeof(TeleportableObject))]
     public class BallSoundsPlayer : MonoBehaviour
     {
         private TeleportableObject _teleportable;
-        private SoundPlayer[] _players;
+        private SoundPlayer _player;
 
         private void Awake()
         {
             _teleportable = GetComponent<TeleportableObject>();
-            _players = new []
-            {
-                new SoundPlayer(SoundName.BallBounce),
-                new SoundPlayer(SoundName.Teleportation),
-                new SoundPlayer(SoundName.BallGeneration),
-                new SoundPlayer(SoundName.Acceleration),
-            };
+            _player = GetComponent<SoundPlayer>();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent(out DeadZone _) == false)
-                PlaySound(SoundName.BallBounce);
+                _player.Play(default);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -37,26 +31,14 @@ namespace BounceFactory.BaseObjects.BallComponents
             {
                 case PortalItem teleport when teleport.CanTeleport
                 && _teleportable.CanBeTeleported:
-                    PlaySound(SoundName.Teleportation);
+                    _player.Play(SoundName.Teleportation);
                     break;
                 case BallGeneratorItem generator when generator.IsActive:
-                    PlaySound(SoundName.BallGeneration);
+                    _player.Play(SoundName.BallGeneration);
                     break;
                 case AccelerationItem:
-                    PlaySound(SoundName.Acceleration);
+                    _player.Play(SoundName.Acceleration);
                     break;
-            }
-        }
-
-        private void PlaySound(SoundName sound)
-        {
-            foreach (var player in _players)
-            {
-                if (player.Sound == sound)
-                {
-                    player.PlaySound();
-                    return;
-                }
             }
         }
     }

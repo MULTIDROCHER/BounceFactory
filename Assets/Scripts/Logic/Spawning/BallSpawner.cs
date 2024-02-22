@@ -33,7 +33,7 @@ namespace BounceFactory.Logic.Spawning
         private void SpawnAndSetBall()
         {
             var ball = Instantiate(GetTemplateToSpawn(), Holder.transform.position, Quaternion.identity, Holder.transform);
-            ball.GetEffectContainer(_effectContainer);
+            ball.SetEffectContainer(_effectContainer);
             ball.SetScoreOperator(ScoreOperations);
         }
     }

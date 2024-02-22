@@ -1,24 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BounceFactory.System.Game.Sound
 {
-    public class SoundPlayer
+    [RequireComponent(typeof(AudioSource))]
+    public class SoundPlayer : MonoBehaviour
     {
-        private readonly SoundName _sound;
-        private readonly AudioSource _source;
+        [SerializeField] private List<SoundClip> _clips = new ();
 
-        public SoundPlayer(SoundName sound)
+        private AudioSource _source;
+
+        private void Awake()
         {
-            _sound = sound;
-            _source = SourceProvider.GetSFXSource(_sound);
+            _source = GetComponent<AudioSource>();
+            _source.playOnAwake = false;
+            _source.loop = false;
         }
 
-        public SoundName Sound => _sound;
+        public void Play(SoundName sound) => _source.PlayOneShot(GetClip(sound));
 
-        public void PlaySound()
+        private AudioClip GetClip(SoundName name)
         {
-            if (_source != null)
-                _source.PlayOneShot(_source.clip);
+            if (name == default)
+                return _source.clip;
+
+            foreach (var clip in _clips)
+            {
+                if (clip.Name == name)
+                    return clip.Clip;
+            }
+
+            return _source.clip;
         }
     }
 }

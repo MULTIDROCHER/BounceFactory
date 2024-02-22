@@ -1,10 +1,10 @@
 using BounceFactory.BaseObjects;
-using BounceFactory.System.Game.Sound;
 using DG.Tweening;
 using UnityEngine;
 
 namespace BounceFactory.Playground.FlipperSystem
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Flipper : MonoBehaviour
     {
         private readonly float _delay = .1f;
@@ -13,13 +13,13 @@ namespace BounceFactory.Playground.FlipperSystem
         [SerializeField] private float _angle;
 
         private Vector3 _rotation;
-        private SoundPlayer _player;
+        private AudioSource _source;
         private bool _isOpened = false;
 
         private void Start()
         {
             _rotation = new (0, 0, _angle);
-            _player = new (SoundName.Flipper);
+            _source = GetComponent<AudioSource>();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -30,7 +30,7 @@ namespace BounceFactory.Playground.FlipperSystem
 
         public void Open()
         {
-            _player.PlaySound();
+            _source.PlayOneShot(_source.clip);
             _isOpened = true;
 
             transform.DORotate(_rotation, _delay).OnComplete(() =>

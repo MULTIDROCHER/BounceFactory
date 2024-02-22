@@ -1,6 +1,5 @@
 using System;
 using BounceFactory.Display.ItemLevel;
-using BounceFactory.System.Game.Sound;
 using BounceFactory.Tutorial;
 using UnityEngine;
 
@@ -8,13 +7,14 @@ namespace BounceFactory.BaseObjects.ItemComponents
 {
     [RequireComponent(typeof(Item))]
     [RequireComponent(typeof(EffectApplier))]
+    [RequireComponent(typeof(AudioSource))]
     public class UpgradeHandler : MonoBehaviour, ITutorialEvent
     {
         [SerializeField] private ItemLevelDisplay _displayTemplate;
         [SerializeField] private Material _mergeMaterial;
 
         private EffectApplier _effectApplier;
-        private SoundPlayer _player;
+        private AudioSource _source;
         private Material _defaultMaterial;
         private SpriteRenderer _renderer;
         private ItemLevelDisplay _display;
@@ -28,9 +28,9 @@ namespace BounceFactory.BaseObjects.ItemComponents
         private void Awake()
         {
             _effectApplier = GetComponent<EffectApplier>();
+            _source = GetComponent<AudioSource>();
             _current = GetComponent<Item>();
             _renderer = _current.Renderer;
-            _player = new (SoundName.ItemMerge);
 
             _display = Instantiate(_displayTemplate, transform);
             _defaultMaterial = _renderer.material;
@@ -94,7 +94,7 @@ namespace BounceFactory.BaseObjects.ItemComponents
 
             template.LevelUp();
             _effectApplier.DoUpgradeEffect(template.transform);
-            _player.PlaySound();
+            _source.PlayOneShot(_source.clip);
 
             if (template != item)
                 item.Destroy();

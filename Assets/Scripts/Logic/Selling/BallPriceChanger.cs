@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BounceFactory.BaseObjects;
 using BounceFactory.Playground.DeadZones;
+using BounceFactory.System.Game;
 using BounceFactory.Tutorial;
-using UnityEngine;
 
 namespace BounceFactory.Logic.Selling
 {
@@ -11,29 +13,42 @@ namespace BounceFactory.Logic.Selling
         private readonly int _startPrice = 50;
         private readonly float _priceIncrease = 1.5f;
 
-        [SerializeField] private DeadZonesEventHandler _zonesEventHandler;
+        private List<DeadZone> _deadZones = new();
 
         public event Action Performed;
 
         public event Action BallDestroyed;
 
-        private void Start()
-        {
-            _zonesEventHandler.BallDestroyed += OnBallDestroyed;
-            _zonesEventHandler.BallsOver += OnBallsOver;
-        }
+        private void Awake() => LevelSwitcher.LevelChanged += SetActiveDeadZones;
 
-        private void OnDestroy()
-        {
-            _zonesEventHandler.BallDestroyed -= OnBallDestroyed;
-            _zonesEventHandler.BallsOver -= OnBallsOver;
-        }
+        private void OnDestroy() => LevelSwitcher.LevelChanged -= SetActiveDeadZones;
 
         protected override void SetPrices()
         {
             Performed?.Invoke();
             Price = _startPrice;
             PriceIncrease = _priceIncrease;
+        }
+
+        private void SetActiveDeadZones()
+        {
+            if (_deadZones.Count != 0)
+            {
+                foreach (var zone in _deadZones)
+                {
+                    zone.BallDestroyed -= OnBallDestroyed;
+                    zone.BallsOver -= OnBallsOver;
+                }
+            }
+
+            _deadZones.Clear();
+            _deadZones = LevelSwitcher.CurrentLevel.BallData.DeadZones.ToList();
+
+            foreach (var zone in _deadZones)
+            {
+                zone.BallDestroyed += OnBallDestroyed;
+                zone.BallsOver += OnBallsOver;
+            }
         }
 
         private void OnBallDestroyed()

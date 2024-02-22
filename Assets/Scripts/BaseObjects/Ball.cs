@@ -47,6 +47,6 @@ namespace BounceFactory.BaseObjects
 
         public void ChangeColor(Color color) => Renderer.color = color;
 
-        public void GetEffectContainer(EffectContainer container) => _effectContainer = container;
+        public void SetEffectContainer(EffectContainer container) => _effectContainer = container;
     }
 }
